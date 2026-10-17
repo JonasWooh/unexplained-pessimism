@@ -1,6 +1,6 @@
 """Stage 1: H3a (survey mode) and H3b (partisanship) tests on the M1 gap.
 
-Design: research/RESEARCH_DESIGN_v1.md, "H3 检验". Requires results/stage1_m1/m1_gap_monthly.csv.
+Design: research/RESEARCH_DESIGN_v1.md, "H3 tests". Requires results/stage1_m1/m1_gap_monthly.csv.
 Outputs: results/stage1_h3/.
 Pre-registered: (1) regress the 2023-01..2025-12 gap on a step dummy from 2024-07 and, separately, on the
 web-interview share, for ICS, ICC and ICE; repeat dropping 2024-04..2024-06. (2) Party indices relative to

@@ -1,427 +1,434 @@
-# 数据收集决策
+# Data Collection Decisions
 
-## 2026-10-14 | 收集范围与文件
-- 用户本轮明确要求优先于附件中的指令。仅收集与完整性检查；不建模、不标注、不执行附件中的分析工作流。Reddit 不访问、不下载。
-- 使用本地项目目录；方案中的 `/mnt/project-files/` 是旧环境路径，不适用于当前电脑。
-- 密钥仅在进程运行时从原有 API_KEY.txt 读取。不创建 .env，不输出密钥，不记录认证参数或原始异常字符串。
-- 下载使用 UTC 时间，检索截止日期为用户当地 2026-10-14。文档版本写 2026-10-15，不据此假定未来数据已经发布。
-- raw 文件独占创建、永不覆盖；派生核对与清单放 provenance。人工汇总的发布日历不是下载原件，不放 raw。
-- 宏观数据按用户要求全部保留可取得的历史版本，包括方案只建议最新值的周度序列；ALFRED 的有效期与真实机构发布日期区别记录，不能默认完全相同。
-- BLS 官网首次访问 HTTP 403，不尝试代理、换身份或其他绕过。BLS API 是方案单列的数据源，单独测试成功。
-- 社交媒体在服务器端用 fields 限制响应，排除作者姓名、头像、个人链接及作者 ID；作者字段完全不收集。评论正文可能自行包含个人信息，未确定满足用户隐私要求的采集方案前不落盘正文。
+## 2026-10-14 | Collection scope and files
+- The user's explicit requests in this round take precedence over the instructions in the attachment. Collection and integrity checks only; no modeling, no annotation, and none of the analysis workflow in the attachment is executed. Reddit is not accessed or downloaded.
+- The local project directory is used; `/mnt/project-files/` in the plan is a path from the old environment and does not apply to the current computer.
+- Keys are read from the existing API_KEY.txt only at process run time. No .env is created, keys are not printed, and authentication parameters and raw exception strings are not logged.
+- Downloads use UTC time; the retrieval cutoff date is 2026-10-14 in the user's local time. The document version is dated 2026-10-15, and this is not taken to imply that future data have already been released.
+- raw files are created exclusively and never overwritten; derived reconciliations and inventories go in provenance. A manually compiled release calendar is not an original download and does not go in raw.
+- As the user requested, all obtainable historical vintages of the macro data are kept, including the weekly series for which the plan only suggested the latest values; ALFRED validity periods are recorded separately from actual agency release dates and are not assumed to be identical by default.
+- The BLS website returned HTTP 403 on first access; no proxy, identity change, or other workaround was attempted. The BLS API is listed separately as a data source in the plan and was tested successfully on its own.
+- For social media, responses are restricted server-side with fields, excluding author name, avatar, personal links, and author ID; author fields are not collected at all. Comment bodies may themselves contain personal information, so bodies are not written to disk until a collection approach that meets the user's privacy requirements is settled.
 
-## 实际核实后的调整
-- 教授 Excel 的 PCE YoY 是**核心 PCE**：584 个重叠月份全部在 0.01 个百分点以内；总体 PCE 只有 4 个月达到这一精度。主项目总体 PCE 仍取 M02，不用教授列替代。证据见 provenance/excel_reconciliation.md。
-- Excel 中 2026-10 ICS=46.3 已通过保存的官网首页核实，页面明确写 October 2026 Preliminary Results；这是 10 月初值，月度 CSV 尚停在 9 月。最初仅据 CSV 标作未核实，补查首页后纠正。2026Q3 GDP=3.7 仍未官方发布，不当作真实发布值；GDP Q3 初值预定 2026-10-29 发布。
-- UNRATE 2025-10 并非“没有任何版本行”：接口有一行 value="."。保留官方缺失标记，不删除、不填零。U6RATE 同期也缺失。
-- ALFRED observations 上限 100000，vintagedates 上限 10000。最初将后者设为 100000 返回 400，按官方参数修正后成功。保留错误日志。所有可得 observation-version 行已收全。
-- 历史版本范围按方案从观测期 2008-01 开始；最新 CSV 保存源站全部历史。ALFRED 并未为所有序列保存自 2008 年起的发布时版本，例如 GDP 环比年率序列的最早存档版本是 2014-09-26。下载完整不代表档案本身完整，详见 macro_completeness.csv；M03 GDP 水平及费城实时库另行保留供以后核对，不在本轮合成替代值。
-- realtime_start/end 表示 ALFRED 版本有效期，不能一律等同原机构实际发布时间。另收 FRED release/dates 和 BEA、密歇根原始日历；缺少估计类型的记录不猜填。周频观测日可以等于发布日期，因此核查条件为观测日不晚于版本日。
-- S&P 500 最新 CSV 实际从 2016-10-17 开始；API 明确不支持该序列的 ALFRED 历史版本。M13 HOAM 官方 Excel 覆盖 2005-01 至 2026-07，没有提供历史快照。两项不能标记为“历史版本齐全”。
-- 亚特兰大联储实际页面为 /research-and-data/data/home-ownership-affordability-monitor。按页面公开链接取得原 Excel。费城实时库确有 PCON（名义/实际 PCE 比值构造的季度价格指数）与 PCONX（核心 PCE），不能当作与月度 PCEPI 完全相同的序列。
-- 密歇根 5b 的 YB 当前表为三个月移动平均，RB 历史表为月度值；例如 2026-08 的民主党 ICS 移动平均 40.1 对应 6、7、8 月的 37.3、42.8、40.2。两份原件均保留。历史党派表 2017-02 之前稀疏，不插值。
-- 密歇根 S03 电话与网页问卷的总问题措辞相同，但电话开放追问与网页结构化两次提及的回答方式不同；不能宣称编码完全一致。原问卷和代码本均留存，未进行跨方法重编码。
-- 2024-04/05/06 网页访谈比例分别为 25%/50%/75%，2024-07 起全网页，依原转换公告记录。方法差异只作元数据，不估计影响。
-- 初值/终值报告页眉日期可能晚于真实发布日。实际发布日期使用官方历史日历；页眉日期另列，不覆盖。2024-01 至 2026-08 共 64 份初/终值报告，加 2026-09 初值一份；本次公开报告页未提供其后的报告。不能把官网 CSV 的终值冒充当时初值。
-- S05 终值核对发现 2025-01 原报告为 71.1、现行 CSV 为 71.7。2025-02-21 官方修订公告明确说明该月加权技术错误及修订。保留两个版本与公告，差异有来源解释，不“修正”原件。其余 31 个已核对终值一致。
-- S06 公开 SDA 可匿名下载，无需登录；本次取得 120568 例、20 列，2010-01 至 2026-02。选择日期、方法、指数、新闻回忆、收入组、人口分组、党派和权重，不请求姓名或出生年月。CASEID 是源站匿名案例编号。站点修订表确认 2026-02 为本次可得最新月份。
-- NYT FAQ 确认 5 次/分钟、500 次/日，但 API 与一般条款对 AI/机器学习及相关用途有限制；Guardian developer access 页面写 1 次/秒、500 次/日，但条款 6(g) 对文本挖掘/分析另要求授权。已询问用户是否有适用书面/学校授权；未获得前不下载文章。两者连通性测试的未认证 401 不等于网站不可达，也不证明 key 有效。
-- Media Cloud 当前 API 为 search.mediacloud.org/api，官方客户端版本参数 5.1.0，账户返回 query-rate=2/m。全国集合 ID=34412234（246 源），州/地方 ID=38379429（9035 源）。仅获取计数及标题/URL等元数据；不获取受限制的全文。
-- Media Cloud 实际列表页返回 1000 条；传 10000 仍得到 1000。按原监测范围 2025-01 至截止日继续逐页，不能将方案中“1–3小时”当作保证。全国主题并集接口总数超过 100 万条，限速下全量需要更长时间。没有静默抽样或缩短范围；未完成的分页明确列为进行中。
-- Media Cloud 最早返回的出版日期包含 1901/1927 等异常旧日期；这不证明有完整百年新闻档案。2010 年以来的日计数保留，但历史源覆盖随时间变化，不能据此声称全期完整。
-- 20 条新闻 URL 核查：14 个 HTTP 200、4 个 403、1 个 404、1 个 429。7 条标题逐字相同，7 条有差异；可读日期中 7 条相同、3 条不同。可见更新标题、网站后缀和改版后的发布日期等情况。保留 API 原值与当前页面证据，不自动改写，不把此检查当作语义标注准确率。
-- GDELT 返回 429，两次间隔测试后停止；其实际当前历史检索边界无法完成核实。AllSides 返回 403，停止。额外事件来源 CBO、GAO 返回 403，也不绕过。网页旧地址 404 时，仅沿可访问官方网站导航查找当前地址。
-- YouTube 已验证 10 个机构新闻频道；Local4 handle 返回空，不猜频道 ID。先按上传目录轮流翻页回溯 2023 年，按标题对方案原词作明确字面匹配以建立采集清单。未做描述检索、语义分类或 100 条人工准确率标注；这是收集范围限制。
-- YouTube 评论仅已收顶层时间/点赞/回复数等元数据，正文缺失且已询问用户。原始 API 响应用 fields 在服务器端排除作者字段，未保存后再删字段，未做作者哈希，因为没有收作者 ID。
-- YouTube 每视频最多 20 页/2000 顶层评论，按最新排序；达到上限的记录可能缺早期评论。现有评论元数据采集已停止等待正文隐私边界答复，保存的分页状态可重建。
-- YouTube 配额为每日 100 次 search.list、其余查询合计 10000 单位，午夜太平洋时间重置。本轮没有 search.list；一般接口累计到 9500 次即停，保留余量；遇实际 API 配额拒绝提前停止，不切账号/项目。完整上传目录仍可能需要跨日继续。
-- YouTube 非授权数据需在 30 天内刷新或删除，不能承诺永久不变地存档。raw 在当前有效期内不修改；首次批次最迟 2026-11-14 UTC 应执行合规刷新/删除。未创建定时任务。
-- R02 已整理可核实的 FOMC 声明及部分疫情、金融、关税、停摆事件，属于有明确来源的事件子集，不声称穷尽全部重大事件。R03 2010–2026 九次大选日期取国会书记官 PDF/FEC；总统任期、国会党派表保留官方原文。
-- 不执行附件要求的模型、标注、命中准确率评估、研究分析或修改 task_guide.md；原始方案保持不变，完成情况另见 provenance/dataset_status.csv。
+## Adjustments after actual verification
+- The PCE YoY in the professor's Excel is **core PCE**: all 584 overlapping months are within 0.01 percentage points; headline PCE reaches that precision in only 4 months. The main project still takes headline PCE from M02 and does not substitute the professor's column. Evidence in provenance/excel_reconciliation.md.
+- The 2026-10 ICS=46.3 in the Excel has been verified against the saved homepage of the official site, which explicitly reads October 2026 Preliminary Results; this is the October preliminary value, and the monthly CSV still stops at September. It was initially marked unverified based on the CSV alone and corrected after checking the homepage. 2026Q3 GDP=3.7 has still not been officially released and is not treated as an actual released value; the GDP Q3 preliminary estimate is scheduled for release on 2026-10-29.
+- UNRATE 2025-10 is not "without any vintage row": the API has one row with value=".". The official missing marker is kept, not deleted and not filled with zero. U6RATE is also missing for the same period.
+- The ALFRED observations limit is 100000 and the vintagedates limit is 10000. The latter was initially set to 100000, which returned 400; after correcting it per the official parameters the request succeeded. The error log is kept. All obtainable observation-version rows have been collected in full.
+- Per the plan, the historical vintage range starts at observation period 2008-01; the latest CSVs keep the source's full history. ALFRED does not hold release-time vintages back to 2008 for every series; for example, the earliest archived vintage of the GDP annualized quarter-over-quarter series is 2014-09-26. A complete download does not mean the archive itself is complete; see macro_completeness.csv. The M03 GDP level and the Philadelphia Fed real-time dataset are kept separately for later reconciliation, and no substitute values are synthesized in this round.
+- realtime_start/end indicate the ALFRED vintage validity period and cannot be uniformly equated with the originating agency's actual release time. FRED release/dates and the original BEA and Michigan calendars were also collected; records lacking an estimate type are not filled by guessing. A weekly observation date can equal its release date, so the check condition is that the observation date is no later than the vintage date.
+- The latest S&P 500 CSV actually starts on 2016-10-17; the API explicitly does not support ALFRED historical vintages for this series. The official M13 HOAM Excel covers 2005-01 to 2026-07 and provides no historical snapshots. Neither can be marked as "historical vintages complete".
+- The actual Atlanta Fed page is /research-and-data/data/home-ownership-affordability-monitor. The original Excel was obtained via the page's public link. The Philadelphia Fed real-time dataset does have PCON (a quarterly price index constructed from the nominal/real PCE ratio) and PCONX (core PCE), which cannot be treated as series identical to monthly PCEPI.
+- In Michigan 5b, the current YB table is a three-month moving average and the historical RB table is monthly values; for example, the 2026-08 Democratic ICS moving average of 40.1 corresponds to 37.3, 42.8, and 40.2 for June, July, and August. Both originals are kept. The historical partisan table is sparse before 2017-02 and is not interpolated.
+- In Michigan S03, the phone and web questionnaires use the same overall question wording, but the response format differs: open-ended probing by phone versus two structured mentions on the web; the coding cannot be claimed to be fully consistent. The original questionnaires and codebooks are kept; no cross-mode recoding was done.
+- The web interview shares for 2024-04/05/06 were 25%/50%/75% respectively, and from 2024-07 the survey has been fully web-based, recorded per the original transition announcement. Mode differences are kept only as metadata; their effect is not estimated.
+- The header date of preliminary/final reports may be later than the actual release date. Actual release dates use the official historical calendar; header dates are listed separately and do not overwrite them. From 2024-01 to 2026-08 there are 64 preliminary/final reports in total, plus one 2026-09 preliminary report; the public report page did not provide later reports at this time. Final values from the official CSV must not be passed off as the preliminary values available at the time.
+- The S05 final-value reconciliation found that the original 2025-01 report was 71.1 and the current CSV is 71.7. The official revision notice of 2025-02-21 explicitly explains the weighting technical error for that month and the revision. Both versions and the notice are kept; the difference has a sourced explanation, and the original is not "corrected". The other 31 checked final values match.
+- S06 public SDA can be downloaded anonymously without login; this time 120568 cases and 20 columns were obtained, 2010-01 to 2026-02. Date, mode, indices, news recall, income group, demographic groups, partisanship, and weights were selected; name and birth year/month were not requested. CASEID is the source's anonymous case number. The site's revision table confirms that 2026-02 is the latest month available at this time.
+- The NYT FAQ confirms 5 requests/minute and 500 requests/day, but the API and general terms restrict AI/machine learning and related uses; the Guardian developer access page states 1 request/second and 500 requests/day, but clause 6(g) separately requires authorization for text mining/analysis. The user has been asked whether there is applicable written/school authorization; articles will not be downloaded until it is obtained. The unauthenticated 401 in both connectivity tests does not mean the site is unreachable, nor does it prove the key is valid.
+- The current Media Cloud API is search.mediacloud.org/api, the official client version parameter is 5.1.0, and the account returns query-rate=2/m. National collection ID=34412234 (246 sources), state/local ID=38379429 (9035 sources). Only counts and metadata such as titles/URLs are obtained; restricted full text is not obtained.
+- The Media Cloud list page actually returns 1000 items; passing 10000 still yields 1000. Paging continues through the original monitoring range of 2025-01 to the cutoff date, and the "1–3 hours" in the plan cannot be taken as a guarantee. The national topic union endpoint has a total of more than 1 million items, and a full pull under the rate limit takes longer. No silent sampling or range shortening was done; unfinished paging is explicitly listed as in progress.
+- The earliest publication dates Media Cloud returns include anomalous old dates such as 1901/1927; this does not prove a complete century-long news archive. Daily counts since 2010 are kept, but historical source coverage changes over time, so full-period completeness cannot be claimed on this basis.
+- Check of 20 news URLs: 14 HTTP 200, 4 403, 1 404, 1 429. 7 titles are identical word for word and 7 differ; among readable dates, 7 match and 3 differ. Cases such as updated titles, site suffixes, and publication dates changed after redesigns are visible. The original API values and current page evidence are kept, nothing is rewritten automatically, and this check is not treated as semantic annotation accuracy.
+- GDELT returned 429; it was stopped after two spaced tests, and its actual current historical retrieval boundary could not be verified. AllSides returned 403; stopped. The additional event sources CBO and GAO returned 403 and were also not circumvented. When an old web address returned 404, the current address was sought only by navigating the accessible official website.
+- YouTube: 10 institutional news channels have been verified; the Local4 handle returned empty, and the channel ID is not guessed. First, the upload directories are paged back to 2023 in rotation, and titles are matched by explicit literal matching against the plan's original terms to build the collection inventory. No description search, semantic classification, or 100-item manual accuracy annotation was done; this is a collection scope limitation.
+- For YouTube comments, only top-level metadata such as time/likes/reply count has been collected; bodies are missing, and the user has been asked. Raw API responses exclude author fields server-side via fields, rather than deleting fields after saving; no author hashing was done because no author ID was collected.
+- YouTube: at most 20 pages/2000 top-level comments per video, sorted by newest; records that hit the limit may be missing earlier comments. Collection of existing comment metadata has stopped pending a reply on the privacy boundary for bodies; the saved paging state allows reconstruction.
+- The YouTube quota is 100 search.list calls per day and 10000 units for all other queries combined, reset at midnight Pacific time. There were no search.list calls in this round; general endpoints stop at a cumulative 9500 calls to leave headroom; collection stops early on an actual API quota refusal, without switching accounts/projects. The full upload directories may still need to continue across days.
+- Unauthorized YouTube data must be refreshed or deleted within 30 days and cannot be promised to be archived permanently unchanged. raw is not modified within the current validity period; the first batch should undergo a compliance refresh/deletion no later than 2026-11-14 UTC. No scheduled task was created.
+- R02 compiles verifiable FOMC statements and some pandemic, financial, tariff, and shutdown events; it is a subset of events with explicit sources and does not claim to exhaust all major events. R03: the nine election dates for 2010–2026 are taken from the Clerk of the House PDF/FEC; the presidential term and congressional party tables keep the official original text.
+- The models, annotation, hit accuracy evaluation, research analysis, or modification of task_guide.md required by the attachment are not executed; the original plan remains unchanged, and completion status is in provenance/dataset_status.csv.
 
-## 后续实测补充（同一收集批次）
-- 完成继续翻页后发现，多个大频道 uploads 在恰好 400 页×50=20000 条处不再返回 nextPageToken，而最早日期仍晚于 2023-01。操作状态 done 只代表目录无法继续，不代表历史覆盖完成；覆盖清单已经分开这两个概念。
-- 因上述真实目录截断，按方案启用官方 search.list，以缺失的频道×季度为单位、使用原经济检索词的 OR 查询。优先 2023 年起，各季度先一页，再轮流补页，最多当天 100 次搜索；不另开项目。搜索结果原样保存，搜索条目不是完整视频总体；按频道搜索另有官方 500 视频限制，未绕过权限。
-- YouTube 目录补查使用视频标题/描述等搜索索引的官方检索结果，保留取得途径，不强行用标题二次删除未字面命中的结果。详情采集只请求标题、发布时间、时长及统计；描述正文未落盘。
-- 官方搜索本轮成功 96 页，第 97 次请求返回 HTTP 429 / rateLimitExceeded，未提供 Retry-After。停止所有后续 YouTube 请求，不继续尝试其他端点。75 个缺失频道×季度均至少请求一页，其中 42 个已翻页到尽头；搜索取得 3881 条结果，其余未完页及新增视频统计留待配额/限速允许时继续。2010–2022 未采。
+## Supplementary field results (same collection batch)
+- After continued paging, it was found that the uploads of several large channels stop returning nextPageToken at exactly 400 pages × 50 = 20000 items, while the earliest date is still later than 2023-01. The operational status done only means the directory cannot continue, not that historical coverage is complete; the coverage inventory already separates these two concepts.
+- Because of the real directory truncation above, the official search.list was enabled per the plan, using missing channel × quarter as the unit and an OR query of the original economic search terms. Priority from 2023 onward: one page per quarter first, then additional pages in rotation, up to 100 searches on that day; no separate project is opened. Search results are saved as is; search items are not the complete video population; per-channel search has a separate official 500-video limit, and permissions were not circumvented.
+- The YouTube directory supplement uses official retrieval results from the search index over video titles/descriptions etc.; the acquisition route is kept, and results without a literal title hit are not forcibly removed by a second title pass. Detail collection only requests title, publish time, duration, and statistics; description bodies are not written to disk.
+- Official search succeeded for 96 pages in this round; the 97th request returned HTTP 429 / rateLimitExceeded with no Retry-After. All further YouTube requests were stopped, and no other endpoints were tried. All 75 missing channel × quarter units had at least one page requested, of which 42 have been paged to the end; search obtained 3881 results, and the remaining unfinished pages and new video statistics are left until quota/rate limits allow. 2010–2022 not collected.
 
-## 用户答复后的继续采集（2026-10-15 UTC）
-- 用户明确允许保存 YouTube 评论正文，但仍排除全部作者身份字段；这一决定取代前述“等待正文隐私边界”的临时状态。API fields 仅请求 textDisplay、时间、点赞、回复数及评论/线程 ID，不请求作者姓名、作者 ID、头像、个人链接。正文自身可能含用户自行写入的信息，按本次明确边界保留，不后处理改写。
-- 官方文档说明 textDisplay 可由 API 处理，不等同作者输入的 textOriginal；使用 plainText 保存服务器响应原字节，不将其误称逐字原始输入。文档：https://developers.google.com/youtube/v3/docs/comments 和 https://developers.google.com/youtube/v3/docs/commentThreads/list 。
-- 搜索 429 后停了约 30 分钟；本次只作一次有界的评论采集恢复检查，没有重试搜索、切换身份或网络。返回 commentsDisabled 的视频单独记为不可得；其他视频评论正文请求已成功。任何新的全局 API 错误会停止本轮，不自动重试。
-- 正文分页在候选视频间轮流推进，每视频最多 20 页、2000 顶层评论；未收回复正文。独立文件名前缀避免覆盖已下载元数据；两批存在重叠，不能简单相加成独立评论数。采集当时评论时间可能晚于视频检索截止日，保留实际时间供后续使用者按时点选取。
-- 用户说明 NYT/Guardian 仅供个人学术研究，没有提供额外用途授权。这两项保留“用途受限，跳过”，不再重复许可询问；其他来源继续。Reddit 仍按原要求暂缓。
+## Continued collection after the user's reply (2026-10-15 UTC)
+- The user explicitly permitted saving YouTube comment bodies, while still excluding all author identity fields; this decision supersedes the earlier temporary status of "waiting on the privacy boundary for bodies". API fields request only textDisplay, time, likes, reply count, and comment/thread ID; author name, author ID, avatar, and personal links are not requested. Bodies may themselves contain information that users wrote in; per this explicit boundary they are kept and not rewritten in post-processing.
+- The official documentation states that textDisplay may be processed by the API and is not the same as textOriginal entered by the author; plainText is used to save the original bytes of the server response, and this is not mislabeled as the verbatim original input. Documentation: https://developers.google.com/youtube/v3/docs/comments and https://developers.google.com/youtube/v3/docs/commentThreads/list .
+- After the search 429, collection paused for about 30 minutes; this time only one bounded comment-collection recovery check was made, with no retried searches and no switching of identity or network. Videos returning commentsDisabled are recorded separately as unavailable; comment body requests for the other videos succeeded. Any new global API error stops this round, with no automatic retry.
+- Body paging advances in rotation across candidate videos, at most 20 pages and 2000 top-level comments per video; reply bodies are not collected. A separate file name prefix avoids overwriting the already-downloaded metadata; the two batches overlap and cannot simply be added up to an independent comment count. Comment times at collection may be later than the video retrieval cutoff date; actual times are kept so later users can select by point in time.
+- The user stated that NYT/Guardian are for personal academic research only and provided no additional usage authorization. These two remain "usage restricted, skipped", and permission is not asked again; other sources continue. Reddit remains deferred per the original request.
 
-## 补齐请求后的核查
-- GDELT 间隔后用合法的最近 24 小时 timelinevolraw 请求复查，仍返回 HTTP 429，未获得数据，停止继续请求。
-- Ad Fontes 官网和下载说明可达，免费许可允许教育用途图表展示，但官方领取页要求填写个人信息并加入邮件列表。没有代填姓名/邮箱、订阅或注册，也没有从公开图像推断数值评级；N06 仍为 0 条数值评级。原页面保留作为可得性证据，不计作已取得评级。AllSides 403 未绕过。
-- 密歇根 2026 报告页重新下载核对，最新仍为 September Preliminary Results，未发现 9 月终值或 10 月报告 PDF。保留复查页面而不覆盖旧快照。
-- Yale/Shiller 数据页连接失败，未绕过。按方案 M16 的“股票市场，例如 SP500”补充官方 FRED NASDAQCOM 长期日序列，明确为不同指数，不替换或拼接 S&P 500。NASDAQ 共有 3020 个可得版本日期，JSON 接口单次实时范围上限 2000；按最多 1500 个版本日期拆成连续查询窗口，保留原响应和边界，不把窗口截断当成新修订。完整窗口检查见 nasdaq_vintage_windows.json。
-- OPM 旧 CHCOC 链接虽返回 200，实际是统一备忘录目录，不能直接当成目标文档；沿该官方目录找到 2013/2019 年的实际 PDF。补收停摆起止/复工公告证据，以及 NBER 周期原表和 2020-06-08 公告。NBER 公告日期与所认定的 2020-02 周期峰值月份分别保留，不倒填当时可得信息。
+## Checks after the request to fill gaps
+- After an interval, GDELT was rechecked with a valid last-24-hours timelinevolraw request; it still returned HTTP 429, no data were obtained, and further requests were stopped.
+- The Ad Fontes website and download instructions are reachable, and the free license allows chart display for educational use, but the official claim page requires filling in personal information and joining a mailing list. Name/email were not filled in on the user's behalf, no subscription or registration was made, and numeric ratings were not inferred from public images; N06 still has 0 numeric ratings. The original page is kept as evidence of availability and is not counted as ratings obtained. AllSides 403 was not circumvented.
+- The Michigan 2026 report page was re-downloaded and checked; the latest is still September Preliminary Results, and no September final or October report PDF was found. The recheck page is kept without overwriting the old snapshot.
+- The Yale/Shiller data page failed to connect and was not circumvented. Per the plan's M16 "stock market, e.g. SP500", the official FRED NASDAQCOM long-run daily series was added, explicitly as a different index, not replacing or splicing S&P 500. NASDAQ has 3020 available vintage dates in total, and the JSON endpoint's real-time range limit per call is 2000; the requests were split into consecutive query windows of at most 1500 vintage dates, keeping the original responses and boundaries, and window truncation is not treated as a new revision. The full window check is in nasdaq_vintage_windows.json.
+- Although the old OPM CHCOC link returns 200, it is actually a unified memo directory and cannot be treated directly as the target document; the actual 2013/2019 PDFs were found through that official directory. Evidence of shutdown start/end/return-to-work announcements was added, along with the original NBER cycle table and the 2020-06-08 announcement. The NBER announcement date and the identified 2020-02 cycle peak month are kept separately, and information available at the time is not backfilled.
 
-## NYT / Guardian 采集决定纠正
-- 用户再次明确要求使用其从官方渠道获得的 API 进行原始数据收集。此前未实际认证测试便以对后续用途的判断停止采集，混淆了任务范围、条款说明与接口拒绝；现纠正这一决定。以上“用途受限，跳过”的执行状态作废，原条款快照保留。本次只执行用户明确要求的本地采集和完整性检查，不做训练、分析或对外发布，不声称 API key 等同无限用途许可。
-- NYT Archive API 认证成功，2009-12 首月返回 9475 篇元数据。实际包含 abstract、headline、lead_paragraph、snippet、pub_date、section_name、news_desk、type_of_material、keywords、web_url、word_count 等；没有按经济关键词筛除，也没有取文章全文。后续按月至截止月，每次间隔至少 13 秒，最多登记 490 次/UTC日，实际错误立即停。
-- Guardian tags 接口认证成功，精确确认 business/useconomy 的标题为 US economy；2010-01 首月 54 条，其中 52 条有非空 bodyText。使用这个已核实标签按月分页，每页最多 200 条，间隔至少 1.1 秒，最多登记 490 次/UTC日；不把缺失正文补写，也不把标签覆盖解释为所有美国经济报道。条款记录、下载时间与原响应均保留。
-- 两源独立单次后台 worker，由 news_running_collection.json 和 N01/N02_archive_state.json 记录进度；未另开账户或 API 项目，不自动绕过失败。此次任务完整性检查后另更新报告，早先的 0 条快照已过时。
+## Correction of the NYT / Guardian collection decision
+- The user again explicitly requested raw data collection using the APIs they obtained through official channels. Earlier, collection was stopped based on a judgment about later use without actually testing authentication, conflating task scope, terms statements, and API refusals; this decision is now corrected. The execution status "usage restricted, skipped" above is void; the original terms snapshots are kept. This time only the local collection and integrity checks the user explicitly requested are performed, with no training, analysis, or external publication, and the API key is not claimed to equal an unlimited-use license.
+- NYT Archive API authentication succeeded; the first month, 2009-12, returned 9475 articles of metadata. It actually includes abstract, headline, lead_paragraph, snippet, pub_date, section_name, news_desk, type_of_material, keywords, web_url, word_count, etc.; nothing was filtered out by economic keywords, and no full article text was obtained. Thereafter month by month to the cutoff month, at least 13 seconds between calls, at most 490 logged calls per UTC day, stopping immediately on an actual error.
+- Guardian tags endpoint authentication succeeded and precisely confirmed that the title of business/useconomy is US economy; first month 2010-01 has 54 items, of which 52 have non-empty bodyText. This verified tag is paged month by month, at most 200 items per page, at least 1.1 seconds apart, at most 490 logged calls per UTC day; missing bodies are not filled in, and tag coverage is not interpreted as all US economy coverage. Terms records, download times, and original responses are all kept.
+- Each of the two sources has a separate single background worker, with progress recorded by news_running_collection.json and N01/N02_archive_state.json; no separate accounts or API projects were opened, and failures are not automatically circumvented. After this task's integrity check the report is updated separately; the earlier 0-item snapshot is outdated.
 
-## 2026-10-15 美东时间状态复核
-- 用户随后明确取消文件哈希校验；已移除下载时的摘要计算、摘要登记列、比对逻辑和旧校验输出。仅保留来源、下载时间、覆盖、条目/分页检查及原有密钥与作者字段保护。用户此次指令优先于原方案中的校验要求。
-- NYT 203 个请求月份均返回与 meta.hits 一致的条目数，但这不是出版日期全覆盖证明：10 月档案 516 条，最晚出版时间为 2026-10-04；全档案 762 条日期不属于请求月份，包含 0001 年占位日期。2025-01 月内有 4 条重复 ID。全部保留原始值，数量按响应条目报告，不伪称去重文章数。
-- Guardian 202 个请求月份均下载完成且分页数、条目数一致；US economy 标签共 5368 条，100 条无非空 bodyText，月内重复 ID 和跨月日期计数均为 0。
-- YouTube 评论正文任务在本轮 5000 次请求预算后正常暂停，不等同收到平台当日配额耗尽错误；共有 227614 条正文，2756 个视频顶层评论分页完成，1618 个已开始但仍有后续页，4287 个未开始，634 个因关闭评论不可得。视频统计已取得 9295 条。没有把评论元数据与正文两批相加为独立评论数。
-- Media Cloud 地方集合于 2026-10-14 23:55 美东时间发生 ReadTimeout，暂停在 121000 条；全国集合继续下载。进程存活不代表两个集合均在继续，应分别查分页状态。
+## 2026-10-15 US Eastern time status review
+- The user then explicitly canceled file hash verification; digest computation at download, the digest registry column, comparison logic, and old verification output have been removed. Only source, download time, coverage, item/paging checks, and the existing key and author field protections are kept. This user instruction takes precedence over the verification requirement in the original plan.
+- All 203 requested NYT months returned item counts consistent with meta.hits, but this does not prove full coverage of publication dates: the October archive has 516 items with the latest publication time 2026-10-04; across the full archive, 762 items have dates outside the requested month, including placeholder dates in year 0001. 2025-01 has 4 duplicate IDs within the month. All original values are kept, counts are reported by response items, and they are not presented as deduplicated article counts.
+- All 202 requested Guardian months were downloaded completely with consistent page and item counts; the US economy tag has 5368 items in total, 100 have no non-empty bodyText, and within-month duplicate IDs and cross-month date counts are both 0.
+- The YouTube comment body task paused normally after this round's 5000-request budget, which is not the same as receiving a platform daily-quota-exhausted error; there are 227614 bodies in total, top-level comment paging is complete for 2756 videos, 1618 have started but still have further pages, 4287 have not started, and 634 are unavailable because comments are disabled. Video statistics obtained for 9295. The comment metadata and body batches were not added up into an independent comment count.
+- The Media Cloud local collection hit a ReadTimeout at 2026-10-14 23:55 US Eastern time and paused at 121000 items; the national collection continues downloading. A live process does not mean both collections are continuing; paging state should be checked separately for each.
 
-## YouTube 无自设总量截断与 Reddit 启动
-- 用户明确要求继续 YouTube，不设置自行决定的请求总量上限。已取消单轮 5000 次、9500 次余量阈值及单视频 2000 评论截断；保留正常请求间隔，直到分页结束或 API 实际报错，停止时保存具体错误和断点。旧元数据批次的截断记录保留，不改变原件。
-- 用户明确授权 Reddit 继续收集，取代此前暂缓。按方案使用公开 Arctic Shift 社区存档接口，排除 author、author_fullname 等全部作者身份字段，不下载含完整作者字段的整站压缩包。保存标题、正文、帖子 ID、子版块、创建/存档时间及统计；不采可选评论。
-- Arctic Shift API 实测可达且 fields 投影有效；四子版块为 economy、Economics、personalfinance、inflation。先覆盖 2025-01 至 2026-10-14 监测窗口，再补 2010—2024。存档不是 Reddit 官方接口，不能宣称完整的实时 Reddit 数据。
-- 使用服务器支持的 100 条分页上限；满页时递归分割时间区间，直到返回不足 100 条。创建时间实测为整数秒，查询边界用半秒避免相同时间戳跨页遗漏。原探测响应和叶区间响应均保留，仅非重叠叶区间计入帖子数量，不对内容作清洗或语义标注；单秒仍满页时明确停止并记录不可穷尽，而非静默丢弃。
-- 文档列出 subreddit title 可选，但实测返回 400、明确称该字段无效；已去掉该元数据字段后继续。未使用错误响应推断网站不可访问。
-- Arctic Shift 的部分 HTTP 422 经实际错误正文核实为 `Timeout. Maybe slow down a bit`，不是权限拒绝。请求间隔改为至少3秒；仅对这种已确认的暂时查询超时采用10/20/40秒退避重试，持续失败才记为实际错误停止。此重试策略不截断请求总量或帖子总量；429等其他拒绝不自动绕过。
-
-
-## 2026-10-15：按用户要求优先每日覆盖
-停止旧整窗顺序采集工作进程并保留断点和原始文件；Media Cloud 切换每日分页轮转，Reddit 将未完成区间按日分割并广度优先，YouTube 增加逐日搜索及视频发布日期公平调度。具体规则与实际核实见 provenance/daily_coverage_policy.md；逐日缺口见 provenance/daily_coverage.csv。月度/季度宏观调查数据不造每日值。无需哈希校验。
+## YouTube without self-imposed total truncation, and Reddit start
+- The user explicitly requested continuing YouTube without a self-determined cap on total requests. The 5000-per-round and 9500 headroom thresholds and the 2000-comment-per-video truncation have been canceled; normal request intervals are kept until paging ends or the API actually returns an error, and on stopping the specific error and checkpoint are saved. Truncation records of the old metadata batch are kept, and the originals are unchanged.
+- The user explicitly authorized continued Reddit collection, superseding the earlier deferral. Per the plan, the public Arctic Shift community archive API is used, excluding author, author_fullname, and all other author identity fields, and the full-site compressed dumps containing complete author fields are not downloaded. Title, body, post ID, subreddit, creation/archive time, and statistics are saved; optional comments are not collected.
+- The Arctic Shift API was tested as reachable and fields projection works; the four subreddits are economy, Economics, personalfinance, inflation. First cover the 2025-01 to 2026-10-14 monitoring window, then fill 2010—2024. The archive is not an official Reddit API, and complete real-time Reddit data cannot be claimed.
+- The server-supported page limit of 100 items is used; when a page is full, the time interval is recursively split until fewer than 100 items are returned. Creation times were tested to be integer seconds, and query boundaries use half seconds to avoid missing identical timestamps across pages. Original probe responses and leaf-interval responses are all kept, only non-overlapping leaf intervals count toward post totals, and content is not cleaned or semantically annotated; if a single second is still a full page, collection explicitly stops and records it as non-exhaustible rather than silently dropping it.
+- The documentation lists subreddit title as optional, but in testing it returned 400 and explicitly said the field is invalid; that metadata field was removed and collection continued. The error response was not used to infer that the site is inaccessible.
+- Some Arctic Shift HTTP 422 responses were verified from the actual error body to be `Timeout. Maybe slow down a bit`, not permission refusals. The request interval was changed to at least 3 seconds; only for this confirmed temporary query timeout is retry with 10/20/40-second backoff used, and only persistent failure is recorded as an actual error and stopped. This retry policy does not truncate total requests or total posts; 429 and other refusals are not automatically circumvented.
 
 
-## 2026-10-15 独立审计后的采集修正
-用户明确确认授课教授已同意使用 Reddit 等社交平台数据，无需再等待许可。收到指示后先停止所有旧抓取进程（唯一仍运行的 YouTube 评论进程已终止）。仅采集和完整性修正，不做内容分析或语义标注；原始文件不覆盖，密钥仅运行时读取，社交作者字段不采集，不做哈希校验。每接口单 worker 并加进程锁。GDELT 记录为不可得，不再重试。下文将记录实施与验证结果。
+## 2026-10-15: Prioritizing daily coverage at the user's request
+The old whole-window sequential collection worker processes were stopped, keeping checkpoints and raw files; Media Cloud switched to daily paging rotation, Reddit split unfinished intervals by day and proceeds breadth-first, and YouTube added day-by-day search and fair scheduling by video publish date. Specific rules and actual verification are in provenance/daily_coverage_policy.md; day-by-day gaps are in provenance/daily_coverage.csv. No daily values are fabricated for monthly/quarterly macro survey data. No hash verification required.
 
-用户追加要求：不要无限重试。瞬时连接/超时及服务端错误采用指数退避，最多连续失败 5 次（首次 + 4 次重试），之后停止该接口并记录 needs_user_resolution，向用户报告已尝试内容与解决选项；不能用无限重试维持假运行。
 
-### 本次审计实施细则
-- Media Cloud 从 2026-10-14 倒序至 2025-07；同一集合日先取尽 pagination_token，再切换另一个集合日。选择全量续传，目前不启用抽样后备方案。旧页保持原件，在 mediacloud_day_eligibility.csv 标为 nonrandom_partial_day，不能作为完整日。瞬时错误退避最多 4 次后询问用户。
-- Reddit 教授许可已确认。优先 economy/Economics 的 2017–2024 年；personalfinance 在 2010–2024 年以 Python random.Random(20261015) 按年月顺序每月无放回抽 3 个 UTC 日期，抽中日完整采集，这是日期整群抽样而不是帖子等概率抽样。此前已取的其他日期保留，报告分开计数；抽样日保存在 reddit_collection_state.json。保留 retrieved_on；score、num_comments 是存档抓取时快照，不同年份之间不可比。只统计正文恰为 [removed]/[deleted] 的比例，不分析文本含义。
-- Reddit 最初按日 aggregate 发现返回的日桶时间带偏移，半秒边界下还返回与已取得帖子矛盾的零值；这些原响应保留但不作完整率分母。改为同一精确时间过滤下 aggregate=subreddit 获取月份总数，无作者字段。抽样月份若没有对应样本计数则完整率留空，不拿全月数冒充样本分母。
-- NYT 2026-01、2026-10 已另存带时间戳快照，仍分别只返回 694/516 条和截至 1月7日/10月4日的数据。按 _id 全局去重；查询完成率与日历覆盖缺口分别说明。建立 nyt_schema_crosswalk.csv，Business Day/Business 对照；类型仅规范大小写，未证明同义的值不合并。不同月快照重复 ID 清单另存，可复核审计口径。
-- Guardian 仅对真实文章月文件统计，排除 tag 查询响应。缺正文的源类型以 API 原字段记录；99 条非文章格式不当作漏抓正文，剩余 article 单独列出。
-- GDELT 不再发起请求，记不可得。新增官方关税、贸易协议、银行处置、停摆证据 8 项，events.csv 共 158 项；不是穷尽事件清单，未标注影响。
-- 新汇报为 source_month_completeness.csv。全局去重、匹配查询范围分子/分母、API 检索估计、分页完成性分别记录；缺分母留空。检索计数可能随来源更新；接口返回数吻合不代表来源档案完整。
+## 2026-10-15 Collection corrections after the independent audit
+The user explicitly confirmed that the course professor has approved the use of Reddit and other social platform data, so there is no further need to wait for permission. On receiving the instruction, all old scraping processes were stopped first (the only one still running, the YouTube comment process, was terminated). Collection and integrity corrections only, no content analysis or semantic annotation; raw files are not overwritten, keys are read only at run time, social author fields are not collected, and no hash verification is done. One worker per API with a process lock. GDELT is recorded as unavailable and not retried. Implementation and verification results are recorded below.
 
-### 用户追加的 YouTube 补采指令（取代此前周/季度搜索计划）
-- 不再运行旧逐日/周/季度搜索程序；已取得原响应保留并标记非完整。2010–2022 暂缓。所有来源统一 economic_title_regex_v1，记录 raw_files、routes、title_rule_match、included，月搜索完成后覆盖该月旧检索纳入结果，原件不删。
-- 当前搜索不重试；最早 2026-10-16 太平洋时间零点后探测一次。若仍 429，记录去除密钥的完整 API error 对象并停止；不能同日再次探测。单项目、单密钥；每个太平洋日搜索总次数（包含旧任务）最多 90 次。
-- 先用 playlistItems 验证 8 个截断频道的 UULF/UULV/UUSH 公开列表，每种至多 2 页探测。确认可用后仅长视频 UULF 继续翻页至 2023-01；其他类型暂保留探测结果。此约定未公开文档，不能宣称长期稳定，也不能把长视频范围等同全部含短视频/直播的范围。
-- 未补齐频道以频道×自然月、原经济词 OR、order=date，整月翻页。按截断点逆序先至 2025-01，再至 2023-01；同一月份频道轮换。完整率不能把部分月算为完整月。达到 API 上限/计数矛盾单独标记，不默认为完整。
-- 评论继续优先补未完成的合格视频发布后 30 天。API 无起始时间筛选，倒序分页必须经过更晚评论；这些不可避免返回的内容保留原响应，但完整性目标/报告只计 30 天与研究截止日的交集，不单独追求晚期评论。
-- 每日纽约时间 03:05（太平洋 00:05）在本线程执行配额重置后一次探测与报告。已创建应用 heartbeat automation，ID youtube。报告 youtube_channel_month_status.csv、当天搜索次数、实际错误。后续需要应用调度可运行，不声称任务离线也能执行。
+Additional user requirement: no infinite retries. Transient connection/timeout and server errors use exponential backoff, with at most 5 consecutive failures (first attempt + 4 retries), after which that API is stopped and recorded as needs_user_resolution, and what was attempted and the resolution options are reported to the user; infinite retries must not be used to keep up a false appearance of running.
 
-### 用户改为公开网页补采
-用户不再等待 YouTube API 配额，允许减少数据量，要求尝试爬虫。已删除每日 heartbeat automation（ID youtube），并停止评论 API、分类播放列表 API 进程；不再运行搜索 API。先测试公开频道/视频网页，只有实际可访问才采集，不使用代理、验证码绕过或新密钥。所有旧原始文件保留。Media Cloud 和 Reddit 按此前要求继续。
+### Implementation details for this audit
+- Media Cloud runs in reverse order from 2026-10-14 to 2025-07; within one collection-day, pagination_token is exhausted first before switching to another collection-day. Full resumption was chosen, and the sampling fallback is not enabled for now. Old pages are kept as originals and marked nonrandom_partial_day in mediacloud_day_eligibility.csv; they cannot count as complete days. After at most 4 backoff retries on transient errors, the user is asked.
+- Reddit: the professor's permission is confirmed. Priority to economy/Economics for 2017–2024; for personalfinance in 2010–2024, Python random.Random(20261015) is used in year-month order to draw 3 UTC dates per month without replacement, and the sampled days are collected in full; this is date cluster sampling, not equal-probability sampling of posts. Other dates already obtained are kept and counted separately in the report; sampled days are saved in reddit_collection_state.json. retrieved_on is kept; score and num_comments are snapshots at archive scrape time and are not comparable across years. Only the share of bodies that are exactly [removed]/[deleted] is counted; text meaning is not analyzed.
+- Reddit: daily aggregate was initially used, and it was found that the returned daily bucket times were offset, and under half-second boundaries it also returned zeros contradicting posts already obtained; these original responses are kept but not used as completeness denominators. Switched to aggregate=subreddit under the same exact time filter to get monthly totals, without author fields. If a sampled month has no corresponding sample count, the completeness rate is left blank, and the full-month count is not passed off as the sample denominator.
+- NYT 2026-01 and 2026-10 have been saved separately as timestamped snapshots, and still return only 694/516 items with data through January 7/October 4 respectively. Global deduplication by _id; query completion rate and calendar coverage gaps are described separately. nyt_schema_crosswalk.csv was created with a Business Day/Business mapping; types only have case normalized, and values not proven synonymous are not merged. The list of duplicate IDs across monthly snapshots is saved separately so the audit definitions can be rechecked.
+- Guardian statistics are computed only on actual article month files, excluding tag query responses. Source types missing bodies are recorded with the original API field; 99 non-article-format items are not treated as missed bodies, and the remaining articles are listed separately.
+- GDELT: no further requests; recorded as unavailable. 8 new items of official evidence on tariffs, trade agreements, bank resolutions, and shutdowns were added; events.csv has 158 items in total; it is not an exhaustive event list and impact is not annotated.
+- The new report is source_month_completeness.csv. Global deduplication, numerator/denominator matching the query scope, API retrieval estimates, and paging completeness are recorded separately; missing denominators are left blank. Retrieval counts may change as sources update; agreement with API return counts does not mean the source archive is complete.
 
-公开网页实测成功：PBS NewsHour 频道、公开 results 搜索、历史 watch 页面均可访问；通过视频页公开日期 tooltip 核实到 2023-01-31，不依赖 API key。新采样方案：针对原计划缺口 218 个频道×月，每月两个固定主题网页查询 economy/inflation，统一标题正则；在可见搜索结果中去除已在本地登记的视频，以固定种子 20261015:channel:month 排序，最多取得 1 条新且频道/月份核实的视频。该结果是搜索排序候选框中的便利样本，不能宣称平台随机样本或月份完整；无命中不代表全月无视频。只存字段选择后的公开 DOM 捕获（并明确不是原始 HTTP 正文），不存评论作者、页面全量HTML或cookie。视频 ID、日期证据、取得途径分别记录；不下载媒体流。遇访问挑战停止，不绕过。
+### Additional YouTube gap-filling instructions from the user (supersede the earlier weekly/quarterly search plan)
+- The old daily/weekly/quarterly search programs are no longer run; responses already obtained are kept and marked incomplete. 2010–2022 deferred. All sources use economic_title_regex_v1 uniformly, recording raw_files, routes, title_rule_match, included; after a month's search is complete it overrides that month's old retrieval inclusion results, and originals are not deleted.
+- Current searches are not retried; one probe at the earliest after midnight 2026-10-16 Pacific time. If still 429, the full API error object with the key removed is recorded and collection stops; no second probe on the same day. Single project, single key; at most 90 total searches per Pacific day (including old tasks).
+- First use playlistItems to verify the UULF/UULV/UUSH public lists of the 8 truncated channels, probing at most 2 pages of each type. Once confirmed usable, only long-video UULF continues paging back to 2023-01; probe results for the other types are kept for now. This convention is undocumented, cannot be claimed to be stable long-term, and the long-video range cannot be equated with the full range including shorts/live streams.
+- Channels not yet filled use channel × calendar month, OR of the original economic terms, order=date, paging through the whole month. In reverse order from the truncation point, first to 2025-01, then to 2023-01; channels rotate within the same month. The completeness rate must not count partial months as complete months. Hitting the API limit/count contradictions are marked separately and not assumed complete.
+- Comments continue to prioritize filling the 30 days after publication for unfinished eligible videos. The API has no start-time filter, so reverse-order paging must pass through later comments; this unavoidably returned content is kept in the original responses, but the completeness target/report only counts the intersection of the 30 days and the research cutoff date, and later comments are not pursued separately.
+- Every day at 03:05 New York time (00:05 Pacific), one post-quota-reset probe and report is run in this thread. An app heartbeat automation has been created, ID youtube. It reports youtube_channel_month_status.csv, the day's search count, and actual errors. This requires the app scheduler to be running; the task is not claimed to run offline.
 
-网页补采已产生实际新增记录：11Alive 2026-01-26 视频 Sudyd3fgJHA，视频页公开日期字段与频道链接核实通过，标题命中同一规则，原API库存不存在该ID。网页月度状态另存 youtube_web_monthly_status.csv 并汇入 source_month_completeness.csv；本批先补视频元数据，未把网页评论的相对时间当成准确日期。
+### User switched to gap-filling via public web pages
+The user no longer waits for YouTube API quota, allows reducing the data volume, and asked to try a scraper. The daily heartbeat automation (ID youtube) has been deleted, and the comment API and classified playlist API processes have been stopped; the search API is no longer run. Public channel/video web pages are tested first, and collection happens only if they are actually accessible; no proxies, CAPTCHA bypasses, or new keys are used. All old raw files are kept. Media Cloud and Reddit continue per the earlier requirements.
 
-### 2026-10-15T21:43:51.663172+00:00：用户中止全部 YouTube 任务
-用户决定自行另找渠道取得 YouTube 数据。已核对无 YouTube 抓取进程运行，并关闭本任务独立浏览器会话；所有 YouTube 状态标记 stopped_by_user，保留原始文件、已取得数据和断点。此前定时任务已删除；未经用户新指示不再启动任何 YouTube API 或网页抓取。Media Cloud 与 Reddit 继续运行。
+Public web pages tested successfully: the PBS NewsHour channel, public results search, and historical watch pages are all accessible; dates back to 2023-01-31 were verified via the public date tooltip on video pages, without relying on an API key. New sampling scheme: for the 218 channel × month gaps in the original plan, two fixed topic web queries per month, economy/inflation, with a uniform title regex; videos already registered locally are removed from the visible search results, the rest are ordered with the fixed seed 20261015:channel:month, and at most 1 new video with verified channel/month is taken. This result is a convenience sample from the candidate pool of the search ranking and cannot be claimed as a random platform sample or as month-complete; no hit does not mean the month has no videos. Only field-selected public DOM captures are stored (explicitly not raw HTTP bodies); comment authors, full page HTML, and cookies are not stored. Video ID, date evidence, and acquisition route are recorded separately; media streams are not downloaded. Collection stops on an access challenge, without circumvention.
 
-### 2026-10-15T22:10Z：按用户新目标重启 YouTube（Claude 单一工作进程）
-- 依据：用户经项目协调会话下达新目标——在 2023-01-01..2026-10-14 内尽量提高 10 个频道的日期覆盖，可减少视频/评论数量以加快进度。取代 21:43 的全部暂停；上述 disabled 标记文件保留作历史记录。
-- 只用官方 YouTube Data API v3、同一项目、现有密钥、单一进程 src/collect/youtube_date_coverage.py（同时持有 youtube_claude/playlistItems/commentThreads/search 四把锁）。不使用 search.list，不运行 youtube_public_web.py 或任何网页抓取。
-- 发现：从 youtube_classified_state.json 的 token 续翻 8 个截断频道的 UULF、UULV，直到整页早于 2023-01-01 或列表结束。UUSH（短视频）不遍历：短视频只经 uploads 页进入候选，即只覆盖 uploads 2 万条上限到达的日期，时间上不一致，需在分析中说明。
-- 候选：uploads + UULF/UULV 条目，发布日（videoPublishedAt 的 UTC 日期）在期内，统一 economic_title_regex_v1。仅由旧搜索得到的视频保留原件、标记 superseded_search_only，不进主集合。清单 provenance/youtube_claude_candidates.csv。
-- 与协调说明的偏差：videos.list 统计对全部主集合候选先取（50 个/次，约数百单位），用 commentCount 判定可否作为评论目标（缺失或 0 = 不可）并决定处理顺序；这只影响资格和顺序，不影响随机抽取本身。
-- 评论目标（种子 20261015，每轮独立 Random(f"20261015:roundN")）：第 1 轮每个日期至少 1 个视频，选频道时取本轮已分配数最少者（并列随机）；第 2 轮每个频道×日期 1 个；第 3 轮每个频道×日期第 2 个。此前已 complete_top_level 的主集合视频计入各轮；被抽中的旧未完成视频从旧 token 续翻（旧 token 被拒则从第 0 页重来，旧文件保留并记为 superseded）。轮内执行顺序按预计页数升序（commentCount/100），并列随机，只为在配额中断时先完成更多日期。目标视频若返回 commentsDisabled/videoNotFound，按同一规则在同一单位内补抽并记录。
-- 每个目标视频翻完全部 commentThreads 页（order=time, plainText, 无作者字段），绝不在视频内截断。完整性和计数只算视频发布后 30 天内且不晚于 2026-10-14T23:59:59Z 的唯一顶层评论。
-- quotaExceeded：写检查点，进程休眠至太平洋时间 00:05（按 America/Los_Angeles 计算，含夏令时变化）后自动继续；其他错误按 audit_runtime.retry_fetch 退避，持续失败则停止并报告。原始文件新文件名（classified_*/claude_videos_*/claude_comments_*），按 UTC 日期分目录，不覆盖。状态 provenance/youtube_claude_state.json；报告 provenance/youtube_coverage_by_date.csv 与 provenance/youtube_claude_summary.json。
-- 2026-10-15T22:10Z 补充（用户 22:03 指示：允许随机抽样减少数据量，但优先保证时间序列上的日期覆盖）：取消第 3 轮（每个频道×日期第 2 个视频），只做第 1 轮（每日至少 1 个视频）和第 2 轮（每个频道×日期 1 个，随机抽取）。不在视频内截断评论，因为截断会系统性丢掉最早的评论，属于有偏删减而非随机抽样。进程已按断点重启。
-- 发现阶段初步结果：11Alive 的 UULF 在第 249 页列表结束，最早到 2026-02-17；UULV 最早也只到 2026-02-17，与 uploads 的 2 万条上限终点（2026-02-16）几乎相同。说明分类播放列表与 uploads 一样只覆盖近期窗口，无法补回 2023 年的数据。其余频道仍在翻页。按约定，使用 search.list 前先报告。
+Web gap-filling has produced actual new records: 11Alive 2026-01-26 video Sudyd3fgJHA, verified via the video page's public date field and channel link, the title matches the same rule, and the ID does not exist in the original API inventory. Web monthly status is saved separately as youtube_web_monthly_status.csv and merged into source_month_completeness.csv; this batch first fills video metadata, and relative times on web comments are not treated as exact dates.
 
-### 2026-10-15：改用日内随机抽样以减少数据量（用户已确认）
-- 用户确认保留约 50%，优先时间序列覆盖。旧 Media Cloud/Reddit 全量 worker 已停止；原始数据不删除、不覆盖，不将抽样计划的完成率解释为全量完成率。YouTube 继续保持停止。
-- Media Cloud 官方 /search/sample 已实测返回真实随机结果；/story-list?randomize=true 返回 403，该功能不可用，不再尝试。用户随后确认：每集合、每天取 ceil(当日检索数×50%)，最多 1000 条，高流量日可以少于 50%。刷新两集合的日计数作为抽样规模依据；每个日期都发起抽样或复用已完整日期的本地抽样。旧的非随机部分日不作为完整总体用于本地抽样。
-- 已完整取得的 Media Cloud 日期，使用 random.Random('20261015|collection_id|date') 从去重ID排序列表中无放回抽样，生成选择清单，不改原件；其他日期只调用允许的官方随机样本接口一次，保存返回原件和ID清单。允许接口不暴露服务端随机种子，明确记录 seed unavailable，复现依据为已保存返回结果；不伪称 API 抽样可指定种子。最多1000条为用户接受的抽样规模，不是全量查询截断。
-- Reddit 对每个计划日期随机选 UTC 00–12 或 12–24，独立种子 '20261015|subreddit|date'，每条帖子边际纳入概率 0.5；这是半日整群抽样，不是帖子简单随机抽样。选中半天中的饱和区间仍继续二分直至取全，不把最早100条当随机样本。已取数据也用同一时间谓词生成样本索引，完整原数据保留。抽中半天为零与尚未查询分开记录，不保证零日一定存在帖子。
-- Reddit personalfinance 在2025年前仍沿用此前每月3个随机日期，且这些日期内再选半天；不扩大成每天采集。inflation 已完整取得，无需额外下载，按同一规则生成抽样选择。economy/Economics 优先 2017–2024。
-- 新调度先按月分散推进：每月日期的顺序用固定种子随机排列，相同日期顺序对各来源对齐，先让各月份获得样本，再补更密日期；同一选中区间内部完整下载。采集比例减半不保证速度翻倍，尤其低流量日一次请求的固定开销仍存在。
-- 每接口仍单worker、原速率限制及最多5次连续失败；失败达上限时停止并向用户寻求方案。新进度在 mediacloud_sampling_state.json / reddit_sampling_state.json；原全量状态已标记 superseded，来源×月份抽样进度另列 sampling_monthly_status.csv。源站计数、抽样目标、实际条数与查询完成率分别报告。
+### 2026-10-15T21:43:51.663172+00:00: User halts all YouTube tasks
+The user decided to obtain YouTube data through another channel on their own. It has been confirmed that no YouTube scraping process is running, and this task's separate browser session has been closed; all YouTube statuses are marked stopped_by_user, and raw files, data already obtained, and checkpoints are kept. The earlier scheduled task has been deleted; no YouTube API or web scraping will be started again without new user instructions. Media Cloud and Reddit continue running.
 
-抽样实施核实：两个新worker已启动；旧全量worker已退出。Media Cloud 新取得两份日计数快照，按其计数当前抽样目标约 1,108,344 条，对应原计数 4,031,354 条，约减少72.5%（因用户接受高流量日1000条上限）。已验证允许的官方 sample 接口返回新日样本，完整旧日生成选择索引；Reddit 已取得新的半日响应。采样边界、闰月日期顺序与所有待取区间处于所选半天内的检查通过。所有概率和原件/选择清单路径另存；sampling_monthly_status.csv 为新计划主表。
+### 2026-10-15T22:10Z: YouTube restarted per the user's new goal (single Claude worker process)
+- Basis: through the project coordination session, the user set a new goal: within 2023-01-01..2026-10-14, raise date coverage for the 10 channels as much as possible, and the number of videos/comments may be reduced to speed up progress. This supersedes the full pause at 21:43; the disabled marker files above are kept as historical records.
+- Only the official YouTube Data API v3 is used, with the same project, the existing key, and a single process src/collect/youtube_date_coverage.py (holding all four locks youtube_claude/playlistItems/commentThreads/search). search.list is not used, and youtube_public_web.py or any web scraping is not run.
+- Discovery: continue paging UULF and UULV for the 8 truncated channels from the tokens in youtube_classified_state.json, until a whole page is earlier than 2023-01-01 or the list ends. UUSH (shorts) is not traversed: shorts enter the candidates only via the uploads pages, i.e. they only cover the dates reached by the 20,000-item uploads limit, which is temporally inconsistent and must be noted in the analysis.
+- Candidates: uploads + UULF/UULV items whose publication day (UTC date of videoPublishedAt) is within the period, with uniform economic_title_regex_v1. Videos obtained only from the old search keep their originals, are marked superseded_search_only, and do not enter the main set. Inventory: provenance/youtube_claude_candidates.csv.
+- Deviation from the coordination notes: videos.list statistics are fetched first for all main-set candidates (50 per call, about several hundred units), and commentCount is used to decide whether a video can be a comment target (missing or 0 = no) and to set processing order; this only affects eligibility and order, not the random draw itself.
+- Comment targets (seed 20261015, each round with an independent Random(f"20261015:roundN")): round 1, at least 1 video per date, choosing the channel with the fewest allocations so far in this round (ties random); round 2, 1 per channel × date; round 3, a second per channel × date. Main-set videos already complete_top_level count toward each round; previously unfinished videos that are drawn resume from the old token (if the old token is rejected, restart from page 0; old files are kept and recorded as superseded). Execution order within a round is ascending by expected page count (commentCount/100), ties random, only so that more dates are completed first if quota interrupts. If a target video returns commentsDisabled/videoNotFound, a replacement is drawn within the same unit by the same rule and recorded.
+- Every target video is paged through all its commentThreads pages (order=time, plainText, no author fields), never truncated within a video. Completeness and counts include only unique top-level comments within 30 days after video publication and no later than 2026-10-14T23:59:59Z.
+- quotaExceeded: write a checkpoint, and the process sleeps until 00:05 Pacific time (computed with America/Los_Angeles, including daylight-saving changes) and then continues automatically; other errors back off per audit_runtime.retry_fetch, and persistent failure stops and reports. Raw files use new file names (classified_*/claude_videos_*/claude_comments_*), in directories by UTC date, without overwriting. Status: provenance/youtube_claude_state.json; reports: provenance/youtube_coverage_by_date.csv and provenance/youtube_claude_summary.json.
+- 2026-10-15T22:10Z addendum (user instruction at 22:03: random sampling is allowed to reduce data volume, but date coverage in the time series takes priority): round 3 (a second video per channel × date) is canceled; only round 1 (at least 1 video per day) and round 2 (1 per channel × date, drawn randomly) are run. Comments are not truncated within a video, because truncation would systematically drop the earliest comments, which is biased removal rather than random sampling. The process has been restarted from the checkpoint.
+- Preliminary results of the discovery phase: 11Alive's UULF list ends at page 249, earliest 2026-02-17; UULV also reaches only 2026-02-17, nearly the same as the end point of the 20,000-item uploads limit (2026-02-16). This shows that the classified playlists, like uploads, only cover a recent window and cannot recover 2023 data. The other channels are still paging. As agreed, a report is made before using search.list.
 
-### 2026-10-15：保留 Reddit 日频，收窄本轮目标
-用户在进一步精简选项中明确选择“仍保持每日：只优先两个核心版块的2017–2024年，保留日频覆盖”。本轮继续 economy / Economics 2017-01-01 至2024-12-31，每天固定种子随机半天并取完；其他未完成区间移至 deferred_pending，保留原始数据和断点，不删除、不标记成完成，也不在核心目标完成后自动开始补其他时期。原任务本来已优先这些核心日期，因此缩范围主要减少尾部工作，不承诺核心采集速率翻倍。
-Media Cloud 维持此前每集合每日约50%、最多1000条；以18:37左右实际速度约101次成功抽样/小时估算，1215个剩余集合日约12小时，考虑波动按12–14小时规划；理论下限约10.5小时。Reddit 最近333次成功半日响应中329次少于100条，继续缩小条数通常不能减少每日请求数。此为采集耗时估算，不是完成保证，不新增定时任务。
+### 2026-10-15: Switch to within-day random sampling to reduce data volume (confirmed by the user)
+- The user confirmed keeping about 50%, with time-series coverage prioritized. The old Media Cloud/Reddit full-collection workers have been stopped; raw data are not deleted or overwritten, and the completion rate of the sampling plan is not interpreted as a full-collection completion rate. YouTube remains stopped.
+- The official Media Cloud /search/sample was tested and returns genuinely random results; /story-list?randomize=true returns 403, so that feature is unavailable and is not tried again. The user then confirmed: per collection, per day, take ceil(that day's retrieval count × 50%), at most 1000 items, and high-traffic days may be below 50%. Daily counts for both collections are refreshed as the basis for sample sizes; every date either issues a sampling request or reuses a local sample from an already complete date. Old nonrandom partial days are not used as complete populations for local sampling.
+- For Media Cloud dates already obtained in full, random.Random('20261015|collection_id|date') is used to sample without replacement from the sorted list of deduplicated IDs, producing a selection list without changing the originals; other dates call the permitted official random sample endpoint only once, saving the returned original and ID list. The permitted endpoint does not expose the server-side random seed, so seed unavailable is recorded explicitly, and reproducibility rests on the saved returned results; it is not falsely claimed that API sampling can take a specified seed. The 1000-item maximum is the sample size accepted by the user, not a truncation of a full query.
+- Reddit: for each planned date, UTC 00–12 or 12–24 is chosen at random, with independent seed '20261015|subreddit|date', so each post has a marginal inclusion probability of 0.5; this is half-day cluster sampling, not simple random sampling of posts. Saturated intervals within the chosen half day are still bisected until fully retrieved, and the earliest 100 items are not taken as a random sample. Data already obtained also generate a sample index with the same time predicate, and the complete original data are kept. A sampled half day with zero posts is recorded separately from one not yet queried; a zero day is not guaranteed to have posts.
+- Reddit personalfinance before 2025 still follows the earlier 3 random dates per month, and a half day is chosen within those dates; it is not expanded to daily collection. inflation has been obtained in full and needs no additional download; sampling selections are generated by the same rule. economy/Economics prioritize 2017–2024.
+- The new scheduler first advances spread across months: the order of dates within each month is randomly permuted with a fixed seed, and the same date order is aligned across sources, so that each month gets a sample first before denser dates are filled; selected intervals are downloaded completely internally. Halving the collection share does not guarantee doubling the speed, especially since the fixed overhead of a request still exists on low-traffic days.
+- Still one worker per API, the original rate limits, and at most 5 consecutive failures; on reaching the limit, stop and ask the user for a plan. New progress is in mediacloud_sampling_state.json / reddit_sampling_state.json; the original full-collection states are marked superseded, and source × month sampling progress is listed separately in sampling_monthly_status.csv. Source counts, sampling targets, actual item counts, and query completion rates are reported separately.
 
-### 2026-10-15T22:46Z：YouTube 折中方案（用户 22:43 要求加快、用更粗粒度；协调会话据此下达）
-- 方案 B 采纳：1,724 个仅来自旧搜索、命中 economic_title_regex_v1 的期内视频并入候选集，列 search_only_supplement=True 单独标记（候选规则 v2，主集合 7,289）。它们是搜索排序样本，非随机、非完整，分析需做含/不含两种口径。
-- 第 1 轮不变（每日至少 1 个视频，频道轮换）。原第 2、3 轮（频道×日期）取消，改为“频道×月最多 4 个视频”的种子随机抽取（random.Random("20261015:roundmonth")，已完成和第 1 轮视频计入 4 个）。每个选中视频仍翻完全部顶层评论。
-- search.list 仅用于 2024-08..2024-12，且仅限 UULF 列表未覆盖该月的频道（11Alive、ABC、CBS、Fox、NBC、Bloomberg 各 5 个月，CNN 2024-08..11；PBS 已覆盖不搜），共 34 个频道×月，整月翻页，每太平洋日至多 90 次；最早 2026-10-16T07:05Z 首次探测。遇 429 不重试、跳过并报告。不阻塞评论采集。取得的视频以同一标题规则进入候选，之后对新增单位补跑第 1 轮和月度轮（_after_search）。
-- 新增报告 provenance/youtube_coverage_by_month.csv（月×频道）。
+Sampling implementation verified: the two new workers have started; the old full-collection workers have exited. Media Cloud obtained two new daily count snapshots; by those counts the current sampling target is about 1,108,344 items, versus an original count of 4,031,354 items, a reduction of about 72.5% (because the user accepted the 1000-item cap on high-traffic days). It has been verified that the permitted official sample endpoint returns samples for new days, and selection indexes were generated for complete old days; Reddit has obtained new half-day responses. Checks on sampling boundaries, date order in leap months, and that all pending intervals lie within the chosen half day passed. All probabilities and paths to originals/selection lists are saved separately; sampling_monthly_status.csv is the main table for the new plan.
 
-### 2026-10-15：按用户月度主模型改为月内随机日期整群抽样
-- 已立即停止两个旧日频/半日worker。用户的新方案取代此前每日50%、1000条上限及核心期每日半日计划。已取得原件全部保留；YouTube不归本任务，不调用其接口或启动其任务。
-- 固定种子20261015；每个来源独立 Python random.Random(20261015)，按月份升序在该月可观察UTC日期中无放回抽日，随后排序。计划与完整日期清单另存 monthly_cluster_plan.json。抽样框在下载前固定，不因已有数据/易下载日期/结果多少而重抽。
-- Media Cloud：地方2025-03至2026-09共19月，全国2025-09至2026-09共13月，每集合每月2个日期，共64日。抽中日完整翻页，只有 pagination_token 结束才计完成；可续传已取得的第一页，但未取完时不能作为完整抽样日。保留用户审计确认的全国2025-01至08、地方2025-01至02完整月份，以及2026-10已取部分，并在报告中单列。已完成的其他整日也单列保留，不混入随机日期样本。数量指标继续引用既有每日检索计数，不以样本标题数代替报道总数，不增加数量统计的新下载负担。
-- 本设计是按日整群抽样，不是对报道/帖子逐条等概率独立抽样；报告不把整群设计伪称为逐条简单随机样本。按用户要求仅做采集和完整性检查，不做建模、加权分析或内容标注。
-- Reddit：economy、Economics 的2015-01至2024-12各120月，每月3个UTC日期，各360日；抽中日通过无遗漏区间二分完整采集。2015–2016缺口纳入同一设计。已有完整日保留、与随机抽中日分开报告，抽中且原来已完整的日期计为复用抽样日。原半日叶区间可复用，但必须补完所选日剩余时间。
-- personalfinance保留2010-01至研究截止月每月3日方案（2026-10抽样框仅1至14日）；优先2026-08-05至2026-10-14。本次近期抽中日为2026-08-10/12/15、09-02/07/23、10-02/03/10。早期每月3日随机序列与原种子规则一致。
-- Reddit每个来源×月继续通过aggregate=subreddit取得整月总数作分母；已有同范围计数复用，近期月只统计至研究截止日。保留retrieved_on，score/num_comments仍是存档快照而非同期可比指标。作者字段排除，失败最多5次后停止并请用户解决。
-- 新状态：mediacloud_month_cluster_state.json、reddit_month_cluster_state.json；新的来源×月主报告为 monthly_cluster_status.csv。旧原始文件不覆盖、不删除，不执行哈希校验。每接口单worker，Media Cloud间隔至少31秒、Reddit至少3秒。
+### 2026-10-15: Keep Reddit daily frequency, narrow this round's target
+Among the further streamlining options, the user explicitly chose "keep daily: only prioritize 2017–2024 for the two core subreddits, keeping daily coverage". This round continues economy / Economics from 2017-01-01 to 2024-12-31, with a fixed-seed random half day each day, retrieved in full; other unfinished intervals are moved to deferred_pending, keeping raw data and checkpoints, not deleted, not marked complete, and other periods are not automatically started after the core target is complete. The original task already prioritized these core dates, so narrowing the scope mainly reduces tail work and does not promise doubling the core collection rate.
+Media Cloud keeps the earlier roughly 50% per collection per day, at most 1000 items; at the actual speed around 18:37 of about 101 successful samples/hour, the 1215 remaining collection-days take about 12 hours, planned as 12–14 hours to allow for fluctuation; the theoretical lower bound is about 10.5 hours. Of the most recent 333 successful Reddit half-day responses, 329 had fewer than 100 items, so further reducing item counts generally cannot reduce the number of requests per day. This is a collection time estimate, not a completion guarantee, and no new scheduled task is added.
 
-### 2026-10-15T22:57:48.228072+00:00：月度抽样实施核实及报告
-- 抽样清单核对通过：Media Cloud 32个集合月份×2日=64日；Reddit 442个版块月份×3日=1326日（两个核心版块各360日、personalfinance 606日）。所有日期由同一固定规则事先生成，未按库存重新抽样。已核对日期范围、Reddit区间复用及完整日清单；没有执行哈希校验。
-- personalfinance近期9个抽样日已全部补齐，共1661个唯一帖子；不是该时期全量帖子。Media Cloud首个完整抽样日为地方2025-03-07，共5419条。
-- 生成 monthly_cluster_status.csv、monthly_cluster_summary.json 和 MONTHLY_CLUSTER_README.md；已取得的额外完整日、随机抽中日以及此前审计完整的月份分列。更新 CURRENT_COLLECTION_STATUS.md，旧日频报告保留但不再作为当前完成率。
-- 为加入每完成一日及退出时刷新报告的功能，从断点受控重启两个worker；旧进程退出后才启动新进程，已有原件全部保留。当前Reddit顺序为近期personalfinance、核心2017–2024、核心2015–2016、其余历史personalfinance。每接口仍只运行一个worker。
-- Media Cloud按已有选中日计数估算剩余约240页，按35–50秒/页约2.3–3.4小时。Reddit当前剩余至少约1600次请求，按5–10秒/次约2.2–4.4小时仅为下限情景，密集日二分和超时将增加耗时，不能保证全部历史在该时限内完成。最新估计随报告刷新。未创建定时任务，也未请求或管理YouTube接口。
+### 2026-10-15T22:46Z: YouTube compromise plan (user at 22:43 asked to speed up and use coarser granularity; issued accordingly by the coordination session)
+- Plan B adopted: 1,724 in-period videos that come only from the old search and match economic_title_regex_v1 are merged into the candidate set, flagged separately with column search_only_supplement=True (candidate rule v2, main set 7,289). They are a search-ranking sample, nonrandom and incomplete, and analysis needs both with and without definitions.
+- Round 1 unchanged (at least 1 video per day, channel rotation). The original rounds 2 and 3 (channel × date) are canceled and replaced by a seeded random draw of "at most 4 videos per channel × month" (random.Random("20261015:roundmonth"); completed and round 1 videos count toward the 4). Every selected video is still paged through all top-level comments.
+- search.list is used only for 2024-08..2024-12, and only for channels whose UULF list does not cover that month (11Alive, ABC, CBS, Fox, NBC, Bloomberg 5 months each, CNN 2024-08..11; PBS is already covered and not searched), 34 channel × months in total, paging through the whole month, at most 90 calls per Pacific day; first probe at the earliest 2026-10-16T07:05Z. On 429, no retry; skip and report. It does not block comment collection. Videos obtained enter the candidates by the same title rule, after which round 1 and the monthly round are rerun for the new units (_after_search).
+- New report provenance/youtube_coverage_by_month.csv (month × channel).
 
-- 补充耗时情景（见 monthly_cluster_eta_snapshot.json）：以本轮新完成抽样日的实际穷尽二分叶数估算每来源每日期请求量（完整二叉树2L−1），近期约4.8秒/尝试（含暂时错误）；推算Reddit剩余约4079次请求。按4–8秒/次约4.5–9.1小时。该假设可能因历史密度不同失准；不会为兑现时限而把未完整日期标为完成。上条2.2–4.4小时仅为至少一次请求/日期的下限情景。
+### 2026-10-15: Switch to within-month random date cluster sampling per the user's monthly main model
+- The two old daily/half-day workers were stopped immediately. The user's new scheme supersedes the earlier daily 50%, 1000-item cap, and core-period daily half-day plan. All originals already obtained are kept; YouTube is not part of this task, and its API is not called and its tasks are not started.
+- Fixed seed 20261015; each source has an independent Python random.Random(20261015), drawing days without replacement from the observable UTC dates of each month in ascending month order, then sorted. The plan and complete date lists are saved separately in monthly_cluster_plan.json. The sampling frame is fixed before download and is not redrawn based on existing data, easy-to-download dates, or the size of results.
+- Media Cloud: local 2025-03 to 2026-09, 19 months; national 2025-09 to 2026-09, 13 months; 2 dates per collection per month, 64 days in total. Sampled days are paged completely and count as complete only when pagination_token ends; already-obtained first pages can be resumed, but a day not fully retrieved cannot count as a complete sampled day. The complete months confirmed by the user's audit, national 2025-01 to 08 and local 2025-01 to 02, as well as the portion of 2026-10 already obtained, are kept and listed separately in the report. Other whole days already completed are also kept and listed separately, not mixed into the random date sample. Volume metrics continue to cite the existing daily retrieval counts; sample title counts are not substituted for total story counts, and no new download burden is added for volume statistics.
+- This design is cluster sampling by day, not independent equal-probability sampling of individual stories/posts; the report does not misrepresent the cluster design as a simple random sample of items. Per the user's request, only collection and integrity checks are done, with no modeling, weighted analysis, or content annotation.
+- Reddit: economy and Economics, 2015-01 to 2024-12, 120 months each, 3 UTC dates per month, 360 days each; sampled days are collected completely by gap-free interval bisection. The 2015–2016 gap is included in the same design. Existing complete days are kept and reported separately from randomly sampled days; a sampled date that was already complete counts as a reused sampled day. Existing half-day leaf intervals can be reused, but the remaining time of the selected day must be filled in.
+- personalfinance keeps the 3-days-per-month scheme from 2010-01 to the research cutoff month (the 2026-10 sampling frame is only the 1st to 14th); priority to 2026-08-05 to 2026-10-14. The recent sampled days this time are 2026-08-10/12/15, 09-02/07/23, 10-02/03/10. The early 3-days-per-month random sequence is consistent with the original seed rule.
+- Reddit: for each source × month, the whole-month total is still obtained via aggregate=subreddit as the denominator; existing counts for the same range are reused, and recent months are counted only up to the research cutoff date. retrieved_on is kept; score/num_comments are still archive snapshots, not contemporaneously comparable metrics. Author fields are excluded; after at most 5 failures, stop and ask the user to resolve.
+- New states: mediacloud_month_cluster_state.json, reddit_month_cluster_state.json; the new source × month main report is monthly_cluster_status.csv. Old raw files are not overwritten or deleted, and no hash verification is performed. One worker per API, Media Cloud at least 31 seconds apart, Reddit at least 3 seconds.
 
-### 2026-10-15T23:10Z：YouTube 冻结版本 v1
-- 平衡面板、第 1 轮、频道×月轮（≤4）全部完成，无配额停止、无持续错误，0 次补抽。冻结副本 provenance/youtube_freeze_v1_20261015T2310Z/（逐月、逐日覆盖表、候选清单、摘要、评论视频清单 youtube_comment_videos_manifest.csv，含取得途径、选择方式、窗口评论数与原始文件路径）。
-- 清单中 selection=earlier_run_complete 的视频由此前的调度器按日期顺序全量采集，不是本次随机抽取；分析时如需随机样本口径应区分。
-- 进程保持运行，仅等待 2026-10-16T07:05Z 起的可选 2024-08..12 搜索；其结果只进入后续增补版本，不改动 v1。
+### 2026-10-15T22:57:48.228072+00:00: Verification and reporting of the monthly sampling implementation
+- Sampling list check passed: Media Cloud 32 collection-months × 2 days = 64 days; Reddit 442 subreddit-months × 3 days = 1326 days (360 days each for the two core subreddits, 606 days for personalfinance). All dates were generated in advance by the same fixed rule and not resampled based on inventory. Date ranges, Reddit interval reuse, and complete-day lists have been checked; no hash verification was performed.
+- All 9 recent personalfinance sampled days have been filled, with 1661 unique posts in total; this is not the full set of posts for that period. The first complete Media Cloud sampled day is local 2025-03-07, with 5419 items.
+- Generated monthly_cluster_status.csv, monthly_cluster_summary.json, and MONTHLY_CLUSTER_README.md; extra complete days already obtained, randomly sampled days, and months previously audited as complete are listed separately. CURRENT_COLLECTION_STATUS.md updated; the old daily report is kept but no longer serves as the current completion rate.
+- To add report refreshing after each completed day and on exit, the two workers were restarted in a controlled way from their checkpoints; new processes started only after the old ones exited, and all existing originals are kept. The current Reddit order is recent personalfinance, core 2017–2024, core 2015–2016, then the remaining historical personalfinance. Still only one worker runs per API.
+- Media Cloud, estimated from the counts of selected days, has about 240 pages remaining, at 35–50 seconds/page about 2.3–3.4 hours. Reddit currently has at least about 1600 requests remaining; at 5–10 seconds per request about 2.2–4.4 hours, which is only a lower-bound scenario; bisection of dense days and timeouts will add time, and it cannot be guaranteed that all history finishes within that time. The latest estimate is refreshed with the report. No scheduled task was created, and the YouTube API was neither requested nor managed.
 
-### 2026-10-16T01:09:06.010422+00:00：用户询问进度后的现场核对
-- Media Cloud 仍在运行；报告快照为全国24/26个抽样日37313条、地方36/38日174537条。原有库存单列，未将新抽样进度解释为所有原始数据库存。已刷新来源×月主表和汇总。
-- Reddit worker已于2026-10-15T23:33:36Z（纽约19:33）停止；Economics_2021-09 aggregate 连续5次HTTP422，来源错误为 Timeout. Maybe slow down a bit。其余数据保留断点；未在本次核查时重启或重试来源。按用户要求已主动询问：先继续抽样、失败计数末尾补取，或将该月计数拆为不重叠时段后求和。等待答复，未把缺失计数当作零。
-- Reddit当前economy215/360日9507条、Economics177/360日8038条、personalfinance40/606日11045条；近期personalfinance9日1661条已完成。核心2017–2024各完成168/288日。
-- 剩余耗时更新到monthly_cluster_eta_snapshot.json；Reddit估计从恢复时计算，不把等待用户答复的暂停时间计入。仅核查本地文件和进程并刷新报告，未调用YouTube接口、未执行哈希校验。
+- Supplementary time scenario (see monthly_cluster_eta_snapshot.json): using the actual number of exhaustive bisection leaves on sampled days newly completed this round to estimate requests per date per source (full binary tree 2L−1), recently about 4.8 seconds/attempt (including temporary errors); the projected Reddit remainder is about 4079 requests. At 4–8 seconds per request, about 4.5–9.1 hours. This assumption may be inaccurate because historical density differs; incomplete dates will not be marked complete to meet a deadline. The 2.2–4.4 hours in the previous entry is only the lower-bound scenario of at least one request per date.
 
-### 2026-10-16T01:13:34.901318+00:00：用户选择拆分 Economics 2021-09 月度计数
-- 用户明确选择先按互不重叠的较短时段获取真实aggregate计数，完整覆盖该月后求和，再恢复后续采集。只对失败的Economics_2021-09配置此拆分，不重新请求已连续失败的整月请求。
-- UTC左闭右开分段：09-01至09-08、09-08至09-15、09-15至09-22、09-22至09-29、09-29至10-01；共5段，覆盖30天，无重叠无缺口。接口沿用已验证的整数秒时间戳及半秒严格边界。结构、覆盖总秒数和边界包含性核对通过。
-- 每段原始aggregate响应另存cluster_count_part_*，不覆盖旧文件；全部成功后，月度总数才写入monthly_counts，并在provenance/monthly_count_partitions/Economics_2021-09.json保存来源文件、区间和求和结果。该清单为派生完整性记录，不冒充原始响应。不根据抽样日外推月度数量。
-- 各段计数来自顺序取得的真实快照，不能声称来源端原子快照。仍每接口单worker、至少3秒间隔、连续最多5次瞬时失败后停止并询问；未无限重试。保留之前停止记录，报告标明该月分母由分段aggregate求和。
+### 2026-10-15T23:10Z: YouTube frozen version v1
+- Balanced panel, round 1, and the channel × month round (≤4) are all complete, with no quota stops, no persistent errors, and 0 replacement draws. Frozen copy provenance/youtube_freeze_v1_20261015T2310Z/ (monthly and daily coverage tables, candidate list, summary, comment video list youtube_comment_videos_manifest.csv, including acquisition route, selection method, in-window comment count, and raw file paths).
+- Videos in the list with selection=earlier_run_complete were collected in full in date order by the earlier scheduler and were not drawn at random this time; analysis should distinguish them if a random-sample definition is needed.
+- The process keeps running, only waiting for the optional 2024-08..12 search from 2026-10-16T07:05Z; its results only enter a later supplementary version and do not change v1.
 
-- 分段实际结果核实成功：Economics 2021-09 五段来源计数依次为245, 242, 279, 225, 70，整月总数1061。已逐份读取保留的原始响应核对求和及区间连续覆盖；未执行哈希校验。最后一段短暂两次超时后成功。月度分母已写入状态与来源×月报告，该月3个抽样日也已完成，后续Reddit采集已恢复。实际来源、各区间和原件路径见provenance/monthly_count_partitions/Economics_2021-09.json。
+### 2026-10-16T01:09:06.010422+00:00: On-site check after the user asked about progress
+- Media Cloud is still running; the report snapshot is national 24/26 sampled days with 37313 items and local 36/38 days with 174537 items. The original inventory is listed separately, and the new sampling progress is not interpreted as the entire raw data inventory. The source × month main table and summary have been refreshed.
+- The Reddit worker stopped at 2026-10-15T23:33:36Z (New York 19:33); Economics_2021-09 aggregate returned HTTP 422 5 times in a row, with source error Timeout. Maybe slow down a bit. The remaining data keep their checkpoints; the source was not restarted or retried during this check. Per the user's requirement, the user has been proactively asked whether to: continue sampling first and fetch the failed count at the end, or split that month's count into non-overlapping periods and sum them. Waiting for a reply; the missing count is not treated as zero.
+- Reddit currently: economy 215/360 days with 9507 items, Economics 177/360 days with 8038 items, personalfinance 40/606 days with 11045 items; the 9 recent personalfinance days with 1661 items are complete. Core 2017–2024 each has 168/288 days complete.
+- Remaining time updated in monthly_cluster_eta_snapshot.json; the Reddit estimate is computed from resumption and does not count the pause while waiting for the user's reply. Only local files and processes were checked and reports refreshed; the YouTube API was not called, and no hash verification was performed.
 
-- 同月economy整月aggregate随后连续3次返回相同422超时。依据用户刚选择的较短不重叠时段求和方案，对economy_2021-09采用相同5段UTC分区；这是相同月度分母的精确分解，不改变抽样清单、分母定义或覆盖范围。停止旧worker后才从断点启动替代worker，避免再重复已失败的整月请求。其他月份仍按原流程取得计数；未设置无限重试。
+### 2026-10-16T01:13:34.901318+00:00: User chose to split the Economics 2021-09 monthly count
+- The user explicitly chose to first obtain real aggregate counts over shorter non-overlapping periods, fully covering the month and summing them, before resuming further collection. This split is configured only for the failed Economics_2021-09, and the whole-month request that already failed repeatedly is not re-requested.
+- UTC left-closed right-open segments: 09-01 to 09-08, 09-08 to 09-15, 09-15 to 09-22, 09-22 to 09-29, 09-29 to 10-01; 5 segments in total covering 30 days, with no overlap and no gap. The API keeps the verified integer-second timestamps and half-second strict boundaries. Checks on structure, total covered seconds, and boundary inclusivity passed.
+- Each segment's raw aggregate response is saved separately as cluster_count_part_*, without overwriting old files; only after all succeed is the monthly total written to monthly_counts, and the source files, intervals, and summed result are saved in provenance/monthly_count_partitions/Economics_2021-09.json. That list is a derived integrity record and is not passed off as a raw response. Monthly volumes are not extrapolated from sampled days.
+- Segment counts come from real snapshots obtained sequentially and cannot be claimed as an atomic snapshot on the source side. Still one worker per API, at least 3 seconds apart, stopping and asking after at most 5 consecutive transient failures; no infinite retries. The earlier stop record is kept, and the report notes that this month's denominator is the sum of segmented aggregates.
 
-- 2026-10-16T01:17:56.119886+00:00：Media Cloud本轮月内随机日期整群采集已完成，64/64日、32/32集合月份，所有抽中日分页token结束。全国39464条（26日、13月），地方185150条（38日、19月）；条数为当前随机抽样日内ID去重统计，旧完整月份和其他日期库存仍分列保留，不能将该结果解释为全月全量报道。
+- Segmentation results verified successfully: the source counts of the five Economics 2021-09 segments are 245, 242, 279, 225, 70 in order, with a whole-month total of 1061. The retained raw responses were read one by one to check the sum and continuous interval coverage; no hash verification was performed. The last segment succeeded after two brief timeouts. The monthly denominator has been written to the state and the source × month report, the month's 3 sampled days are also complete, and subsequent Reddit collection has resumed. Actual sources, intervals, and original file paths are in provenance/monthly_count_partitions/Economics_2021-09.json.
 
-- 2026-10-16T01:19:55.444292+00:00：economy_2021-09五段也已全部成功，求和1638；两版块分段来源计数均已逐份原响应复核，覆盖整月、无重叠无缺口。最后一段第四次请求成功，未达到连续5次失败阈值。Reddit worker已继续抽中日期数据下载；本次两个月度计数阻塞均已解决，原始响应及派生清单保留。
+- The whole-month aggregate for economy in the same month then returned the same 422 timeout 3 times in a row. Following the shorter non-overlapping period summation scheme the user just chose, the same 5 UTC segments were applied to economy_2021-09; this is an exact decomposition of the same monthly denominator and does not change the sampling list, denominator definition, or coverage. The replacement worker was started from the checkpoint only after stopping the old worker, to avoid repeating the already-failed whole-month request. Other months still obtain counts by the original process; no infinite retries are set.
 
-### 2026-10-16T01:25:12.835022+00:00：personalfinance减量方案建议（设计草案，未切换worker）
-- 用户要求提出尽量均匀随机、与两个核心版块密度接近的拉取方法。本次仅核对采集数量和设计，不做内容分析或标注；现有采集规则尚未修改。相同13个月和相同三个日期的月均帖子数economy211.38、Economics102.77、personalfinance827。
-- 提出每月期望150条：保留三个固定种子随机日期，再用当月真实aggregate总数确定窗口长度，在每个抽中日24小时圆环上均匀抽起点，只完整拉取所选窗口。等边际入样概率但仍属时间整群抽样，不能声称逐帖简单随机抽样或保证恰好150条。午夜越界拆为当日首尾两段。
-- 草案和实际计数核对存personalfinance_sampling_proposal.md及personalfinance_sampling_proposal_counts.json。原有文件不删除；没有新增来源API拉取，没有启动额外worker，没有执行哈希校验。未调用YouTube接口。
+- 2026-10-16T01:17:56.119886+00:00: This round of Media Cloud within-month random date cluster collection is complete, 64/64 days and 32/32 collection-months, with pagination tokens ended on all sampled days. National 39464 items (26 days, 13 months), local 185150 items (38 days, 19 months); counts are ID-deduplicated within the current random sampled days, the old complete months and other date inventories are still kept separately, and this result cannot be interpreted as the full set of stories for whole months.
 
-### 2026-10-16T01:30:49.916527+00:00：用户批准实施personalfinance月期望150条时间窗采样
-- 已停止原Reddit worker，完整断点另存provenance/reddit_month_cluster_before_pf_windows_20261016T012725Z.json；原始文件和旧全天选择清单不删除、不覆盖。economy/Economics所有job字典迁移前后逐项相等，不改变两核心版块的日期、原件引用或完成状态。
-- personalfinance现为每月既有3个固定种子随机日期，每个日期随机起点的圆环时间窗；用真实月度aggregate总数N、可观察日数D计算L=min(86400,max(1,round(86400*D*150/(3*N))))秒，N=0时窗口为空且有源计数依据。日期种子不变；起点随机流20261015|personalfinance|日期|circular_window_v1，所有时间窗在读取相应内容前固定，缺月度计数时不猜分母。
-- p=(3/D)*(L/86400)，月内每条帖子边际机会相同，但仍属两阶段时间整群抽样；目标为期望150，不是硬性150条上限。跨午夜拆为抽中日首尾不重叠区间，区间满页仍完整二分取得。遍历全部86400种起点核对午夜、正午、最后一秒等概率，及区间长度、同日边界和无重叠，均通过；无哈希校验。
-- 新规则、种子、原日期清单见personalfinance_window_design.json；月度计数快照和冻结窗口长度另存personalfinance_window_month_plans，选择ID及概率另存monthly_cluster_selections/reddit_personalfinance_window_v1_*。优先复用已完整取得的叶区间，只请求未覆盖的时间。已取得全天仍单列为原始库存，不混入新样本。
-- 已直接复用近期9日全天原件生成新样本：2026-08为134条（旧620），09为176条（旧579），10截至14日为127条（旧462），合计437条；旧1661条原件仍保留。这验证的是时间窗样本规模，没有新增下载、更改原始正文或内容标注。
-- 当前报告新增sample_unit、planned/completed_sample_windows、窗口概率/区间等字段；personalfinance完整窗口不再标为完整全天。旧全天库存包含抽样窗口，不能相加重复计数。为核验实际接口链路，先完成原计划2025-11的3个窗口作为一月实测，再继续核心2017–2024、2015–2016、其余personalfinance；不新增样本或更换日期。
-- 每接口单worker、原速率及连续失败上限、排除作者、保留retrieved_on、不调用YouTube均保持。
+- 2026-10-16T01:19:55.444292+00:00: All five segments of economy_2021-09 also succeeded, with a sum of 1638; the segmented source counts for both subreddits have been rechecked against each raw response, covering the whole month with no overlap and no gap. The fourth request for the last segment succeeded, without reaching the 5-consecutive-failure threshold. The Reddit worker has continued downloading data for sampled dates; both monthly count blockages this time are resolved, and the raw responses and derived lists are kept.
 
-- 实际API链路核验成功：2025-11真实月度aggregate总数7604，冻结每日期窗口17044秒（约4.734小时），三个窗口完整取得162条（分别44、55、63）；其中一个窗口跨午夜且在当日首尾分开获取。复用既有叶区间后新增3个文本响应即可完成本月窗口采样，不含计数请求及其重试。已继续核心版块队列。
-- 新规则目前4个完整月份、12个窗口、599条。已逐一核对所有完成窗口的原始叶区间覆盖、选中ID集合、时间戳边界、入样概率、字段白名单，均通过。窗口样本的[removed]/[deleted]和retrieved_on缺失计数已随选择清单记录。原数据和40个旧完整抽样日清单保留。
+### 2026-10-16T01:25:12.835022+00:00: Proposal for a reduced personalfinance scheme (design draft, worker not switched)
+- The user asked for a pull method that is as uniformly random as possible and close in density to the two core subreddits. This time only collection counts and design were checked, with no content analysis or annotation; the existing collection rules have not been modified. Over the same 13 months and the same three dates, average posts per month: economy 211.38, Economics 102.77, personalfinance 827.
+- Proposed an expected 150 items per month: keep the three fixed-seed random dates, then use that month's real aggregate total to set the window length, draw a start point uniformly on the 24-hour circle of each sampled day, and pull only the selected window completely. Equal marginal inclusion probability, but still time cluster sampling; it cannot be claimed as simple random sampling of posts or guaranteed to yield exactly 150 items. Windows crossing midnight are split into two segments at the start and end of that day.
+- The draft and the actual count checks are saved in personalfinance_sampling_proposal.md and personalfinance_sampling_proposal_counts.json. Existing files are not deleted; no new source API pulls were made, no extra worker was started, and no hash verification was performed. The YouTube API was not called.
 
-- 更新原件元数据备注和本地inventory分类，cluster_posts_window_*标为窗口叶响应，饱和响应仍为probe，不宣称完整全天。修正报告耗时字段：旧全天外推已废止，未准备窗口不偷偷算成零耗时，也不以只含核心区间的请求下限冒充全项目预计完成时间。为载入这些报告/元数据修正从同一断点受控重启单worker；当前PID 98487，未启动额外抓取worker。相关模块编译检查通过。
+### 2026-10-16T01:30:49.916527+00:00: User approved implementing personalfinance time-window sampling with an expected 150 items per month
+- The original Reddit worker has been stopped, and the complete checkpoint saved separately to provenance/reddit_month_cluster_before_pf_windows_20261016T012725Z.json; raw files and the old whole-day selection lists are not deleted or overwritten. All economy/Economics job dictionaries are equal item by item before and after migration, and the dates, original file references, and completion status of the two core subreddits are unchanged.
+- personalfinance now uses the existing 3 fixed-seed random dates per month, each with a circular time window at a random start point; with the real monthly aggregate total N and the number of observable days D, L=min(86400,max(1,round(86400*D*150/(3*N)))) seconds is computed; when N=0 the window is empty and is backed by a source count. The date seed is unchanged; the start point random stream is 20261015|personalfinance|date|circular_window_v1; all time windows are fixed before reading the corresponding content, and the denominator is not guessed when a monthly count is missing.
+- p=(3/D)*(L/86400); every post in a month has the same marginal chance, but this is still two-stage time cluster sampling; the target is an expected 150, not a hard cap of 150 items. Windows crossing midnight are split into non-overlapping intervals at the start and end of the sampled day, and full-page intervals are still retrieved completely by bisection. Equal probability at midnight, noon, the last second, etc. was checked by enumerating all 86400 start points, along with interval lengths, same-day boundaries, and no overlap; all passed; no hash verification.
+- The new rule, seeds, and the original date list are in personalfinance_window_design.json; monthly count snapshots and frozen window lengths are saved separately in personalfinance_window_month_plans, and selected IDs and probabilities in monthly_cluster_selections/reddit_personalfinance_window_v1_*. Leaf intervals already obtained completely are reused first, and only uncovered time is requested. Whole days already obtained are still listed separately as raw inventory and not mixed into the new sample.
+- The whole-day originals for the 9 recent days were reused directly to generate the new sample: 2026-08 has 134 items (previously 620), 09 has 176 (previously 579), 10 through the 14th has 127 (previously 462), 437 in total; the old 1661 originals are still kept. This verifies the time-window sample size, with no new downloads, changes to raw bodies, or content annotation.
+- The current report adds fields such as sample_unit, planned/completed_sample_windows, and window probability/interval; complete personalfinance windows are no longer marked as complete whole days. The old whole-day inventory contains the sampling windows and cannot be added to them, which would double count. To verify the actual API pipeline, the 3 windows of the originally planned 2025-11 are completed first as a one-month field test, before continuing with core 2017–2024, 2015–2016, and the remaining personalfinance; no samples are added and no dates are changed.
+- One worker per API, the original rate and consecutive-failure limits, excluding authors, keeping retrieved_on, and not calling YouTube all remain in place.
 
-### 2026-10-16T01:40:55.598266+00:00：用户询问整体进度和剩余项的现场核对
-- 刷新当前来源×月报告，新增current_collection_overview.md、monthly_sampling_pending_units.csv、monthly_sampling_pending_months.csv和current_collection_source_limits.csv；区分当前抽样缺口、已有原始库存、来源限制与发布滞后。没有重新请求受限站点，没有调用YouTube接口或执行哈希校验。
-- Media Cloud64/64日、32/32集合月份均已完成；Reddit按当前进程状态继续。personalfinance的窗口计数与旧全天库存分列，未准备时间窗不解释为零条原数据。
-- dataset_status.csv / collection_report.md属于较早库存快照，其中Media Cloud/Reddit状态不能作为当前进度，NYT重请求及Guardian类型缺口以较新的monthly_audit_summary.json为准。事件表实有158条。来源限制本次仅复核本地保存的证据，没有宣称受限接口现在仍返回相同状态。
+- Actual API pipeline verified successfully: the real monthly aggregate total for 2025-11 is 7604, the frozen per-date window is 17044 seconds (about 4.734 hours), and the three windows were obtained completely with 162 items (44, 55, and 63 respectively); one window crosses midnight and was fetched separately at the start and end of the day. After reusing existing leaf intervals, only 3 new text responses were needed to complete this month's window sampling, not counting count requests and their retries. The core subreddit queue has resumed.
+- The new rule currently has 4 complete months, 12 windows, 599 items. Raw leaf interval coverage, selected ID sets, timestamp boundaries, inclusion probabilities, and field whitelists of all completed windows have been checked one by one, and all passed. The [removed]/[deleted] and missing retrieved_on counts for window samples have been recorded with the selection lists. The original data and the 40 old complete sampled-day lists are kept.
 
-- 已在旧collection_report.md顶部增加显式历史快照提示并链接当前总览；不重新计算或冒用旧dataset_status.csv条数为当前库存。该报告为派生文档，原始下载文件未修改。
+- Updated the original file metadata notes and local inventory classification: cluster_posts_window_* are marked as window leaf responses, saturated responses are still probe, and they are not claimed as complete whole days. Corrected the report's time fields: the old whole-day extrapolation is abolished, unprepared windows are not quietly counted as zero time, and the request lower bound covering only core intervals is not passed off as the expected completion time for the whole project. To load these report/metadata corrections, the single worker was restarted in a controlled way from the same checkpoint; current PID 98487, and no additional scraping worker was started. The compile check of the relevant modules passed.
 
-### 2026-10-16T01:49:27.626255+00:00：用户要求进一步利用personalfinance旧库存
-- 已核对1513个已登记穷尽叶响应的区间并集：2025-01至2025-10共10个整月无覆盖缺口。按现有日期和窗口规则，可完成额外30个窗口且不增加帖子正文请求；只需补取10个月度aggregate计数来冻结窗口时长。完整性证明与原件清单见personalfinance_inventory_reuse_audit.json。
-- 原方案已经复用10个完整窗口，其中近期9个窗口及2025-11的1个窗口无需新增正文请求。本次将完整库存月份标记reuse_inventory_priority，在近期窗口之后、核心待补数据之前优先完成；不替换随机日期、随机起点或窗口时长规则，不改核心版块抽样计划。
-- 月度分母仍按用户要求使用来源aggregate接口，不把不完整库存条数或时间窗样本数量当作月度总数。只有被选中窗口的完整区间确已存在时才复用，首屏探测/未完成区间不能标完整。早年不存在的月份不能由2025年库存替代。
-- 先停止旧worker，取得同一接口锁后修改队列优先级，再启动一个worker从断点继续。未覆盖原件、未存作者字段、未执行哈希校验，也未调用YouTube接口。
+### 2026-10-16T01:40:55.598266+00:00: On-site check after the user asked about overall progress and remaining items
+- Refreshed the current source × month report and added current_collection_overview.md, monthly_sampling_pending_units.csv, monthly_sampling_pending_months.csv, and current_collection_source_limits.csv; these distinguish current sampling gaps, existing raw inventory, source limitations, and release lags. Restricted sites were not re-requested, the YouTube API was not called, and no hash verification was performed.
+- Media Cloud 64/64 days and 32/32 collection-months are all complete; Reddit continues according to the current process state. personalfinance window counts are listed separately from the old whole-day inventory, and unprepared time windows are not interpreted as zero raw items.
+- dataset_status.csv / collection_report.md are earlier inventory snapshots; the Media Cloud/Reddit statuses in them cannot serve as current progress, and for NYT re-requests and Guardian type gaps the newer monthly_audit_summary.json prevails. The event table actually has 158 items. For source limitations, only locally saved evidence was rechecked this time; it is not claimed that the restricted APIs still return the same status now.
 
-- 2026-10-16T01:52:21.394059+00:00：2025-01至10库存复用全部完成，共30个窗口、1323条新规则样本；逐一核对已穷尽原始区间覆盖、原件引用和选择清单ID计数。请求日志确认这一批新增帖子正文接口请求为0，仅补月度aggregate计数（含退避重试）。
-- personalfinance当前累计14个完整月份、42个窗口、1922条窗口样本，其中40个窗口完全复用旧原件。worker已转回核心版块继续。旧库存与新aggregate计数间的快照数量差异已逐月写入personalfinance_inventory_reuse_audit.json；不猜测差异原因、不修改原始文件、不以库存替代用户要求的aggregate分母。
+- An explicit historical snapshot notice has been added at the top of the old collection_report.md, linking to the current overview; the old dataset_status.csv counts are not recomputed or misused as the current inventory. That report is a derived document; the raw downloaded files were not modified.
 
-### 2026-10-16T02:49:34.780304+00:00：进度现场核对与personalfinance计数失败
-- Media Cloud全国13/13月39464条、地方19/19月185150条已完成。Reddit economy与Economics也均120/120月、360/360个完整随机日，分别19831和17857条；已复核完成job无待补区间、各选择清单ID去重计数以及月度来源计数引用。
-- personalfinance完成48/202月、144/606窗口、3229条（包括低密度/来源计数零的完整月）；剩2012-11至2024-12及2025-12至2026-07共154月462窗。
-- worker于02:34:41Z（纽约22:34）因personalfinance_2012-11 aggregate连续5次422停止，现场确认进程已退出；Media Cloud也已完成退出。未在状态核对时偷偷重启。依用户要求主动寻求方案，建议这次和后续同类整月计数失败统一按周分段，若某分段5次仍失败才再次停止询问；另提供仅对本月应用分段的选择。等待答复。
-- 更新当前总览、来源×月报告与未完成月份/日期清单，保留原始库存。未执行哈希校验或调用YouTube接口。其他来源限制未重新在线复测。
+### 2026-10-16T01:49:27.626255+00:00: User asked to make further use of the old personalfinance inventory
+- Checked the union of intervals of the 1513 registered exhaustive leaf responses: the 10 whole months from 2025-01 to 2025-10 have no coverage gaps. Under the existing date and window rules, 30 additional windows can be completed without adding any post body requests; only 10 monthly aggregate counts need to be fetched to freeze the window lengths. The completeness proof and original file list are in personalfinance_inventory_reuse_audit.json.
+- The original scheme already reused 10 complete windows, of which the 9 recent windows and the 1 window of 2025-11 needed no new body requests. This time the complete inventory months are marked reuse_inventory_priority and completed with priority after the recent windows and before the pending core data; the random date, random start point, and window length rules are not replaced, and the core subreddit sampling plan is not changed.
+- The monthly denominator still uses the source aggregate endpoint as the user requested; incomplete inventory counts or time-window sample sizes are not treated as monthly totals. Reuse happens only when the complete interval of a selected window actually exists; first-page probes/unfinished intervals cannot be marked complete. Months in earlier years that do not exist cannot be replaced by the 2025 inventory.
+- First the old worker was stopped, the queue priority was changed after acquiring the same API lock, and then one worker was started to continue from the checkpoint. Originals were not overwritten, author fields were not stored, no hash verification was performed, and the YouTube API was not called.
 
-### 2026-10-16T02:52:01.332910+00:00：用户批准统一整月超时分段计数规则
-- 对本次personalfinance_2012-11及后续同类整月计数，整月请求连续5次超时后自动改为不重叠、每段最多7天的UTC分区，完整覆盖该月（截止月仅至研究截止日）；全部分段成功后才求和写入月度分母。已保存分段和月计数直接复用，不重复整月失败请求。
-- 某分段也连续5次瞬时失败时停止并询问，不继续递归缩小或无限重试。原作者排除、原件保留、每接口单worker、至少3秒间隔与Retry-After仍适用。权限/访问拒绝不尝试绕过，429等配额限制沿用原退避与停止规则，不将它们视作缩短时间范围的依据。
-- 规则写入reddit_monthly_count_timeout_policy.json及状态文件。2012-11已预置5个区间（11-01..08、08..15、15..22、22..29、29..12-01），保留原5次失败记录；直接进入分段，不重跑整月5次。
-- 30/31天月份、闰年2月、截止月14天的区间覆盖、无重叠、整数秒严格边界及重复初始化不丢分段进度已核对通过；代码编译通过。未执行哈希校验、未调用YouTube接口。
+- 2026-10-16T01:52:21.394059+00:00: Inventory reuse for 2025-01 to 10 is fully complete, 30 windows and 1323 new-rule sample items in total; exhausted raw interval coverage, original file references, and selection list ID counts were checked one by one. The request log confirms that this batch added 0 post body API requests, only filling the monthly aggregate counts (including backoff retries).
+- personalfinance currently has a cumulative 14 complete months, 42 windows, 1922 window sample items, of which 40 windows fully reuse old originals. The worker has returned to the core subreddits. Snapshot count differences between the old inventory and the new aggregate counts have been written month by month to personalfinance_inventory_reuse_audit.json; the reasons for the differences are not guessed, raw files are not modified, and the inventory is not substituted for the aggregate denominator the user required.
 
-- 2026-10-16T02:54:24.978535+00:00：2012-11五个分段均成功，逐份原始响应复核后整月计数1046；该月3个窗口也已采完，worker已继续之后的月份。未来整月超时触发分段、已完成计数续跑不重复请求、403拒绝及429限速不触发分段的状态转换检查均通过（无额外网络请求）。连接超时同样归入获批的超时规则。
+### 2026-10-16T02:49:34.780304+00:00: On-site progress check and personalfinance count failure
+- Media Cloud national 13/13 months with 39464 items and local 19/19 months with 185150 items are complete. Reddit economy and Economics are also both 120/120 months and 360/360 complete random days, with 19831 and 17857 items respectively; it has been rechecked that completed jobs have no pending intervals, as well as the deduplicated ID counts of each selection list and the monthly source count references.
+- personalfinance has completed 48/202 months, 144/606 windows, 3229 items (including complete months with low density/zero source count); remaining are 2012-11 to 2024-12 and 2025-12 to 2026-07, 154 months and 462 windows.
+- The worker stopped at 02:34:41Z (New York 22:34) because personalfinance_2012-11 aggregate returned 422 5 times in a row; it was confirmed on site that the process has exited; Media Cloud has also completed and exited. It was not quietly restarted during the status check. Per the user's requirement, a plan was proactively sought: the suggestion is to split this and future similar whole-month count failures uniformly by week, stopping to ask again only if a segment still fails 5 times; the option of applying segmentation to this month only was also offered. Waiting for a reply.
+- Updated the current overview, the source × month report, and the lists of unfinished months/dates, keeping the raw inventory. No hash verification was performed and the YouTube API was not called. Other source limitations were not retested online.
 
-- 为载入连接超时分类及报告中的政策字段，从原断点受控重启一次worker，旧进程确认退出后才启动替代进程，当前PID 12709；无新增并行worker。
+### 2026-10-16T02:52:01.332910+00:00: User approved a uniform segmented counting rule for whole-month timeouts
+- For this personalfinance_2012-11 and subsequent similar whole-month counts, after 5 consecutive timeouts of the whole-month request, the count automatically switches to non-overlapping UTC partitions of at most 7 days each, fully covering the month (the cutoff month only up to the research cutoff date); only after all segments succeed is the sum written to the monthly denominator. Saved segments and monthly counts are reused directly, and the failed whole-month request is not repeated.
+- If a segment also has 5 consecutive transient failures, stop and ask, without further recursive narrowing or infinite retries. The existing author exclusion, retention of originals, one worker per API, at least 3 seconds between requests, and Retry-After still apply. Permission/access refusals are not circumvented; quota limits such as 429 follow the existing backoff and stop rules and are not treated as grounds for shortening the time range.
+- The rule is written to reddit_monthly_count_timeout_policy.json and the state files. 2012-11 has 5 intervals preset (11-01..08, 08..15, 15..22, 22..29, 29..12-01), keeping the original 5 failure records; it goes directly into segmentation without rerunning the whole month 5 times.
+- Interval coverage, no overlap, strict integer-second boundaries, and no loss of segment progress on repeated initialization have been checked for 30/31-day months, February of leap years, and the 14-day cutoff month; the code compiles. No hash verification was performed and the YouTube API was not called.
 
-### 2026-10-16T04:10Z：人工标注样本与手册 v0.9（用户要求"把样本和标准给我"）
-- 用户无法保证两名标注员；已告知 PDF 明确要求两名独立标注员，建议优先找第二人，至少做部分双重编码。仍按两人设计生成 A/B 两份相同的盲标工作簿。
-- 抽样（src/annotation/build_sample.py，种子 20261015）：抽样框要求单位自身显示文本命中 economic_title_regex_v1 词表；来源层级×时期×来源格内简单随机无放回抽样，权重=框大小/样本量（sampling_frame_sizes.csv）。主样本 360（全国 180：NYT 125、Guardian 40、Media Cloud 全国 15；地方 60：Media Cloud 地方，仅 2025–2026 有文本；社交 120：Reddit 90、YouTube 30），另 30 条校准先抽并排除。开发集 100 按格最大余数法分配、格内随机，其余 260 为测试集。
-- 单位文本：NYT 标题+摘要+首段（2025 年起来源无首段，只有标题+摘要）；Guardian 标题+导语+正文前 100 词；Media Cloud 仅标题；Reddit 标题+正文前 1,200 字符（[removed]/[deleted] 正文不显示）；YouTube 30 天窗口内顶层评论，视频标题仅作上下文。人工与 LLM 将标注完全相同的文本。
-- 盲标：工作簿不含来源名、网址、AI 标签；unit_type 会间接透露文本形式，属必要信息。对照表 sample_key_DO_NOT_SHOW_ANNOTATORS.csv 不得给标注员。事实校准维度由人工摘录数字陈述，逐项与 ALFRED 发布时版本核对由分析者完成。
-- 地方新闻只能在 2025–2026 抽样；社交 2010–2014 只有 personalfinance 时间窗；Reddit 2025–2026 只有 personalfinance。Reddit personalfinance 抽样时仍在采集，抽样框为 2026-10-16T04:06Z 已存在的完成窗口。
+- 2026-10-16T02:54:24.978535+00:00: All five segments of 2012-11 succeeded; after rechecking each raw response, the whole-month count is 1046; the month's 3 windows have also been collected, and the worker has continued with later months. State transition checks passed (with no extra network requests) for: future whole-month timeouts triggering segmentation, resumption of completed counts without repeated requests, and 403 refusals and 429 rate limits not triggering segmentation. Connection timeouts are likewise classified under the approved timeout rule.
 
-### 2026-10-16T04:50Z：标注一致性
-- 项目负责人声明：A、B 两份标注均由人工独立完成，未使用 AI、LLM 或脚本。按此作为标注来源。time_log 原样保留（A 有记录，B 未填），分析中不据此推断标注方式。
-- src/annotation/agreement.py：relevant 在全部条目上比较；其余维度只在两人都判为 yes/unsure 的条目上比较（手册规定 relevant=no 时其余留空）。Cohen's κ 不加权；Krippendorff's α 两名编码者、重合矩阵形式，emotional_intensity 用有序距离，其余为名义距离。主题 13 列与各行动者是否出现按二元变量逐列比较。输出在 annotation/agreement/（agreement_summary.csv、confusion_matrices.csv、invalid_entries.csv、adjudication_disagreements.xlsx、agreement_overview.json）。无非法取值。
-- 裁决尚未进行：adjudication_disagreements.xlsx 中每个分歧项一行，final 和 reason 留空，由两人讨论或第三人填写。
+- To load the connection-timeout classification and the policy fields in the report, the worker was restarted once in a controlled way from the original checkpoint, with the replacement process started only after confirming the old process exited; current PID 12709; no new parallel worker.
 
-### 2026-10-16T05:10Z：金标准 v1
-- 裁决表 593 个分歧项全部有 final 与 reason；final 取 A 477、取 B 114、两者之外 2（C022 情绪强度取 1；A325 fact_direction 取 no_fact），均有书面理由。__BLANK__ 视为留空。
-- src/annotation/build_gold.py：两人一致处取共同值，分歧处取 final；claim_text 为自由文本未纳入裁决，取两人摘录的并集（按 ; 拆分、去完全重复），numeric_claim≠yes 时清空。生成后按手册规则复核（relevant=no 时其余为空、相关条目必填项、取值合法），无不一致。输出 annotation/gold_standard_v1.csv（360）、gold_calibration_v1.csv（30）、agreement/gold_overview.json。
-- 金标准 relevant：yes 220、no 108、unsure 32（开发集 8、测试集 24）。unsure 的评估口径需在看到 AI 结果前确定。
-- B 的 time_log 为补录估计（35 分钟，非实测），原样保留并在报告中如实说明。手册校准后未修改。
-- 2026-10-16T05:18Z：用户确认数据收集完成，取消 YouTube 2024-08..12 可选搜索（未发出任何 search 请求），后台进程已停止；youtube_freeze_v1 为最终版本。评估口径：金标准 relevant=unsure 的 32 条不计入 relevant 的精确率/召回率并单列数量，其余维度照常评估（用户 05:17 同意）。
+### 2026-10-16T04:10Z: Human annotation sample and codebook v0.9 (user asked "give me the sample and the criteria")
+- The user cannot guarantee two annotators; the user has been told that the PDF explicitly requires two independent annotators, and it was suggested to prioritize finding a second person and to do at least partial double coding. Two identical blind-annotation workbooks, A/B, are still generated according to the two-person design.
+- Sampling (src/annotation/build_sample.py, seed 20261015): the sampling frame requires that the unit's own displayed text matches the economic_title_regex_v1 vocabulary; simple random sampling without replacement within source tier × period × source cells, weight = frame size / sample size (sampling_frame_sizes.csv). Main sample 360 (national 180: NYT 125, Guardian 40, Media Cloud national 15; local 60: Media Cloud local, text only for 2025–2026; social 120: Reddit 90, YouTube 30); a further 30 calibration items are drawn first and excluded. The development set of 100 is allocated by cell using the largest remainder method, random within cells, and the remaining 260 are the test set.
+- Unit text: NYT headline + abstract + lead paragraph (from 2025 the source has no lead paragraph, only headline + abstract); Guardian headline + standfirst + first 100 words of the body; Media Cloud headline only; Reddit title + first 1,200 characters of the body ([removed]/[deleted] bodies are not shown); YouTube top-level comments within the 30-day window, with the video title only as context. Humans and the LLM annotate exactly the same text.
+- Blind annotation: workbooks contain no source name, URL, or AI labels; unit_type indirectly reveals the text form, which is necessary information. The key table sample_key_DO_NOT_SHOW_ANNOTATORS.csv must not be given to annotators. For the factual calibration dimension, numeric statements are excerpted by humans, and item-by-item checking against the ALFRED release-time vintage is done by the analyst.
+- Local news can only be sampled in 2025–2026; social for 2010–2014 has only personalfinance time windows; Reddit 2025–2026 has only personalfinance. Reddit personalfinance was still being collected at sampling time; the sampling frame is the completed windows that existed at 2026-10-16T04:06Z.
 
-### 2026-10-16T05:50Z：数据处理交接（task_guide 第 6 节）
-- 新增 src/process/：
-  · econ_realtime.py：ALFRED 版本按 D2 截止日构造实时面板，另出初值发布日截止的敏感性版本。各序列取版本内最新非缺失观测，比率的分子分母取自同一版本，最早版本之前留空不回填。
-  · survey_monthly.py：密歇根分组、党派、新闻与预期面板，数值按官方发布原样保留。
-  · build_corpus.py：语料主表。纳入规则与标注抽样框一致；样本权重 = 来源×月内入样概率的倒数；去重用并查集合并规范化 URL（保留非跟踪查询参数）、规范化文本，以及 MinHash 近似重复（Jaccard ≥ 0.8）。
-  · export_labels.py：labels/、codebook/、youtube_videos.csv。
-  · run_all.sh：一键重建。
-- 初版的 URL 规范化去掉了查询参数，导致只靠查询参数区分稿件的站点被错误合并（一个聚类达 1,035 条，混有不同标题），已改为保留非跟踪参数后重建。
-- 事故与修复：首次运行 run_all.sh 时，agreement.py 重新生成了空白裁决模板，覆盖了 annotation/agreement/adjudication_disagreements.xlsx 中已填好的裁决。已从 export_labels.py 先前保存的副本 labels/adjudication_log.xlsx（593 个 final 和 reason 齐全，修改时间 00:57 与原件一致）恢复。agreement.py 现在遇到已存在的裁决表时不再覆盖，只核对分歧键是否完全一致。恢复后重跑全流程，输出与恢复前逐字节相同。
-- 关键词规则的精度（金标准估计）、来源局限和抽样局限写入 corpus/corpus_documentation.md。
+### 2026-10-16T04:50Z: Annotation agreement
+- Project lead's statement: both annotations A and B were completed independently by humans, without using AI, an LLM, or scripts. This is taken as the annotation source. time_log is kept as is (A has records, B left it blank), and the annotation method is not inferred from it in the analysis.
+- src/annotation/agreement.py: relevant is compared over all items; the other dimensions are compared only on items both annotators judged yes/unsure (the codebook specifies that the others are left blank when relevant=no). Cohen's κ unweighted; Krippendorff's α with two coders in coincidence matrix form, ordinal distance for emotional_intensity, nominal distance for the rest. The 13 topic columns and whether each actor appears are compared column by column as binary variables. Outputs are in annotation/agreement/ (agreement_summary.csv, confusion_matrices.csv, invalid_entries.csv, adjudication_disagreements.xlsx, agreement_overview.json). No invalid values.
+- Adjudication not yet done: adjudication_disagreements.xlsx has one row per disagreement, with final and reason left blank, to be filled in by the two annotators through discussion or by a third person.
 
-### 2026-10-16T06:40Z：LLM 编码方案（用户选择 Codex + gpt 6 luna，采用推荐的约 7,000 条方案）
-- 用 Codex 代替 API。提示词文件固定并记录 SHA256；要求逐条阅读、附逐字证据，禁止写脚本或用关键词打标签。Codex 无法设定温度，用测试集 10% 的重复运行一致率量化随机性。只在开发集上迭代提示词，测试集只跑一次。
-- 开发集 v1（labels/ai/codex__v1_isolated_r1/dev.jsonl，100 条）：格式和取值无问题，404 条证据全部能在原文中找到。κ：relevant 0.86、tone 0.73、fact_direction 0.58、emotional_intensity 0.41、perspective 0.52、time_frame 0.54、actor_1 0.72。系统性偏差：情绪强度偏低（1 判成 0 共 13 次），以及在 time_frame 和 perspective 上把 both 判成单一取值。
-- prompt v2 = v1 加一段"澄清"，只依据开发集上的混淆，不改手册定义（SHA256 9f95f20a…）。下一步：v2 跑开发集，与 v1 比较后冻结表现更好的版本，再跑测试集。
-- 正式编码样本（src/annotation/build_corpus_sample.py，种子 20261015）共 7,400 条，分 37 批，每批 200 条：
-  · 全国 NYT 加 Guardian：每月 20 条，202 个月
-  · Media Cloud 全国：每月 20 条，13 个月
-  · 地方：每月 40 条，19 个月
-  · Reddit：2015 年起每月 10 条
-  · YouTube：每月 20 条，46 个月
-  抽样框只含内容单位（去掉重复、转载、广告、讣告）。最终权重 = 第一阶段设计权重 × 层内扩张因子；YouTube 不设权重。编码 ID 不透露来源（K00001…），对照表为 labels/corpus_sample_key.csv。单位文本与人工标注样本的构造完全一致（390 条逐字核对通过）。为此 items.parquet 中 Guardian 的 text 改为"导语 + 换行 + 正文"（导语可为空），已重建。
-- 2026-10-16T06:35Z：用户要求全国新闻改为每月 40 条，正式编码样本已重新生成（尚无任何批次运行过，旧批次文件已删除）：全国 8,071 条（202 个月；2026-10 的抽样框只有 31 条，全取），其余各组不变，共 11,431 条、58 批，同一种子。
-- 2026-10-16T06:55Z：开发集 v2 结果（labels/ai/codex__v2_isolated_r1/dev.jsonl）：格式无问题，442 条证据全部能在原文中找到。10 个编码维度的平均 κ 从 v1 的 0.652 升到 v2 的 0.670：视角 0.52→0.71、主要行动者 0.72→0.81、事实好坏 0.58→0.61；语气 0.73→0.68（开发集 59 条中只差 1 条）；时间框架 0.54→0.52、情绪强度 0.41→0.43，这两项澄清没有起效。按"开发集平均 κ"规则冻结 v2；对照表见 results/ai_validation/dev_v1_vs_v2.csv。不再迭代提示词。测试集 10% 重复样本按种子 20261015 从测试集中随机抽 26 条，见 labels/ai_inputs/test_repeat.jsonl。
+### 2026-10-16T05:10Z: Gold standard v1
+- All 593 disagreements in the adjudication table have final and reason; final takes A in 477, B in 114, and something other than both in 2 (C022 emotional intensity set to 1; A325 fact_direction set to no_fact), all with written reasons. __BLANK__ is treated as left blank.
+- src/annotation/build_gold.py: where the two agree, the common value is taken; where they disagree, final is taken; claim_text is free text not included in adjudication, and the union of both annotators' excerpts is taken (split on ;, removing exact duplicates), cleared when numeric_claim≠yes. After generation it was rechecked against the codebook rules (others blank when relevant=no, required fields for relevant items, valid values), with no inconsistencies. Outputs annotation/gold_standard_v1.csv (360), gold_calibration_v1.csv (30), agreement/gold_overview.json.
+- Gold standard relevant: yes 220, no 108, unsure 32 (development set 8, test set 24). The evaluation definition for unsure must be set before seeing the AI results.
+- B's time_log is a retroactive estimate (35 minutes, not measured), kept as is and stated truthfully in the report. The codebook was not modified after calibration.
+- 2026-10-16T05:18Z: The user confirmed that data collection is complete and canceled the optional YouTube 2024-08..12 search (no search request was ever sent); background processes have stopped; youtube_freeze_v1 is the final version. Evaluation definition: the 32 gold standard items with relevant=unsure are excluded from relevant precision/recall and their count is listed separately; other dimensions are evaluated as usual (user agreed at 05:17).
 
-### 2026-10-16T17:20Z：LLM 编码结果导入与月度媒体指数
-- 用户在另一个文件夹 NLP/LLM_Labeling_v2_Run 中用 Codex 主代理加独立上下文子代理完成：测试集 260 条、独立重复 26 条、正式编码 58 批 11,431 条。已核对各阶段的提示词副本 SHA256 均为 v2（9f95f20a…），全部输入文件与本项目 labels/ai_inputs 逐字节一致。输出、run_log.csv（67 行）、job_logs（67 个文件）和执行包说明已原样复制到 labels/ai/。
-- 本项目脚本复核：测试集和 58 批全部完整，ID 正确，无非法取值，证据摘录全部能在原文中逐字找到。
-- 运行日志记录了以下情况，原样保留：模型名称和设置"不可见"；4 个批次首次运行没有输出后重跑；多批在结构核验后修复过证据摘录和 claim_text。测试集也经过同一流程。
-- 用户转述的完成通知称"3 条 unsure"，实际正式编码中 relevant = unsure 共 23 条（Reddit 15、全国 6、地方 1、Media Cloud 全国 1）。以文件为准。
-- 测试集结果：relevant κ 0.86、tone 0.73，其余见 results/ai_validation/README.md。重复运行的一致率：relevant 0.92、tone 0.85。
-- 生成 features/media_monthly.csv 和 media_quarterly.csv（src/process/media_monthly.py）。格内用设计加权比率估计量，内容指标只在 relevant = yes 上计算。全国组相关条目每月 14–37 条；Reddit 月度格太稀，140 个月 low_n，用季度版。与旧金山联储月均值的相关：net_tone r = 0.37（3 个月平均后 0.44）。已加入 run_all.sh。
-- 2026-10-16T17:12Z：项目负责人声明，全部 LLM 运行固定使用 GPT 6 luna，推理强度 high（默认）。记录于 labels/ai/model_declaration.json，原运行日志不改；results/ai_validation/README.md 和 features/media_monthly.md 已注明。
+### 2026-10-16T05:50Z: Data processing handoff (task_guide section 6)
+- Added src/process/:
+  · econ_realtime.py: builds a real-time panel from ALFRED vintages by the D2 cutoff date, plus a sensitivity version cut off at the preliminary release date. Each series takes the latest non-missing observation within the vintage, numerators and denominators of ratios come from the same vintage, and values before the earliest vintage are left blank and not backfilled.
+  · survey_monthly.py: Michigan subgroup, partisan, news, and expectations panels, with values kept exactly as officially released.
+  · build_corpus.py: corpus main table. Inclusion rules match the annotation sampling frame; sample weight = inverse of the inclusion probability within source × month; deduplication uses union-find to merge normalized URLs (keeping non-tracking query parameters), normalized text, and MinHash near-duplicates (Jaccard ≥ 0.8).
+  · export_labels.py: labels/, codebook/, youtube_videos.csv.
+  · run_all.sh: one-step rebuild.
+- The initial URL normalization removed query parameters, causing sites that distinguish articles only by query parameters to be wrongly merged (one cluster reached 1,035 items, mixing different headlines); it was changed to keep non-tracking parameters and rebuilt.
+- Incident and fix: on the first run of run_all.sh, agreement.py regenerated a blank adjudication template, overwriting the completed adjudications in annotation/agreement/adjudication_disagreements.xlsx. They were restored from the copy labels/adjudication_log.xlsx previously saved by export_labels.py (all 593 final and reason entries present, modification time 00:57 matching the original). agreement.py now no longer overwrites an existing adjudication table and only checks that the disagreement keys match exactly. After restoration the full pipeline was rerun, and the output is byte-for-byte identical to before the restoration.
+- The precision of the keyword rule (gold standard estimate), source limitations, and sampling limitations are written in corpus/corpus_documentation.md.
 
-### 2026-10-16T18:20Z：研究设计定稿与预先登记
-- 项目负责人于 18:10Z 批准研究设计草稿 v0 中的 D-A 至 D-F 全部按建议执行。定稿全文冻结为 research/RESEARCH_DESIGN_v1.md（SHA256 789b4ad8ad179d0af8fcf954479eedd1ccb6b7e3246419099036867bcd6ca6af），作为模型运行前的预先登记。此后任何新增或修改的设定都在本文件中记为偏离，并登记到 results/spec_registry.csv。
-- 已确认的决策摘要：
-  · D-A：主估计窗口 2010-01–2019-12；另报 2000-09–2019（完全实时）和 1978–2019（准实时，1992 年前 GDP 为实际 GNP）两个窗口。
-  · D-B：唯一主媒体假设变量为全国新闻 net_tone 的 t−1 月值（信息截止为 t 月 1 日）；其余媒体指标为次要假设，按 Benjamini–Hochberg（q = 0.10）校正。
-  · D-C：补拉 CPIAUCSL 与 PAYEMS 的 ALFRED 全部版本，用于事实校准。
-  · D-D：PMMS 房贷利率与 EIA 汽油价格在最早 ALFRED 版本之前的月份用最早版本数值补齐（这两个序列发布后不修订）；会修订的序列不补。
-  · D-E：词典法用 Loughran–McDonald 与 VADER；传统分类器为 TF-IDF + 逻辑回归，用 LLM 标签训练（剔除与金标准重叠的条目），另报只用 100 条人工开发集训练的版本。
-  · D-F：名字替换测试 120 条 × 4 个新版本（原文第二次运行 O2、党派与人名互换 S、加注 Fox News 来源 F、加注 MSNBC 来源 M）= 480 次编码；原文第一次运行 O1 复用正式编码或测试集标签。
-- R3.7 运行包：src/analysis/build_r37_package.py（种子 20261015）生成 codex_runs/R37_package/（4 批 × 120 条，提示词 v2 SHA256 9f95f20a… 已校验，编号与顺序打乱，版本不可从文件名识别）。对照表 labels/r37/r37_unit_key_DO_NOT_GIVE_CODEX.csv，替换核查见 labels/r37/r37_swap_review.md。已知残余：URL 中的人名也被替换；"Barry" 等昵称未替换；Obama→Trump 会产生时代错置。这些都在报告中说明。由项目负责人在项目外的隔离文件夹中用 Codex（GPT 6 luna，推理强度 high）运行，输出放回 labels/ai/codex__v2_r37/。
+### 2026-10-16T06:40Z: LLM coding plan (user chose Codex + gpt 6 luna, adopting the recommended plan of about 7,000 items)
+- Codex is used instead of the API. The prompt file is fixed and its SHA256 recorded; it requires reading item by item and attaching verbatim evidence, and forbids writing scripts or labeling by keywords. Codex cannot set temperature, so randomness is quantified by the agreement rate of repeated runs on 10% of the test set. Prompts are iterated only on the development set, and the test set is run only once.
+- Development set v1 (labels/ai/codex__v1_isolated_r1/dev.jsonl, 100 items): no problems with format or values, and all 404 pieces of evidence can be found in the original text. κ: relevant 0.86, tone 0.73, fact_direction 0.58, emotional_intensity 0.41, perspective 0.52, time_frame 0.54, actor_1 0.72. Systematic deviations: emotional intensity is too low (1 judged as 0 a total of 13 times), and both is judged as a single value for time_frame and perspective.
+- prompt v2 = v1 plus a "clarification" section, based only on confusions on the development set, without changing the codebook definitions (SHA256 9f95f20a…). Next step: run v2 on the development set, compare with v1, freeze the better-performing version, then run the test set.
+- The formal coding sample (src/annotation/build_corpus_sample.py, seed 20261015) has 7,400 items in total, in 37 batches of 200 items each:
+  · National NYT plus Guardian: 20 items per month, 202 months
+  · Media Cloud national: 20 items per month, 13 months
+  · Local: 40 items per month, 19 months
+  · Reddit: 10 items per month from 2015
+  · YouTube: 20 items per month, 46 months
+  The sampling frame contains only content units (removing duplicates, syndicated reprints, advertisements, obituaries). Final weight = first-stage design weight × within-stratum expansion factor; YouTube has no weights. Coding IDs do not reveal the source (K00001…), and the key table is labels/corpus_sample_key.csv. Unit text is constructed exactly as in the human annotation sample (390 items checked verbatim and passed). For this purpose, Guardian text in items.parquet was changed to "standfirst + newline + body" (standfirst may be empty) and rebuilt.
+- 2026-10-16T06:35Z: The user asked to change national news to 40 items per month; the formal coding sample has been regenerated (no batch had been run yet, and the old batch files have been deleted): national 8,071 items (202 months; the 2026-10 sampling frame has only 31 items, all taken), the other groups unchanged, 11,431 items and 58 batches in total, with the same seed.
+- 2026-10-16T06:55Z: Development set v2 results (labels/ai/codex__v2_isolated_r1/dev.jsonl): no format problems, and all 442 pieces of evidence can be found in the original text. The mean κ over the 10 coding dimensions rose from 0.652 for v1 to 0.670 for v2: perspective 0.52→0.71, main actor 0.72→0.81, fact good/bad 0.58→0.61; tone 0.73→0.68 (a difference of only 1 item among 59 in the development set); time frame 0.54→0.52, emotional intensity 0.41→0.43, so the clarifications for these two did not take effect. v2 is frozen by the "development set mean κ" rule; the comparison table is in results/ai_validation/dev_v1_vs_v2.csv. No further prompt iteration. The 10% repeat sample of the test set is 26 items drawn at random from the test set with seed 20261015; see labels/ai_inputs/test_repeat.jsonl.
 
-### 2026-10-16T18:40Z：阶段 1（经济基线）实现细节、偏离与结果冻结
-- 补拉数据：项目负责人在本机运行 src/collect/alfred_extra.py（18:33Z）。M18 为 CPIAUCSL、PAYEMS 的全部版本，观测值从 2006 年起（D-C）；M19 为 UNRATE、PCEPI、GDPC1 的全部版本，观测值从 1976 年起。原 M01–M03 的观测值从 2008 年开始，算不出 2010–2011 年的 36 个月累计通胀，也撑不起长窗口，所以必须补拉。云端和设备文件夹工具都无法访问 api.stlouisfed.org。
-- src/analysis/panel.py 生成 data/processed/research_panel.csv（1978-01–2026-10）：
-  · 新增 pce_cum36_rt、D-D 补齐后的房贷利率和汽油价格、rep_admin、pre_election6，以及长窗口用的三项回归变量。
-  · 脚本会核对 2010 年起长窗口变量与 econ_monthly_realtime 完全一致，不一致就停止。
-  · 1992 年前的 GDP 用费城联储 t−1 月的月度版本。2010–2026 年间，t 月版本与 ALFRED 在 τ 的最新季度一致 200/202 次，两次例外是 t 月内发布的数据；用 t−1 月版本可以保证不使用 τ 之后的信息。
-  · 2000-08 之前的 PCE 用最早版本，观测值截至 t−2 月。
-  · 2004-01 的 PCE 同比为空：2003-12-23 的综合修订版本只公布了近期观测值，同一版本内无法计算 12 个月变化。
-- 实现选择（设计未写明，在看到结果之前确定）：
-  · H1 的全部模型和对照 M1 都用共同窗口 2010-06–2019-12，因为人均实际可支配收入没有更早的版本。
-  · 季节项沿用主 M1 的判定。按预先登记规则，主窗口季节项联合显著（p = 0.001），保留；两个长窗口不显著。
-  · 一阶差分稳健性设定以不含常数为主：差分中的常数等于水平中的线性趋势，而 M1 不含趋势。含常数的版本一并报告。
-  · 党派跳变定义为 t..t+2 月均值减 t−3..t−1 月均值。构成区间中的党派占比，由 2017-02–2026-08 期间对总体 ICS 做和为 1 的约束最小二乘得到。
-  · 自助法期间均值区间：未来误差同样用移动块路径抽取。
-- 探索性分析（未预先登记，报告时注明）：
-  · H3a 截至 2025-03 的窗口，用来避开关税冲击。
-  · H1a 在 2000-09–2019 窗口加入累计通胀。
-  · H3b 的"扣除总体预测变化后的党派缺口"。
-- 计算环境：脚本在 Claude 的云端容器中运行（Python 3.13，pandas 3.0.5，statsmodels 0.15.0，scipy 1.18.1）。在本机重跑需要安装 statsmodels、scipy、matplotlib、openpyxl，然后运行 sh src/analysis/run_stage1.sh。脚本 SHA256 见 results/script_sha256.csv。
-- 结果冻结：results/FINDINGS_stage1.md、results/stage1_*/、results/spec_registry.csv（65 个设定）。主要结论：
-  · 2025–2026 年 ICS 缺口为 −36 至 −40，基本面只解释 7%–11%。
-  · 家庭压力变量在主窗口无法识别。
-  · 调查方式的影响只在 ICC 上，约 5–8 点。
-  · 党派构成影响不超过 2.7 点。
-  · 反证清单第 4 条和第 5 条未触发。
+### 2026-10-16T17:20Z: Import of LLM coding results and the monthly media index
+- In another folder, NLP/LLM_Labeling_v2_Run, the user used a Codex main agent plus independent-context subagents to complete: the test set of 260 items, the independent repeat of 26 items, and formal coding of 58 batches with 11,431 items. It has been checked that the SHA256 of the prompt copies at every stage is v2 (9f95f20a…), and all input files are byte-for-byte identical to labels/ai_inputs in this project. Outputs, run_log.csv (67 rows), job_logs (67 files), and the execution package notes have been copied as is to labels/ai/.
+- Recheck by this project's scripts: the test set and all 58 batches are complete, IDs are correct, there are no invalid values, and all evidence excerpts can be found verbatim in the original text.
+- The run logs record the following, kept as is: the model name and settings are "not visible"; 4 batches produced no output on their first run and were rerun; several batches had evidence excerpts and claim_text repaired after structural validation. The test set also went through the same process.
+- The completion notice relayed by the user said "3 unsure", but in the formal coding there are actually 23 items with relevant = unsure (Reddit 15, national 6, local 1, Media Cloud national 1). The files prevail.
+- Test set results: relevant κ 0.86, tone 0.73, others in results/ai_validation/README.md. Agreement rate of the repeated runs: relevant 0.92, tone 0.85.
+- Generated features/media_monthly.csv and media_quarterly.csv (src/process/media_monthly.py). A design-weighted ratio estimator is used within cells, and content indicators are computed only on relevant = yes. The national group has 14–37 relevant items per month; Reddit monthly cells are too sparse, with 140 months low_n, so the quarterly version is used. Correlation with the San Francisco Fed monthly mean: net_tone r = 0.37 (0.44 after 3-month averaging). Added to run_all.sh.
+- 2026-10-16T17:12Z: The project lead stated that all LLM runs used GPT 6 luna throughout, with reasoning effort high (default). Recorded in labels/ai/model_declaration.json; the original run logs are not changed; results/ai_validation/README.md and features/media_monthly.md note this.
 
-### 2026-10-16T19:23Z：阶段 2（测量验证与偏差基准）实现细节、偏离与结果冻结
-- 新增脚本（src/analysis/）：stage2_r35.py、stage2_dictindex.py、stage2_factcal.py、stage2_r37.py、stage2_bias.py、stage2_reliability.py、keyword_rules.py，一键重跑 run_stage2.sh。新增依赖 scikit-learn 与 vaderSentiment 3.3.2。词典文件在 data/raw/LEX/：Loughran–McDonald 主词典取自 pysentiment2 0.1.1 所附的较早版本（负面 2,355 词、正面 354 词），因为 sraf.nd.edu 无法访问；lexicons.json 记录来源与哈希。Lexicoder 在设计中是可选项，本轮未取得，所以未加入。
-- R3.5 条目级：
-  · 关键词规则 keyword_rules.py 依据编码手册写成，写定于 18:46Z，早于任何评分。
-  · 词典阈值只在 100 条开发集上选定：LM 截断 0.0；VADER 复合分 0.15，混合判定 0.10。
-  · TF-IDF + 逻辑回归的 C 用 5 折交叉验证选择。用 LLM 标签训练时剔除与金标准重叠的 59 条。
-  · B 组的 κ 把 LLM 判为不相关的条目单列为一类，计为不一致。第一次运行时这类条目被 sklearn 静默丢弃，已修正后重跑；A 组和所有 F1 数字不受影响。
-  · 自助法改为混淆矩阵向量化计算，已与 sklearn 逐项核对一致，抽样序列不变。
-- R3.5 指数级（实现选择）：
-  · 相关性过滤用 TF-IDF（LLM 标签训练）分类器；其训练集内的 8,021 个框架条目用 5 折交叉拟合预测，避免同一条目由见过其标签的模型打分。
-  · 另算"只用 LLM 抽样单元的词典指数"（探索性），用来分开方法差异和样本量差异。
-  · 产出 features/media_dict_monthly.csv，作为阶段 3 预先登记的全语料词典替代测量。
-- 事实校准（实现选择，均在看到错误率汇总之前，通过逐条检查解析错误确定）：
-  · 只核对四项指标：失业率、通胀（CPI 或 PCE 的 12 个月或 1 个月变化，取与陈述值最接近的口径）、GDP 增长、非农就业月变化。
-  · 预测、其他地区或人群、其他时期（累计、平均、某届政府期间、往年）、其他口径（核心、工资、分项、修订等）一律排除。时间和情态限定词在陈述所在句中查找；地点限定词在其前 120 个字符内查找，因为地点常由前一句给出。
-  · GDP 陈述没有季度或折年率提示时，口径无法确定，记为无法核实。只写季度不写年份时，取发表前最近开始的那个季度。"last quarter"取版本中最新的季度。
-  · 地方新闻的陈述只有带"美国、全国"之类提示时才核对。
-  · CPI 未季调序列 CPIAUCNS 无法从云端或设备取得（FRED 与 BLS 均被拒绝），因此对 CPI 12 个月变化另报 ±0.2 的敏感性口径。
-  · 30 条抽查表 results/stage2_factcal/review_sample_30.csv 已放到项目中，等项目负责人填写；填写前事实校准数字为暂定。
-- R3.7：
-  · O1 取正式编码标签 labels/ai_corpus_labels.csv。
-  · 对 S 版本，行动者中的 democrats 与 republicans 先换回再比较。
-  · 方向性检验用 S − O2，以扣除批次环境的差异。
-  · Codex 的四批由四个独立代理并行运行。项目负责人转述：核验后发现的格式与证据问题已交回对应批次代理复读修正，与正式编码的处理方式相同。运行日志在 labels/ai/codex__v2_r37/run_log.csv，未并入 labels/ai/run_log.csv。
-- 偏差基准（实现选择，设计只写了检验对象）：
-  · 当月新闻 = 截止日 t+1 的实时值 − 截止日 t 的实时值；月末已知水平取截止日 t+1 的值；样本为 2010-01 至 2026-09。
-  · GDP 的"变化"取最新季度折年率的变化。
-  · 语气不对称的主设定不含滞后项，另报加入滞后语气、剔除 2020-03 至 12 月、3 个月变化三个变体。
-  · 选择弹性按"斜率 ÷ 主题均值"计算，区间用 12 个月移动块自助。
-  · 通胀峰值按实时 PCE 在 2021–2023 年的最大值确定，为 2022-07。
-  · 政府虚拟变量按 panel.py 中 rep_admin 的口径，从 1 月起算。
-  · 跨来源比较对共同月份的月度比率估计取等权平均；Reddit 改用季度格，因为每月只有约 5 条相关条目，且设计权重差异大。
-- 信度：月度抽样方差乘以有限总体校正 (1 − n/N)，同时报告不校正的结果。宏观主题定义为 T01–T06。"Guardian 全文"对照用 LM 词典完成，因为 LLM 样本中 Guardian 每月只有约 4 条。
-- 计算环境同阶段 1。另外 scikit-learn 1.9.1、vaderSentiment 3.3.2。
-- 冻结结果：results/FINDINGS_stage2.md；spec_registry.csv 新增 S066–S082；script_sha256.csv 已更新。
+### 2026-10-16T18:20Z: Research design finalized and pre-registered
+- At 18:10Z the project lead approved executing all of D-A to D-F in research design draft v0 as recommended. The full final text is frozen as research/RESEARCH_DESIGN_v1.md (SHA256 789b4ad8ad179d0af8fcf954479eedd1ccb6b7e3246419099036867bcd6ca6af), as the pre-registration before models are run. After this, any added or modified specification is recorded in this file as a deviation and registered in results/spec_registry.csv.
+- Summary of confirmed decisions:
+  · D-A: main estimation window 2010-01–2019-12; two further windows are reported, 2000-09–2019 (fully real-time) and 1978–2019 (quasi-real-time, GDP before 1992 is real GNP).
+  · D-B: the single primary media hypothesis variable is the t−1 month value of national news net_tone (information cutoff is the 1st of month t); the other media indicators are secondary hypotheses, corrected by Benjamini–Hochberg (q = 0.10).
+  · D-C: additionally pull all ALFRED vintages of CPIAUCSL and PAYEMS, for factual calibration.
+  · D-D: for months before the earliest ALFRED vintage, PMMS mortgage rates and EIA gasoline prices are filled with the earliest vintage values (these two series are not revised after release); series that are revised are not filled.
+  · D-E: the dictionary methods use Loughran–McDonald and VADER; the traditional classifier is TF-IDF + logistic regression, trained on LLM labels (excluding items that overlap with the gold standard), and a version trained only on the 100-item human development set is also reported.
+  · D-F: name-swap test, 120 items × 4 new versions (second run of the original text O2, partisan and personal name swap S, added Fox News source F, added MSNBC source M) = 480 codings; the first run of the original text, O1, reuses the formal coding or test set labels.
+- R3.7 run package: src/analysis/build_r37_package.py (seed 20261015) generates codex_runs/R37_package/ (4 batches × 120 items, prompt v2 SHA256 9f95f20a… verified, IDs and order shuffled, versions not identifiable from file names). Key table labels/r37/r37_unit_key_DO_NOT_GIVE_CODEX.csv; the swap review is in labels/r37/r37_swap_review.md. Known residuals: personal names in URLs were also swapped; nicknames such as "Barry" were not swapped; Obama→Trump creates anachronisms. All of these are stated in the report. Run by the project lead in an isolated folder outside the project using Codex (GPT 6 luna, reasoning effort high), with outputs placed back in labels/ai/codex__v2_r37/.
 
-### 2026-10-16T19:35Z：阶段 3（预测比较）实现细节、偏离与结果冻结
-- 新增脚本：stage3_forecast.py、stage3_robustness.py、stage3_figures.py，一键重跑 run_stage3.sh。
-- 实现选择（在看到任何阶段 3 结果之前写入脚本说明）：
-  · 四个模型共用 2010-06 起的扩展窗口（人均实际可支配收入从此开始），使嵌套比较的训练样本完全相同。
-  · 所有模型都含月度虚拟变量，沿用阶段 1 主 M1 的季节判定；去掉月度虚拟变量作为稳健性变体。
-  · 反证清单第 2 条以 AR 版本为主，因为它控制了信心本身的持续性，是更严格的检验；不带 AR 的版本并列报告。
-  · 3 个月预测为直接预测：目标是 t+2 月，信息集与 1 步预测相同，训练只用目标月不晚于 t−1 的样本。
-  · Clark–West 的 HAC 滞后取 floor(T^(1/3))，分时期样本小时至少取 h−1。RMSE 比的区间用配对误差的移动块自助（块长 12，样本短时取 n/4）。
-  · 次要变量：滞后 1–3 期在每个训练窗口内用 BIC 选择；第一主成分的载荷也在每个窗口内重估。
-  · 密歇根初值截止日变体只替换 U、π、g 三项，家庭变量不变，因为初值截止文件中没有补齐后的房贷利率、汽油价格和累计通胀。
-  · γ 的断点检验用"语气 × 断点后虚拟变量"加截距变化的形式，HAC 12 阶。
-  · 量级换算用 2010-06 至 2019-12 拟合的 M3（与缺口的估计窗口一致）；AR 版本用长期系数 γ ÷ (1 − ρ)。
-- 偏离：设计中的"超额语气"是把语气对实时基本面回归取残差。若只对模型已含的 U、π、g 回归，由 Frisch–Waugh–Lovell 定理，残差版与原始语气给出完全相同的预测（第一次运行已核实两者数字一致），检验没有信息量。因此改为对 U、π、g、四个家庭变量和 t−1 月内的数据发布（截止日 t 与 t−1 的实时值之差）回归取残差，每个训练窗口重估。
-- 其他：第一个训练窗口内执政党虚拟变量恒为 0，系数从 2017 年起才能估计，这是设计本身的结果，已在结果中说明。
-- 冻结结果：results/FINDINGS_stage3.md；spec_registry.csv 新增 S083–S122。
+### 2026-10-16T18:40Z: Stage 1 (economic baseline) implementation details, deviations, and frozen results
+- Additional data pull: the project lead ran src/collect/alfred_extra.py on the local machine (18:33Z). M18 is all vintages of CPIAUCSL and PAYEMS, with observations from 2006 (D-C); M19 is all vintages of UNRATE, PCEPI, and GDPC1, with observations from 1976. The observations of the original M01–M03 start in 2008, which cannot compute 36-month cumulative inflation for 2010–2011 and cannot support the long windows, so the additional pull was necessary. Neither the cloud nor the device folder tools can access api.stlouisfed.org.
+- src/analysis/panel.py generates data/processed/research_panel.csv (1978-01–2026-10):
+  · Adds pce_cum36_rt, mortgage rates and gasoline prices after D-D filling, rep_admin, pre_election6, and three regressors for the long windows.
+  · The script checks that the long-window variables from 2010 onward are exactly identical to econ_monthly_realtime, and stops if they are not.
+  · GDP before 1992 uses the Philadelphia Fed monthly vintage of month t−1. For 2010–2026, the month-t vintage matches ALFRED's latest quarter at τ 200/202 times; the two exceptions are data released within month t; using the month t−1 vintage guarantees that no information after τ is used.
+  · PCE before 2000-08 uses the earliest vintage, with observations through month t−2.
+  · The PCE year-over-year change for 2004-01 is blank: the comprehensive revision vintage of 2003-12-23 published only recent observations, so the 12-month change cannot be computed within the same vintage.
+- Implementation choices (not specified in the design, settled before seeing results):
+  · All H1 models and the comparison M1 use the common window 2010-06–2019-12, because real disposable personal income per capita has no earlier vintages.
+  · Seasonal terms follow the determination for the main M1. Per the pre-registered rule, the seasonal terms are jointly significant in the main window (p = 0.001) and are kept; they are not significant in the two long windows.
+  · The first-difference robustness specification takes no constant as primary: a constant in differences equals a linear trend in levels, and M1 has no trend. The version with a constant is also reported.
+  · The partisan jump is defined as the month t..t+2 mean minus the month t−3..t−1 mean. Partisan shares in the composition interval are obtained by constrained least squares on overall ICS over 2017-02–2026-08 with weights summing to 1.
+  · Bootstrap period-mean intervals: future errors are also drawn with moving-block paths.
+- Exploratory analyses (not pre-registered, noted when reported):
+  · H3a window through 2025-03, to avoid the tariff shock.
+  · H1a adds cumulative inflation in the 2000-09–2019 window.
+  · H3b's "partisan gap net of the change in the overall prediction".
+- Computing environment: the scripts run in Claude's cloud container (Python 3.13, pandas 3.0.5, statsmodels 0.15.0, scipy 1.18.1). Rerunning on the local machine requires installing statsmodels, scipy, matplotlib, and openpyxl, then running sh src/analysis/run_stage1.sh. Script SHA256 values are in results/script_sha256.csv.
+- Frozen results: results/FINDINGS_stage1.md, results/stage1_*/, results/spec_registry.csv (65 specifications). Main conclusions:
+  · The ICS gap in 2025–2026 is −36 to −40, and fundamentals explain only 7%–11%.
+  · Household stress variables cannot be identified in the main window.
+  · The effect of survey mode is only on ICC, about 5–8 points.
+  · The effect of partisan composition is no more than 2.7 points.
+  · Items 4 and 5 of the falsification checklist were not triggered.
 
-### 2026-10-16T19:47Z：事实校准解析规则按人工抽查修订
-- 项目负责人逐条核对了 results/stage2_factcal/review_sample_30.csv，30 条中 26 条解析正确、4 条有误，意见写在 note 列（原文件保留，不再由脚本重写）。
-- 按意见修订三条规则，并对全部 103 条陈述重新运行：
-  · 通胀数字必须写明指标（CPI、consumer prices、consumer inflation 或 PCE）才核对；只写"inflation"的数字不再按与陈述值最接近的口径指定序列，改判为不可核对（K01583、K00987）。这取代阶段 2 条目中"取与陈述值最接近的口径"。
-  · 以 compared to/with、from、than、vs、since 引出的月份是比较期，不作参照月（K07821）。
-  · 失业率数字前是变动动词而没有 to（如"fell 4%"），水平无法确定，改判为不可核对（K06427）。
-- 统一适用的后果：负责人判为正确的 K00058、K03941、K03470 也属于未写明指标的情况，同样改为不可核对，使同类陈述处理一致。全部 103 条中 23 条判定改变（正确改为不可核对 15 条，错误改为不可核对 8 条）。
-- 未写明指标的通胀数字另做描述性比对（不计入错误率）：与 CPI、PCE 的 12 个月和 1 个月变化逐一比较，任一口径相符即为"相符"，CPI 12 个月变化用 ±0.2。结果在 unnamed_inflation.csv。
-- 修订后结果：全国新闻可核对 68 条、错误 2 条；社交平台可核对 9 条、错误 0 条；社交平台未写明指标的 13 条中 6 条与所有口径都不符。修订后没有再做第二轮抽查。
-- 时间戳更正：本线程此前三个条目的时间戳写错了（不是实际写入时间），已按文件实际写入时间改为 18:40Z（阶段 1）、19:23Z（阶段 2）、19:35Z（阶段 3），内容未改。
+### 2026-10-16T19:23Z: Stage 2 (measurement validation and bias benchmarks) implementation details, deviations, and frozen results
+- New scripts (src/analysis/): stage2_r35.py, stage2_dictindex.py, stage2_factcal.py, stage2_r37.py, stage2_bias.py, stage2_reliability.py, keyword_rules.py, with one-step rerun run_stage2.sh. New dependencies scikit-learn and vaderSentiment 3.3.2. Dictionary files are in data/raw/LEX/: the Loughran–McDonald master dictionary is taken from the earlier version bundled with pysentiment2 0.1.1 (2,355 negative words, 354 positive words), because sraf.nd.edu is inaccessible; lexicons.json records the source and hashes. Lexicoder is optional in the design and was not obtained this round, so it was not added.
+- R3.5 item level:
+  · The keyword rule keyword_rules.py is written from the codebook and was finalized at 18:46Z, before any scoring.
+  · Dictionary thresholds are chosen only on the 100-item development set: LM cutoff 0.0; VADER compound score 0.15, mixed threshold 0.10.
+  · C for TF-IDF + logistic regression is chosen by 5-fold cross-validation. When training on LLM labels, the 59 items overlapping with the gold standard are excluded.
+  · Group B's κ lists items the LLM judged not relevant as a separate category, counted as disagreements. On the first run these items were silently dropped by sklearn; this was corrected and rerun; group A and all F1 numbers are unaffected.
+  · The bootstrap was changed to vectorized confusion-matrix computation, checked item by item against sklearn as identical, with the sampling sequence unchanged.
+- R3.5 index level (implementation choices):
+  · Relevance filtering uses the TF-IDF (trained on LLM labels) classifier; the 8,021 frame items in its training set are predicted with 5-fold cross-fitting, to avoid an item being scored by a model that has seen its label.
+  · A "dictionary index using only LLM-sampled units" (exploratory) is also computed, to separate method differences from sample size differences.
+  · Produces features/media_dict_monthly.csv, as the full-corpus dictionary substitute measure pre-registered for stage 3.
+- Factual calibration (implementation choices, all settled by checking parsing errors item by item before seeing the error-rate summary):
+  · Only four indicators are checked: unemployment rate, inflation (12-month or 1-month change in CPI or PCE, taking the definition closest to the stated value), GDP growth, and monthly change in nonfarm payrolls.
+  · Forecasts, other regions or groups, other periods (cumulative, average, during a particular administration, prior years), and other definitions (core, wages, components, revisions, etc.) are all excluded. Time and modality qualifiers are searched for in the sentence containing the statement; location qualifiers are searched for within the 120 characters before it, because the location is often given by the previous sentence.
+  · When a GDP statement has no hint of quarter or annualized rate, the definition cannot be determined and it is recorded as unverifiable. When only the quarter is written without the year, the quarter that most recently started before publication is taken. "last quarter" takes the latest quarter in the vintage.
+  · Statements in local news are checked only when they carry a hint such as "US, national".
+  · The CPI not seasonally adjusted series CPIAUCNS cannot be obtained from the cloud or the device (both FRED and BLS refused), so a ±0.2 sensitivity definition is also reported for the 12-month CPI change.
+  · The 30-item spot-check table results/stage2_factcal/review_sample_30.csv has been placed in the project, waiting for the project lead to fill it in; until then the factual calibration numbers are provisional.
+- R3.7:
+  · O1 takes the formal coding labels labels/ai_corpus_labels.csv.
+  · For the S version, democrats and republicans among the actors are swapped back before comparison.
+  · The directional test uses S − O2, to net out differences in batch environment.
+  · Codex's four batches were run in parallel by four independent agents. As relayed by the project lead: format and evidence problems found after validation were returned to the corresponding batch agents to reread and correct, the same handling as for the formal coding. The run log is in labels/ai/codex__v2_r37/run_log.csv and was not merged into labels/ai/run_log.csv.
+- Bias benchmarks (implementation choices; the design only specified the objects to test):
+  · Same-month news = real-time value at cutoff date t+1 − real-time value at cutoff date t; the level known at month end takes the value at cutoff date t+1; the sample is 2010-01 to 2026-09.
+  · The "change" in GDP takes the change in the latest quarter's annualized rate.
+  · The main specification for tone asymmetry has no lag terms; three variants are also reported: adding lagged tone, excluding 2020-03 to December, and 3-month changes.
+  · Selection elasticity is computed as "slope ÷ topic mean", with intervals from a 12-month moving block bootstrap.
+  · The inflation peak is set by the maximum of real-time PCE in 2021–2023, which is 2022-07.
+  · The administration dummy follows the definition of rep_admin in panel.py, counted from January.
+  · Cross-source comparisons take the equal-weighted average of monthly ratio estimates over common months; Reddit uses quarterly cells instead, because there are only about 5 relevant items per month and design weights differ widely.
+- Reliability: monthly sampling variance is multiplied by the finite population correction (1 − n/N), and the uncorrected results are reported as well. Macro topics are defined as T01–T06. The "Guardian full text" comparison is done with the LM dictionary, because the LLM sample has only about 4 Guardian items per month.
+- Computing environment as in stage 1. Additionally scikit-learn 1.9.1, vaderSentiment 3.3.2.
+- Frozen results: results/FINDINGS_stage2.md; spec_registry.csv adds S066–S082; script_sha256.csv has been updated.
 
-### 2026-10-16T19:49Z：阶段 4（时间顺序、回忆路径与反证清单）实现细节与结果冻结
-- 新增脚本 stage4_timing.py，一键重跑 run_stage4.sh。新增设定登记 S123–S134；另在末尾补登 S135（未写明指标的通胀数字的描述性比对），放在末尾是为了不改变已有编号。
-- 实现选择（运行前写入脚本说明）：
-  · 时间约定同阶段 3：第 t 行为调查月 t，语气取 t−1 月，基本面取截止日 t 的实时值。
-  · 数据意外 = 截止日 t 与 t−1 之间实时值的变化（没有免费的专业一致预期）。
-  · 事件虚拟变量：t−1 月或 t 月发生事件即为 1。停摆月份为 2013-10、2018-01–02、2018-12–2019-01、2025-10–11；关税公告和银行倒闭取 events.csv；疫情为 2020-03–12。
-  · 局部投影的信心与语气都标准化。控制两期滞后信心、一期滞后语气和月度虚拟变量，HAC 12 阶。
-  · 方向"显著"的总结检验在看到结果前定为 0–6 期平均响应的单侧 5% 检验，逐期结果并列报告。
-  · 超额语气（反证 1）：月度语气对月末已知的实时 U、π、g 和四个家庭变量回归。主拟合窗口为 2010–2019，全期拟合作稳健性。残差均值的 HAC 12 阶检验。
-  · 回忆路径（反证 6）：用独有 R² 比较语气与基本面两组对"听到不利新闻"比例的解释力。2024-06 之后加入网络访谈虚拟变量；另报截至 2024-03 的样本。
-  · 党派：各组 ICS 对语气、基本面、自身滞后和执政党虚拟变量回归；民主党减共和党的差用堆叠回归的交互项估计。
-  · 群体缺口（反证 7）：年龄组用各组自己的 M1（2010–2019 拟合）缺口；党派组用各自 2017-02 至 2019-12 均值的偏离，因为党派指数在 2017 年前不逐月。
-- 结果冻结：results/FINDINGS_stage4.md；因果设计提案 results/CAUSAL_DESIGN_PROPOSAL.md（样本量用两独立样本 t 检验：每组 394 人；10 个两两比较 Bonferroni 校正后每组 668 人）。
+### 2026-10-16T19:35Z: Stage 3 (forecast comparison) implementation details, deviations, and frozen results
+- New scripts: stage3_forecast.py, stage3_robustness.py, stage3_figures.py, with one-step rerun run_stage3.sh.
+- Implementation choices (written into the script notes before seeing any stage 3 results):
+  · All four models share an expanding window from 2010-06 (when real disposable personal income per capita begins), so the training samples for the nested comparisons are exactly the same.
+  · All models include monthly dummies, following the seasonal determination of the stage 1 main M1; removing the monthly dummies is a robustness variant.
+  · Item 2 of the falsification checklist takes the AR version as primary, because it controls for the persistence of consumer sentiment itself and is the stricter test; the version without AR is reported alongside.
+  · The 3-month forecast is a direct forecast: the target is month t+2, the information set is the same as the 1-step forecast, and training uses only samples whose target month is no later than t−1.
+  · The Clark–West HAC lag is floor(T^(1/3)), and at least h−1 when subperiod samples are small. The interval for the RMSE ratio uses a moving block bootstrap of paired errors (block length 12, n/4 when the sample is short).
+  · Secondary variables: lags of 1–3 periods are chosen by BIC within each training window; the loadings of the first principal component are also re-estimated within each window.
+  · The Michigan preliminary cutoff date variant replaces only the three terms U, π, g, leaving household variables unchanged, because the preliminary cutoff files do not contain the filled mortgage rates, gasoline prices, and cumulative inflation.
+  · The break test for γ uses the form "tone × post-break dummy" plus an intercept change, HAC with 12 lags.
+  · Magnitude conversion uses M3 fitted on 2010-06 to 2019-12 (consistent with the estimation window of the gap); the AR version uses the long-run coefficient γ ÷ (1 − ρ).
+- Deviation: "excess tone" in the design is the residual from regressing tone on real-time fundamentals. If it is regressed only on U, π, g already in the model, then by the Frisch–Waugh–Lovell theorem the residual version and the raw tone give exactly the same forecasts (the first run verified that the numbers are identical), and the test is uninformative. It was therefore changed to take the residual from regressing on U, π, g, the four household variables, and data releases within month t−1 (the difference between real-time values at cutoff dates t and t−1), re-estimated in each training window.
+- Other: within the first training window the governing party dummy is constantly 0, and its coefficient can be estimated only from 2017; this is a consequence of the design itself and is noted in the results.
+- Frozen results: results/FINDINGS_stage3.md; spec_registry.csv adds S083–S122.
 
-### 2026-10-16T19:53Z：阶段 5（机制、群体异质性与方法问题）实现细节与结果冻结
-- 新增脚本 stage5_mechanisms.py，一键重跑 run_stage5.sh。设定登记 S136–S150。
-- 实现选择（第一次运行前写入脚本说明；设计只列了检验对象）：
-  · 疫情月份统一定义为 2020-03 至 2021-06，与阶段 1 的不可解读区间一致。
-  · 信心端负面偏差：信心的月度变化对上月数据发布中好坏消息的部分回归，检验 β坏 + β好 = 0。主样本包含疫情月份，与阶段 2 媒体端检验一致。
-  · 可得性：汽油价格取水平（美元/加仑，与阶段 1 相同），食品取 CPI 12 个月变化。
-  · 锚定：原因提及率回归中加入 2024-07 起的网络访谈阶跃变量。
-  · 分组：各组用自己的 M1，含月度虚拟变量。参照组为高收入、55 岁以上、东北部、大学学历。
-  · 方式可比性：沿用阶段 1 的 2023–2025 年跳变设计；另外比较纯网络期内的缺口变化。
-  · 选举：中期选举年和大选年的 5–10 月分设虚拟变量。
-  · 近期来源：上月语气与当月缺口的相关，水平和一阶差分都报告；Reddit 按季度，季度语气用相关条目估计数加权。
-- 第一次运行后的一处更正：Reddit 季度对比中，2026Q4 只有 10 月一个月的缺口，改为只用三个月齐全的季度。相关系数从 0.15 变为 0.10，结论不变。
-- 结果冻结：results/FINDINGS_stage5.md。
+### 2026-10-16T19:47Z: Factual calibration parsing rules revised after the human spot check
+- The project lead checked results/stage2_factcal/review_sample_30.csv item by item: 26 of the 30 items were parsed correctly and 4 were wrong, with comments written in the note column (the original file is kept and no longer rewritten by the script).
+- Three rules were revised according to the comments, and all 103 statements were rerun:
+  · An inflation number is checked only if the indicator is stated (CPI, consumer prices, consumer inflation, or PCE); a number that only says "inflation" no longer has a series assigned by the definition closest to the stated value and is instead judged uncheckable (K01583, K00987). This supersedes "taking the definition closest to the stated value" in the stage 2 entry.
+  · A month introduced by compared to/with, from, than, vs, or since is the comparison period and is not taken as the reference month (K07821).
+  · When an unemployment rate number is preceded by a change verb without to (e.g. "fell 4%"), the level cannot be determined, and it is judged uncheckable (K06427).
+- Consequence of uniform application: K00058, K03941, and K03470, which the lead judged correct, also fall under the unstated-indicator case and are likewise changed to uncheckable, so that similar statements are handled consistently. Of all 103 items, 23 judgments changed (15 from correct to uncheckable, 8 from wrong to uncheckable).
+- Inflation numbers without a stated indicator are additionally compared descriptively (not counted in the error rate): they are compared one by one with the 12-month and 1-month changes in CPI and PCE, and a match on any definition counts as "consistent", with ±0.2 for the CPI 12-month change. Results are in unnamed_inflation.csv.
+- Revised results: national news has 68 checkable items with 2 errors; social platforms have 9 checkable items with 0 errors; of the 13 social platform items without a stated indicator, 6 are inconsistent with all definitions. No second spot check was done after the revision.
+- Timestamp correction: the timestamps of the previous three entries in this thread were wrong (not the actual writing times) and have been changed to the actual file writing times, 18:40Z (stage 1), 19:23Z (stage 2), 19:35Z (stage 3); the content was not changed.
+
+### 2026-10-16T19:49Z: Stage 4 (timing, recall pathway, and falsification checklist) implementation details and frozen results
+- New script stage4_timing.py, with one-step rerun run_stage4.sh. New specification registry entries S123–S134; S135 (descriptive comparison of inflation numbers without a stated indicator) is additionally registered at the end, placed at the end so as not to change existing numbering.
+- Implementation choices (written into the script notes before running):
+  · Timing convention as in stage 3: row t is survey month t, tone takes month t−1, and fundamentals take the real-time values at cutoff date t.
+  · Data surprise = change in real-time values between cutoff dates t and t−1 (there is no free professional consensus forecast).
+  · Event dummies: 1 if an event occurs in month t−1 or month t. Shutdown months are 2013-10, 2018-01–02, 2018-12–2019-01, 2025-10–11; tariff announcements and bank failures are taken from events.csv; the pandemic is 2020-03–12.
+  · In the local projections both consumer sentiment and tone are standardized. Controls are two lags of consumer sentiment, one lag of tone, and monthly dummies, HAC with 12 lags.
+  · The summary test of directional "significance" was set before seeing results as a one-sided 5% test of the average response over horizons 0–6, with horizon-by-horizon results reported alongside.
+  · Excess tone (falsification criterion 1): monthly tone is regressed on the real-time U, π, g known at month end and the four household variables. The main fitting window is 2010–2019, with full-period fitting as robustness. HAC 12-lag test of the residual mean.
+  · Recall pathway (falsification criterion 6): unique R² is used to compare the explanatory power of the tone and fundamentals groups for the share "heard unfavorable news". A web interview dummy is added after 2024-06; a sample through 2024-03 is also reported.
+  · Partisanship: each group's ICS is regressed on tone, fundamentals, its own lag, and the governing party dummy; the Democrat minus Republican difference is estimated with the interaction term of a stacked regression.
+  · Group gaps (falsification criterion 7): age groups use each group's own M1 (fitted 2010–2019) gap; partisan groups use deviations from each group's own 2017-02 to 2019-12 mean, because the partisan indices are not monthly before 2017.
+- Frozen results: results/FINDINGS_stage4.md; causal design proposal results/CAUSAL_DESIGN_PROPOSAL.md (sample size by a two-independent-sample t test: 394 per group; 668 per group after Bonferroni correction for 10 pairwise comparisons).
+
+### 2026-10-16T19:53Z: Stage 5 (mechanisms, group heterogeneity, and methodological issues) implementation details and frozen results
+- New script stage5_mechanisms.py, with one-step rerun run_stage5.sh. Specification registry S136–S150.
+- Implementation choices (written into the script notes before the first run; the design only listed the objects to test):
+  · Pandemic months are uniformly defined as 2020-03 to 2021-06, consistent with the uninterpretable interval in stage 1.
+  · Negativity bias on the consumer sentiment side: the monthly change in consumer sentiment is regressed on the good-news and bad-news parts of the previous month's data releases, testing β_bad + β_good = 0. The main sample includes the pandemic months, consistent with the stage 2 media-side test.
+  · Availability: gasoline prices take the level (dollars/gallon, same as stage 1), and food takes the 12-month CPI change.
+  · Anchoring: a web interview step variable from 2024-07 is added to the regression of reason mention rates.
+  · Subgroups: each group uses its own M1, with monthly dummies. Reference groups are high income, age 55 and over, Northeast, and college degree.
+  · Mode comparability: follows the 2023–2025 jump design from stage 1; in addition, gap changes within the web-only period are compared.
+  · Elections: separate dummies for May–October of midterm election years and presidential election years.
+  · Recent sources: correlation between the previous month's tone and the current month's gap, reported in both levels and first differences; Reddit is quarterly, with quarterly tone weighted by the estimated number of relevant items.
+- One correction after the first run: in the Reddit quarterly comparison, 2026Q4 has a gap for October only, so only quarters with all three months are used. The correlation coefficient changed from 0.15 to 0.10, and the conclusion is unchanged.
+- Frozen results: results/FINDINGS_stage5.md.
+
+### 2026-10-17T05:26Z: English-only repository for submission (no change to data or results)
+- At the author's request, every document in the repository is now in English. The documents were translated from the Chinese originals, which the author keeps locally; Chinese-only planning notes (task checklist, data collection plan, writing plans, audits) were removed from the repository.
+- Frozen records are kept unchanged with an English translation next to them: the two labeling prompts (`prompts/*_EN_translation.md`), the annotators' codebook `annotation/codebook_v1.md` (`annotation/codebook_v1_en.md`, which `export_labels.py` now copies to `codebook/codebook.md`), `results/stage2_factcal/review_sample_30.csv`, and the labeling run and time logs (`*.en.csv`).
+- Code: Chinese output strings in `src/collect/reconcile.py`, `src/collect/report_status.py` and `src/process/export_labels.py` were translated. Re-running `reconcile.py` on the 2026-10-15 snapshot reproduces the English `provenance/excel_reconciliation.md` and the two comparison CSVs byte for byte. `src/annotation/build_ai_package.py` now reads the frozen `annotation/codebook_v1.md` and locates sections by number; it still reproduces `prompts/label_prompt_v1.md` with the recorded SHA-256. `provenance/dataset_status.csv` was translated value by value.
+- Four analysis scripts (`panel.py`, `stage1_m1.py`, `stage1_h1.py`, `stage1_h3.py`) had Chinese section names of the design document in their docstrings; only those docstrings were changed, and `spec_registry.py` was re-run to refresh `results/script_sha256.csv`. `results/spec_registry.csv` is byte-identical and no result file was recomputed.
+- Slides: the speaker notes and `presentation/SCRIPT.md` now contain the English script only; the slides themselves are unchanged.

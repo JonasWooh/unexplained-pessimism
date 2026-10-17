@@ -1,87 +1,87 @@
-# 因果设计提案（报告附录，不实施）
+# Causal Design Proposal (report appendix, not implemented)
 
-2026-10-16。依据 `research/RESEARCH_DESIGN_v1.md`「因果推理」一节（D5：观测分析 + 因果设计提案）。本项目的观测结果（阶段 3、4）只能给出时间顺序和条件相关。下面三项设计说明：要把"媒体报道方式影响消费者信心"变成可识别的因果问题，需要什么数据和假设。三项都不在本项目内实施。
+2026-10-16. Based on the "Causal inference" section of `research/RESEARCH_DESIGN_v1.md` (D5: observational analysis + causal design proposal). The project's observational results (stages 3 and 4) can give only temporal ordering and conditional correlation. The three designs below set out what data and assumptions are needed to turn "the way media report affects consumer sentiment" into an identifiable causal question. None of the three is implemented in this project.
 
-## 观测结果对设计的约束
+## Constraints that the observational results place on the design
 
-- 阶段 3：控制家庭压力和政治变量后，语气没有样本外增量。与语气相关的缺口份额最多约 5%，这是关联的上限。
-- 阶段 4：时间顺序上，两个方向都只有部分期数显著。回忆路径的主题对应很清楚，但基本面对"听到不利新闻"的解释力更强。民主党与共和党的语气系数没有差异。
-- 阶段 2：通胀回落后，价格水平表述减少，但物价报道的比重偏高；特朗普第二任期内归咎政府的条目占 40%。名字替换测试没有检出 AI 编码偏差。
+- Stage 3: after controlling for household pressures and political variables, tone has no out-of-sample increment. The share of the gap associated with tone is at most about 5%, which is an upper bound on the association.
+- Stage 4: in terms of temporal ordering, both directions are significant only at some horizons. Topic correspondence in the recall pathway is very clear, but fundamentals explain "heard unfavorable news" better. Tone coefficients do not differ between Democrats and Republicans.
+- Stage 2: after inflation eased, price-level wording declined, but the weight of price coverage stayed high; during Trump's second term, 40% of items blame the administration. The name-swap test detected no AI coding bias.
 
-因此，实验要回答的不是"负面新闻是否降低信心"这种已有大量研究的问题，而是：在同一组真实数据下，**表述方式**（价格水平还是通胀率、家庭视角还是全国总量）是否改变受访者对密歇根问题的回答。本项目的观测数据恰恰无法区分这一点。
+The experiment therefore should not answer a question that already has a large literature, such as "does negative news lower sentiment", but rather: given the same set of real data, does the **wording** (price level or inflation rate, household perspective or national aggregate) change how respondents answer the Michigan questions? This is exactly what the project's observational data cannot distinguish.
 
-## 一、随机框架实验（主提案）
+## 1. Randomized framing experiment (main proposal)
 
-**处理组**（五组，所有组呈现同一个月份的同一组真实官方数据，无欺骗）：
+**Treatment groups** (five groups; all groups are shown the same set of real official data for the same month, with no deception):
 
-| 组 | 表述 | 示例要点 |
+| Group | Wording | Example key point |
 | --- | --- | --- |
-| A 平衡摘要（对照） | 通胀率、失业率、GDP 并列，不加评价 | "过去 12 个月物价上涨 [π]%，失业率 [U]%，GDP 年化增长 [g]%" |
-| B 价格水平 | 强调与疫情前相比的累计涨幅 | "与 2020 年初相比，物价累计上涨 [P]%" |
-| C 通胀率 | 强调同比涨幅及其变化方向 | "通胀率已从 2022 年的峰值 [π_peak]% 降至 [π]%" |
-| D 家庭视角 | 同一数字换算为家庭开支 | "一个典型家庭每月的食品和住房开支比 2020 年多出 [$X]" |
-| E 全国总量 | 同一数字放在全国总量叙述中 | "美国经济已连续 [k] 个季度增长，就业人数为 [N] 百万" |
+| A Balanced summary (control) | Inflation rate, unemployment rate, and GDP side by side, without evaluation | "Over the past 12 months prices rose [π]%, the unemployment rate is [U]%, and GDP grew at an annualized [g]%" |
+| B Price level | Emphasizes the cumulative increase relative to before the pandemic | "Compared with early 2020, prices have risen a cumulative [P]%" |
+| C Inflation rate | Emphasizes the year-over-year increase and the direction of its change | "Inflation has fallen from its 2022 peak of [π_peak]% to [π]%" |
+| D Household perspective | The same numbers converted into household spending | "A typical household spends [$X] more per month on food and housing than in 2020" |
+| E National aggregate | The same numbers placed in a national-aggregate narrative | "The U.S. economy has grown for [k] consecutive quarters, and employment stands at [N] million" |
 
-方括号内的数字在实施时按实验当月最新的官方发布填入。五组的事实内容必须相同，并由不参与假设设定的人员核对。
+The numbers in square brackets are filled in at implementation with the latest official releases for the month of the experiment. The factual content of the five groups must be identical and checked by someone not involved in setting the hypotheses.
 
-**结果变量**
-- 密歇根消费者调查的五个指数问题，原题原序，按官方的相对得分方法计分。
-- 一年通胀预期（原题）。
-- 预先登记的次要结果："最近是否听到有关经济的不利新闻"，以及操纵检查（受访者能否复述所读材料的要点）。
+**Outcome variables**
+- The five index questions of the Michigan Surveys of Consumers, with original wording and order, scored using the official relative-score method.
+- One-year inflation expectations (original question).
+- Pre-registered secondary outcomes: "whether the respondent recently heard unfavorable news about the economy", and a manipulation check (whether the respondent can restate the key points of the material read).
 
-**样本量**
-- 按 d = 0.2、双侧 α = 0.05、功效 0.8 计算，每组需 394 人（两独立样本 t 检验，393.4 向上取整）。五组共 1,970 人。
-- 若对 10 个两两比较做 Bonferroni 校正（α = 0.005），每组需 668 人，共 3,340 人。
-- 预先登记的主比较只有 4 个（B、C、D、E 各对 A）。用 Holm 校正时，所需样本介于两者之间。
-- d = 0.2 是常规的"小效应"。阶段 3 的观测关联很小，实际效应可能更小：若真实效应为 d = 0.15，每组需约 700 人。
+**Sample size**
+- With d = 0.2, two-sided α = 0.05, and power 0.8, each group needs 394 people (two-sample independent t-test, 393.4 rounded up). The five groups total 1,970 people.
+- With a Bonferroni correction for 10 pairwise comparisons (α = 0.005), each group needs 668 people, 3,340 in total.
+- There are only 4 pre-registered main comparisons (B, C, D, and E each against A). With a Holm correction, the required sample falls between the two.
+- d = 0.2 is the conventional "small effect". The observational association in stage 3 is very small, and the actual effect may be smaller still: if the true effect is d = 0.15, each group needs about 700 people.
 
-**分析计划**
-- 主估计：结果对处理虚拟变量做 OLS，用 HC2 稳健标准误。协变量（党派、年龄、收入、教育、地区、基线经济判断）预先指定，只用于提高精度。
-- 预先登记的异质性：党派（与 H3b 对应），以及自报的新闻接触频率。
-- 剔除规则：没有通过注意力检查的受访者事先规定剔除，并同时报告不剔除的结果。
+**Analysis plan**
+- Main estimate: OLS of the outcome on treatment dummies, with HC2 robust standard errors. Covariates (partisanship, age, income, education, region, baseline economic assessment) are pre-specified and used only to improve precision.
+- Pre-registered heterogeneity: partisanship (corresponding to H3b), and self-reported frequency of news exposure.
+- Exclusion rule: respondents who fail the attention check are excluded by a rule fixed in advance, and results without exclusion are reported as well.
 
-**伦理与程序**
-- 实验前在 OSF 或 AsPredicted 预注册。
-- 取得知情同意，并经 IRB 审批。
-- 结束后告知受访者完整的官方数据来源。
-- 所有材料都是真实数据的真实表述，不需要欺骗，也不涉及党派人物。
+**Ethics and procedure**
+- Pre-register on OSF or AsPredicted before the experiment.
+- Obtain informed consent and IRB approval.
+- After completion, tell respondents the full official data sources.
+- All materials are truthful wordings of real data, so no deception is needed and no partisan figures are involved.
 
-**外部效度的限制**
-- 一次性阅读与长期新闻接触不同，效应可能衰减。可以在一部分样本中加一周后的追踪测量，估计存留比例，正好对应第三节的 ρ。
-- 在线样本即使配额抽样，也需按 CPS 加权。
+**Limits to external validity**
+- A one-time reading differs from long-term news exposure, and the effect may decay. A follow-up measurement one week later can be added for part of the sample to estimate the retained share, which corresponds exactly to ρ in section 3.
+- An online sample, even with quota sampling, still needs CPS weighting.
 
-## 二、准实验思路
+## 2. Quasi-experimental ideas
 
-**A. 地方报纸关闭**
-- 处理：某地唯一的日报关闭或停止印刷。处理时间取关闭日期，对照为同期未关闭的可比地区。
-- 估计：交错双重差分，用对交错处理稳健的估计量，如 Callaway–Sant'Anna。结果变量为地区层面的消费者信心与通胀预期。
-- 前提与威胁：
-  - 关闭往往发生在经济已在衰退的地区，必须检验事前趋势。
-  - 外溢：读者可能转向全国媒体或社交平台。
-  - 本项目阶段 2 发现地方新闻比全国新闻少负面（净语气差 +0.37），所以符号的预期是：关闭后当地信心更接近全国新闻环境下的水平。
+**A. Local newspaper closures**
+- Treatment: an area's only daily newspaper closes or stops printing. The treatment date is the closure date, and the controls are comparable areas without closures over the same period.
+- Estimation: staggered difference-in-differences, using an estimator robust to staggered treatment, such as Callaway–Sant'Anna. Outcome variables are area-level consumer sentiment and inflation expectations.
+- Assumptions and threats:
+  - Closures often happen in areas whose economies are already declining, so pre-trends must be tested.
+  - Spillovers: readers may shift to national media or social platforms.
+  - Stage 2 of this project found local news less negative than national news (net tone difference +0.37), so the expected sign is: after a closure, local sentiment moves closer to the level under the national news environment.
 
-**B. Sinclair 收购地方电视台**
-- 处理：Sinclair 收购后，地方台的全国政治与经济报道比重上升、内容向全国统一稿件靠拢。这一点已有文献记录，见 Martin & McCrain（2019，APSR）。
-- 估计：同样采用交错双重差分，处理为收购完成，单位为电视市场（DMA）。
+**B. Sinclair acquisitions of local TV stations**
+- Treatment: after a Sinclair acquisition, local stations raise the weight of national political and economic coverage and their content converges toward nationally uniform scripts. This is documented in the literature; see Martin & McCrain (2019, APSR).
+- Estimation: also staggered difference-in-differences, with treatment as completion of the acquisition and the unit as the television market (DMA).
 
-**两者共同的数据缺口**
-- 密歇根公开数据只有四大区，没有州或市场层面的识别。必须申请受限地理变量，或改用有州或县级识别、样本量足够的其他调查。
-- 需要一个可匹配的地方报道内容数据集，用来证明"第一阶段"，即处理确实改变了当地受众接触到的报道。本项目的地方新闻语料只覆盖 2025-03 至 2026-09，不足以做这件事。
+**Data gaps common to both**
+- Michigan public data cover only the four census regions, with no state or market identifiers. One must apply for restricted geographic variables, or switch to another survey with state or county identifiers and a large enough sample.
+- A matchable dataset of local coverage content is needed to demonstrate the "first stage", that is, that the treatment actually changed the coverage that local audiences were exposed to. The project's local news corpus covers only 2025-03 to 2026-09, which is not enough for this.
 
-## 三、从样本效应到全国指数（R4.6）
+## 3. From sample effects to the national index (R4.6)
 
-即使实验识别出单次表述效应 τ，它也不能直接换算成全国指数的点数。近似关系为：
+Even if the experiment identifies a single-exposure wording effect τ, it cannot be converted directly into points on the national index. The approximate relationship is:
 
-ΔICS_全国 ≈ Σ_g w_g × e_g × τ_g × ρ_g
+ΔICS_national ≈ Σ_g w_g × e_g × τ_g × ρ_g
 
-- w_g：群体 g 在全国人口中的权重，用 CPS 加权。
-- e_g：调查前一段时间内，群体 g 实际接触到该类表述的比例。需要人口层面的接触估计，例如带媒体使用日志的面板，单靠内容分析得不到。
-- τ_g：群体 g 的单次效应，即实验中的异质性估计，需换算为指数点数。
-- ρ_g：从接触到受访时效应仍存留的比例，来自实验的追踪测量。
+- w_g: the weight of group g in the national population, using CPS weighting.
+- e_g: the share of group g actually exposed to this kind of wording during a period before the survey. This needs population-level exposure estimates, for example a panel with media-use logs; content analysis alone cannot provide it.
+- τ_g: the single-exposure effect for group g, that is, the heterogeneity estimate from the experiment, which must be converted to index points.
+- ρ_g: the share of the effect still retained from exposure to the time of the interview, from the experiment's follow-up measurement.
 
-**所需假设**
-- 实验中的表述与真实报道可比。
-- 效应可以从实验样本迁移到总体。
-- 多次接触的效应可以加总。最后一条最难成立，报告时应给出 ρ 和加总方式的敏感性区间。
+**Required assumptions**
+- The wording in the experiment is comparable to real coverage.
+- The effect transfers from the experimental sample to the population.
+- The effects of repeated exposures can be summed. The last is the hardest to sustain, so the report should give sensitivity ranges for ρ and for the aggregation method.
 
-**示例**（只说明量级换算，不是估计）：设 e = 0.5、τ = 0.1 个标准差、ρ = 0.3，全国效应约为 0.015 个标准差，按 ICS 标准差约 15 点计，约 0.2 点。只有当接触比例和存留比例都很高时，表述效应才可能达到缺口（约 36–40 点）的可观比例。这与阶段 3 得出的"与语气相关的份额最多约 5%"在量级上一致。
+**Example** (only to illustrate the magnitude conversion, not an estimate): with e = 0.5, τ = 0.1 standard deviations, and ρ = 0.3, the national effect is about 0.015 standard deviations, or about 0.2 points given an ICS standard deviation of about 15 points. Only when both the exposure share and the retained share are very high could a wording effect reach an appreciable share of the gap (about 36–40 points). This is consistent in magnitude with the stage 3 finding that "the share associated with tone is at most about 5%".

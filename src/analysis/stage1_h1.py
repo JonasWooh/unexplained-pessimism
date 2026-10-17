@@ -1,6 +1,6 @@
 """Stage 1: H1 (household price, borrowing-cost and income channels) and H3c (estimation windows).
 
-Design: research/RESEARCH_DESIGN_v1.md, "H1 检验" and "估计窗口（对应决策 D-A）". Input:
+Design: research/RESEARCH_DESIGN_v1.md, "H1 test" and "Estimation windows (corresponding to decision D-A)". Input:
 data/processed/research_panel.csv (src/analysis/panel.py). Outputs: results/stage1_h1/, results/stage1_windows/.
 
 H1: add pce_cum36_rt, mortgage30_rt_dd, rdpi_pc_yoy_rt, gas_price_rt_dd to M1 one at a time, then all four.

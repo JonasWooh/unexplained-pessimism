@@ -1,58 +1,58 @@
-> 当前进度请看 [current_collection_overview.md](current_collection_overview.md) 和 [monthly_cluster_status.csv](monthly_cluster_status.csv)。本文件为2026-10-15 08:17 UTC历史库存快照，其中Media Cloud/Reddit调度和计数已过时，不能作为当前进度。
+> For current progress see [current_collection_overview.md](current_collection_overview.md) and [monthly_cluster_status.csv](monthly_cluster_status.csv). This file is a historical inventory snapshot from 2026-10-15 08:17 UTC; its Media Cloud/Reddit scheduling and counts are out of date and cannot be used as current progress.
 
-> 2026-10-15 更新：当前任务已切换为逐日覆盖优先。下表为此前库存快照；最新逐日缺口见 [daily_coverage.csv](daily_coverage.csv)，调度与解释见 [daily_coverage_policy.md](daily_coverage_policy.md)。旧 supervisor 已由日覆盖任务替代。
+> 2026-10-15 update: the current task has switched to prioritizing day-by-day coverage. The table below is the earlier inventory snapshot; the latest day-by-day gaps are in [daily_coverage.csv](daily_coverage.csv), and the scheduling and explanation are in [daily_coverage_policy.md](daily_coverage_policy.md). The old supervisor has been replaced by the daily coverage task.
 
-# 数据收集状态快照
+# Data collection status snapshot
 
-生成时间：2026-10-15T08:17:46.183290+00:00。截止日：2026-10-14。**尚未全部完成**：存在限速分页、来源限制和历史缺口；下列数字仅为此快照。
+Generated: 2026-10-15T08:17:46.183290+00:00. Cutoff: 2026-10-14. **Not yet fully complete**: there are rate-limited pagination, source restrictions, and historical gaps; the numbers below apply only to this snapshot.
 
-教授 Excel 的 **PCE YoY 是核心 PCE**；584 个月与核心 PCE 匹配。总体 PCE 已单独收集。原 Excel 和原下载文件没有改写。
+The **PCE YoY in the professor's Excel file is core PCE**; 584 months match core PCE. Headline PCE has been collected separately. The original Excel file and the original downloaded files have not been rewritten.
 
-| 数据集 | 状态 | 实际/请求覆盖期 | 条目数（单位） | 问题 |
+| Dataset | Status | Actual/requested coverage period | Item count (unit) | Issues |
 |---|---|---|---|---|
-| S01 ICS/ICC/ICE | 已取得 | ICS 1952-11、分项 1951-02 起，均至 2026-09 | 677 / 677（ICS 行 / ICC-ICE 行） | 1978-01 起连续月度；早年非连续月度；教授表重叠 585 月全匹配 |
-| S02 人口分组与党派 | 已取得公开数据 | 分组 1978-01—2026-08；党派 1980-06—2026-08 | 584 / 156（人口分组月 / 党派月） | 39 分组指标；党派早期稀疏；当前 5b 是三月均值，历史表是月度 |
-| S03 听到的新闻 | 已取得 | 1978-01—2026-08 | 584（月，22 统计列） | 电话/网页回答方式不同，编码兼容性不能视为已证明 |
-| S04 原因、预期、购买条件 | 已取得 | 1978-01—2026-08；通胀预期至 2026-09 | 584 / 585（详细表月 / 通胀预期月） | 详细表 111 统计列；另存全部 12 份当前表 |
-| S05 发布值与方法 | 已取得公开版本，PDF有滞后 | 2024-01—2026-10 初值 | 65 + 1（PDF报告 + 官网首页初值） | 10月初值46.3已确认；9月终值PDF未取得，CSV有终值；2025-01修订差异有官方公告 |
-| S06 匿名微观调查 | 已取得所选字段 | 2010-01—2026-02 | 120568（案例，20 列） | 最新可得 2026-02，未自行补齐后续月份 |
-| M01 U-3 | 可得版本下载完整 | 2008-01-01—2026-09-01 | 423（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv；2025-10 官方缺失保留 |
-| M02 总体 PCE | 可得版本下载完整 | 2008-01-01—2026-08-01 | 2093（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M03 实际 GDP 水平 | 可得版本下载完整 | 2008-01-01—2026-04-01 | 664（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M04 实际 GDP 环比年率 | 可得版本下载完整 | 2008-01-01—2026-04-01 | 431（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv；环比序列最早版本为 2014-09-26；2026Q3 未发布 |
-| M05 核心 PCE | 可得版本下载完整 | 2008-01-01—2026-08-01 | 2089（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M06 U-6 | 可得版本下载完整 | 2008-01-01—2026-09-01 | 489（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv；2025-10 官方缺失保留 |
-| M07 实际可支配收入两序列 | 可得版本下载完整 | 2008-01-01—2026-08-01 | 5568（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M08 汽油 | 可得版本下载完整 | 2008-01-07—2026-10-12 | 985（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M09 食品 CPI 两序列 | 可得版本下载完整 | 2008-01-01—2026-09-01 | 2284（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M10 30 年房贷利率 | 可得版本下载完整 | 2008-01-03—2026-10-08 | 980（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M11 偿债负担 | 可得版本下载完整 | 2008-01-01—2026-04-01 | 2107（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M12 政策不确定性 | 可得版本下载完整 | 2008-01-01—2026-09-01 | 2605（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv；另存 EPU 原表 1521 月，1900-01—2026-09 |
-| M13 住房可负担性 HOAM | 最新快照已取得 | 2005-01—2026-07 | 259（月） | 原站文件没有历史版本档案 |
-| M14 实际消费 | 可得版本下载完整 | 2008-01-01—2026-08-01 | 2105（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M15 房价 | 可得版本下载完整 | 2008-01-01—2026-07-01 | 14263（观测×版本行） | 已收 API 全部可得版本；档案最早版本日详见 macro_completeness.csv |
-| M16 股票市场：S&P 500 与 NASDAQ 补充 | 标普部分；NASDAQ补充已取得 | S&P 2016-10-17—2026-10-14；另补 NASDAQ Composite 1971-02-05—2026-10-13，14527 日期行，另存全部可得版本的分窗口响应；是不同指数，不与标普拼接 | 2608（S&P 日期行；NASDAQ 数量见覆盖栏） | 标普 ALFRED 不支持历史版本，早于2016年仍缺；含非交易日缺失 |
-| M17 费城实时数据 | 已取得 | 参考期最早 1947；最新至 2026Q2/2026-07 | 9（工作簿） | 8 份实时版本/首次三次估计工作簿及 1 份就业历史发布日；PCON 为构造的季度价格指数 |
-| N01 纽约时报 | complete_monthly_archive | 请求月份 2009-12—2026-10；返回最晚出版时间 2026-10-04T17:53:18.167Z；含异常日期，不以原始最小日期解释覆盖 | 1160137（文章响应条目（不等于去重文章数）） | 官方密钥实测成功；按月保存全量文章元数据，不筛选；当前月部分，非新闻正文；月内重复ID 4 条；出版日期不在请求月份 762 条，原样保留 |
-| N02 Guardian | complete_monthly_archive | 2010-01-01T16:45:46Z—2026-10-14T22:10:13Z | 5368（文章响应条目（不等于去重文章数）） | 官方密钥实测成功；business/useconomy 标签已核实；正文按实际字段保存，缺正文不补写；只覆盖该标签，不宣称美国经济报道总体完整；月内重复ID 0 条；出版日期不在请求月份 0 条，原样保留；缺正文 100 条 |
-| N03 Media Cloud | 计数已取得；United States - State & Local 错误暂停；United States - National 错误暂停 | 主计数 2010-01-01—2026-10-14；已下载标题 2025-01-01—2025-11-08（不连续全覆盖） | 73572 / 670000（主日计数行 / 已下载标题） | 全国+地方各6条日序列；2请求/分钟；原请求窗口为2025-01至截止日；列表未完成；含非经济命中，未标注筛除 |
-| N04 GDELT | 不可访问 | 未取得 | 0（记录） | 间隔后以24小时请求复查仍 HTTP 429；停止，未绕过；实际历史边界未核实 |
-| N05 旧金山联储新闻情绪 | 已取得 | 1980-01-01—2026-10-11 | 17067（每日指数行） | Excel、2 CSV、复现 ZIP 均保留；不是原始新闻文章 |
-| N06 媒体倾向评级 | 数值评级未取得 | 未取得 | 0（评级） | AllSides HTTP 403；Ad Fontes 页面可达，免费教育图表要求姓名/邮箱表单并加入邮件列表；未替用户注册，静态图表也不等于数值评级数据库 |
-| SM01 YouTube | 部分；评论正文任务 stopped_api_error | 视频优先 2023—2026-10-14；2/10 频道目录到达 2023 边界；评论正文 2023-01-20T14:58:44Z—2026-10-15T03:22:23Z | 177227 / 9295 / 35959 / 288002（目录 / 视频统计 / 评论元数据 / 评论正文响应条目） | 另有 3881 条搜索结果；评论两批可能重叠，不能相加视为独立评论；正文获用户允许，排除作者字段；评论时间可晚于视频截止日；大频道目录止于20000条；搜索429后未重试；2010–2022未采 |
-| SM02 Reddit | running | 2010-07-27T20:03:49+00:00—2026-10-14T20:00:52+00:00 | 47219（非重叠时间区间帖子条目） | 用户已批准采集；Arctic Shift 社区存档，非 Reddit 官方 API；四子版块；先2025年以来，再2010—2024；排除作者身份字段；饱和探测页不重复计数；未采可选评论 |
-| R01 发布日历 | 已取得可得日历 | 1960-03-15—2027-12-17 | 15082（日历行） | 实际发布、ALFRED版本、未来计划分别标识；BLS网页403，FRED日历已取得 |
-| R02 重大事件 | 部分 | 2010-01-27—2026-09-16 | 150（已核实事件） | FOMC声明及部分疫情/银行/关税/停摆；未宣称穷尽；CBO/GAO源403 |
-| R03 政治日历 | 已取得 | 2010-11-02—2026-11-03 | 9（选举日期） | 另保存总统任期与两院党派构成官方表 |
-| R04 Pew 平台使用率 | 已取得 | 2025-02-05—2025-06-18 | 1（公开报告，原调查 n=5022） | YouTube84%、Facebook71%、Instagram50%、TikTok37%、Reddit26%核对；未下载调查个体数据 |
-| R05 SPF 专业预测 | 已取得 | 工作簿总体 1968Q4—2026Q3 | 2（完整工作簿） | 各变量开始时间不同；PCE 不能当成自1968年都有 |
+| S01 ICS/ICC/ICE | Obtained | ICS from 1952-11, components from 1951-02, both through 2026-09 | 677 / 677 (ICS rows / ICC-ICE rows) | Continuous monthly from 1978-01; not continuous monthly in early years; all 585 months overlapping with the professor's table match |
+| S02 Demographic subgroups and partisanship | Public data obtained | Subgroups 1978-01—2026-08; partisan 1980-06—2026-08 | 584 / 156 (subgroup months / partisan months) | 39 subgroup indicators; partisan data sparse early on; current 5b is a three-month average, the historical table is monthly |
+| S03 News heard | Obtained | 1978-01—2026-08 | 584 (months, 22 statistic columns) | Telephone/web response modes differ, so coding compatibility cannot be considered proven |
+| S04 Reasons, expectations, buying conditions | Obtained | 1978-01—2026-08; inflation expectations through 2026-09 | 584 / 585 (detailed table months / inflation expectation months) | Detailed table has 111 statistic columns; all 12 current tables saved separately |
+| S05 Released values and methodology | Public versions obtained, PDFs lag | 2024-01—2026-10 preliminary values | 65 + 1 (PDF reports + official homepage preliminary value) | October preliminary value 46.3 confirmed; September final PDF not obtained, the CSV has the final value; there is an official announcement on the 2025-01 revision difference |
+| S06 Anonymous microdata survey | Selected fields obtained | 2010-01—2026-02 | 120568 (cases, 20 columns) | Latest available is 2026-02; later months were not filled in on our own |
+| M01 U-3 | Available vintages fully downloaded | 2008-01-01—2026-09-01 | 423 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv; official missing value for 2025-10 kept |
+| M02 Headline PCE | Available vintages fully downloaded | 2008-01-01—2026-08-01 | 2093 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M03 Real GDP level | Available vintages fully downloaded | 2008-01-01—2026-04-01 | 664 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M04 Real GDP quarter-over-quarter annualized rate | Available vintages fully downloaded | 2008-01-01—2026-04-01 | 431 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv; the earliest vintage of the quarter-over-quarter series is 2014-09-26; 2026Q3 not released |
+| M05 Core PCE | Available vintages fully downloaded | 2008-01-01—2026-08-01 | 2089 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M06 U-6 | Available vintages fully downloaded | 2008-01-01—2026-09-01 | 489 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv; official missing value for 2025-10 kept |
+| M07 Real disposable income, two series | Available vintages fully downloaded | 2008-01-01—2026-08-01 | 5568 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M08 Gasoline | Available vintages fully downloaded | 2008-01-07—2026-10-12 | 985 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M09 Food CPI, two series | Available vintages fully downloaded | 2008-01-01—2026-09-01 | 2284 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M10 30-year mortgage rate | Available vintages fully downloaded | 2008-01-03—2026-10-08 | 980 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M11 Debt service burden | Available vintages fully downloaded | 2008-01-01—2026-04-01 | 2107 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M12 Policy uncertainty | Available vintages fully downloaded | 2008-01-01—2026-09-01 | 2605 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv; the original EPU table is also saved, 1521 months, 1900-01—2026-09 |
+| M13 Housing affordability HOAM | Latest snapshot obtained | 2005-01—2026-07 | 259 (months) | The source site's file has no archive of historical versions |
+| M14 Real consumption | Available vintages fully downloaded | 2008-01-01—2026-08-01 | 2105 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M15 Home prices | Available vintages fully downloaded | 2008-01-01—2026-07-01 | 14263 (observation × vintage rows) | All vintages available from the API collected; earliest archive vintage dates in macro_completeness.csv |
+| M16 Stock market: S&P 500 and NASDAQ supplement | S&P partial; NASDAQ supplement obtained | S&P 2016-10-17—2026-10-14; NASDAQ Composite additionally added for 1971-02-05—2026-10-13, 14527 date rows, with windowed responses for all available vintages saved separately; it is a different index and is not spliced with the S&P | 2608 (S&P date rows; NASDAQ counts in the coverage column) | ALFRED does not support historical vintages for the S&P, so data before 2016 is still missing; includes missing values for non-trading days |
+| M17 Philadelphia Fed real-time data | Obtained | Reference periods as early as 1947; latest through 2026Q2/2026-07 | 9 (workbooks) | 8 real-time vintage/first-three-estimates workbooks and 1 employment historical release dates file; PCON is a constructed quarterly price index |
+| N01 New York Times | complete_monthly_archive | Requested months 2009-12—2026-10; latest returned publication time 2026-10-04T17:53:18.167Z; contains anomalous dates, so coverage is not interpreted from the raw minimum date | 1160137 (article response entries (not equal to the number of deduplicated articles)) | Official key tested successfully; full article metadata saved by month, unfiltered; current month partial; not news body text; 4 duplicate IDs within months; 762 with publication dates outside the requested month, kept as is |
+| N02 Guardian | complete_monthly_archive | 2010-01-01T16:45:46Z—2026-10-14T22:10:13Z | 5368 (article response entries (not equal to the number of deduplicated articles)) | Official key tested successfully; business/useconomy tag verified; body text saved from the actual fields, missing body text not filled in; covers only this tag and does not claim overall completeness of US economy coverage; 0 duplicate IDs within months; 0 with publication dates outside the requested month, kept as is; 100 missing body text |
+| N03 Media Cloud | Counts obtained; United States - State & Local paused on error; United States - National paused on error | Main counts 2010-01-01—2026-10-14; headlines downloaded 2025-01-01—2025-11-08 (not continuous full coverage) | 73572 / 670000 (main daily count rows / downloaded headlines) | 6 daily series each for national + local; 2 requests/minute; the original request window was 2025-01 to the cutoff; listing not finished; includes non-economic hits, not filtered out by annotation |
+| N04 GDELT | Not accessible | Not obtained | 0 (records) | A recheck request after a 24-hour interval still returned HTTP 429; stopped, not circumvented; actual historical boundary not verified |
+| N05 San Francisco Fed News Sentiment | Obtained | 1980-01-01—2026-10-11 | 17067 (daily index rows) | Excel, 2 CSVs, and the replication ZIP all kept; these are not raw news articles |
+| N06 Media outlet bias ratings | Numeric ratings not obtained | Not obtained | 0 (ratings) | AllSides HTTP 403; the Ad Fontes page is reachable, but the free educational chart requires a name/email form and joining a mailing list; we did not register on the user's behalf, and a static chart is not a numeric rating database anyway |
+| SM01 YouTube | Partial; comment text task stopped_api_error | Videos prioritized 2023—2026-10-14; 2/10 channel directories reached the 2023 boundary; comment text 2023-01-20T14:58:44Z—2026-10-15T03:22:23Z | 177227 / 9295 / 35959 / 288002 (directory / video statistics / comment metadata / comment text response entries) | Additionally 3881 search results; the two comment batches may overlap and cannot be added together as independent comments; text allowed by the user, author fields excluded; comment times can be later than the video cutoff; large channel directories stop at 20000 entries; no retry after search 429; 2010–2022 not collected |
+| SM02 Reddit | running | 2010-07-27T20:03:49+00:00—2026-10-14T20:00:52+00:00 | 47219 (post entries in non-overlapping time intervals) | Collection approved by the user; Arctic Shift community archive, not the official Reddit API; four subreddits; 2025 onward first, then 2010—2024; author identity fields excluded; saturation probe pages not double-counted; optional comments not collected |
+| R01 Release calendar | Available calendars obtained | 1960-03-15—2027-12-17 | 15082 (calendar rows) | Actual releases, ALFRED vintages, and future schedules marked separately; BLS web page 403, FRED calendar obtained |
+| R02 Major events | Partial | 2010-01-27—2026-09-16 | 150 (verified events) | FOMC statements and some pandemic/banking/tariff/shutdown events; not claimed to be exhaustive; CBO/GAO sources 403 |
+| R03 Political calendar | Obtained | 2010-11-02—2026-11-03 | 9 (election dates) | Official tables of presidential terms and party composition of both chambers also saved |
+| R04 Pew platform usage | Obtained | 2025-02-05—2025-06-18 | 1 (public report, original survey n=5022) | YouTube 84%, Facebook 71%, Instagram 50%, TikTok 37%, Reddit 26% checked; individual-level survey data not downloaded |
+| R05 SPF Survey of Professional Forecasters | Obtained | Workbooks overall 1968Q4—2026Q3 | 2 (complete workbooks) | Variables start at different times; PCE must not be treated as available since 1968 |
 
-登记文件：12369 份；16 条可用 ALFRED 序列分页完整，无重复版本键、未来版本或观测日晚于版本日。
+Registered files: 12369; pagination is complete for the 16 usable ALFRED series, with no duplicate vintage keys, no future vintages, and no observation dates later than vintage dates.
 
-用户决定已落实：YouTube 可保存评论正文，排除全部作者身份字段；取消自设单轮请求总数和单视频评论截断，遇接口真实错误才停止。NYT/Guardian 已使用用户密钥执行官方 API 采集。Reddit 已批准并启动；不再暂缓。
+User decisions implemented: YouTube comment text may be saved, excluding all author identity fields; the self-imposed total requests per round and the per-video comment truncation have been removed, and collection stops only on genuine API errors. NYT/Guardian official API collection has been run with the user's keys. Reddit has been approved and started; it is no longer deferred.
 
-关键核对及局限：2025-01 ICS 71.1→71.7 是官方修订；教授表2026-10 ICS=46.3 已由官网首页确认为初值；2026Q3 GDP=3.7仍未作为已核实官方值入库。新闻20链接检查有6个不可读响应、7个标题差异及3个可读日期差异，详见 news_url_spotcheck.csv。
+Key checks and limitations: 2025-01 ICS 71.1→71.7 is an official revision; the professor's table value 2026-10 ICS=46.3 has been confirmed by the official homepage as a preliminary value; 2026Q3 GDP=3.7 has still not been entered as a verified official value. The 20-link news check found 6 unreadable responses, 7 title differences, and 3 readable date differences; see news_url_spotcheck.csv.
 
-后台收集若正在运行，以 running_collection.json、各分页状态和日志为准；它不是定时任务。Media Cloud 按原范围逐页，YouTube/Reddit 在实际接口错误时记录断点。后续批次仍需再次核对库存；本报告不保证未来页面可得。
+If background collection is running, running_collection.json, the pagination states, and the logs are authoritative; it is not a scheduled task. Media Cloud proceeds page by page over the original range, and YouTube/Reddit record checkpoints on actual API errors. Later batches still need the inventory checked again; this report does not guarantee that future pages will be available.
 
-详细证据：sources.csv（来源、UTC下载时刻、覆盖）、inventory.csv（逐文件条目数）、macro_completeness.csv、release_calendar.csv、excel_reconciliation.md、../DECISIONS.md。原始数据与受版权内容仅保留在本地，不打包公开。
+Detailed evidence: sources.csv (sources, UTC download times, coverage), inventory.csv (per-file item counts), macro_completeness.csv, release_calendar.csv, excel_reconciliation.md, ../DECISIONS.md. Raw data and copyrighted content are kept only locally and are not packaged for public release.

@@ -1,53 +1,53 @@
-# 研究结果总览（冻结版）
+# Results Overview (frozen version)
 
-2026-10-16 冻结。数据截止日为 2026-10-16，密歇根 10 月数据为初值。本文件只汇总各阶段已冻结的结论，细节、表格和出处都在各阶段的 `FINDINGS_stage<N>.md`。
+Frozen 2026-10-16. The data cutoff is 2026-10-16, and the Michigan October data are preliminary. This file only summarizes the frozen conclusions of each stage; details, tables, and sources are in each stage's `FINDINGS_stage<N>.md`.
 
-- 设计：`research/RESEARCH_DESIGN_v1.md`。
-- 偏离与实现细节：`DECISIONS.md`。
-- 设定登记：`results/spec_registry.csv`，共 150 个设定，包括所有不利结果。
-- 脚本哈希：`results/script_sha256.csv`。
-- 一键重建：`sh src/analysis/run_research.sh`，依次运行阶段 1–5。
+- Design: `research/RESEARCH_DESIGN_v1.md`.
+- Deviations and implementation details: `DECISIONS.md`.
+- Specification registry: `results/spec_registry.csv`, 150 specifications in total, including all unfavorable results.
+- Script hashes: `results/script_sha256.csv`.
+- One-command rebuild: `sh src/analysis/run_research.sh`, which runs stages 1–5 in order.
 
-## 一句话结论
+## One-sentence conclusion
 
-2025–2026 年密歇根信心比失业、通胀、GDP 所能解释的水平低约 36–40 点。这个缺口对设定、窗口和调查方式都稳健，在各人口群体中普遍存在，并且在选举季之前就已形成。全国新闻语气与信心有小而稳定的关联，但控制家庭压力和政治变量后没有样本外预测增量；与语气相关的部分最多约占缺口的 5%。媒体偏差不是这一缺口的主要解释。
+In 2025–2026, Michigan sentiment is about 36–40 points below the level that unemployment, inflation, and GDP can explain. This gap is robust to specification, window, and survey mode, is present across demographic groups, and had already formed before the election season. National news tone has a small but stable association with sentiment, but after controlling for household pressures and political variables it adds no out-of-sample forecasting increment; the part associated with tone accounts for at most about 5% of the gap. Media bias is not the main explanation of this gap.
 
-## 六个研究问题
+## Six research questions
 
-| 问题 | 结论 | 主要依据 |
+| Question | Conclusion | Main evidence |
 | --- | --- | --- |
-| RQ1 如何度量媒体偏差 | LLM 编码在条目层面明显优于词典法和传统分类器（语气 κ 0.73，LM 词典 0.35）。名字和来源替换没有检出编码器偏差。月度指数信度 0.62，噪声主要来自每月条目少。媒体端的负面不对称和选择不对称都不稳健；特朗普第二任期内归咎政府的条目占 40%，但不能直接认定为偏差。全国新闻引用官方数字基本准确（写明指标的 68 条中错 2 条）。 | 阶段 2 |
-| RQ2 偏差对信心的影响 | 语气对信心有短暂的正向关联（0–2 期），信心对后续语气也有滞后关联，两个方向的平均响应都不显著。回忆路径的主题对应清楚，但基本面对"听到不利新闻"的解释力更强。民主党与共和党的语气系数没有差异。 | 阶段 3–4 |
-| RQ3 基本面能解释多少 | 2023 年以后只能解释信心下滑的 7%–11%。2025–2026 年的缺口在三个估计窗口和全部稳健性设定下绝对值都不小于 23 点；2021–2022 年的缺口则对窗口敏感。 | 阶段 1 |
-| RQ4 可测的感知机制 | 负面偏差：媒体端和信心端都不稳健。可得性：物价报道与"听到的物价新闻"对应成立，汽油和食品在估计窗口内没有额外解释力。锚定：在估计窗口内识别不出，只有相容证据，例如通胀回落后"因物价高而财务变差"的提及率仍高。确认偏差：只有相容证据（党派跳变）。 | 阶段 5 第二节 |
-| RQ5 媒体能否改进预测 | 只在三项基本面的模型上有小幅改进（RMSE 降 0.9%，p = 0.041）；加入家庭与政治控制后，20 个变体都不显著。 | 阶段 3 |
-| RQ6 反驳媒体解释的证据 | 第 2 条（无样本外增量）和第 6 条（回忆更跟随经济）被触发。第 1 条和第 3 条字面未触发，但证据方向也不支持媒体偏差解释。 | 阶段 4 第二节 |
+| RQ1 How to measure media bias | LLM coding is clearly better at the item level than dictionary methods and traditional classifiers (tone κ 0.73, LM dictionary 0.35). Name and source swaps detected no coder bias. Monthly index reliability is 0.62, with noise mainly due to the small number of items per month. Neither the media-side negativity asymmetry nor the selection asymmetry is robust; during Trump's second term, 40% of items blame the administration, but this cannot be directly identified as bias. National news cites official figures mostly accurately (2 errors among the 68 claims that name the indicator). | Stage 2 |
+| RQ2 The effect of bias on sentiment | Tone has a brief positive association with sentiment (horizons 0–2), and sentiment also has a lagged association with later tone; the average responses in both directions are not significant. Topic correspondence in the recall pathway is clear, but fundamentals explain "heard unfavorable news" better. Tone coefficients do not differ between Democrats and Republicans. | Stages 3–4 |
+| RQ3 How much fundamentals can explain | After 2023, they explain only 7%–11% of the decline in sentiment. The 2025–2026 gap is at least 23 points in absolute value under all three estimation windows and all robustness specifications; the 2021–2022 gap, by contrast, is sensitive to the window. | Stage 1 |
+| RQ4 Measurable perception mechanisms | Negativity bias: not robust on either the media side or the sentiment side. Availability: the correspondence between price coverage and "price news heard" holds; gasoline and food have no additional explanatory power within the estimation window. Anchoring: not identifiable within the estimation window, with only compatible evidence, such as the mention rate of "worse off financially because of high prices" staying high after inflation eased. Confirmation bias: only compatible evidence (partisan jumps). | Stage 5, section 2 |
+| RQ5 Whether media improves forecasts | Only a small improvement over the three-fundamentals model (RMSE down 0.9%, p = 0.041); after adding household and political controls, none of the 20 variants is significant. | Stage 3 |
+| RQ6 Evidence refuting the media explanation | Item 2 (no out-of-sample increment) and item 6 (recall follows the economy more) are triggered. Items 1 and 3 are not triggered literally, but the direction of the evidence also does not support the media-bias explanation. | Stage 4, section 2 |
 
-## 三组假设
+## Three groups of hypotheses
 
-- **H1 真实压力**：主窗口内识别不出，原因是 2010–2019 年累计通胀和房贷利率的变化太小，属于检验力不足，不能当作这些渠道不存在的证据。探索性的 2000 年窗口中，累计通胀能解释约四分之一的缺口；"因物价高"的提及率在 2025–2026 年仍很高。H1 是未被排除、但本数据无法确认的解释。
-- **H2 媒体选择、框架与偏差**：有可测量的媒体端特征，但与缺口的关联很弱，见上文 RQ2 和 RQ5。主证据不支持把它作为主要解释。
-- **H3 测量、时间与模型**：
-  - 调查方式只影响 ICC 约 5–8 点，而且 2025–2026 年缺口的扩大发生在纯网络期内部。
-  - 党派构成的影响不超过 2.7 点。
-  - 窗口敏感性只影响 2021–2022 年。
-  - 2025–2026 年缺口的主体不能归于这些因素。
+- **H1 Real pressures**: not identifiable in the main window, because cumulative inflation and the mortgage rate changed too little in 2010–2019; this is a lack of power and cannot be taken as evidence that these channels do not exist. In the exploratory 2000 window, cumulative inflation explains about a quarter of the gap; the mention rate of "because of high prices" remained very high in 2025–2026. H1 is an explanation that is not ruled out but that these data cannot confirm.
+- **H2 Media selection, framing, and bias**: there are measurable media-side features, but their association with the gap is very weak; see RQ2 and RQ5 above. The main evidence does not support treating it as the main explanation.
+- **H3 Measurement, timing, and model**:
+  - Survey mode affects only ICC, by about 5–8 points, and the widening of the 2025–2026 gap took place within the web-only period.
+  - The effect of partisan composition is no more than 2.7 points.
+  - Window sensitivity affects only 2021–2022.
+  - The bulk of the 2025–2026 gap cannot be attributed to these factors.
 
-## 仍未解释的部分
+## What remains unexplained
 
-2025–2026 年的缺口有三个特点：没有被以上任何因素解释；在收入、年龄、地区、教育组之间大小相近；共和党人也远低于自身基准。
+The 2025–2026 gap has three features: it is not explained by any of the factors above; it is similar in size across income, age, region, and education groups; and Republicans are also far below their own baseline.
 
-本项目的数据能排除或限定若干解释：基本面、调查方式、党派构成、选举季、媒体语气的增量。但不能确定其余部分的来源。可能的方向包括：
-- 价格水平本身（H1a）；
-- 关税等政策不确定性；
-- 个体层面的信息处理。
+The project's data can rule out or bound several explanations: fundamentals, survey mode, partisan composition, the election season, and the increment from media tone. But they cannot determine the source of the remainder. Possible directions include:
+- the price level itself (H1a);
+- policy uncertainty such as tariffs;
+- individual-level information processing.
 
-这些只能作为讨论和后续研究方向，不能写成结论。因果设计提案见 `results/CAUSAL_DESIGN_PROPOSAL.md`。
+These can only serve as discussion and directions for future research and cannot be written as conclusions. The causal design proposal is in `results/CAUSAL_DESIGN_PROPOSAL.md`.
 
-## 报告中必须写明的限制
+## Limitations that must be stated in the report
 
-- 观测分析只给出时间顺序和条件相关，全文一律不写"导致"。
-- 全国媒体指标只来自 NYT 和 Guardian，每月约 26 条相关条目，月度信度 0.62。2026-01 只有 1–7 日；2026-10 只到 10-04。
-- 社交平台和地方新闻只做近期描述，不进入历史模型。
-- 事实校准、名字替换测试和 2025–2026 年的分时期检验，样本都很小。
-- 密歇根 10 月终值（10-23）和三季度 GDP 初值不在本轮数据内。11 月初值在选举日（11-03）之后发布，列入后续更新计划。
+- The observational analysis gives only temporal ordering and conditional correlation; the word "causes" is not used anywhere in the text.
+- The national media measures come only from NYT and Guardian, with about 26 relevant items per month and a monthly reliability of 0.62. 2026-01 covers only days 1–7; 2026-10 runs only to 10-04.
+- Social platforms and local news are described only for the recent period and do not enter the historical models.
+- Factual calibration, the name-swap test, and the 2025–2026 by-period tests all have very small samples.
+- The Michigan October final value (10-23) and the preliminary Q3 GDP estimate are not in this round's data. The November preliminary value is released after Election Day (11-03) and is listed in the plan for later updates.

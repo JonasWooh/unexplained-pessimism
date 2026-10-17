@@ -1,84 +1,84 @@
-# 阶段 4 结果：时间顺序、回忆路径与反证清单（RQ2、RQ6）
+# Stage 4 results: temporal ordering, recall pathway, and falsification list (RQ2, RQ6)
 
-冻结时间 2026-10-16。脚本 `src/analysis/stage4_timing.py`，一键重跑 `sh src/analysis/run_stage4.sh`，实现细节见 `DECISIONS.md` 2026-10-16T19:49Z 条目。观测分析只能给出时间顺序和条件相关，下文一律写成"与……相关""领先于"。因果设计提案见 `results/CAUSAL_DESIGN_PROPOSAL.md`。
+Frozen 2026-10-16. Script `src/analysis/stage4_timing.py`; rerun everything with `sh src/analysis/run_stage4.sh`; implementation details are in the 2026-10-16T19:49Z entry of `DECISIONS.md`. The observational analysis can give only temporal ordering and conditional correlation, so everything below is worded as "associated with..." or "leads". The causal design proposal is in `results/CAUSAL_DESIGN_PROPOSAL.md`.
 
-**设定**
-- 第 t 行为调查月 t：语气取 t−1 月；经济变量取 t 月 1 日的实时值。
-- "数据意外"为截止日 t−1 到 t 之间实时值的变化。没有免费的专业一致预期，所以用"实际发布值减上一次发布值"代替。
-- 事件虚拟变量（`provenance/events.csv`）：t−1 月或 t 月发生停摆、关税公告或银行倒闭时为 1；疫情为 2020-03 至 12 月。
-- 局部投影中，信心和语气都标准化为标准差单位。
-- 在看到结果前约定：方向是否"显著"，以 0–6 期平均响应的单侧 5% 检验为准；逐期结果并列报告。
+**Specification**
+- Row t is survey month t: tone is taken from month t−1; economic variables are the real-time values on the 1st of month t.
+- A "data surprise" is the change in the real-time value between cutoffs t−1 and t. There is no free professional consensus forecast, so "the actual released value minus the previous released value" is used instead.
+- Event dummies (`provenance/events.csv`): 1 when a shutdown, tariff announcement, or bank failure occurs in month t−1 or month t; the pandemic is 2020-03 to 12.
+- In the local projections, sentiment and tone are both standardized to standard-deviation units.
+- Agreed before seeing the results: whether a direction is "significant" is decided by a one-sided 5% test of the average response over horizons 0–6; horizon-by-horizon results are reported alongside.
 
-## 一、发现
+## 1. Findings
 
-**F1. 语气对信心有短暂的领先关联；信心对后续语气也有滞后关联；两个方向的 0–6 期平均响应都不显著。**
-主设定控制了实时基本面、数据意外、事件、两期滞后信心和滞后语气（`stage4_timing/local_projections.csv`）。
+**F1. Tone has a brief leading association with sentiment; sentiment also has a lagged association with later tone; the 0–6 average responses in both directions are not significant.**
+The main specification controls for real-time fundamentals, data surprises, events, two lags of sentiment, and lagged tone (`stage4_timing/local_projections.csv`).
 
-- **正向**（t−1 月语气对之后各月信心）：第 0、1、2 期分别为 0.061、0.065、0.070 个标准差（单侧 p 为 0.0002、0.010、0.025），第 3 期起回到 0 附近。0–6 期平均为 0.029（单侧 p = 0.22）。
-  - ICS 的标准差约 14.9 点，所以 0.06 个标准差约等于 0.9 点。
-- **反向**（t−1 月信心对之后各月语气）：第 0–3 期接近 0，第 4、5 期为 0.34 和 0.38（单侧 p 为 0.037 和 0.019），0–6 期平均为 0.11（单侧 p = 0.22）。
-- 只控制基本面、或剔除 2020 年疫情月份时，形态相同。
-- 语气的关联短而小，信心对语气的关联滞后数月出现，两者都只在部分期数显著。这更像双向的弱反馈，而不是媒体单向领先。
+- **Forward** (month t−1 tone on sentiment in later months): horizons 0, 1, and 2 are 0.061, 0.065, and 0.070 standard deviations (one-sided p of 0.0002, 0.010, and 0.025), returning to near 0 from horizon 3. The 0–6 average is 0.029 (one-sided p = 0.22).
+  - The standard deviation of ICS is about 14.9 points, so 0.06 standard deviations is about 0.9 points.
+- **Reverse** (month t−1 sentiment on tone in later months): horizons 0–3 are close to 0, horizons 4 and 5 are 0.34 and 0.38 (one-sided p of 0.037 and 0.019), and the 0–6 average is 0.11 (one-sided p = 0.22).
+- The pattern is the same when controlling only for fundamentals, or when excluding the 2020 pandemic months.
+- Tone's association is short and small, and sentiment's association with tone appears with a lag of several months; both are significant only at some horizons. This looks more like weak two-way feedback than one-way media leadership.
 
-**F2. 2021 年以来，语气并不比基本面所预示的更负面；按预先选定的拟合窗口，残差反而为正。**
-把月度语气对实时 U、π、g 和四个家庭变量回归，用 2010–2019 年拟合（`excess_tone_since_2021.csv`）：
+**F2. Since 2021, tone has not been more negative than fundamentals imply; under the pre-selected fitting window, the residual is in fact positive.**
+Regressing monthly tone on real-time U, π, g, and the four household variables, fitted on 2010–2019 (`excess_tone_since_2021.csv`):
 
-| 时段 | 平均残差 | p |
+| Period | Mean residual | p |
 | --- | --- | --- |
-| 2021-01 至 2026-10 | +0.18 | 0.011 |
-| 2021-07 至 2022-12 | +0.13 | 0.007 |
-| 2023-01 至 2024-12 | +0.39 | < 0.001 |
-| 2025-01 至 2026-10 | −0.01 | 0.45 |
+| 2021-01 to 2026-10 | +0.18 | 0.011 |
+| 2021-07 to 2022-12 | +0.13 | 0.007 |
+| 2023-01 to 2024-12 | +0.39 | < 0.001 |
+| 2025-01 to 2026-10 | −0.01 | 0.45 |
 
-- 2021–2024 年的高通胀本应对应更负面的报道，实际语气没有那么负面。
-- 用 2010–2026 全期拟合时，2025–2026 年的残差为 −0.15（p < 0.001）。这个结果依赖拟合窗口，要和上表一起看。
-- 基本面对月度语气的解释力很低，R² 只有 0.06（全期拟合为 0.13），所以这项检验本身的力度有限。
+- High inflation in 2021–2024 should have corresponded to more negative coverage, but actual tone was not that negative.
+- When fitted on the full 2010–2026 period, the 2025–2026 residual is −0.15 (p < 0.001). This result depends on the fitting window and must be read together with the table above.
+- Fundamentals explain very little of monthly tone, with R² of only 0.06 (0.13 for the full-period fit), so this test itself has limited power.
 
-**F3. 回忆路径：语气与"听到不利新闻"的比例相关，而且主题一一对应；但基本面对回忆的解释力更强。**
-调查月 2010-06 至 2026-08（`recall_unique_r2.csv`、`recall_regressions.csv`）：
+**F3. Recall pathway: tone is associated with the share who "heard unfavorable news", and topics match one to one; but fundamentals explain recall better.**
+Survey months 2010-06 to 2026-08 (`recall_unique_r2.csv`, `recall_regressions.csv`):
 
-- 控制基本面后，上月语气每高 1 个单位，听到不利新闻的比例低 45 个百分点（p = 0.001）。月度语气的标准差约 0.2，对应约 9 个百分点。
-- 加入"听到不利新闻"的比例后，语气对 ICS 的系数从显著变为 −1.5（p = 0.74），而该比例本身仍显著（−0.18，p < 0.001）。这符合"语气 → 听到的新闻 → 信心"的顺序，但仍是相关，不能当作中介效应的识别。
-- 主题对应很清楚：
-  - 物价上涨报道占比对应听到不利物价新闻的比例，系数 17.2（p < 0.001）；用裁员报道作安慰剂时系数为 −0.5（p = 0.85）。
-  - 裁员报道占比对应听到不利就业新闻，系数 62.3（p = 0.031）；物价报道作安慰剂时系数为 0.3。
-- 独有解释力：基本面 R² 0.21，语气 0.14。在网络访谈之前的 2010-06 至 2024-03，两者为 0.28 和 0.13。
+- Controlling for fundamentals, each 1-unit increase in last month's tone is associated with a 45 percentage point lower share hearing unfavorable news (p = 0.001). The monthly standard deviation of tone is about 0.2, corresponding to about 9 percentage points.
+- After adding the share who "heard unfavorable news", tone's coefficient on ICS goes from significant to −1.5 (p = 0.74), while the share itself remains significant (−0.18, p < 0.001). This fits the ordering "tone → news heard → sentiment", but it is still correlational and cannot be taken as identification of a mediation effect.
+- Topic correspondence is very clear:
+  - The share of rising-prices coverage corresponds to the share hearing unfavorable price news, with a coefficient of 17.2 (p < 0.001); using layoff coverage as a placebo gives a coefficient of −0.5 (p = 0.85).
+  - The share of layoff coverage corresponds to hearing unfavorable employment news, with a coefficient of 62.3 (p = 0.031); price coverage as a placebo gives a coefficient of 0.3.
+- Unique explanatory power: fundamentals R² 0.21, tone 0.14. Before web interviews, in 2010-06 to 2024-03, the two are 0.28 and 0.13.
 
-**F4. 民主党人的信心与语气的关联并不比共和党人更强。**
-2017-02 至 2026-08（`partisan_gamma.csv`）：
+**F4. Democrats' sentiment is not more strongly associated with tone than Republicans'.**
+2017-02 to 2026-08 (`partisan_gamma.csv`):
 
-- 语气系数：民主党 4.5（p = 0.14），独立人士 5.5（p = 0.005），共和党 6.8（p = 0.009）。
-- 民主党减共和党为 −2.3（p = 0.57）。
-- NYT 读者偏民主党，若语气通过接触起作用，民主党的系数应更大。结果没有这种迹象，所以这条接触渠道没有得到相容证据。
+- Tone coefficients: Democrats 4.5 (p = 0.14), independents 5.5 (p = 0.005), Republicans 6.8 (p = 0.009).
+- Democrats minus Republicans is −2.3 (p = 0.57).
+- NYT readers lean Democratic, so if tone works through exposure, the Democratic coefficient should be larger. The results show no such sign, so this exposure channel receives no compatible evidence.
 
-**F5. 不同群体的缺口形态明显不同，但差异主要来自党派，与媒体接触无法区分。**
-（`group_gap_differences.csv`）
+**F5. Gap patterns differ clearly across groups, but the differences come mainly from partisanship and cannot be distinguished from media exposure.**
+(`group_gap_differences.csv`)
 
-- 按党派（相对各自 2017-02 至 2019-12 的均值）：
-  - 2021-07 至 2022-12：民主党 +2.9，共和党 −75.2。
-  - 2025-01 至 2026-08：民主党 −38.7，共和党 −29.8，差 −8.9（p = 0.001）。
-  - 2021–2026 年两党缺口路径的月度相关为 −0.72。
-- 按年龄（各自的 M1 缺口）：
-  - 2021–2022 年：18–34 岁 −0.2，55 岁以上 −35.2。
-  - 2025–2026 年：分别为 −38.8 和 −35.5，差 −3.3（p = 0.033）。
+- By party (relative to each group's own 2017-02 to 2019-12 mean):
+  - 2021-07 to 2022-12: Democrats +2.9, Republicans −75.2.
+  - 2025-01 to 2026-08: Democrats −38.7, Republicans −29.8, a difference of −8.9 (p = 0.001).
+  - The monthly correlation between the two parties' gap paths in 2021–2026 is −0.72.
+- By age (each group's own M1 gap):
+  - 2021–2022: ages 18–34 −0.2, ages 55 and over −35.2.
+  - 2025–2026: −38.8 and −35.5 respectively, a difference of −3.3 (p = 0.033).
 
-## 二、反证清单逐条判定（RQ6）
+## 2. Item-by-item adjudication of the falsification list (RQ6)
 
-判定按预先登记的操作化规则；"一半"是事先定的报告阈值，实际数字照报。
+Adjudication follows the pre-registered operational rules; "half" is a reporting threshold fixed in advance, and actual numbers are reported as they are.
 
-| # | 反证 | 结果 | 判定 |
+| # | Falsification criterion | Result | Verdict |
 | --- | --- | --- | --- |
-| 1 | 媒体语气可由基本面解释 | 2021 年以来残差 +0.18（p = 0.011），与 0 有显著差异，但方向是比基本面预示的更正面；2025–2026 年为 −0.01（p = 0.45） | 字面规则未触发。偏离方向与"媒体过度负面"相反，2025–2026 年与 0 无差异，所以同样不支持媒体偏差解释 |
-| 2 | 无样本外增量 | M1c 对 M3，AR 主版本 p = 0.23，20 个变体都不显著；不带 AR 时 p = 0.004 | **触发**（主版本） |
-| 3 | 信心领先媒体 | 0–6 期平均：正向 p = 0.22，反向 p = 0.22；逐期看正向在 0–2 期显著，反向在 4–5 期显著 | 未触发。也没有媒体单向领先的证据，形态是弱的双向关联 |
-| 4 | 真实压力解释了缺口 | 阶段 1：主窗口加入家庭变量后缺口几乎不变（−27.4 变为 −27.2），但这些变量在主窗口识别不出 | 未触发（检验力不足，见阶段 1 F4） |
-| 5 | 缺口来自测量或党派 | 阶段 1：调查方式只影响 ICC 约 5–8 点；党派构成不超过 2.7 点，都远小于缺口的一半 | 未触发 |
-| 6 | 回忆跟随经济而非媒体 | 基本面独有 R² 0.21，语气 0.14（网络访谈前 0.28 和 0.13） | **触发**。但语气仍有独立关联，主题对应清楚（F3） |
-| 7 | 群体间无差异 | 党派和年龄组的缺口在 2025–2026 年显著不同，形态差异很大 | 未触发。差异与党派高度重合，不能归于媒体接触（F4、F5） |
-| 8 | 测量本身不稳 | 替换测试的 39 个超额翻转率无一显著（阶段 2）；LLM 语气、全框架词典、负面占比三种测量在 M3 中系数方向一致（阶段 3） | 未触发 |
+| 1 | Media tone can be explained by fundamentals | Residual since 2021 is +0.18 (p = 0.011), significantly different from 0, but in the direction of being more positive than fundamentals imply; −0.01 in 2025–2026 (p = 0.45) | Not triggered under the literal rule. The direction of the deviation is the opposite of "media too negative", and 2025–2026 does not differ from 0, so this likewise does not support the media-bias explanation |
+| 2 | No out-of-sample increment | M1c vs. M3, AR main version p = 0.23, none of the 20 variants significant; p = 0.004 without AR | **Triggered** (main version) |
+| 3 | Sentiment leads media | 0–6 average: forward p = 0.22, reverse p = 0.22; horizon by horizon, forward is significant at horizons 0–2 and reverse at horizons 4–5 | Not triggered. There is also no evidence of one-way media leadership; the pattern is a weak two-way association |
+| 4 | Real pressures explain the gap | Stage 1: adding household variables in the main window barely changes the gap (−27.4 to −27.2), but these variables are not identifiable in the main window | Not triggered (lack of power, see stage 1 F4) |
+| 5 | The gap comes from measurement or partisanship | Stage 1: survey mode affects only ICC, by about 5–8 points; partisan composition is no more than 2.7 points, both far less than half the gap | Not triggered |
+| 6 | Recall follows the economy rather than media | Unique R² of fundamentals 0.21, tone 0.14 (0.28 and 0.13 before web interviews) | **Triggered**. But tone still has an independent association, and topic correspondence is clear (F3) |
+| 7 | No differences across groups | The gaps of partisan and age groups differ significantly in 2025–2026, with large differences in pattern | Not triggered. The differences overlap heavily with partisanship and cannot be attributed to media exposure (F4, F5) |
+| 8 | The measurement itself is unstable | None of the 39 excess flip rates in the swap test is significant (stage 2); the three measures, LLM tone, full-frame dictionary, and negative share, have coefficients of the same sign in M3 (stage 3) | Not triggered |
 
-## 三、综合
+## 3. Synthesis
 
-- 两条反证被触发：第 2 条，控制真实压力后没有样本外增量；第 6 条，回忆更多跟随经济基本面。
-- 第 1 条和第 3 条按字面没有触发，但证据方向也不支持媒体偏差解释：2021 年以来语气并不比基本面预示的更负面，时间顺序上没有媒体单向领先。
-- 媒体端仍有可测量、有方向的关联：短期正向关联、回忆的主题对应，以及特朗普任期内归咎政府占比很高（阶段 2）。但这些都不足以解释 2025–2026 年约 36–40 点的缺口；与语气相关的部分最多约 5%（阶段 3 F3）。
+- Two falsification criteria are triggered: item 2, no out-of-sample increment after controlling for real pressures; and item 6, recall follows economic fundamentals more.
+- Items 1 and 3 are not triggered literally, but the direction of the evidence also does not support the media-bias explanation: since 2021 tone has not been more negative than fundamentals imply, and in temporal ordering there is no one-way media leadership.
+- The media side still has measurable, directional associations: the short-run positive association, the topic correspondence in recall, and the very high share blaming the administration during the Trump term (stage 2). But none of these is enough to explain the 2025–2026 gap of about 36–40 points; the part associated with tone is at most about 5% (stage 3 F3).

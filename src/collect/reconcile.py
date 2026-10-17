@@ -29,16 +29,16 @@ def main():
  u=json.loads((ROOT/'data/raw/M01'/DAY/'UNRATE_observations_0000000.json').read_bytes())['observations']
  missing_oct=[a for a in u if a['date']=='2025-10-01'];valid_oct=[a for a in missing_oct if a['value']!='.']
  g=latest('M04','A191RL1Q225SBEA');gmax=g.dropna().index.max()
- result='# 教授 Excel 只读核对\n\n原文件未修改。以下运算仅用于确认数据口径与完整性，不是分析数据集。单位为百分点。\n\n'
- result+='| 口径 | 可对齐月份 | 平均绝对误差 | 最大绝对误差 | 误差不超过 0.01 的月份 |\n|---|---:|---:|---:|---:|\n'+'\n'.join(summary)
- result+='\n\n对照公式：100 × (同一最新版本的当月指数 / 12 个月前指数 − 1)。匹配结果支持核心 PCE 口径，精确程度见上表；不能仅凭列名判断为总体 PCE。历史修订可能影响精确逐值匹配。\n'
+ result='# Read-only check of the professor\'s Excel file\n\nThe original file was not modified. The calculations below are only for confirming the data definitions and completeness; this is not an analysis dataset. Units are percentage points.\n\n'
+ result+='| Definition | Alignable months | Mean absolute error | Maximum absolute error | Months with error no greater than 0.01 |\n|---|---:|---:|---:|---:|\n'+'\n'.join(summary)
+ result+='\n\nComparison formula: 100 × (index for the month in the same latest vintage / index 12 months earlier − 1). The match supports the core PCE definition, with the precision shown in the table above; it cannot be judged to be headline PCE from the column name alone. Historical revisions may affect exact value-by-value matching.\n'
  home=BeautifulSoup((ROOT/'data/raw/S05'/DAY/'homepage.html').read_bytes(),'html.parser').get_text(' ',strip=True)
  match=re.search(r'Preliminary Results for October 2026.*?Index of Consumer Sentiment (\d+\.\d+)',home)
  if not match:raise ValueError('Official October preliminary result not found in saved homepage')
  value=float(match.group(1))
- result+=f'\n- 信心月度 CSV 可匹配 {c.official_ics.notna().sum()} 个月；一致 {(c.difference.abs()<1e-8).sum()} 个月。CSV 最新月份 {values.index.max()}。另核对保存的官网首页明确标为 Preliminary Results for October 2026：ICS={value}，与教授表 2026-10={c.loc["2026-10","excel_ics"]} 一致。它是初值，不能混作终值。官方日历发布日 2026-10-09，10月终值计划10月23日发布。证据 data/raw/S05/20261015/homepage.html，来源 https://www.sca.isr.umich.edu/ 。\n'
- result+=f'- UNRATE 2025-10 共有 {len(missing_oct)} 条版本记录，其中非缺失数值 {len(valid_oct)} 条；缺失标记不等于可用观测。\n- GDP 环比折年率最新非缺失观测 {gmax}；Excel 的 2026Q3=3.7 不作为实测值收录，无法据此确认来源。\n'
- result+=f'- 官网 ICS 2022-06={values.get("2022-06")}; 2026-05={values.get("2026-05")}。\n'
+ result+=f'\n- The consumer sentiment monthly CSV can be matched for {c.official_ics.notna().sum()} months; {(c.difference.abs()<1e-8).sum()} months agree. The latest month in the CSV is {values.index.max()}. The saved official homepage was also checked; it is explicitly labeled Preliminary Results for October 2026: ICS={value}, which agrees with the professor\'s table value 2026-10={c.loc["2026-10","excel_ics"]}. It is a preliminary value and must not be mixed with final values. The official calendar release date is 2026-10-09, and the October final value is scheduled for release on October 23. Evidence: data/raw/S05/20261015/homepage.html, source https://www.sca.isr.umich.edu/ .\n'
+ result+=f'- UNRATE 2025-10 has {len(missing_oct)} vintage record in total, of which {len(valid_oct)} have non-missing values; a missing-value marker is not a usable observation.\n- The latest non-missing observation of the GDP quarter-over-quarter annualized rate is {gmax}; the Excel value 2026Q3=3.7 is not recorded as a measured value, and its source cannot be confirmed from it.\n'
+ result+=f'- Official website ICS 2022-06={values.get("2022-06")}; 2026-05={values.get("2026-05")}.\n'
  (PROV/'excel_reconciliation.md').write_text(result)
  print(result)
 

@@ -7,11 +7,11 @@ Final project for *AI Applications in Finance* (Jonas Wu). Data cutoff: 16 Octob
 |---|---|
 | Report (PDF) | [`report/report_draft_v1.pdf`](report/report_draft_v1.pdf), LaTeX source in [`report/src/`](report/src/) |
 | Slides | [`presentation/Unexplained_Pessimism_slides.pptx`](presentation/Unexplained_Pessimism_slides.pptx) (PDF copy alongside), speaker script [`presentation/SCRIPT.md`](presentation/SCRIPT.md) |
-| Dashboard | [`dashboard/index.html`](dashboard/index.html) (single offline file), guides [`DASHBOARD_GUIDE_EN.md`](dashboard/DASHBOARD_GUIDE_EN.md) / [`DASHBOARD_GUIDE.md`](dashboard/DASHBOARD_GUIDE.md) |
+| Dashboard | [`dashboard/index.html`](dashboard/index.html) (single offline file), guide [`DASHBOARD_GUIDE_EN.md`](dashboard/DASHBOARD_GUIDE_EN.md) |
 | Results summary | [`results/RESULTS_OVERVIEW.md`](results/RESULTS_OVERVIEW.md), per stage `results/FINDINGS_stage1-5.md` |
 | Research design and decision log | [`research/RESEARCH_DESIGN_v1.md`](research/RESEARCH_DESIGN_v1.md), [`DECISIONS.md`](DECISIONS.md) |
 
-On macOS, double-clicking `启动展示.command` opens the dashboard and the report (type `r` within 5 seconds to rebuild the dashboard first).
+On macOS, double-clicking `open_dashboard.command` opens the dashboard and the report (type `r` within 5 seconds to rebuild the dashboard first).
 
 ## Question and approach
 
@@ -34,7 +34,7 @@ U.S. consumer sentiment has stayed far below what headline economic indicators i
 ```
 .
 ├── README.md, DECISIONS.md      project overview; timestamped log of every design decision and deviation
-├── 启动展示.command               one-click launcher for the dashboard and report (macOS)
+├── open_dashboard.command       one-click launcher for the dashboard and report (macOS)
 ├── src/
 │   ├── collect/                 data collection from official APIs and archives (needs API keys, see below)
 │   ├── process/                 raw → processed panels, corpus, labels, media indices (run_all.sh)
@@ -48,22 +48,33 @@ U.S. consumer sentiment has stayed far below what headline economic indicators i
 │   └── external/                professor's Excel, used only for a read-only cross-check  [local only]
 ├── corpus/                      corpus documentation and counts; items.parquet and raw/ are [local only]
 ├── annotation/, labels/         sampling design, agreement statistics, AI run logs (text-bearing files local only)
-├── codebook/, prompts/          coding manual and frozen LLM prompts (v1, v2) with SHA-256
+├── codebook/, prompts/          human labeling guide; frozen LLM prompts (v1, v2) with SHA-256 and English translations
 ├── codex_runs/                  name-swap (R3.7) run package (inputs local only)
 ├── features/                    monthly and quarterly media indices
 ├── provenance/                  release calendar, inventory, collection state and reports (source registry and request log local only)
 ├── research/                    pre-registered research design
 ├── results/                     frozen outputs of every stage, findings, spec registry, script hashes
-├── report/                      report PDF, plan, LaTeX source, figure/table generators
-├── presentation/                deck (.pptx and .pdf), plan, script, slide figure layers
+├── report/                      report PDF, LaTeX source, figure/table generators
+├── presentation/                deck (.pptx and .pdf), speaker script, slide figure layers
 ├── dashboard/                   built dashboard and guides
 └── docs/
-    ├── task_guide.md, data_collection_plan.md      original task checklist and data plan
     ├── README_data.md, README_collection.md         data hand-off notes and collection notes
-    ├── audits/                  data collection audit, temporary-file audit
-    ├── notes/                   overview of the course files, collection brief
+    ├── audits/                  repository publication check
     └── assignment/              course assignment PDF                         [local only]
 ```
+
+## Language
+
+All documentation in this repository is in English. The project was worked on in Chinese, so most documents are translations of Chinese originals, which the author keeps locally. Planning notes that exist only in Chinese (the task checklist, the data collection plan, writing plans, audits) are not included; `DECISIONS.md` and other documents still mention them by name.
+
+A few files are frozen records and are kept exactly as they were used. Each has an English translation next to it:
+
+| Frozen original | English translation | Why it is kept |
+|---|---|---|
+| `prompts/label_prompt_v1.md`, `prompts/label_prompt_v2.md` (and the copy in `codex_runs/R37_package/prompts/`) | `*_EN_translation.md` in the same folder | The model received these files, which embed the codebook in Chinese; their SHA-256 hashes are recorded in `prompts/*.sha256`. |
+| `annotation/codebook_v1.md` | `annotation/codebook_v1_en.md`, copied to `codebook/codebook.md` by `src/process/export_labels.py` | The version the two annotators used; `src/annotation/build_ai_package.py` builds the prompt from it. |
+| `results/stage2_factcal/review_sample_30.csv` | `review_sample_30.en.csv` | Manual review notes on the factual-calibration parser. |
+| `labels/ai/run_log.csv`, `labels/ai/codex__v2_r37/run_log.csv`, `labels/ai/job_logs/*.csv`, `labels/annotator_B_time_log.csv` | `*.en.csv` next to each file that contains Chinese | Run and time logs written while labeling. |
 
 ## Data not in git
 

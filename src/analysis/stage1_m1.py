@@ -1,6 +1,6 @@
 """Stage 1: M1 baseline, sentiment gap, prediction intervals, explained share and decomposition (RQ3).
 
-Design: research/RESEARCH_DESIGN_v1.md, section "模型 1". Inputs: data/processed/econ_monthly_realtime.csv
+Design: research/RESEARCH_DESIGN_v1.md, section "Model 1". Inputs: data/processed/econ_monthly_realtime.csv
 (cutoff D2) and econ_monthly_realtime_prelim_cutoff.csv (robustness). Outputs: results/stage1_m1/.
 Only the pre-registered 2010-01..2019-12 window is run here; the 2000-09 and 1978 windows are in
 stage1_windows.py because they need the long ALFRED pulls (data/raw/M19).

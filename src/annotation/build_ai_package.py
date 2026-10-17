@@ -49,9 +49,9 @@ ALLOWED={'relevant':'yes, no, unsure','tone_overall':'negative, neutral, positiv
  'direction_1 / direction_2':'credit, blame, neutral_mention (null when the actor is none or null)'}
 
 def codebook_body():
- t=(ROOT/'codebook/codebook.md').read_text()
+ t=(ROOT/'annotation/codebook_v1.md').read_text()  # frozen original codebook the prompts were built from
  # Keep the labeling rules (sections 1-7); drop the human workflow (0), the column notes (8) and the change log (9).
- start=t.index('## 1. 标注单位');end=t.index('## 8. 其他列')
+ start=re.search(r'^## 1\. ',t,re.M).start();end=re.search(r'^## 8\. ',t,re.M).start()
  return t[start:end].rstrip()+'\n'
 
 def main():

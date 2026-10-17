@@ -1,30 +1,30 @@
-# personalfinance 减量抽样建议（尚未切换采集规则）
+# personalfinance reduced sampling proposal (collection rules not yet switched)
 
-这是采集设计建议，不改变现有 worker、断点或原始文件。目标是减少新增正文下载并使各版块月度文本量处于相近量级。数量核对快照见 personalfinance_sampling_proposal_counts.json。
+This is a collection design proposal; it does not change the existing worker, checkpoints, or raw files. The goal is to reduce new body-text downloads and bring the monthly text volume of each subreddit to a similar order of magnitude. The count-check snapshot is in personalfinance_sampling_proposal_counts.json.
 
-## 核对依据
+## Basis for the check
 
-在13个已完整取得的月份，以相同月份、相同三个UTC日期比较，economy月均211.38条、Economics月均102.77条，personalfinance月均827条。月份是2025-01至10、2026-08至10；2026-10仅至研究截止日。两个核心版块均值约157.08条，因此建议预先固定personalfinance目标为每月期望约150条。该比较不证明历史所有年份均有相同帖子密度。
+In the 13 months already fully obtained, comparing the same months and the same three UTC dates, economy averaged 211.38 items per month, Economics 102.77 items per month, and personalfinance 827 items per month. The months are 2025-01 to 10 and 2026-08 to 10; 2026-10 runs only to the research cutoff. The mean of the two core subreddits is about 157.08 items, so it is proposed to fix in advance a personalfinance target of about 150 expected items per month. This comparison does not prove that all historical years have the same post density.
 
-## 抽样规则
+## Sampling rules
 
-1. 保留种子20261015和每月既有的三个均匀随机UTC日期；日期在取得文本之前固定，不因当日记录数、接口响应、内容或已有库存而改抽。
-2. 取得该月来源aggregate总帖数N和可观察日数D（正常月为日历天数，截止月仅至截止日）。缺少N时先补来源计数，不编造分母、不根据其他年份推定。
-3. 目标T=150，设每个抽中日的时间窗长度L=min(86400, round(86400*D*T/(3*N)))秒。N=0时记录为来源计数为零，不伪造记录。小量历史月份若全天三日的期望数仍低于150，就取这三日全天，不为了凑数反复改抽。
-4. 每个抽中日用单独、可复现的随机流，从0至86399秒均匀抽一个起点。随机流为Python random.Random('20261015|personalfinance|日期|circular_window_v1')。在当天24小时圆环上保留起点后的L秒；跨过午夜时拆为抽中日首尾两个不重叠区间，不能直接丢弃越界部分，也不能移动至下一日。
-5. 只拉取这些时间窗，所有选中区间完整取得；接口满页则按原精确区间二分规则取全，不按时间顺序只截前若干条，不以得到150条为停止条件。既有完整原件可按同一时间谓词生成选择清单，不重新下载或修改原件。
-6. 每个版块月份记录N、D、T、L、三个日期、随机起点、实际时间区间、原件路径、取得条数和入样概率。报告标准变为“抽中时间窗完整”，不能将其写作“完整全天”。原始全天库存仍单列保留，不能与新样本混在一起重复计数。
+1. Keep the seed 20261015 and the three existing uniform random UTC dates per month; dates are fixed before the text is obtained and are not redrawn because of the number of records on the day, API responses, content, or existing inventory.
+2. Obtain the source aggregate total post count N for the month and the number of observable days D (the number of calendar days in a normal month; the cutoff month only runs to the cutoff). When N is missing, fill in the source count first; do not invent a denominator or infer it from other years.
+3. Target T=150; set the time window length on each drawn day to L=min(86400, round(86400*D*T/(3*N))) seconds. When N=0, record it as a source count of zero and do not fabricate records. For small historical months where the expected number from three whole days is still below 150, take those three whole days, and do not repeatedly redraw to pad the count.
+4. For each drawn day, use a separate, reproducible random stream to draw a start point uniformly from 0 to 86399 seconds. The random stream is Python random.Random('20261015|personalfinance|date|circular_window_v1'). On the day's 24-hour circle, keep the L seconds after the start point; when this crosses midnight, split it into two non-overlapping intervals at the start and end of the drawn day; the part that crosses the boundary must not simply be discarded, nor moved to the next day.
+5. Pull only these time windows, and obtain all selected intervals in full; when the API returns a full page, obtain everything using the original exact interval bisection rule; do not truncate to only the first few items in time order, and do not use reaching 150 items as a stopping condition. Existing complete raw files can be used to generate the selection list with the same time predicate, without re-downloading or modifying the raw files.
+6. For each subreddit-month, record N, D, T, L, the three dates, the random start points, the actual time intervals, raw file paths, the number of items obtained, and the inclusion probability. The reporting standard becomes "drawn time window complete", which must not be written as "complete whole day". The original whole-day inventory is still kept and listed separately, and must not be mixed with the new sample and counted twice.
 
-## 随机性与边界
+## Randomness and boundaries
 
-给定固定的N、D和L，每条来源帖子在本设计下的边际入样概率相同，为p=(3/D)*(L/86400)。期望月度条数为N*p，约等于150；取整误差很小，L上限会使低密度月份的期望数低于150。圆环均匀起点保证午夜附近与白天时间点的入样概率相同。它仍是随机日期加随机时间窗的两阶段整群抽样，同窗帖子同时入样，不是固定150条的逐帖简单随机抽样。来源计数快照漂移会影响期望条数，不应暗中改抽或凑数。
+Given fixed N, D, and L, every source post has the same marginal inclusion probability under this design, p=(3/D)*(L/86400). The expected monthly item count is N*p, about 150; the rounding error is very small, and the cap on L makes the expected count for low-density months fall below 150. The uniform start point on the circle ensures that times near midnight have the same inclusion probability as daytime times. It is still two-stage cluster sampling of random dates plus random time windows, with posts in the same window entering the sample together; it is not simple random sampling of a fixed 150 individual posts. Drift in the source count snapshot will affect the expected item count, and draws should not be quietly changed or padded.
 
-## 数量与速度
+## Volume and speed
 
-相对于已核对月份平均827条的旧三日全天设计，新目标150条的期望文本量约减少82%。2026-08/09/10的实测总数分别6167/5362/2243，对应每抽中日窗口约6.03/6.71/7.49小时；不会假定所有年份统一四小时即可达到同样样本量。每月通常发起3至6个基础时间区间请求，饱和区间继续精确二分，另有月度计数请求。请求速度还受超时和退避影响，不能保证耗时同步减少82%。
+Compared with the old three-whole-day design, which averaged 827 items in the checked months, the new target of 150 items reduces the expected text volume by about 82%. The measured totals for 2026-08/09/10 are 6167/5362/2243, corresponding to windows of about 6.03/6.71/7.49 hours per drawn day; it is not assumed that a uniform four hours in all years would achieve the same sample size. Each month usually issues 3 to 6 base time-interval requests, saturated intervals continue to be bisected exactly, and there are also monthly count requests. Request speed is also affected by timeouts and backoff, so the time taken cannot be guaranteed to fall by the same 82%.
 
-## 接口依据
+## API basis
 
-Arctic Shift官方项目API文档提供时间范围、升降序和字段选择，未列出随机排序选项：https://github.com/ArthurHeitmann/arctic_shift/blob/master/api/README.md 。因此此方案用事先随机选中的时间窗减少实际下载，而非把时间排序第一页称为随机样本。
+The official Arctic Shift project API documentation provides time range, ascending/descending order, and field selection, and lists no random ordering option: https://github.com/ArthurHeitmann/arctic_shift/blob/master/api/README.md . Therefore this plan uses time windows selected at random in advance to reduce actual downloads, rather than calling the first page in time order a random sample.
 
-作者字段排除、保留retrieved_on、原件不覆盖、单worker、速率限制、连续失败上限以及不使用哈希均沿用。
+Exclusion of author fields, keeping retrieved_on, never overwriting raw files, a single worker, rate limits, the cap on consecutive failures, and not using hashes all carry over.

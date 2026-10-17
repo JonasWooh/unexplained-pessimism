@@ -1,17 +1,17 @@
-# AI 测量验证（R3.4–R3.6）
+# AI Measurement Validation (R3.4–R3.6)
 
-- 模型：项目负责人声明为 Codex 中的 GPT 6 luna，推理强度 high（默认），全程固定（`labels/ai/model_declaration.json`）。运行日志 `labels/ai/run_log.csv` 中模型名称和设置记为"不可见"，原样保留。温度不可设定。
-- 提示词：`prompts/label_prompt_v1.md`（SHA256 26365ac8…）；`prompts/label_prompt_v2.md`（SHA256 9f95f20a…）冻结。所有运行用的提示词副本均已核对哈希一致。
-- 金标准：`labels/adjudicated.csv`。relevant = unsure 的金标准条目不计入 relevant 指标。
-- 评分脚本：`src/annotation/score_ai.py`。逐维度、逐类别、按来源的结果见 `*_metrics.csv` 和 `*_per_class.csv`。
+- Model: declared by the project lead as GPT 6 luna in Codex, reasoning effort high (default), fixed throughout (`labels/ai/model_declaration.json`). In the run log `labels/ai/run_log.csv`, the model name and settings are recorded as "not visible" and are kept as is. Temperature cannot be set.
+- Prompts: `prompts/label_prompt_v1.md` (SHA256 26365ac8…); `prompts/label_prompt_v2.md` (SHA256 9f95f20a…) frozen. The hashes of all prompt copies used in runs have been checked and match.
+- Gold standard: `labels/adjudicated.csv`. Gold-standard items with relevant = unsure are not counted in the relevant metrics.
+- Scoring script: `src/annotation/score_ai.py`. Results by dimension, by class, and by source are in `*_metrics.csv` and `*_per_class.csv`.
 
-## 开发集（100 条，用于选择提示词版本）
+## Development set (100 items, used to choose the prompt version)
 
-v1 与 v2 的逐维度对比见 `dev_v1_vs_v2.csv`。10 个编码维度的平均 κ：v1 0.652，v2 0.670。按"开发集平均 κ"规则冻结 v2。
+The dimension-by-dimension comparison of v1 and v2 is in `dev_v1_vs_v2.csv`. Mean κ across the 10 coding dimensions: v1 0.652, v2 0.670. v2 was frozen under the "development-set mean κ" rule.
 
-## 测试集（260 条，冻结 v2 后只运行一次）
+## Test set (260 items, run only once after freezing v2)
 
-| 维度 | n | 准确率 | κ | 宏 F1 | 人工 A–B 的 κ |
+| Dimension | n | Accuracy | κ | Macro F1 | Human A–B κ |
 |---|---:|---:|---:|---:|---:|
 | relevant | 236 | 0.94 | 0.86 | 0.93 | 0.81 |
 | tone_overall | 174 | 0.85 | 0.73 | 0.81 | 0.79 |
@@ -25,14 +25,14 @@ v1 与 v2 的逐维度对比见 `dev_v1_vs_v2.csv`。10 个编码维度的平均
 | actor_1 | 174 | 0.75 | 0.67 | 0.56 | 0.83 |
 | direction_1 | 174 | 0.68 | 0.56 | 0.67 | 0.78 |
 
-（人工 A–B 的 κ 取自全部 360 条，见 `labels/agreement_summary.csv`。）
+(Human A–B κ is computed on all 360 items; see `labels/agreement_summary.csv`.)
 
-- 主题：13 个中 10 个 κ ≥ 0.70；汽油价格 0.60、经济增长 0.63、其他 0.54。
-- 按来源的结果见 `codex__v2_isolated_r1_test_metrics.csv`。relevant 的 κ：NYT 0.90、Reddit 0.83、地方 0.72、Media Cloud 全国 0.54（n = 11）。tone 的 κ 在 0.63–0.76 之间。
-- 格式：260 条全部返回，没有非法取值，1,315 条证据摘录全部能在原文中逐字找到。
-- 自身一致性：测试集随机 26 条，在独立上下文中重复运行（`codex__v2_isolated_r2`）。一致率：relevant 0.92、语气 0.85、事实好坏 0.85、情绪强度 0.69、价格框架 0.88、视角 0.81、时间框架 0.73、数字陈述 0.92、概念错误 0.85、行动者 0.77、方向 0.88。
+- Topics: 10 of 13 have κ ≥ 0.70; gasoline prices 0.60, economic growth 0.63, other 0.54.
+- Results by source are in `codex__v2_isolated_r1_test_metrics.csv`. κ for relevant: NYT 0.90, Reddit 0.83, local 0.72, Media Cloud national 0.54 (n = 11). κ for tone ranges from 0.63 to 0.76.
+- Format: all 260 items were returned, with no invalid values, and all 1,315 evidence excerpts can be found verbatim in the original text.
+- Self-consistency: 26 random test-set items were rerun in an independent context (`codex__v2_isolated_r2`). Agreement rates: relevant 0.92, tone 0.85, factual good/bad 0.85, emotional intensity 0.69, price framing 0.88, perspective 0.81, time frame 0.73, numeric claim 0.92, concept error 0.85, actor 0.77, direction 0.88.
 
-## 尚未完成（属于研究阶段）
+## Not yet completed (belongs to the research stage)
 
-- 与词典法、TF-IDF + 逻辑回归的比较（R3.5）
-- 政治人物名字和来源标签的替换测试（R3.7）
+- Comparison with dictionary methods and TF-IDF + logistic regression (R3.5)
+- Swap test of political figures' names and source labels (R3.7)

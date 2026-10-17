@@ -1,72 +1,72 @@
-# 阶段 5 结果：机制、群体异质性与方法问题（RQ4、R5.2–R5.4）
+# Stage 5 results: mechanisms, group heterogeneity, and methodological issues (RQ4, R5.2–R5.4)
 
-冻结时间 2026-10-16。脚本 `src/analysis/stage5_mechanisms.py`，一键重跑 `sh src/analysis/run_stage5.sh`。实现细节见 `DECISIONS.md` 2026-10-16T19:53Z 条目，设定登记为 S136–S150。
+Frozen 2026-10-16. Script `src/analysis/stage5_mechanisms.py`; rerun everything with `sh src/analysis/run_stage5.sh`. Implementation details are in the 2026-10-16T19:53Z entry of `DECISIONS.md`, and the specifications are registered as S136–S150.
 
-**设定**
-- 时间约定同前几阶段：基本面取 t 月 1 日的实时值，加月度虚拟变量，HAC 12 阶。
-- "疫情月份"指 2020-03 至 2021-06。阶段 1 已说明这段时间 M1 的误差无法解读。
-- 全样本回归（2010–2026，不含疫情月份）把缺口年份也用于估计，所以只表示样本内关联，不能用来解释缺口。
+**Specification**
+- Timing conventions are the same as in earlier stages: fundamentals are the real-time values on the 1st of month t, with monthly dummies added and HAC with 12 lags.
+- "Pandemic months" means 2020-03 to 2021-06. Stage 1 already explained that M1's errors in this period cannot be interpreted.
+- Full-sample regressions (2010–2026, excluding the pandemic months) also use the gap years for estimation, so they show only in-sample associations and cannot be used to explain the gap.
 
-## 一、发现
+## 1. Findings
 
-**F1. 信心对经济好消息和坏消息的反应没有稳健的不对称。**
-信心的月度变化对上月数据发布中坏消息和好消息部分分别回归（`negativity_confidence.csv`）。若存在负面偏差，β坏 + β好 < 0。
+**F1. Sentiment shows no robust asymmetry in its response to good and bad economic news.**
+The monthly change in sentiment is regressed separately on the bad-news and good-news parts of last month's data releases (`negativity_confidence.csv`). If negativity bias exists, β_bad + β_good < 0.
 
-| 设定 | 三项指标合计 β坏 + β好 | p |
+| Specification | Sum over the three indicators β_bad + β_good | p |
 | --- | --- | --- |
-| 1 个月变化，2010-02 至 2026-10 | +4.9 | 0.030 |
-| 剔除疫情月份 | +2.1 | 0.67 |
+| 1-month change, 2010-02 to 2026-10 | +4.9 | 0.030 |
+| Excluding pandemic months | +2.1 | 0.67 |
 | 2010–2019 | +7.5 | 0.34 |
-| 3 个月变化，剔除疫情月份 | −11.4 | 0.16 |
+| 3-month change, excluding pandemic months | −11.4 | 0.16 |
 
-- 唯一显著的是主设定，而且方向与负面偏差相反：通胀回落时信心的回升，大于通胀上升时的下降。它依赖疫情月份，剔除后不再显著。
-- 分指标看，系数符号在不同设定间不一致。
-- 阶段 2 在媒体端得到的结论相同：负面不对称不稳健。
+- The only significant result is the main specification, and its direction is the opposite of negativity bias: the rebound in sentiment when inflation eases is larger than the decline when inflation rises. It depends on the pandemic months and is no longer significant once they are excluded.
+- By indicator, the signs of the coefficients are inconsistent across specifications.
+- Stage 2 reached the same conclusion on the media side: the negativity asymmetry is not robust.
 
-**F2. 可得性：汽油和食品价格在估计窗口内没有额外解释力；物价报道与"听到的物价新闻"对应清楚。**
-（`competition_regressions.csv`、`competition_gap_reduction.csv`）
+**F2. Availability: gasoline and food prices have no additional explanatory power within the estimation window; the correspondence between price coverage and "price news heard" is clear.**
+(`competition_regressions.csv`, `competition_gap_reduction.csv`)
 
-- 2010–2019 年在 M1 上加入汽油价格和食品 CPI 同比：汽油 −0.91（p = 0.56），食品 −0.51（p = 0.46）。用这个模型重算 2025-01 至 2026-10 的缺口，只缩小 2.2%。
-- 全样本（不含疫情月份）的样本内关联：汽油 −11.4（p = 0.001），食品不显著。同时加入 36 个月累计通胀后，汽油降为 −5.0（p = 0.18）。
-- 接触端（阶段 4 F3）：物价上涨报道占比每高 1 个单位，听到不利物价新闻的比例高 17.2 个百分点（p < 0.001），裁员报道作安慰剂时不显著。
+- Adding gasoline prices and year-over-year food CPI to M1 in 2010–2019: gasoline −0.91 (p = 0.56), food −0.51 (p = 0.46). Recomputing the 2025-01 to 2026-10 gap with this model shrinks it by only 2.2%.
+- In-sample association in the full sample (excluding pandemic months): gasoline −11.4 (p = 0.001), food not significant. With 36-month cumulative inflation added at the same time, gasoline falls to −5.0 (p = 0.18).
+- Exposure side (stage 4 F3): each 1-unit increase in the share of rising-prices coverage is associated with a 17.2 percentage point higher share hearing unfavorable price news (p < 0.001), and layoff coverage as a placebo is not significant.
 
-**F3. 锚定于过去价格：总量层面有相容证据，但在估计窗口内识别不出。**
+**F3. Anchoring on past prices: there is compatible evidence at the aggregate level, but it cannot be identified within the estimation window.**
 
-- **竞争回归**：
-  - 2010–2019 年，36 个月累计 PCE 涨幅的系数为 −0.21（p = 0.79），这与阶段 1 相同。原因是这一时期累计涨幅变化太小，识别力不足。
-  - 全样本中，累计涨幅为 −2.2（p < 0.001），同时 12 个月通胀为 −4.7（p < 0.001）。
-  - 阶段 1 的探索性 2000 年窗口中，累计涨幅显著，并能把 2021 年以来的缺口缩小约 24%。
-- **"因物价高"的原因提及率**（`price_reasons.csv`、`price_reasons_periods.csv`）：
+- **Competing regressions**:
+  - In 2010–2019, the coefficient on 36-month cumulative PCE inflation is −0.21 (p = 0.79), the same as in stage 1. The reason is that cumulative inflation changed too little in this period, so identifying power is insufficient.
+  - In the full sample, cumulative inflation is −2.2 (p < 0.001), while 12-month inflation is −4.7 (p < 0.001).
+  - In the exploratory 2000 window of stage 1, cumulative inflation is significant and shrinks the gap since 2021 by about 24%.
+- **Mention rates of "because of high prices" as a reason** (`price_reasons.csv`, `price_reasons_periods.csv`):
 
-| 时期 | 财务变差：因物价高 | 不宜买耐用品 | 不宜买车 | 不宜买房 | PCE 同比 | 36 个月累计 |
+| Period | Worse off financially: because of high prices | Bad time to buy durables | Bad time to buy a vehicle | Bad time to buy a home | PCE year-over-year | 36-month cumulative |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2019 | 7.3 | 11.3 | 19.8 | 24.3 | 1.5 | 5.3 |
 | 2022 | 39.8 | 42.4 | 56.0 | 62.5 | 6.2 | 10.9 |
-| 2025-01 至 2026-08 | 44.8 | 33.4 | 39.9 | 43.9 | 2.8 | 9.4 |
+| 2025-01 to 2026-08 | 44.8 | 33.4 | 39.9 | 43.9 | 2.8 | 9.4 |
 
-  - 控制 12 个月通胀后，累计涨幅对四项提及率的系数都为正且显著（1.2–2.1，p ≤ 0.001）。
-  - 2025–2026 年的通胀率不到 2022 年的一半，但"财务因物价高而变差"的提及率反而更高。这与"受访者以价格水平而非通胀率为参照"相容。
-- **注意**：回归中网络访谈虚拟变量的系数也很大（财务变差提及率 +17.9）。2024-07 以后的方式变化与关税等事件在时间上重合，无法分开。用阶段 1 的方式跳变设计单独检验，该提及率的跳变为 +2.0（p = 0.21），剔除过渡月后为 +6.5（p = 0.018），见 F6。
+  - After controlling for 12-month inflation, the coefficients of cumulative inflation on all four mention rates are positive and significant (1.2–2.1, p ≤ 0.001).
+  - The inflation rate in 2025–2026 is less than half that of 2022, yet the mention rate of "worse off financially because of high prices" is actually higher. This is compatible with "respondents use the price level rather than the inflation rate as their reference".
+- **Note**: the coefficient on the web-interview dummy in the regressions is also large (+17.9 for the worse-off mention rate). The mode change after 2024-07 coincides in time with events such as tariffs and cannot be separated from them. Tested separately with the stage 1 mode-jump design, the jump in this mention rate is +2.0 (p = 0.21), and +6.5 (p = 0.018) after excluding the transition months; see F6.
 
-**F4. 2025–2026 年的缺口在各人口群体中普遍存在，大小相近；2021–2022 年则差异很大。**
-每组用自己的 M1（2010–2019 拟合）计算缺口（`group_gaps.csv`、`group_gap_differences.csv`）。下表为 ICS：
+**F4. The 2025–2026 gap is present across demographic groups and similar in size; in 2021–2022, by contrast, it differed greatly.**
+Each group's gap is computed with its own M1 (fitted on 2010–2019) (`group_gaps.csv`, `group_gap_differences.csv`). The table below is for ICS:
 
-| 维度 | 2021-07 至 2022-12 | 2025-01 至 2026-08 |
+| Dimension | 2021-07 to 2022-12 | 2025-01 to 2026-08 |
 | --- | --- | --- |
-| 收入（低、中、高三分位） | −16.3、−25.6、−23.5 | −35.2、−39.6、−36.9 |
-| 年龄（18–34、35–54、55+） | −0.2、−25.8、−35.2 | −38.8、−42.3、−35.5 |
-| 地区（西、中北、东北、南） | −19.3、−20.8、−7.8、−33.2 | −39.6、−37.4、−32.0、−38.1 |
-| 教育（高中及以下、部分大学、大学） | −41.7、−36.0、−6.7 | −36.6、−41.2、−35.2 |
+| Income (low, middle, high tercile) | −16.3, −25.6, −23.5 | −35.2, −39.6, −36.9 |
+| Age (18–34, 35–54, 55+) | −0.2, −25.8, −35.2 | −38.8, −42.3, −35.5 |
+| Region (West, North Central, Northeast, South) | −19.3, −20.8, −7.8, −33.2 | −39.6, −37.4, −32.0, −38.1 |
+| Education (high school or less, some college, college) | −41.7, −36.0, −6.7 | −36.6, −41.2, −35.2 |
 
-- 2025–2026 年，同一维度内各组缺口的极差不超过 7.5 点，而缺口本身为 32–42 点。部分组间差在统计上显著，例如东北部比其他地区小 5–8 点，但量级远小于缺口。
-- 各组的 M1 在 2025 年都只能解释信心下降的 2%–14%。
-- 2021–2022 年的格局完全不同：年轻人、大学学历者和东北部几乎没有缺口，年长者、低学历者和南部缺口很大。
-- 党派（阶段 4 F5）是唯一在 2025–2026 年仍有大幅差异的维度，而且方向与执政党相关。
+- In 2025–2026, the range of gaps across groups within the same dimension is no more than 7.5 points, while the gap itself is 32–42 points. Some between-group differences are statistically significant, for example the Northeast is 5–8 points smaller than the other regions, but the magnitude is far smaller than the gap.
+- Each group's M1 explains only 2%–14% of that group's decline in sentiment in 2025.
+- The pattern in 2021–2022 is completely different: young people, college graduates, and the Northeast have almost no gap, while older people, those with less education, and the South have large gaps.
+- Partisanship (stage 4 F5) is the only dimension that still shows large differences in 2025–2026, and the direction is related to the governing party.
 
-**F5. 2026 年的缺口不是选举季现象。**
-（`pre_election_years.csv`、`pre_election_regression.csv`）
+**F5. The 2026 gap is not an election-season phenomenon.**
+(`pre_election_years.csv`, `pre_election_regression.csv`)
 
-| 中期选举年 | 1–4 月缺口 | 5–10 月缺口 | 变化 | 语气变化 |
+| Midterm year | January–April gap | May–October gap | Change | Change in tone |
 | --- | --- | --- | --- | --- |
 | 2010 | 2.1 | 1.9 | −0.2 | +0.02 |
 | 2014 | −4.5 | −1.0 | +3.6 | +0.13 |
@@ -74,66 +74,66 @@
 | 2022 | −27.4 | −27.1 | +0.3 | −0.07 |
 | 2026 | −38.8 | −40.4 | −1.6 | −0.09 |
 
-- 2010–2018 年的缺口是样本内残差，2022 和 2026 年是样本外缺口。
-- 2026 年的缺口在 1–4 月就已达 −38.8，选前 6 个月只扩大了 1.6 点，略低于其他中期选举年的变化范围（−0.2 至 +3.6），差别很小。
-- 全样本回归：选前 5–10 月的月度缺口变化与其他月份没有差异。中期选举年的系数为 +0.60（p = 0.22），大选年为 +0.73（p = 0.28）。
-- 同期发生的其他变化（R5.4 要求一并报告）：2026 年 5–10 月与 1–4 月相比，实时 PCE 同比从 2.8% 升至 3.7%，汽油价格从每加仑 3.15 美元升至 4.18 美元，30 年房贷利率从 6.15% 升至 6.61%。2025 年还有 4 月的关税行政令和 10–11 月的政府停摆。即便选前几个月信心有变化，也不能单独归因于选举。
+- The 2010–2018 gaps are in-sample residuals; the 2022 and 2026 gaps are out-of-sample.
+- The 2026 gap had already reached −38.8 in January–April and widened by only 1.6 points in the 6 months before the election, slightly below the range of changes in the other midterm years (−0.2 to +3.6), a very small difference.
+- Full-sample regression: the monthly change in the gap in the pre-election months May–October does not differ from other months. The coefficient for midterm years is +0.60 (p = 0.22), and for presidential election years +0.73 (p = 0.28).
+- Other changes in the same period (R5.4 requires reporting them together): comparing May–October 2026 with January–April, real-time PCE year-over-year inflation rose from 2.8% to 3.7%, gasoline prices rose from $3.15 to $4.18 per gallon, and the 30-year mortgage rate rose from 6.15% to 6.61%. In 2025 there was also the April tariff executive order and the October–November government shutdown. Even if sentiment changed in the months before the election, the change could not be attributed to the election alone.
 
-**F6. 调查方式：2025–2026 年缺口的扩大发生在网络访谈期之内，不是方式转换造成的。**
-（`mode_gap_changes.csv`、`mode_steps.csv`）
+**F6. Survey mode: the widening of the 2025–2026 gap took place within the web-interview period and was not caused by the mode switch.**
+(`mode_gap_changes.csv`, `mode_steps.csv`)
 
-- 只在 2024-07 以后的纯网络期内比较，不受方式水平差异的影响：
-  - ICS 缺口从 2024 年下半年的 −23.0 扩大到 2026 年的 −39.3，变化 −16.3。到 2025 年的变化为 −12.8。
-  - ICC 的变化为 −10.6，ICE 为 −20.0。
-  - 作为参照，纯电话期 2022 年下半年到 2024 年一季度，ICS 缺口收窄 6.7 点。
-- 调查端机制变量在 2024-07 的跳变（2023–2025 年样本，控制 M1 变量）：
+- Comparing only within the web-only period after 2024-07, which is unaffected by level differences between modes:
+  - The ICS gap widened from −23.0 in the second half of 2024 to −39.3 in 2026, a change of −16.3. The change through 2025 is −12.8.
+  - The change is −10.6 for ICC and −20.0 for ICE.
+  - For reference, in the phone-only period from the second half of 2022 to 2024 Q1, the ICS gap narrowed by 6.7 points.
+- Jumps at 2024-07 in survey-side mechanism variables (2023–2025 sample, controlling for the M1 variables):
 
-| 变量 | 跳变 | p | 剔除 2024-04 至 06 后 | p |
+| Variable | Jump | p | After excluding 2024-04 to 06 | p |
 | --- | --- | --- | --- | --- |
-| 听到不利新闻 | +7.1 | 0.41 | −15.9 | 0.10 |
-| 听到不利物价新闻 | −2.3 | < 0.001 | −1.5 | 0.27 |
-| 财务因物价高而变差 | +2.0 | 0.21 | +6.5 | 0.018 |
-| 1 年通胀预期中位数 | +0.2 | 0.68 | −1.1 | 0.012 |
+| Heard unfavorable news | +7.1 | 0.41 | −15.9 | 0.10 |
+| Heard unfavorable price news | −2.3 | < 0.001 | −1.5 | 0.27 |
+| Worse off financially because of high prices | +2.0 | 0.21 | +6.5 | 0.018 |
+| Median 1-year inflation expectation | +0.2 | 0.68 | −1.1 | 0.012 |
 
-  - 四个变量都没有在两种样本下一致显著的跳变。但结果对是否剔除过渡月很敏感，所以 2024 年前后这些开放题和通胀预期的水平不宜直接比较。
-  - 阶段 4 的回忆路径因此另报了截至 2024-03 的样本。
+  - None of the four variables shows a jump that is significant under both samples. But the results are very sensitive to whether the transition months are excluded, so the levels of these open-ended items and of inflation expectations before and after 2024 should not be compared directly.
+  - The stage 4 recall pathway therefore also reports a sample ending 2024-03.
 
-**F7. 近期社交平台和地方新闻的语气，与缺口的同步程度不如全国新闻。**
-上月语气与当月 ICS 缺口的相关（`recent_sources.csv`），只作描述：
+**F7. In the recent period, tone on social platforms and in local news moves with the gap less closely than national news does.**
+Correlation of last month's tone with the current month's ICS gap (`recent_sources.csv`), descriptive only:
 
-| 来源 | 时段 | 月或季数 | 相关（水平） | 同期全国新闻 | 相关（一阶差分） | 同期全国新闻 |
+| Source | Period | Months or quarters | Correlation (levels) | National news, same period | Correlation (first differences) | National news, same period |
 | --- | --- | --- | --- | --- | --- | --- |
-| YouTube 评论 | 2023-02 至 2026-10 | 45 月 | 0.16 | 0.62 | 0.05 | 0.01 |
-| 地方新闻 | 2025-04 至 2026-10 | 19 月 | 0.44 | 0.09 | 0.41 | 0.12 |
-| Media Cloud 全国 | 2025-10 至 2026-10 | 13 月 | 0.30 | 0.25 | 0.13 | 0.07 |
-| Reddit（季度） | 2015Q2 至 2026Q3 | 45 季 | 0.10 | 0.23 | −0.06 | 0.13 |
+| YouTube comments | 2023-02 to 2026-10 | 45 months | 0.16 | 0.62 | 0.05 | 0.01 |
+| Local news | 2025-04 to 2026-10 | 19 months | 0.44 | 0.09 | 0.41 | 0.12 |
+| Media Cloud national | 2025-10 to 2026-10 | 13 months | 0.30 | 0.25 | 0.13 | 0.07 |
+| Reddit (quarterly) | 2015Q2 to 2026Q3 | 45 quarters | 0.10 | 0.23 | −0.06 | 0.13 |
 
-- YouTube 评论平均比全国新闻更负面（−0.67 对 −0.48，阶段 2 已报告），但它的月度起伏与缺口几乎无关。
-- 地方新闻的相关较高，但只有 19 个月，而且水平相关受共同趋势影响。
-- 结论只限于这些时段和样本。社交平台和地方新闻都不进入历史模型。
+- YouTube comments are on average more negative than national news (−0.67 vs. −0.48, already reported in stage 2), but their monthly fluctuations are almost unrelated to the gap.
+- Local news has a higher correlation, but only 19 months, and the levels correlation is affected by common trends.
+- Conclusions are limited to these periods and samples. Neither social platforms nor local news enter the historical models.
 
-## 二、机制三分类（RQ4）
+## 2. Three-way classification of mechanisms (RQ4)
 
-| 机制 | 已测量（总量层面） | 只有相容证据 | 无法测量 |
+| Mechanism | Measured (aggregate level) | Only compatible evidence | Not measurable |
 | --- | --- | --- | --- |
-| 负面偏差 | 媒体端好坏消息不对称：不稳健（阶段 2 F6）；信心端：不稳健（F1） | — | 个体的信息处理过程 |
-| 可得性 | 物价报道与"听到的物价新闻"主题对应：成立（阶段 4 F3）；汽油、食品在估计窗口内的额外解释力：不成立（F2） | 全样本中汽油价格的关联（F2，含缺口年份） | 个人记忆中的具体事例 |
-| 锚定于过去价格 | 累计涨幅与通胀率的竞争回归：估计窗口内识别不出（F3，阶段 1 F4） | 全样本和 2000 年窗口中累计涨幅显著；通胀回落后"因物价高"的提及率仍高（F3） | 个人参考价格 |
-| 确认偏差 | 不能识别 | 党派指数在政府更替时方向相反的跳变（阶段 1 F6）；党派缺口路径负相关（−0.72，阶段 4 F5） | 个体的信念、接触与处理，写入实验提案 |
+| Negativity bias | Media-side good/bad news asymmetry: not robust (stage 2 F6); sentiment side: not robust (F1) | — | Individual information processing |
+| Availability | Topic correspondence between price coverage and "price news heard": holds (stage 4 F3); additional explanatory power of gasoline and food within the estimation window: does not hold (F2) | The full-sample association of gasoline prices (F2, includes gap years) | Specific instances in personal memory |
+| Anchoring on past prices | Competing regressions of cumulative inflation and the inflation rate: not identifiable within the estimation window (F3, stage 1 F4) | Cumulative inflation significant in the full sample and the 2000 window; the mention rate of "because of high prices" stays high after inflation eased (F3) | Personal reference prices |
+| Confirmation bias | Not identifiable | Opposite-direction jumps in partisan indices at changes of administration (stage 1 F6); negative correlation of partisan gap paths (−0.72, stage 4 F5) | Individual beliefs, exposure, and processing; written into the experiment proposal |
 
-## 三、对设计要求的判定
+## 3. Adjudication against the design requirements
 
-| 项目 | 判定 | 依据 |
+| Item | Verdict | Basis |
 | --- | --- | --- |
-| RQ4 机制可测性 | 两项机制在总量层面得到检验，结果都是"不稳健或识别不出"；锚定和确认偏差只有相容证据 | 第二节 |
-| R5.2 分组异质性 | 2025–2026 年缺口在收入、年龄、地区、教育组间普遍且相近；只有党派差异大 | F4；阶段 4 F5 |
-| R5.3 调查方式可比性 | 2025–2026 年缺口的扩大发生在网络期内部；开放题与通胀预期的跨断点水平比较不可靠 | F6；阶段 1 F5 |
-| R5.4 选举临近 | 没有证据显示选前几个月的缺口变化异常；同期有通胀、汽油和利率上升 | F5 |
-| 反证清单第 7 条（补充） | 阶段 4 的"未触发"判定不变。但应注意：2025–2026 年各人口群体的缺口相近，组间差异主要体现在 2021–2022 年和党派维度上 | F4 |
+| RQ4 Mechanism measurability | Two mechanisms are tested at the aggregate level, both with the result "not robust or not identifiable"; anchoring and confirmation bias have only compatible evidence | Section 2 |
+| R5.2 Group heterogeneity | The 2025–2026 gap is widespread and similar across income, age, region, and education groups; only partisan differences are large | F4; stage 4 F5 |
+| R5.3 Survey mode comparability | The widening of the 2025–2026 gap took place within the web period; level comparisons of open-ended items and inflation expectations across the break are unreliable | F6; stage 1 F5 |
+| R5.4 Approaching election | No evidence that the change in the gap in the months before the election is unusual; inflation, gasoline prices, and interest rates rose over the same period | F5 |
+| Falsification list item 7 (supplement) | The stage 4 verdict of "not triggered" stands. But note: in 2025–2026 the gaps of the demographic groups are similar, and between-group differences show up mainly in 2021–2022 and along the partisan dimension | F4 |
 
-## 四、限制
+## 4. Limitations
 
-- 各组 M1 用 2010–2019 年拟合，同样有阶段 1 的外推问题，组间比较的是同一种外推下的相对大小。
-- 分组指数由密歇根按组公布，没有样本量和标准误，组间差的检验只用了月度序列的 HAC 方差。
-- "因物价高"的原因提及率是开放题编码，在方式转换前后的可比性没有得到证明。F3 中这些提及率的上升，有一部分可能来自方式转换。
-- 党派构成没有月度序列，构成调整只能用阶段 1 的敏感性区间（不超过 2.7 点）。
+- Each group's M1 is fitted on 2010–2019 and has the same extrapolation problem as in stage 1, so the between-group comparisons are of relative sizes under the same kind of extrapolation.
+- The group indices are published by Michigan by group without sample sizes or standard errors, so tests of between-group differences use only the HAC variance of the monthly series.
+- The mention rates of "because of high prices" as a reason come from coding of open-ended questions, and their comparability before and after the mode switch has not been established. Part of the rise in these mention rates in F3 may come from the mode switch.
+- There is no monthly series on partisan composition, so composition adjustment can only use the stage 1 sensitivity range (no more than 2.7 points).

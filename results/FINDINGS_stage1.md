@@ -1,82 +1,82 @@
-# 阶段 1 结果：经济基线（RQ3、H1、H3）
+# Stage 1 results: economic baseline (RQ3, H1, H3)
 
-冻结时间 2026-10-16。设计见 `research/RESEARCH_DESIGN_v1.md`，偏离与实现细节见 `DECISIONS.md` 2026-10-16T18:40Z 条目，所有设定登记在 `results/spec_registry.csv`。脚本在 `src/analysis/`，一键重跑用 `sh src/analysis/run_stage1.sh`。
+Frozen 2026-10-16. The design is in `research/RESEARCH_DESIGN_v1.md`, deviations and implementation details are in the 2026-10-16T18:40Z entry of `DECISIONS.md`, and all specifications are registered in `results/spec_registry.csv`. Scripts are in `src/analysis/`; rerun everything with `sh src/analysis/run_stage1.sh`.
 
-下文先写发现，再写对假设的判定，两部分分开。数字后的括号注明出处文件。缺口 = 实际值 − M1 预测值，负数表示信心低于基本面所能解释的水平。区间为移动块自助法（块长 12，2,000 次）给出的期间均值 95% 区间。
+Findings come first below, followed by the adjudication of the hypotheses, with the two parts kept separate. Parentheses after numbers give the source file. Gap = actual value − M1 forecast; a negative number means sentiment is below the level that fundamentals can explain. Intervals are 95% intervals for period means from the moving-block bootstrap (block length 12, 2,000 replications).
 
-## 一、发现
+## 1. Findings
 
-**F1. M1 在 2010–2019 拟合良好；疫情期间逐月误差极大，那段时间不能用来验证模型。**
-ICS 对实时失业率、PCE 同比和 GDP 环比折年率回归，R² 为 0.90，n = 120。系数为：失业率 −4.84（HAC 标准误 0.29），通胀 −2.31（1.00），GDP 增长 1.09（0.28）。季节虚拟变量联合显著（p = 0.001），按预先登记规则保留（`stage1_m1/m1_fit.csv`）。Engle–Granger 检验显示残差平稳（p < 0.001），说明水平式回归不是伪回归（`unit_roots_main_window.csv`）。2020-01 至 2021-06 的平均缺口为 +1.1，但这是正负误差相抵的结果，不说明模型解释了疫情。2020-03 至 2021-06 的逐月误差均方根为 30.3。原因是失业率（14.7%）和 GDP 折年率（−32.9% 和 +33.1%）都远远超出估计期的取值范围：2020-09 的缺口为 +52.0，2021-01 为 −39.6（`m1_gap_monthly.csv`）。
+**F1. M1 fits well in 2010–2019; during the pandemic its monthly errors are extremely large, so that period cannot be used to validate the model.**
+Regressing ICS on the real-time unemployment rate, PCE year-over-year inflation, and annualized quarter-over-quarter GDP growth gives R² of 0.90, n = 120. The coefficients are: unemployment rate −4.84 (HAC standard error 0.29), inflation −2.31 (1.00), GDP growth 1.09 (0.28). The seasonal dummies are jointly significant (p = 0.001) and are kept under the pre-registered rule (`stage1_m1/m1_fit.csv`). The Engle–Granger test shows that the residuals are stationary (p < 0.001), indicating that the levels regression is not spurious (`unit_roots_main_window.csv`). The mean gap from 2020-01 to 2021-06 is +1.1, but this results from positive and negative errors offsetting each other and does not mean the model explains the pandemic. The root mean square of monthly errors from 2020-03 to 2021-06 is 30.3. The reason is that the unemployment rate (14.7%) and annualized GDP growth (−32.9% and +33.1%) are far outside the range of values in the estimation period: the gap is +52.0 in 2020-09 and −39.6 in 2021-01 (`m1_gap_monthly.csv`).
 
-所以下文的解释比例只用 2021-07 以后的各期，疫情期间不作解读。
+The explained shares below therefore use only the periods from 2021-07 onward, and the pandemic period is not interpreted.
 
-**F2. 2021 年下半年以后出现大而持久的负缺口，并逐期扩大。** 下表为 ICS 的分期结果，来源 `stage1_m1/m1_periods.csv`、`fig_m1_gap_ics.png`。
+**F2. From the second half of 2021, a large and persistent negative gap appears and widens period by period.** The table below gives the by-period results for ICS, from `stage1_m1/m1_periods.csv` and `fig_m1_gap_ics.png`.
 
-| 时段 | 实际值相对 2019 年的变化 | 平均缺口 | 95% 区间 | 解释比例 S |
+| Period | Change in actual value relative to 2019 | Mean gap | 95% interval | Explained share S |
 | --- | --- | --- | --- | --- |
-| 2021-07 至 2022-12 | −32.6 | −22.9 | [−7.7, 7.9] | 0.30 |
-| 2023-01 至 2024-12 | −27.0 | −25.2 | [−4.4, 4.7] | 0.07 |
-| 2025-01 至 2025-12 | −38.4 | −35.8 | [−4.2, 3.9] | 0.07 |
-| 2026-01 至 2026-10 | −44.8 | −39.8 | [−5.3, 5.1] | 0.11 |
+| 2021-07 to 2022-12 | −32.6 | −22.9 | [−7.7, 7.9] | 0.30 |
+| 2023-01 to 2024-12 | −27.0 | −25.2 | [−4.4, 4.7] | 0.07 |
+| 2025-01 to 2025-12 | −38.4 | −35.8 | [−4.2, 3.9] | 0.07 |
+| 2026-01 to 2026-10 | −44.8 | −39.8 | [−5.3, 5.1] | 0.11 |
 
-- 各期缺口都远在区间之外，自助法 p < 0.001。
-- 2023 年以后，三项基本面只能解释信心下滑的 7%–11%。
-- 贡献分解：2021–2022 年通胀拉低 9.4 点，失业率拉低 2.6 点。2025–2026 年各项贡献都不超过 4.2 点。
-- ICC 缺口更大（2026 年 −55.2），ICE 较小（−29.9）。
-- 2026-10 的 ICS 是初值。
+- The gap in every period is far outside the interval, bootstrap p < 0.001.
+- After 2023, the three fundamentals explain only 7%–11% of the decline in sentiment.
+- Contribution decomposition: in 2021–2022, inflation pulls sentiment down by 9.4 points and the unemployment rate by 2.6 points. In 2025–2026, no contribution exceeds 4.2 points.
+- The ICC gap is larger (−55.2 in 2026), and the ICE gap smaller (−29.9).
+- The 2026-10 ICS is preliminary.
 
-**F3. 2025–2026 年的缺口对设定稳健；2021–2022 年的缺口对估计窗口敏感。**
-在主窗口，以下变体下 2025 年缺口都在 −35.5 至 −36.3 之间：HAC 6 或 18 阶、去掉季节项、改用 GDP 同比、改用密歇根初值发布日作截止。一阶差分设定的缺口更大，不含常数时为 −41.1（`m1_robustness.csv`）。
+**F3. The 2025–2026 gap is robust to specification; the 2021–2022 gap is sensitive to the estimation window.**
+In the main window, the 2025 gap lies between −35.5 and −36.3 under each of the following variants: HAC with 6 or 18 lags, dropping the seasonal terms, using GDP year-over-year instead, and using the Michigan preliminary release date as the cutoff. The first-difference specification gives a larger gap, −41.1 without a constant (`m1_robustness.csv`).
 
-换估计窗口后，2025 年缺口为：2000-09–2019 窗口 −31.7，1978–2019 窗口 −35.9。2021–2022 年缺口则在 −10.1（2000 年窗口）到 −25.1（1978 年窗口）之间，主窗口为 −22.9（`stage1_windows/m1_windows.csv`）。原因是通胀系数随窗口变化：2000 年窗口为 −5.4，主窗口为 −2.3。主窗口的 PCE 同比只在 0.2%–2.9% 之间变动，2021 年以来 53% 的月份超出这个范围（`h1_support.csv`）。
+With other estimation windows, the 2025 gap is −31.7 in the 2000-09–2019 window and −35.9 in the 1978–2019 window. The 2021–2022 gap, by contrast, ranges from −10.1 (2000 window) to −25.1 (1978 window), versus −22.9 in the main window (`stage1_windows/m1_windows.csv`). The reason is that the inflation coefficient changes with the window: −5.4 in the 2000 window and −2.3 in the main window. In the main window, PCE year-over-year inflation varies only between 0.2% and 2.9%, and 53% of the months since 2021 are outside this range (`h1_support.csv`).
 
-扩展窗口递归估计会逐渐把缺口吸收进系数，但 2025 年仍为 −25.2。
+Expanding-window recursive estimation gradually absorbs the gap into the coefficients, but the 2025 gap is still −25.2.
 
-**F4. 加入家庭压力变量后，主窗口里识别不出这些渠道。**
-单独或一起加入 36 个月累计通胀、30 年房贷利率、人均实际可支配收入增长和汽油价格，在 ICS 方程里都不显著（p 介于 0.24 和 0.89 之间）。2021 年以来的平均缺口只从 −27.4 变为 −27.2（`stage1_h1/h1_models.csv`）。
+**F4. After adding household pressure variables, these channels cannot be identified in the main window.**
+Adding 36-month cumulative inflation, the 30-year mortgage rate, real per-capita disposable income growth, and gasoline prices, separately or together, none is significant in the ICS equation (p between 0.24 and 0.89). The mean gap since 2021 changes only from −27.4 to −27.2 (`stage1_h1/h1_models.csv`).
 
-原因是估计期变化太小：样本外 89% 的累计通胀值和 96% 的房贷利率值落在 2010–2019 年的取值范围之外（`h1_support.csv`）。所以这是检验力不足，不能当作这些渠道不存在的证据。
+The reason is that these variables changed too little in the estimation period: 89% of out-of-sample cumulative inflation values and 96% of mortgage rate values fall outside their 2010–2019 ranges (`h1_support.csv`). This is therefore a lack of power and cannot be taken as evidence that these channels do not exist.
 
-探索性分析（未预先登记）：在变化更大的 2000-09–2019 窗口，累计通胀显著（ICS −1.68，p = 0.008；ICC −2.35，p = 0.001）。它把 2021 年以来的 ICS 缺口从 −20.4 缩小到 −15.5，约 24%，2025 年缺口从 −31.7 缩小到 −26.2（`h1_models_with_exploratory.csv`）。
+Exploratory analysis (not pre-registered): in the 2000-09–2019 window, where variation is larger, cumulative inflation is significant (ICS −1.68, p = 0.008; ICC −2.35, p = 0.001). It shrinks the ICS gap since 2021 from −20.4 to −15.5, about 24%, and the 2025 gap from −31.7 to −26.2 (`h1_models_with_exploratory.csv`).
 
-**F5. 改为网络访谈后，现状指数 ICC 出现约 5–8 点的下移，ICS 和 ICE 没有稳定的跳变。**
-用 2023–2025 年的缺口对 2024-07 起的阶跃变量回归（`stage1_h3/h3a_mode.csv`）：
+**F5. After the switch to web interviews, the current conditions index ICC shifts down by about 5–8 points, while ICS and ICE show no stable jump.**
+Regressing the 2023–2025 gap on a step variable starting 2024-07 (`stage1_h3/h3a_mode.csv`):
 
-| 指数 | 系数 | p 值 | 剔除 2024-04 至 06 过渡月后 |
+| Index | Coefficient | p-value | After excluding the 2024-04 to 06 transition months |
 | --- | --- | --- | --- |
 | ICC | −8.0 | < 0.001 | −8.4 |
 | ICS | −5.7 | 0.07 | — |
 | ICE | −4.1 | 0.32 | — |
 
-用网络访谈比例代替阶跃变量，结果相同。为排除 2025 年 4 月关税冲击的干扰，另做了截至 2025-03 的探索性回归：ICC 仍为 −5.1（p < 0.001），ICS 为 +0.3。
+Using the web-interview share instead of the step variable gives the same results. To rule out interference from the April 2025 tariff shock, an exploratory regression through 2025-03 was also run: ICC is still −5.1 (p < 0.001), and ICS is +0.3.
 
-**F6. 党派反应剧烈但方向相反，抵消后总体缺口仍很大，而且不只来自在野党。**
-政府更替前后 3 个月的跳变（`h3b_party_jumps.csv`）：
+**F6. Partisan reactions are sharp but go in opposite directions; after they offset, the overall gap is still large, and it does not come only from the out-party.**
+Jumps in the 3 months before and after changes of administration (`h3b_party_jumps.csv`):
 
-| 更替 | 民主党 | 共和党 | 独立人士 | 全体 |
+| Change | Democrats | Republicans | Independents | All |
 | --- | --- | --- | --- | --- |
 | 2021-01 | +17.8 | −19.7 | — | +0.4 |
 | 2025-01 | −28.2 | +17.6 | −4.2 | −7.6 |
 
-2025 年各党派指数相对自身 2017–2019 年均值的偏离（`h3b_party_periods.csv`）：民主党 −37.3，独立人士 −42.4，共和党也有 −29.3。
+Deviation of each partisan index in 2025 from its own 2017–2019 mean (`h3b_party_periods.csv`): Democrats −37.3, independents −42.4, and Republicans also −29.3.
 
-党派构成敏感性区间：假设共和党人占比下降 2、4 或 6 个百分点，ICS 只会下降 0.8–2.7 点，不超过 2025–2026 年缺口的 7%（`h3b_composition_bound.csv`）。计算中用到的党派占比是在 ICS 总体等于三派加权平均、且权重之和为 1 的约束下用最小二乘估计的：民主党 0.26、独立人士 0.54、共和党 0.20，拟合误差 1.0 点。
+Sensitivity range for partisan composition: assuming the Republican share falls by 2, 4, or 6 percentage points, ICS would fall by only 0.8–2.7 points, no more than 7% of the 2025–2026 gap (`h3b_composition_bound.csv`). The partisan shares used in the calculation are estimated by least squares under the constraint that overall ICS equals the weighted average of the three groups with weights summing to 1: Democrats 0.26, independents 0.54, Republicans 0.20, with a fitting error of 1.0 point.
 
-## 二、对假设的判定
+## 2. Adjudication of hypotheses
 
-| 假设 | 判定 | 依据 |
+| Hypothesis | Verdict | Basis |
 | --- | --- | --- |
-| H1a 累计通胀 | 主窗口不支持，原因是识别不足；探索性的 2000 年窗口支持方向，但只能解释约四分之一 | F4 |
-| H1b 房贷利率 | 不支持；系数在 ICS 方程中为负但不显著，在 ICC 方程中为正 | F4 |
-| H1c 实际收入 | 不支持；系数方向正确但不显著 | F4 |
-| H1d 汽油价格 | 不支持；系数方向正确但不显著 | F4 |
-| H3a 调查方式 | 部分支持：只有 ICC 出现稳定跳变，约 5–8 点，不到 ICC 缺口的五分之一 | F5 |
-| H3b 党派 | 部分支持：跳变明显，但 2025–2026 年的缺口并不只集中在民主党和独立人士，共和党也远低于自身基准；构成效应可以忽略 | F6 |
-| H3c 模型与窗口 | 支持，但只限 2021–2022 年；2025–2026 年的缺口在三个窗口和全部稳健性设定下绝对值都不小于 23 点 | F3 |
+| H1a Cumulative inflation | Not supported in the main window, because of insufficient identification; the exploratory 2000 window supports the direction but explains only about a quarter | F4 |
+| H1b Mortgage rate | Not supported; the coefficient is negative but not significant in the ICS equation, and positive in the ICC equation | F4 |
+| H1c Real income | Not supported; the coefficient has the right sign but is not significant | F4 |
+| H1d Gasoline prices | Not supported; the coefficient has the right sign but is not significant | F4 |
+| H3a Survey mode | Partly supported: only ICC shows a stable jump, about 5–8 points, less than a fifth of the ICC gap | F5 |
+| H3b Partisanship | Partly supported: the jumps are clear, but the 2025–2026 gap is not concentrated only among Democrats and independents, as Republicans are also far below their own baseline; the composition effect is negligible | F6 |
+| H3c Model and window | Supported, but only for 2021–2022; the 2025–2026 gap is at least 23 points in absolute value under all three windows and all robustness specifications | F3 |
 
-**反证清单**
-- 第 4 条（真实压力解释缺口）未触发：没有任何家庭控制组合能把 2021 年以来的缺口缩小一半：ICS 最多缩小 4%，ICC 最多 10%，探索性模型为 24%。
-- 第 5 条（缺口来自测量或党派）未触发：ICS 方式跳变区间的绝对值上限为 11.9，ICC 为 12.6，都小于 2025–2026 年各自平均缺口的一半（ICS 约 18–20，ICC 约 24–28）；党派构成效应不超过 2.7。
+**Falsification list**
+- Item 4 (real pressures explain the gap) is not triggered: no combination of household controls shrinks the gap since 2021 by half: ICS shrinks by at most 4%, ICC by at most 10%, and the exploratory model by 24%.
+- Item 5 (the gap comes from measurement or partisanship) is not triggered: the upper bound on the absolute value of the mode-jump range is 11.9 for ICS and 12.6 for ICC, both smaller than half of their respective mean 2025–2026 gaps (ICS about 18–20, ICC about 24–28); the partisan composition effect is no more than 2.7.
 
-**留给后续阶段的问题**：2025–2026 年 −36 至 −40 点的缺口，经济基本面、家庭压力变量、调查方式和党派构成都无法解释。这一残差是阶段 3 检验媒体增量（H2）的对象。由于 F3 的窗口敏感性，2021–2022 年的结论要附带窗口区间来报告。
+**Questions left for later stages**: the 2025–2026 gap of −36 to −40 points cannot be explained by economic fundamentals, household pressure variables, survey mode, or partisan composition. This residual is the object of the stage 3 test of the media increment (H2). Because of the window sensitivity in F3, conclusions about 2021–2022 must be reported with the window range.

@@ -1,268 +1,268 @@
-# 研究设计 v1（预先登记版）
+# Research Design v1 (pre-registered version)
 
-2026-10-16。由草稿 v0 定稿：项目负责人于 2026-10-16T18:10Z 批准 D-A 至 D-F 全部按建议执行。来源：Claude Doc「研究设计草稿 v0」rev 14。此文件冻结后不再修改，后续变动记入 DECISIONS.md 作为偏离。
+2026-10-16. Finalized from draft v0: the project lead approved D-A through D-F, all as recommended, at 2026-10-16T18:10Z. Source: Claude Doc "Research Design Draft v0" rev 14. Once frozen, this file will not be modified again; later changes are recorded in DECISIONS.md as deviations.
 
-## 已确认的决策（2026-10-16T18:10Z 批准）
+## Confirmed decisions (approved 2026-10-16T18:10Z)
 
-本稿把教授的六个研究问题落到三组可证伪假设、四个模型（M1、M1c、M2、M3）和六个执行阶段上。下面六项需要你拍板，其余按稿中默认执行。定稿后全文写入 `DECISIONS.md`，作为模型运行前的预先登记，之后任何偏离都单独记录。
+This draft maps the professor's six research questions onto three groups of falsifiable hypotheses, four models (M1, M1c, M2, M3), and six execution stages. The six items below need your sign-off; everything else follows the defaults in the draft. Once finalized, the full text is written into `DECISIONS.md` as the pre-registration before any model is run, and any later deviation is recorded separately.
 
-| 编号 | 决策 | 建议 | 理由 |
+| ID | Decision | Recommendation | Rationale |
 | --- | --- | --- | --- |
-| D-A | 缺口模型的估计窗口 | 主设定仍为 2010–2019 固定窗口；另外预先登记 2000-09–2019（完全实时）和 1978–2019（准实时）两个窗口，结果并列报告 | 2010–2019 年实时 PCE 同比只在 0.2%–3.0%、房贷利率只在 3.3%–5.0%；2022 年分别到 6.8% 和 7.8%。主窗口对高通胀和高利率的系数是外推，缺口大小必须给出窗口敏感区间 |
-| D-B | 唯一的主要媒体假设 | 全国新闻 `net_tone` 的 t−1 月值 | 截止日为 t 月 1 日，当月媒体指数在预测时点还不存在；只设一个主假设，其余媒体指标按次要假设做多重检验校正 |
-| D-C | 事实校准的覆盖面 | 补拉 CPIAUCSL 与 PAYEMS 两个序列的 ALFRED 全部版本（用你本地的 FRED key，几分钟） | 全国样本有 1,562 条数字陈述，现有版本数据只能核对失业率（约 64 条）和 GDP（约 26 条）；通胀类约 50 条多引用 CPI，就业类约 180 条中有一部分是非农就业。不补拉则只核对 U-3、GDP、PCE，覆盖面很小 |
-| D-D | 不修订序列的早期补齐 | 房贷利率（Freddie Mac PMMS）和汽油价格（EIA）在其最早 ALFRED 版本之前的月份，用最早版本中的数值补齐 | 这两个序列发布后从不修订，补齐不引入前视；会修订的序列（EPU、Case-Shiller、U-6 等）不补 |
-| D-E | 词典法与传统分类器 | 词典用 Loughran–McDonald 和 VADER（Lexicoder 视许可情况加入）；传统分类器为 TF-IDF 加逻辑回归，用 11,431 条 LLM 标签训练，在 260 条人工测试集上评估，另附一个只用 100 条人工开发集训练的版本 | 两种训练来源分别回答"能否低成本复制 LLM"和"小样本人工标签够不够" |
-| D-F | 名字替换测试（R3.7）的规模 | 120 条 × 4 个新版本 = 480 次编码，分 4 批（第一次原文运行直接复用正式编码的标签），由你在隔离文件夹中用 Codex 跑，模型与提示词不变 | 必须包含原文的第二次运行，才能把替换效应和 Codex 本身的随机性（语气重复一致率 0.85）分开 |
+| D-A | Estimation window for the gap model | Keep the fixed 2010–2019 window as the main specification; additionally pre-register two windows, 2000-09–2019 (fully real-time) and 1978–2019 (quasi-real-time), and report the results side by side | In 2010–2019, real-time PCE year-over-year inflation ranged only from 0.2% to 3.0% and the mortgage rate only from 3.3% to 5.0%; in 2022 they reached 6.8% and 7.8%. The main window's coefficients on high inflation and high rates are extrapolations, so the size of the gap must come with a window-sensitivity range |
+| D-B | The single primary media hypothesis | The t−1 month value of national news `net_tone` | The cutoff is the 1st of month t, so the current month's media index does not yet exist at the forecast origin; only one primary hypothesis is set, and the other media measures are treated as secondary hypotheses with multiple-testing correction |
+| D-C | Coverage of factual calibration | Additionally pull all ALFRED vintages of the two series CPIAUCSL and PAYEMS (using your local FRED key, a few minutes) | The national sample has 1,562 numeric claims, but the existing vintage data can only check the unemployment rate (about 64 claims) and GDP (about 26 claims); the roughly 50 inflation claims mostly cite CPI, and part of the roughly 180 employment claims concern nonfarm payrolls. Without the extra pull, only U-3, GDP, and PCE can be checked, and coverage is very small |
+| D-D | Early backfill of non-revised series | For the mortgage rate (Freddie Mac PMMS) and gasoline prices (EIA), fill the months before their earliest ALFRED vintage with the values in the earliest vintage | These two series are never revised after release, so backfilling introduces no look-ahead; series that are revised (EPU, Case-Shiller, U-6, etc.) are not backfilled |
+| D-E | Dictionary methods and traditional classifiers | Dictionaries: Loughran–McDonald and VADER (Lexicoder added if licensing allows); traditional classifier: TF-IDF plus logistic regression, trained on the 11,431 LLM labels and evaluated on the 260-item human test set, plus a version trained only on the 100-item human development set | The two training sources answer, respectively, "can the LLM be replicated cheaply" and "are small-sample human labels enough" |
+| D-F | Scale of the name-swap test (R3.7) | 120 items × 4 new versions = 480 codings, in 4 batches (the first original-text run reuses the labels from the main coding directly), run by you with Codex in an isolated folder, with the model and prompt unchanged | A second run of the original text must be included to separate the swap effect from Codex's own randomness (tone repeat agreement 0.85) |
 
-不需要你决定、但会影响结论措辞的已知限制：党派构成没有月度公开序列，只能做敏感性区间；社交平台和地方新闻只进入近期描述性对比，不进入历史模型。
+Known limitations that need no decision from you but will affect how conclusions are worded: there is no public monthly series on partisan composition, so only a sensitivity range is possible; social platforms and local news enter only the recent descriptive comparison, not the historical models.
 
-## 研究问题与假设
+## Research questions and hypotheses
 
-教授要求区分三种解释：H1 头条指标没有反映的真实压力，H2 信息选择、框架或认知偏差，H3 测量、时间或模型问题。三者不互斥，结论按证据组合给出，"媒体偏差不能解释缺口"同样是合格的结论。
+The professor asks us to distinguish three explanations: H1, real pressures not captured by headline indicators; H2, information selection, framing, or cognitive bias; H3, measurement, timing, or model problems. The three are not mutually exclusive, and conclusions are given as a combination of evidence; "media bias cannot explain the gap" is an equally acceptable conclusion.
 
-| 研究问题 | 本项目的操作化 | 主要检验的假设 | 阶段 |
+| Research question | Operationalization in this project | Main hypothesis tested | Stage |
 | --- | --- | --- | --- |
-| RQ1 如何度量新闻或社交媒体的偏差 | 五个维度的 AI 测量，每个维度配一个明确基准；人工金标准验证、词典法对比、名字替换测试 | H2 的前提：媒体端是否存在相对基准的偏离 | 2 |
-| RQ2 这种偏差对压低密歇根信心的影响 | 控制基本面后的增量关联、双向时间顺序、"听到的新闻"路径、因果设计提案 | H2 | 3–4 |
-| RQ3 失业、通胀和 GDP 能解释多少缺口 | M1 样本外缺口、解释比例、各指标贡献分解，给出窗口敏感区间 | 基准；同时检验 H1、H3 | 1 |
-| RQ4 数据能测哪些感知机制 | 机制分为"已测量""只有相容证据""无法测量"三类（下表） | H2、H1 | 5 |
-| RQ5 媒体分析能否改进信心预测 | 递归样本外预测，Clark–West 检验，分时期报告 | H2 | 3 |
-| RQ6 什么证据会反驳媒体偏差解释 | 预先登记的反证清单及判定规则，分析后逐条判定 | H2 | 4 |
+| RQ1 How to measure bias in news or social media | AI measurement on five dimensions, each paired with an explicit benchmark; human gold-standard validation, dictionary-method comparison, name-swap test | Premise of H2: whether the media side deviates from its benchmarks | 2 |
+| RQ2 The effect of this bias in depressing Michigan sentiment | Incremental association after controlling for fundamentals, two-way temporal ordering, the "news heard" pathway, causal design proposal | H2 | 3–4 |
+| RQ3 How much of the gap unemployment, inflation, and GDP can explain | M1 out-of-sample gap, explained share, decomposition of each indicator's contribution, with a window-sensitivity range | Benchmark; also tests H1 and H3 | 1 |
+| RQ4 Which perception mechanisms the data can measure | Mechanisms classified as "measured", "only compatible evidence", and "not measurable" (table below) | H2, H1 | 5 |
+| RQ5 Whether media analysis improves sentiment forecasts | Recursive out-of-sample forecasts, Clark–West test, reported by period | H2 | 3 |
+| RQ6 What evidence would refute the media-bias explanation | Pre-registered list of falsification criteria with decision rules, adjudicated one by one after analysis | H2 | 4 |
 
-**可检验假设**（方向预先写明；缺口 = 实际信心 − M1 样本外预测）
+**Testable hypotheses** (directions stated in advance; gap = actual sentiment − M1 out-of-sample forecast)
 
-- H1a 价格水平：36 个月累计 PCE 涨幅在控制 12 个月通胀后对信心为负，加入后 2021 年以来的负缺口缩小。
-- H1b 借贷成本：30 年房贷利率为负，加入后缺口缩小。
-- H1c 家庭收入：人均实际可支配收入增长为正，且与 GDP 增长的背离能解释部分缺口。
-- H1d 显著价格：汽油价格在控制总体通胀后仍为负。
-- H2a 媒体端负面不对称：语气对坏消息的反应大于对同幅好消息的反应。
-- H2b 增量预测：t−1 月全国语气在 M1，以及在 M1 加家庭与政治控制之上，改进样本外预测。
-- H2c 时间顺序：语气领先信心，且去掉基本面成分后的"超额语气"仍有预测力；反向关系较弱。
-- H2d 回忆路径：语气预测受访者"听到不利新闻"的比例，后者又预测信心，且主题一一对应（物价报道对应听到的物价新闻）。
-- H3a 调查方式：2024 年 4–7 月转为网络访谈后，缺口（尤其是 ICC 的缺口）出现离散跳变。
-- H3b 党派：2025–2026 年的缺口集中在民主党和独立人士，执政党更替时党派指数跳变而基本面未变。
-- H3c 模型：缺口大小对估计窗口和设定高度敏感，特别是高通胀的外推。
+- H1a Price level: 36-month cumulative PCE inflation is negative for sentiment after controlling for 12-month inflation, and adding it shrinks the negative gap since 2021.
+- H1b Borrowing costs: the 30-year mortgage rate is negative, and adding it shrinks the gap.
+- H1c Household income: growth in real per-capita disposable income is positive, and its divergence from GDP growth explains part of the gap.
+- H1d Salient prices: gasoline prices remain negative after controlling for overall inflation.
+- H2a Media-side negativity asymmetry: tone reacts more to bad news than to good news of the same size.
+- H2b Incremental forecasting: national tone in month t−1 improves out-of-sample forecasts over M1, and over M1 plus household and political controls.
+- H2c Temporal ordering: tone leads sentiment, and "excess tone" with the fundamentals component removed still has predictive power; the reverse relationship is weaker.
+- H2d Recall pathway: tone predicts the share of respondents who "heard unfavorable news", which in turn predicts sentiment, with topics matching one to one (price coverage corresponds to price news heard).
+- H3a Survey mode: after the switch to web interviews in April–July 2024, the gap (especially the ICC gap) shows a discrete jump.
+- H3b Partisanship: the 2025–2026 gap is concentrated among Democrats and independents, and partisan indices jump at changes of the governing party while fundamentals do not change.
+- H3c Model: the size of the gap is highly sensitive to the estimation window and specification, especially extrapolation to high inflation.
 
-**RQ4 机制可测性预判**
+**RQ4 prior assessment of mechanism measurability**
 
-| 机制 | 本项目能测的部分 | 只能给相容证据或无法测的部分 |
+| Mechanism | What this project can measure | What gets only compatible evidence or cannot be measured |
 | --- | --- | --- |
-| 负面偏差 | 媒体端语气对好坏消息的不对称；信心对基本面改善与恶化的不对称（总量层面） | 个体的信息处理过程 |
-| 可得性偏差 | 汽油、食品价格在总体通胀之外的解释力；物价报道占比与"听到的物价新闻"的对应 | 个人记忆中的具体事例 |
-| 锚定于过去价格 | 36 个月累计涨幅与 12 个月通胀的竞争回归；受访者以"物价高"为财务变差或不宜购买原因的比例 | 个人参考价格 |
-| 确认偏差 | 不能识别；只有相容证据：党派指数在政府更替时的跳变 | 需要个体层面的信念、接触与实验数据，写入实验提案 |
+| Negativity bias | Media-side tone asymmetry between good and bad news; asymmetry of sentiment between improving and worsening fundamentals (aggregate level) | Individual information processing |
+| Availability bias | Explanatory power of gasoline and food prices beyond overall inflation; correspondence between the share of price coverage and "price news heard" | Specific instances in personal memory |
+| Anchoring on past prices | Competing regressions of 36-month cumulative inflation versus 12-month inflation; share of respondents citing "high prices" as the reason they are worse off financially or that it is a bad time to buy | Personal reference prices |
+| Confirmation bias | Not identifiable; only compatible evidence: jumps in partisan indices at changes of administration | Requires individual-level belief, exposure, and experimental data; written into the experiment proposal |
 
-## 数据与变量
+## Data and variables
 
-所有变量都取自现有交接文件，只新增一个派生变量（36 个月累计 PCE 涨幅）和两个更长的估计窗口。主分析为月度，2010-01 至 2026-10，共 202 个月；监测窗口为 2026-01 至 2026-10。
+All variables come from the existing handoff files; only one derived variable (36-month cumulative PCE inflation) and two longer estimation windows are added. The main analysis is monthly, 2010-01 to 2026-10, 202 months in total; the monitoring window is 2026-01 to 2026-10.
 
-| 角色 | 变量（文件 · 列） | 覆盖 | 备注 |
+| Role | Variable (file · column) | Coverage | Notes |
 | --- | --- | --- | --- |
-| 因变量 | `econ_monthly_realtime.csv` · `ics`、`icc`、`ice` | 2010-01–2026-10 | 2026-10 为初值，终值 2026-10-23 发布 |
-| 核心经济（M1） | `unrate_rt`、`pce_yoy_rt`（总体 PCE）、`gdp_qoq_saar_rt`（稳健性用 `gdp_yoy_rt`），均附 `_ref` 与 `_release_date` | 全期 | GDP 为"截止日前最新已发布季度"的阶梯函数，不插值 |
-| 家庭控制（H1） | 新增 `pce_cum36_rt`（同一版本 PCEPI 计算）、`mortgage30_rt`、`rdpi_pc_yoy_rt`、`gas_price_rt`；稳健性加 `tdsp_rt`、`u6rate_rt` | 房贷利率 2010-07 起（按 D-D 补齐）、实际收入 2010-06 起、U-6 2011-04 起 | `pce_cum_since_2021_01_rt` 在 2021 年前为空，不能进入 2010–2019 估计，只作描述 |
-| 政治控制 | 执政党虚拟变量（2017-01、2021-01、2025-01 更替）；选举前 6 个月虚拟变量（`political_elections.csv`） | 全期 | 党派构成无月度公开序列 |
-| 测量与方式（H3） | `mode_web_share`；党派指数 `ics_dem`、`ics_ind`、`ics_rep`（`survey_monthly.csv`） | 党派指数 2017-02 起逐月至 2026-08；2010–2016 只有 18 个月 | 党派分析只用 2017 年以后 |
-| 接触与回忆代理 | `news_f_all`、`news_u_all`、`news_r_all`；不利新闻类别 `newsrn_u_pri_all`、`newsrn_u_emp_all` 等 | 至 2026-08 | 开放题编码在 2024 年方式转换前后的可比性未证明 |
-| 机制与异质性 | `pagorn_hp_all`（因物价高而财务变差）、`durrn_hp_all`、`homrn_*`、`vehrn_*`、`px1_*`；收入、年龄、地区、教育分组的 ICS/ICC/ICE | 至 2026-08 | — |
-| 媒体主指标 | `media_monthly.csv`，`group = national` | 202 个月，每月相关条目 14–37（中位数 26） | 2026-01 只有 1–7 日、照常计算并标记，不用 Guardian 替代；2026-10 只到 10-04 |
-| 媒体辅助 | `mc_national`（13 个月）、`local`（2025-03–2026-09，19 个月）、`youtube`（2023-01 起，46 个月）、Reddit 用 `media_quarterly.csv` | 见左 | 只做近期对比和稳健性，不进入 2010–2019 估计 |
-| 外部基准 | `sffed_news_sentiment_monthly.csv` | 202 个月 | 与自建语气 r = 0.37（3 个月平均 0.44） |
-| 事件与发布 | `provenance/events.csv`（158 条：FOMC 138、停摆、关税、银行倒闭、疫情）、`release_calendar.csv` | 全期 | 用于共同冲击控制和仪表盘时间轴 |
-| 条目级 | `labels/ai_corpus_labels.csv`（11,431 条含权重）、`corpus/items.parquet`（167,418 条） | — | 后者用于全语料词典指数和事实校准 |
+| Dependent variable | `econ_monthly_realtime.csv` · `ics`, `icc`, `ice` | 2010-01–2026-10 | 2026-10 is preliminary; the final is released 2026-10-23 |
+| Core economic (M1) | `unrate_rt`, `pce_yoy_rt` (headline PCE), `gdp_qoq_saar_rt` (`gdp_yoy_rt` for robustness), each with `_ref` and `_release_date` | Full period | GDP is a step function of "the latest quarter released before the cutoff", not interpolated |
+| Household controls (H1) | New `pce_cum36_rt` (computed from the same PCEPI vintage), `mortgage30_rt`, `rdpi_pc_yoy_rt`, `gas_price_rt`; for robustness add `tdsp_rt`, `u6rate_rt` | Mortgage rate from 2010-07 (backfilled per D-D), real income from 2010-06, U-6 from 2011-04 | `pce_cum_since_2021_01_rt` is empty before 2021, so it cannot enter the 2010–2019 estimation and is descriptive only |
+| Political controls | Governing-party dummy (changes in 2017-01, 2021-01, 2025-01); dummy for the 6 months before an election (`political_elections.csv`) | Full period | No public monthly series on partisan composition |
+| Measurement and mode (H3) | `mode_web_share`; partisan indices `ics_dem`, `ics_ind`, `ics_rep` (`survey_monthly.csv`) | Partisan indices monthly from 2017-02 to 2026-08; only 18 months in 2010–2016 | Partisan analysis uses only 2017 onward |
+| Exposure and recall proxies | `news_f_all`, `news_u_all`, `news_r_all`; unfavorable news categories `newsrn_u_pri_all`, `newsrn_u_emp_all`, etc. | Through 2026-08 | Comparability of open-ended coding before and after the 2024 mode switch is not established |
+| Mechanisms and heterogeneity | `pagorn_hp_all` (worse off financially because of high prices), `durrn_hp_all`, `homrn_*`, `vehrn_*`, `px1_*`; ICS/ICC/ICE by income, age, region, and education group | Through 2026-08 | — |
+| Main media measures | `media_monthly.csv`, `group = national` | 202 months, 14–37 relevant items per month (median 26) | 2026-01 covers only days 1–7; computed as usual and flagged, not replaced with Guardian; 2026-10 runs only to 10-04 |
+| Auxiliary media | `mc_national` (13 months), `local` (2025-03–2026-09, 19 months), `youtube` (from 2023-01, 46 months), Reddit via `media_quarterly.csv` | See left | Used only for recent comparisons and robustness, not in the 2010–2019 estimation |
+| External benchmark | `sffed_news_sentiment_monthly.csv` | 202 months | r = 0.37 with our own tone (0.44 for 3-month averages) |
+| Events and releases | `provenance/events.csv` (158 entries: FOMC 138, shutdowns, tariffs, bank failures, pandemic), `release_calendar.csv` | Full period | Used for common-shock controls and the dashboard timeline |
+| Item level | `labels/ai_corpus_labels.csv` (11,431 items with weights), `corpus/items.parquet` (167,418 items) | — | The latter is used for the full-corpus dictionary index and factual calibration |
 
-**媒体指标按 AI 验证结果分三档使用**（测试集与金标准的 κ）：
+**Media measures are used in three tiers according to the AI validation results** (κ between the test set and the gold standard):
 
-- 主指标：语气 `net_tone`（0.73），以及依赖相关性判断的供给量（0.86）和价格框架（0.83）。
-- 次要指标（结论需加注测量误差）：事实好坏 `net_fact`（0.57）、视角 `household_share`（0.63）、行动者与归咸 `blame_admin_share`（0.67 / 0.56）、各主题占比。
-- 只作描述：情绪强度（0.56）、时间框架 `forecast_share`（0.59）、概念错误率（0.47）。
+- Main measures: tone `net_tone` (0.73), plus volume (0.86) and price framing (0.83), which depend on the relevance judgment.
+- Secondary measures (conclusions must note measurement error): factual good/bad `net_fact` (0.57), perspective `household_share` (0.63), actor and attribution `blame_admin_share` (0.67 / 0.56), and topic shares.
+- Descriptive only: emotional intensity (0.56), time frame `forecast_share` (0.59), concept error rate (0.47).
 
-正式编码中 23 条 relevant = unsure 不进入任何内容指标，只报告数量。
+The 23 items in the main coding with relevant = unsure do not enter any content measure; only their count is reported.
 
-## 模型 1：只含经济指标的基准与信心缺口（RQ3、H1、H3）
+## Model 1: Economics-only benchmark and the sentiment gap (RQ3, H1, H3)
 
-M1 只用实时 U-3、总体 PCE 同比和 GDP 环比折年率，在 2010–2019 年估计，对 2020-01 起做样本外预测；缺口是实际值减预测值，负缺口只代表"模型无法解释的悲观"。
+M1 uses only real-time U-3, headline PCE year-over-year inflation, and annualized quarter-over-quarter GDP growth, is estimated on 2010–2019, and makes out-of-sample forecasts from 2020-01 onward; the gap is the actual value minus the forecast, and a negative gap means only "pessimism the model cannot explain".
 
 ```latex
 \mathrm{ICS}_t = \alpha + \beta_1 U^{rt}_t + \beta_2 \pi^{rt}_t + \beta_3 g^{rt}_t + \varepsilon_t, \qquad \mathrm{gap}_t = \mathrm{ICS}_t - \widehat{\mathrm{ICS}}_t
 ```
 
-**设定**
+**Specification**
 
-- 不含滞后因变量和时间趋势，否则缺口会被吸收。季节虚拟变量先在估计期做联合检验，显著才加入。
-- 标准误用 Newey–West（12 阶）。ICS、ICC、ICE 各估计一次。
-- 预测区间两种都报：解析区间（HAC 参数方差加残差方差）；估计期残差的移动块自助（块长 12 个月，2,000 次），给出 80% 和 95% 区间。
+- No lagged dependent variable and no time trend, otherwise the gap would be absorbed. Seasonal dummies are first jointly tested in the estimation period and added only if significant.
+- Standard errors are Newey–West (12 lags). ICS, ICC, and ICE are each estimated once.
+- Both kinds of prediction interval are reported: the analytic interval (HAC parameter variance plus residual variance), and a moving-block bootstrap of estimation-period residuals (block length 12 months, 2,000 replications), giving 80% and 95% intervals.
 
-**估计窗口（对应决策 D-A）**
+**Estimation windows (corresponding to decision D-A)**
 
-| 窗口 | 实时程度 | 作用 |
+| Window | Real-time status | Role |
 | --- | --- | --- |
-| 2010-01–2019-12（主） | 完全实时 | PDF 建议起点；已定的 D3 |
-| 2000-09–2019-12 | 完全实时：UNRATE 版本自 1960 年、PCEPI 自 2000-08、GDPC1 自 1991-12 | 加入 2008 年通胀高点和金融危机 |
-| 1978-01–2019-12 | 准实时：2000 年前的 PCE 用最早版本（2000-08），GDP 用费城联储实时数据（已在 `data/raw/M17`）；1992 年前的版本为实际 GNP，需注明 | 唯一包含 6% 以上通胀的窗口，用来检验主缺口是否来自外推 |
-| 扩展窗口递归 | 完全实时 | 指南 D3 的稳健性；会逐渐吸收缺口，只作对照 |
+| 2010-01–2019-12 (main) | Fully real-time | Starting point suggested in the PDF; the already-decided D3 |
+| 2000-09–2019-12 | Fully real-time: UNRATE vintages from 1960, PCEPI from 2000-08, GDPC1 from 1991-12 | Adds the 2008 inflation peak and the financial crisis |
+| 1978-01–2019-12 | Quasi-real-time: PCE before 2000 uses the earliest vintage (2000-08), GDP uses Philadelphia Fed real-time data (already in `data/raw/M17`); vintages before 1992 are real GNP, which must be noted | The only window containing inflation above 6%, used to test whether the main gap comes from extrapolation |
+| Expanding-window recursive | Fully real-time | Robustness for guideline D3; it gradually absorbs the gap, so it serves only as a comparison |
 
-**RQ3 的报告口径**
+**Reporting conventions for RQ3**
 
-- 估计期 R²、样本外 RMSE 和样本外 R²。
-- 解释比例：对时段 P，用 2019 年平均信心作参照，S = 1 − 平均缺口 ÷ 平均（ICS − 2019 年均值）。时段为 2021-07–2022-12、2023–2024、2025、2026-01–2026-10。
-- 贡献分解：每个指标的贡献为 β ×（当期值 − 2019 年均值）。
-- 四个窗口的结果并列，解释比例以区间报告。
+- Estimation-period R², out-of-sample RMSE, and out-of-sample R².
+- Explained share: for period P, using average 2019 sentiment as the reference, S = 1 − mean gap ÷ mean (ICS − 2019 mean). The periods are 2021-07–2022-12, 2023–2024, 2025, and 2026-01–2026-10.
+- Contribution decomposition: each indicator's contribution is β × (current value − 2019 mean).
+- Results for the four windows are shown side by side, and the explained share is reported as a range.
 
-**H1 检验（M1 加家庭控制）**：先逐个加入 36 个月累计涨幅、房贷利率、人均实际可支配收入增长、汽油价格，再一次性加入这四个；判据是 2021 年以来平均缺口的变化和样本外 RMSE。偏债负担和 U-6 只在稳健性里加。EPU 本身由报纸文本构造，归入媒体类稳健性，不作 H1 控制。
+**H1 test (M1 plus household controls)**: first add 36-month cumulative inflation, the mortgage rate, real per-capita disposable income growth, and gasoline prices one at a time, then add all four at once; the criteria are the change in the mean gap since 2021 and the out-of-sample RMSE. Debt-service burden and U-6 are added only in robustness checks. EPU is itself built from newspaper text, so it is classed as a media robustness check, not an H1 control.
 
-**H3 检验**
+**H3 tests**
 
-1. 调查方式：在 2023-01–2025-12 的缺口序列上回归 2024-07 起的阶梯虚拟变量和网络访谈比例，ICC 与 ICE 分别做；另做剔除 2024-04–06 的版本。
-2. 党派：2017 年起各党派指数相对自身 2017-02–2019-12 均值的变化，重点看 2021-01 和 2025-01 的跳变。
-3. 党派构成的敏感性区间：ICS 对各组是线性加权，因此若共和党占比少了 Δs，总指数受影响 Δs ×（ICS\_共和 − ICS\_其余）。Δs 取 2、4、6 个百分点，报告对缺口的影响范围，并说明构成本身不可观测。
+1. Survey mode: on the 2023-01–2025-12 gap series, regress on a step dummy starting 2024-07 and the web-interview share, separately for ICC and ICE; also run a version excluding 2024-04–06.
+2. Partisanship: from 2017, the change in each partisan index relative to its own 2017-02–2019-12 mean, focusing on the jumps at 2021-01 and 2025-01.
+3. Sensitivity range for partisan composition: ICS is a linear weighting of the groups, so if the Republican share falls by Δs, the total index is affected by Δs × (ICS\_Rep − ICS\_others). Δs takes values of 2, 4, and 6 percentage points; the range of effects on the gap is reported, with a note that the composition itself is not observable.
 
-识别说明：M1 是简约式映射，不是结构模型。缺口可以来自遗漏变量（H1）、测量变化（H3）、关系本身的变化或感知因素（H2），单凭缺口无法区分。
+Identification note: M1 is a reduced-form mapping, not a structural model. The gap can come from omitted variables (H1), measurement changes (H3), changes in the relationship itself, or perception factors (H2); the gap alone cannot distinguish among them.
 
-## 模型 2：经济指标加媒体测量（RQ5，RQ2 的关联证据）
+## Model 2: Economic indicators plus media measures (RQ5, associational evidence for RQ2)
 
-M2 在 M1 上加入唯一的主媒体变量：t−1 月全国新闻净语气。它回答的是"媒体是否带来增量预测力"，不是"媒体是否导致信心变化"。
+M2 adds the single primary media variable to M1: national news net tone in month t−1. It answers "does media add incremental predictive power", not "does media cause changes in sentiment".
 
 ```latex
 \mathrm{ICS}_t = \alpha + \beta' X^{rt}_t + \gamma\, \mathrm{Tone}_{t-1} + [\rho\, \mathrm{ICS}_{t-1}] + \varepsilon_t
 ```
 
-**时间对齐**：按 D2，第 t 月的预测时点是 t 月 1 日，只能用 t−1 月及以前的媒体指数。当月语气只用于单独标明的"同期关联"分析，不算预测。
+**Timing alignment**: under D2, the forecast origin for month t is the 1st of month t, so only media indices for month t−1 and earlier can be used. Current-month tone is used only in a separately labeled "contemporaneous association" analysis and does not count as forecasting.
 
-**样本外评估**
+**Out-of-sample evaluation**
 
-- 扩展窗口递归一步预测：第一个训练窗口 2010-01–2016-12（84 个月），评估期 2017-01–2026-10；另做 3 个月前的直接预测。
-- 所有模型都各报一个带同一 AR(1) 项和不带 AR 项的版本。
-- 指标：RMSE、MAE、相对 M1 的 RMSE 比；嵌套比较用 Clark–West 单侧检验（HAC），误差的自助法置信区间。
-- 分时期报告：2017–2019、2020–2022、2023–2024、2025–2026；疫情月份 2020-03–12 有无各报一次。
+- Expanding-window recursive one-step forecasts: the first training window is 2010-01–2016-12 (84 months), and the evaluation period is 2017-01–2026-10; also run 3-month-ahead direct forecasts.
+- Every model is reported in one version with the same AR(1) term and one without an AR term.
+- Metrics: RMSE, MAE, RMSE ratio relative to M1; nested comparisons use the one-sided Clark–West test (HAC), with bootstrap confidence intervals for the errors.
+- Reported by period: 2017–2019, 2020–2022, 2023–2024, 2025–2026; reported once with and once without the pandemic months 2020-03–12.
 
-**次要媒体假设**（每次单独加入，Benjamini–Hochberg 控制错误发现率，q = 0.10）：`net_fact`、`price_level_share_of_priced`、`household_share`、`topic_prices_rising`、`topic_layoffs_unemployment_up`、`blame_admin_share`；另报这六项第一主成分的版本。滞后 1–3 个月在每个训练窗口内用 BIC 选择。
+**Secondary media hypotheses** (each added separately, with Benjamini–Hochberg control of the false discovery rate, q = 0.10): `net_fact`, `price_level_share_of_priced`, `household_share`, `topic_prices_rising`, `topic_layoffs_unemployment_up`, `blame_admin_share`; also report a version with the first principal component of these six. Lags of 1–3 months are chosen by BIC within each training window.
 
-**测量噪声**：全国组每月只有约 26 条相关条目，月度语气有可观的抽样误差，这也是与旧金山联储指数只有 0.37 相关的候选原因之一。处理方式：
+**Measurement noise**: the national group has only about 26 relevant items per month, so monthly tone carries considerable sampling error, which is also one candidate reason for its correlation of only 0.37 with the San Francisco Fed index. Treatment:
 
-1. 用格内自助估计每月的抽样方差，报告信度比（信号方差 ÷ 观测方差），据此说明 γ 的衰减方向。
-2. 预先登记三个替代媒体测量：3 个月移动平均；旧金山联储指数（外部、高样本量）；全语料词典指数（R3.5 的副产品）。
+1. Use a within-cell bootstrap to estimate each month's sampling variance, report the reliability ratio (signal variance ÷ observed variance), and use it to state the direction of attenuation in γ.
+2. Pre-register three alternative media measures: a 3-month moving average; the San Francisco Fed index (external, large sample); a full-corpus dictionary index (a by-product of R3.5).
 
-**超额语气**：在每个训练窗口内把语气对实时基本面回归，取残差作为"超额语气"，再放入 M2。如果原始语气有预测力而超额语气没有，说明媒体只是基本面的另一种读数。
+**Excess tone**: within each training window, regress tone on real-time fundamentals and take the residual as "excess tone", then put it into M2. If raw tone has predictive power but excess tone does not, media is only another reading of the fundamentals.
 
-## 模型 3：加入家庭与政治控制（H1 与 H2 的联合检验）
+## Model 3: Adding household and political controls (joint test of H1 and H2)
 
-M3 = M2 + 家庭控制 + 政治控制。关键比较不是 M3 对 M1，而是 M3 对"M3 去掉媒体"（记作 M1c）：只有它能回答"控制真实压力后，媒体是否仍有增量"。
+M3 = M2 + household controls + political controls. The key comparison is not M3 against M1 but M3 against "M3 without media" (denoted M1c): only this comparison can answer "after controlling for real pressures, does media still add anything".
 
 ```latex
 \mathrm{ICS}_t = \alpha + \beta' X^{rt}_t + \delta' H^{rt}_t + \theta' P_t + \gamma\, \mathrm{Tone}_{t-1} + [\rho\, \mathrm{ICS}_{t-1}] + \varepsilon_t
 ```
 
-- H（家庭）：36 个月累计 PCE 涨幅、房贷利率、人均实际可支配收入增长、汽油价格，与 M1 的 H1 检验完全相同。
-- P（政治）：执政党虚拟变量、选举前 6 个月虚拟变量。党派分组指数只有 2017 年以后逐月可用，不进 M3，放在阶段 4–5。
+- H (household): 36-month cumulative PCE inflation, the mortgage rate, real per-capita disposable income growth, and gasoline prices, exactly the same as in the H1 test of M1.
+- P (political): governing-party dummy, dummy for the 6 months before an election. Partisan group indices are available monthly only from 2017 onward, so they do not enter M3 and are placed in stages 4–5.
 
-| 比较 | 检验什么 |
+| Comparison | What it tests |
 | --- | --- |
-| M1 对 M1c | 家庭与政治控制本身的预测力（H1、H3） |
-| M1 对 M2 | 媒体单独的增量（H2b 第一部分） |
-| M1c 对 M3 | 控制真实压力与政治因素后媒体的增量（H2b 主检验） |
+| M1 vs. M1c | Predictive power of the household and political controls themselves (H1, H3) |
+| M1 vs. M2 | Increment from media alone (first part of H2b) |
+| M1c vs. M3 | Increment from media after controlling for real pressures and political factors (main test of H2b) |
 
-**系数稳定性**：60 个月滚动窗口系数图；在已知日期 2020-03、2024-07、2025-01 做断点检验。
+**Coefficient stability**: 60-month rolling-window coefficient plots; break tests at the known dates 2020-03, 2024-07, and 2025-01.
 
-**自由度与共线性**：第一个训练窗口 84 个月，M3 约 10 个回归元，可以估计但不宽裕；报告方差膨胀因子。房贷利率在 2010–2019 年变动很窄，其系数以长窗口结果为主要参照。不做变量筛选或正则化，变量集在此定死。
+**Degrees of freedom and collinearity**: the first training window has 84 months and M3 has about 10 regressors, which can be estimated but leaves little room; variance inflation factors are reported. The mortgage rate moved within a narrow range in 2010–2019, so for its coefficient the long-window results are the main reference. No variable selection or regularization is done; the variable set is fixed here.
 
-**量级换算**：用 M3 的 γ 乘以语气相对 2019 年均值的偏离，得到"与媒体语气相关的缺口份额"，只作为关联上限报告，不称为媒体的因果效应。
+**Magnitude conversion**: multiply M3's γ by the deviation of tone from its 2019 mean to get "the share of the gap associated with media tone", reported only as an upper bound on the association and not called a causal effect of media.
 
-## 因果推理：观测分析、设计提案与反证清单（RQ2、RQ6）
+## Causal inference: observational analysis, design proposal, and falsification list (RQ2, RQ6)
 
-采用"观测分析 + 因果设计提案"（D5）。观测部分只能提供时间顺序和条件相关的证据，报告一律写成"与…相关"或"领先于"，不写"导致"。
+We adopt "observational analysis + causal design proposal" (D5). The observational part can provide only evidence on temporal ordering and conditional correlation; reports are always worded as "associated with" or "leads", never "causes".
 
-**观测分析（阶段 4）**
+**Observational analysis (stage 4)**
 
-1. 双向局部投影（0–6 个月）：用 t−1 月语气预测未来信心变化，控制实时基本面、滞后信心和滞后语气；反过来用 t−1 月信心预测未来语气。只有正向显著时与"媒体领先"相容；两向都显著说明存在反馈或受众需求；只有反向显著则不支持媒体解释。
-2. 共同冲击：加入数据意外（实际发布值减上一次发布值，因为专业一致预期没有免费来源）和 `events.csv` 中的停摆、关税、疫情、银行倒闭虚拟变量；并检验超额语气是否仍有预测力。
-3. 回忆路径：语气对"听到不利新闻"比例的预测、后者对信心的预测，以及主题对应：物价报道占比对应听到的不利物价新闻，裁员报道占比对应听到的不利就业新闻。这是本项目唯一的接触端证据，仍然是相关。
-4. 党派异质性（2017-02 起，约 115 个月）：纽约时报读者偏民主党，若语气通过接触起作用，其与民主党指数的关联应更强；只作相容证据。
+1. Two-way local projections (0–6 months): use month t−1 tone to predict future changes in sentiment, controlling for real-time fundamentals, lagged sentiment, and lagged tone; in reverse, use month t−1 sentiment to predict future tone. Only a significant forward direction alone is compatible with "media leads"; significance in both directions indicates feedback or audience demand; significance only in the reverse direction does not support the media explanation.
+2. Common shocks: add data surprises (the actual released value minus the previous released value, because there is no free source of professional consensus forecasts) and dummies for shutdowns, tariffs, the pandemic, and bank failures from `events.csv`; and test whether excess tone still has predictive power.
+3. Recall pathway: tone's prediction of the share who "heard unfavorable news", the latter's prediction of sentiment, and topic correspondence: the share of price coverage corresponds to unfavorable price news heard, and the share of layoff coverage corresponds to unfavorable employment news heard. This is the project's only evidence on the exposure side, and it is still correlational.
+4. Partisan heterogeneity (from 2017-02, about 115 months): New York Times readers lean Democratic, so if tone works through exposure, its association with the Democratic index should be stronger; this is compatible evidence only.
 
-**因果设计提案（写入报告附录，不实施）**
+**Causal design proposal (written into the report appendix, not implemented)**
 
-- 随机框架实验：同一组真实数据以五种真实表述呈现（平衡摘要、价格水平、通胀率、家庭视角、全国总量）；结果变量为密歇根五个问题和一年通胀预期；以 d = 0.2、α = 0.05、功效 0.8 计，两两比较每组约 394 人；预注册、知情同意、须经 IRB 审批。
-- 准实验思路：地方报纸关闭或 Sinclair 收购导致的地方报道变化；需要州级信心微观数据（公开表只有四大区），写明处理分配、事前趋势和溢出。
-- 从样本效应到全国指数（R4.6）：全国效应 ≈ 接触比例 × 单次效应 × 到受访时仍存留的比例；需要人口层面的接触估计、代表性抽样或 CPS 加权、以及效应可迁移假设。
+- Randomized framing experiment: the same set of real data presented in five truthful wordings (balanced summary, price level, inflation rate, household perspective, national aggregate); outcome variables are the five Michigan questions and one-year inflation expectations; with d = 0.2, α = 0.05, and power 0.8, pairwise comparisons need about 394 people per group; pre-registered, with informed consent, and subject to IRB approval.
+- Quasi-experimental ideas: changes in local coverage caused by local newspaper closures or Sinclair acquisitions; this needs state-level sentiment microdata (public tables have only the four census regions), and must spell out treatment assignment, pre-trends, and spillovers.
+- From sample effects to the national index (R4.6): national effect ≈ exposure share × per-exposure effect × share still retained at the time of the interview; this needs population-level exposure estimates, representative sampling or CPS weighting, and an assumption that effects transfer.
 
-**反证清单（RQ6，预先登记，分析后逐条判定）**
+**Falsification list (RQ6, pre-registered, adjudicated one by one after analysis)**
 
-| # | 反证 | 操作化判定 |
+| # | Falsification criterion | Operational decision rule |
 | --- | --- | --- |
-| 1 | 媒体语气可由基本面解释 | 语气对基本面回归后，2021 年以来残差均值与 0 无显著差异 |
-| 2 | 无样本外增量 | M1c 对 M3 的 Clark–West 检验在 5% 水平不显著 |
-| 3 | 信心领先媒体 | 局部投影中反向响应显著而正向不显著 |
-| 4 | 真实压力解释了缺口 | 加入家庭控制后，2021 年以来平均缺口缩小一半以上且落入 95% 预测区间 |
-| 5 | 缺口来自测量或党派 | 方式跳变或党派敏感性区间可覆盖 2025–2026 年平均缺口的一半以上 |
-| 6 | 回忆跟随经济而非媒体 | "听到不利新闻"对基本面的解释力强于对语气的解释力 |
-| 7 | 群体间无差异 | 媒体使用不同的群体（党派、年龄）缺口形态相同 |
-| 8 | 测量本身不稳 | 名字或来源替换的超额翻转率显著大于 0，或三种语气测量给出相反结论 |
+| 1 | Media tone can be explained by fundamentals | After regressing tone on fundamentals, the mean residual since 2021 is not significantly different from 0 |
+| 2 | No out-of-sample increment | The Clark–West test of M1c vs. M3 is not significant at the 5% level |
+| 3 | Sentiment leads media | In the local projections, the reverse response is significant and the forward response is not |
+| 4 | Real pressures explain the gap | After adding household controls, the mean gap since 2021 shrinks by more than half and falls within the 95% prediction interval |
+| 5 | The gap comes from measurement or partisanship | The mode jump or the partisan sensitivity range can cover more than half of the mean 2025–2026 gap |
+| 6 | Recall follows the economy rather than media | Fundamentals explain "heard unfavorable news" better than tone does |
+| 7 | No differences across groups | Groups with different media use (partisanship, age) have the same gap pattern |
+| 8 | The measurement itself is unstable | The excess flip rate under name or source swaps is significantly greater than 0, or the three tone measures give opposite conclusions |
 
-第 4、5 条的"一半"是事先定的报告阈值，实际数字一律原样报告。
+The "half" in items 4 and 5 is a reporting threshold fixed in advance; the actual numbers are always reported as they are.
 
-## 稳健性检验
+## Robustness checks
 
-每一项都对 M1 缺口和 M2、M3 的 γ 与 Clark–West 统计量重算，全部结果汇入一张设定曲线图；跑过的每个设定（包括不利结果）都登记在 `results/spec_registry.csv`。
+Each item recomputes the M1 gap and the γ and Clark–West statistics of M2 and M3, and all results are collected into one specification curve plot; every specification run (including unfavorable results) is registered in `results/spec_registry.csv`.
 
-| 维度 | 主设定 | 替代设定 |
+| Dimension | Main specification | Alternative specifications |
 | --- | --- | --- |
-| 因变量 | ICS | ICC、ICE |
-| 信息截止日 | t 月 1 日（D2） | 密歇根初值发布日（`econ_monthly_realtime_prelim_cutoff.csv`） |
-| 缺口估计窗口 | 2010–2019 固定 | 2000-09–2019；1978–2019；扩展窗口 |
-| GDP | 环比折年率 | 同比 |
-| 形式 | 水平 | 一阶差分（先报 ADF 与 KPSS） |
-| 疫情 | 包含 | 剔除 2020-03–12 |
-| 调查方式 | 不处理 | 网络访谈虚拟变量；剔除 2024-04–06 |
-| 媒体测量 | 全国 `net_tone`，t−1 | 3 个月平均；`net_fact`；`share_negative`；旧金山联储指数；全语料词典指数；EPU |
-| 媒体来源 | NYT + Guardian | 只用 NYT（Guardian 非美国本土）；剔除 2026-01 与 2026-10 两个不完整月 |
-| 滞后 | 1 个月 | BIC 在 1–3 个月中选择 |
-| 推断 | HAC 12 阶 | HAC 6 阶与 18 阶；移动块自助 |
-| 季节性 | 视估计期检验而定 | 强制加入月度虚拟变量 |
+| Dependent variable | ICS | ICC, ICE |
+| Information cutoff | 1st of month t (D2) | Michigan preliminary release date (`econ_monthly_realtime_prelim_cutoff.csv`) |
+| Gap estimation window | Fixed 2010–2019 | 2000-09–2019; 1978–2019; expanding window |
+| GDP | Annualized quarter-over-quarter | Year-over-year |
+| Form | Levels | First differences (ADF and KPSS reported first) |
+| Pandemic | Included | Exclude 2020-03–12 |
+| Survey mode | No treatment | Web-interview dummy; exclude 2024-04–06 |
+| Media measure | National `net_tone`, t−1 | 3-month average; `net_fact`; `share_negative`; San Francisco Fed index; full-corpus dictionary index; EPU |
+| Media sources | NYT + Guardian | NYT only (Guardian is not U.S.-based); exclude the two incomplete months 2026-01 and 2026-10 |
+| Lag | 1 month | BIC selection among 1–3 months |
+| Inference | HAC 12 lags | HAC 6 and 18 lags; moving-block bootstrap |
+| Seasonality | Depends on the estimation-period test | Monthly dummies forced in |
 
-社交平台与地方新闻不进入上表，单独做近期对比：YouTube（2023-01 起）与全国新闻在重叠月份的语气、框架差异及其与缺口的描述性关联；Reddit 用季度数据（2015 起）；地方新闻与全国新闻在 2025-03–2026-09 的对比。结论均限定在各自的时段和样本上。
+Social platforms and local news do not enter the table above and get a separate recent comparison: differences in tone and framing between YouTube (from 2023-01) and national news in overlapping months, and their descriptive association with the gap; Reddit uses quarterly data (from 2015); local versus national news in 2025-03–2026-09. All conclusions are restricted to the respective periods and samples.
 
-## 测量验证与偏差基准（RQ1；含 R3.5、R3.7、事实校准）
+## Measurement validation and bias benchmarks (RQ1; including R3.5, R3.7, factual calibration)
 
-R3.5 和 R3.7 都放在阶段 2，必须在模型 2、3 之前完成，因为它们决定媒体指标能否作为可信的自变量。R3.7 需要你跑一次 Codex，可以与阶段 1 并行。
+R3.5 and R3.7 are both placed in stage 2 and must be finished before models 2 and 3, because they determine whether the media measures can serve as credible explanatory variables. R3.7 needs you to run Codex once and can run in parallel with stage 1.
 
-**R3.5 词典法与传统分类器**
+**R3.5 Dictionary methods and traditional classifiers**
 
-- 条目级：在同一组 260 条人工测试集上比较 LLM、词典法（语气）、关键词规则（主题与价格框架）、TF-IDF 加逻辑回归。词典的阈值只在开发集上定。分类器用 LLM 标签训练时剔除与金标准重叠的条目。报告每类精确率、召回率、F1、宏平均 F1、与金标准的 κ，按来源分组，附自助法置信区间。relevance = unsure 的 32 条沿用已定口径。
-- 指数级：用分类器做相关性过滤、词典做语气，对 `items.parquet` 中全部关键词命中的 NYT 与 Guardian 条目构造月度指数，与 LLM 指数和旧金山联储指数比较。这里的取舍是：LLM 单条准确但每月只有约 26 条，词典单条粗糙但每月有数百条。
+- Item level: on the same 260-item human test set, compare the LLM, dictionary methods (tone), keyword rules (topics and price framing), and TF-IDF plus logistic regression. Dictionary thresholds are set only on the development set. When the classifier is trained on LLM labels, items overlapping the gold standard are removed. Report per-class precision, recall, and F1, macro-average F1, and κ with the gold standard, grouped by source, with bootstrap confidence intervals. The 32 items with relevance = unsure follow the already-decided convention.
+- Index level: use the classifier for relevance filtering and the dictionary for tone to build a monthly index from all keyword-matched NYT and Guardian items in `items.parquet`, and compare it with the LLM index and the San Francisco Fed index. The trade-off here: the LLM is accurate per item but has only about 26 items per month, while the dictionary is crude per item but has several hundred items per month.
 
-**R3.7 名字与来源标签替换测试**
+**R3.7 Name and source-label swap test**
 
-- 样本：从测试集和正式编码样本中取约 120 条提到总统或政党的文本，按被提及对象分层。
-- 五个版本：原文两次（第一次即正式编码已有的标签，第二次新跑）；人名与党派互换（Trump 与 Biden、Obama 与 Trump、Republicans 与 Democrats，代词同步）；文前加"Source: Fox News"；文前加"Source: MSNBC"。每个版本放在不同批次、编号打乱、隔离上下文，提示词与模型和正式编码完全相同。
-- 指标：超额翻转率 = 替换版与原文不同的比例 − 原文两次之间不同的比例，按维度报告并附自助法区间；方向性检验看语气得分在 Trump 换成 Biden 与反向替换时是否按同一方向偏移。
-- 若语气或归因的超额翻转显著，就作为 AI 测量偏差写入报告，并计入反证清单第 8 条。
+- Sample: take about 120 texts mentioning a president or a party from the test set and the main coding sample, stratified by the entity mentioned.
+- Five versions: the original text twice (the first is the label already in the main coding, the second a new run); swapped names and parties (Trump and Biden, Obama and Trump, Republicans and Democrats, with pronouns changed accordingly); "Source: Fox News" prepended to the text; "Source: MSNBC" prepended to the text. Each version goes in a different batch, with shuffled IDs and isolated context, and the prompt and model are exactly the same as in the main coding.
+- Metrics: excess flip rate = share of swapped versions that differ from the original − share differing between the two original runs, reported by dimension with bootstrap intervals; the directional test checks whether tone scores shift in the same direction when Trump is replaced with Biden and under the reverse swap.
+- If the excess flip in tone or attribution is significant, it is written into the report as an AI measurement bias and counted toward item 8 of the falsification list.
 
-**事实校准（第四个测量维度）**：用规则从 `claim_text` 中抽取指标、数值和观测期，与发表日当天有效的 ALFRED 版本比对。比率类容差 ±0.1 个百分点，分为正确、四舍五入内正确、错误、无法核实。覆盖哪些指标取决于 D-C。你从抽取结果中抽查 30 条确认解析正确。概念错误率（κ 0.47）只作描述。
+**Factual calibration (the fourth measurement dimension)**: use rules to extract the indicator, value, and observation period from `claim_text`, and compare them with the ALFRED vintage in effect on the publication date. Rates have a tolerance of ±0.1 percentage points; outcomes are classified as correct, correct within rounding, incorrect, or unverifiable. Which indicators are covered depends on D-C. You spot-check 30 extraction results to confirm the parsing is correct. The concept error rate (κ 0.47) is descriptive only.
 
-**各维度的偏差基准（R3.3）**
+**Bias benchmark for each dimension (R3.3)**
 
-| 维度 | 基准 | 检验 |
+| Dimension | Benchmark | Test |
 | --- | --- | --- |
-| 语气（负面偏差） | 同等幅度的好消息与坏消息 | 语气对失业率、通胀、GDP 变化的正负部分分别回归，检验系数绝对值是否相等 |
-| 选择与显著性 | 实际经济变化的大小 | 物价上涨主题对通胀上升的弹性与通胀回落主题对通胀下降的弹性是否对称；裁员与招聘主题同理 |
-| 框架 | 通胀路径 | 通胀回落后，价格水平表述占比是否仍然偏高；家庭视角占比的变化 |
-| 事实校准 | 发表时已公开的官方版本 | 错误率按时期和来源 |
-| 政治归因 | 不同政府时期的相似经济状况 | 归咸行政当局占比对基本面与四个政府虚拟变量回归；批评本身不等于偏差 |
-| 跨来源 | 同一时期的不同来源 | 全国、地方、YouTube、Reddit 在重叠时段的差异，只说明供给差异，不称偏差 |
+| Tone (negativity bias) | Good and bad news of equal size | Regress tone separately on the positive and negative parts of changes in unemployment, inflation, and GDP, and test whether the coefficients are equal in absolute value |
+| Selection and salience | The size of actual economic changes | Whether the elasticity of the rising-prices topic to rising inflation is symmetric with the elasticity of the easing-inflation topic to falling inflation; likewise for layoff and hiring topics |
+| Framing | The inflation path | After inflation eases, whether the share of price-level wording stays high; changes in the share of household perspective |
+| Factual calibration | The official vintage public at the time of publication | Error rate by period and source |
+| Political attribution | Similar economic conditions under different administrations | Regress the share blaming the administration on fundamentals and four administration dummies; criticism by itself is not bias |
+| Cross-source | Different sources in the same period | Differences among national, local, YouTube, and Reddit in overlapping periods; these show only differences in supply and are not called bias |
 
-另外估计月度指数的信度，并解释与旧金山联储指数 0.37 的相关：抽样噪声、标题加摘要与全文的差异、主题范围不同。三个原因各做一个可检验的对照：3 个月平均、Guardian 全文子样本、只用宏观主题条目。
+In addition, estimate the reliability of the monthly index and explain the 0.37 correlation with the San Francisco Fed index: sampling noise, the difference between headline-plus-abstract and full text, and different topic scope. Each of the three reasons gets one testable comparison: a 3-month average, the Guardian full-text subsample, and items on macro topics only.
 
-## 执行顺序与结果固定
+## Execution order and locking results
 
-共六个阶段，阶段 2 的 Codex 运行与阶段 1 并行；每个阶段结束时固定结果，再开始下一阶段。代码放 `src/analysis/`，结果放 `results/stage<N>_*/`，全部纳入 `run_all.sh` 一键重建。
+There are six stages in total, with the stage 2 Codex run in parallel with stage 1; results are locked at the end of each stage before the next one begins. Code goes in `src/analysis/`, results in `results/stage<N>_*/`, and everything is included in `run_all.sh` for one-command rebuilding.
 
-0. **定稿与预先登记**：你确认 D-A 至 D-F 后，把本设计写入 `DECISIONS.md`。此后新增或修改设定都记录为偏离。
-1. **经济基线（RQ3、H1、H3）**：扩展 `econ_realtime.py`（新增 36 个月累计涨幅、D-D 补齐、两个长窗口）；估计 M1、缺口与预测区间、解释比例与贡献分解、H1 与 H3 检验。
-2. **测量验证与偏差基准（RQ1）**：生成 R3.7 运行包交给你；R3.5 条目级与指数级对比；事实校准；五维基准检验；指数信度；收到 Codex 输出后计算 R3.7 指标。
-3. **预测比较（RQ5）**：M1、M1c、M2、M3 递归预测、Clark–West、次要假设的错误发现率校正、系数稳定性、设定曲线。
-4. **时间顺序与因果（RQ2、RQ6）**：双向局部投影、共同冲击、回忆路径、党派异质性；反证清单逐条判定；因果设计提案文稿。
-5. **机制、异质性与方法（RQ4、R5.2–R5.4）**：机制三分类表；收入、年龄、地区、党派分组缺口；调查方式可比性；与 2010、2014、2018、2022 年中期选举前同期比较；社交与地方的近期对比。
-6. **结果冻结**：每个阶段一份 `FINDINGS.md`，发现与假设分开写，每条结论注明表图编号；连同 `spec_registry.csv` 和脚本 SHA256 一起固定。之后再做仪表盘和报告。
+0. **Finalization and pre-registration**: after you confirm D-A through D-F, this design is written into `DECISIONS.md`. From then on, any new or modified specification is recorded as a deviation.
+1. **Economic baseline (RQ3, H1, H3)**: extend `econ_realtime.py` (adding 36-month cumulative inflation, the D-D backfill, and the two long windows); estimate M1, the gap and prediction intervals, explained shares and contribution decomposition, and the H1 and H3 tests.
+2. **Measurement validation and bias benchmarks (RQ1)**: generate the R3.7 run package and hand it to you; R3.5 item-level and index-level comparisons; factual calibration; five-dimension benchmark tests; index reliability; compute the R3.7 metrics once the Codex output is received.
+3. **Forecast comparison (RQ5)**: recursive forecasts for M1, M1c, M2, and M3, Clark–West, false-discovery-rate correction for the secondary hypotheses, coefficient stability, specification curve.
+4. **Temporal ordering and causality (RQ2, RQ6)**: two-way local projections, common shocks, recall pathway, partisan heterogeneity; adjudicating the falsification list item by item; drafting the causal design proposal.
+5. **Mechanisms, heterogeneity, and methods (RQ4, R5.2–R5.4)**: the three-way mechanism classification table; gaps by income, age, region, and partisan group; survey-mode comparability; comparison with the same pre-election period of the 2010, 2014, 2018, and 2022 midterms; recent comparison of social and local media.
+6. **Freezing results**: one `FINDINGS.md` per stage, with findings and hypotheses written separately and each conclusion citing its table or figure number; locked together with `spec_registry.csv` and the script SHA256 hashes. The dashboard and report are done after that.
 
-**数据截止日**：本轮研究以 2026-10-16 为截止（密歇根 10 月为初值）。报告前可加入 10 月终值（10-23）和三季度 GDP 初值；11 月初值在选举日（11-03）之后发布，写入后续更新计划。
+**Data cutoff**: this round of research uses 2026-10-16 as the cutoff (the Michigan October value is preliminary). Before the report, the October final value (10-23) and the preliminary Q3 GDP estimate may be added; the November preliminary value is released after Election Day (11-03) and goes into the plan for later updates.

@@ -1,207 +1,207 @@
-# 经济叙事人工标注手册 v1（Human Labeling Guide）
+# Economic Narratives Human Annotation Codebook v1 (Human Labeling Guide)
 
-适用：annotation_workbook_A.xlsx / annotation_workbook_B.xlsx。两名标注员各用一份，互不交流、互不查看对方表格。本手册即提交包中的"人工标注指南"（R3.1、R6.2）。
+Applies to: annotation_workbook_A.xlsx / annotation_workbook_B.xlsx. Each of the two annotators uses one workbook; they do not communicate with each other and do not look at each other's workbook. This codebook is the "human labeling guide" in the submission package (R3.1, R6.2).
 
-> 状态：v0.9 草案。两人完成 30 条校准（calibration 表）并讨论后，只允许澄清措辞、补充边界例子，然后定为 v1；此后不再修改定义。修改记录写在本文件末尾。
-
----
-
-## 0. 工作流程
-
-1. 先各自独立标完 `calibration` 表的 30 条（C001–C030），记录用时。
-2. 两人一起对照差异，讨论分歧，修改本手册中含糊的地方，形成 v1。校准条目不计入 300 条正式样本。
-3. 各自独立标完 `main` 表的 360 条（A001–A360）。中途不讨论具体条目；有疑问写在 `notes` 列，并把 `unsure` 用在允许的地方。
-4. 每次开始和结束时，在 `time_log` 表记录时间和完成到的编号。
-5. 两份表都交回后，由分析者计算一致性（Cohen's κ、Krippendorff's α、原始一致率、混淆矩阵）；不一致的条目再由两人讨论裁决，或请第三人裁决，裁决理由记录在案。裁决结果为金标准。
-
-表格里看不到来源名称、网址和 AI 标签，这是有意的（盲标）。不要上网搜索原文或来源。
-
-预计用时：相关条目每条约 1–1.5 分钟；判为不相关的条目只填第一列，约 15 秒。
+> Status: v0.9 draft. After the two annotators have completed the 30 calibration items (calibration sheet) and discussed them, only clarifications of wording and additional boundary examples are allowed; the codebook then becomes v1, and the definitions are not changed after that. Changes are recorded at the end of this file.
 
 ---
 
-## 1. 标注单位
+## 0. Workflow
 
-每一行是一个单位，只根据 `text` 列里给出的文字判断：
+1. First, each annotator independently labels the 30 items in the `calibration` sheet (C001–C030) and records the time taken.
+2. The two annotators then go through the differences together, discuss disagreements, and revise unclear parts of this codebook, producing v1. Calibration items do not count toward the 300 items of the formal sample.
+3. Each annotator independently labels the 360 items in the `main` sheet (A001–A360). Do not discuss specific items along the way; write any questions in the `notes` column, and use `unsure` where it is allowed.
+4. At the start and end of each session, record the time and the last item ID completed in the `time_log` sheet.
+5. After both workbooks are returned, the analyst computes agreement (Cohen's κ, Krippendorff's α, raw agreement rate, confusion matrices); items with disagreements are then adjudicated, either through discussion between the two annotators or by a third person, and the reasons for each adjudication are recorded. The adjudicated results are the gold standard.
 
-| unit_type | 内容 |
-|---|---|
-| headline + abstract + lead paragraph | 新闻标题 + 摘要 + 首段 |
-| headline + abstract | 新闻标题 + 摘要（2025 年起该来源不再提供首段） |
-| headline + standfirst + first 100 body words | 新闻标题 + 导语 + 正文前 100 词 |
-| headline only | 只有新闻标题 |
-| forum post (title + body, first 1,200 chars) | 论坛帖子标题 + 正文前 1,200 字符 |
-| video comment (top-level) | 视频下的一条评论 |
+The sheets do not show the source name, the URL, or the AI labels; this is intentional (blind labeling). Do not search online for the original text or the source.
 
-`context` 列只在视频评论时出现（视频标题），帮助理解评论在说什么，但**标注对象是评论本身**，不是视频标题。`[...]` 表示后文被截断，不要猜测截断部分的内容。
+Estimated time: about 1–1.5 minutes per relevant item; for an item judged not relevant, fill in only the first column, about 15 seconds.
 
 ---
 
-## 2. 第一步：是否与美国经济相关（`relevant`）
+## 1. Annotation unit
 
-| 值 | 规则 |
+Each row is one unit. Judge it only from the text given in the `text` column:
+
+| unit_type | Content |
 |---|---|
-| `yes` | 文字传达了关于**美国**经济状况或经济政策的信息、观点或亲身经历：物价与通胀、就业与劳动力市场、增长与衰退、利率与借贷成本、住房成本与房租、关税与贸易、消费者信心，或对这些状况的评价。 |
-| `no` | 不满足上面条件。 |
-| `unsure` | 读完仍无法判断，并在 `notes` 写原因。尽量少用。 |
+| headline + abstract + lead paragraph | News headline + abstract + lead paragraph |
+| headline + abstract | News headline + abstract (from 2025 on, this source no longer provides the lead paragraph) |
+| headline + standfirst + first 100 body words | News headline + standfirst + first 100 words of the body |
+| headline only | News headline only |
+| forum post (title + body, first 1,200 chars) | Forum post title + first 1,200 characters of the body |
+| video comment (top-level) | A single comment under a video |
 
-**边界规则**
-- 个人理财问题（预算、信用分、报税、该不该买某个基金）**只有**在提到经济状况本身时才算 `yes`，例如"现在房租涨得太离谱""这个就业市场根本找不到工作"。只是问个人规划、没有涉及经济状况的，算 `no`。
-- 纯股市行情（某只股票涨跌、大盘点位）算 `no`；如果把股市和经济前景、衰退、利率等联系起来，算 `yes`。
-- 主要讲其他国家经济的算 `no`；讲外国政策对美国经济的影响（如对美关税）算 `yes`。
-- 关键词出现在无关含义中（如"rent a car"、人名、体育），算 `no`。
-- 讣告、广告、赞助内容、活动预告，算 `no`。
-
-**`relevant = no` 时，本行其余各列全部留空。**`unsure` 时照常填写其余各列。
+The `context` column appears only for video comments (it holds the video title). It helps you understand what the comment is about, but **the object of annotation is the comment itself**, not the video title. `[...]` means the rest of the text was truncated; do not guess what the truncated part says.
 
 ---
 
-## 3. 维度 1：语气（Tone）
+## 2. Step 1: Is it related to the US economy (`relevant`)
 
-### 3.1 `tone_overall`：文字本身的整体语气
-| 值 | 规则 |
+| Value | Rule |
 |---|---|
-| `negative` | 措辞和表述整体让人感到经济状况坏、令人担忧、批评性 |
-| `positive` | 整体让人感到状况好、乐观、肯定 |
-| `neutral` | 平铺直叙，没有明显倾向 |
-| `mixed` | 正负两面都有，且分量相当 |
+| `yes` | The text conveys information, opinions, or first-hand experience about **US** economic conditions or economic policy: prices and inflation, employment and the labor market, growth and recession, interest rates and borrowing costs, housing costs and rent, tariffs and trade, consumer sentiment, or evaluations of these conditions. |
+| `no` | Does not meet the condition above. |
+| `unsure` | You still cannot decide after reading; write the reason in `notes`. Use as rarely as possible. |
 
-### 3.2 `fact_direction`：所报道的**事实本身**对美国家庭是好消息还是坏消息
-| 值 | 规则 |
-|---|---|
-| `bad` | 例：失业率上升、物价上涨、房贷利率上升、裁员 |
-| `good` | 例：通胀回落、工资上涨快于物价、招聘增加 |
-| `neutral` | 事实对家庭没有明确好坏，例：美联储维持利率不变且无评价 |
-| `mixed` | 同时报道好坏两类事实 |
-| `no_fact` | 只有观点、情绪或问题，没有陈述经济事实 |
+**Boundary rules**
+- Personal finance questions (budgeting, credit scores, filing taxes, whether to buy a particular fund) count as `yes` **only** when they mention economic conditions themselves, for example "rent has gotten absurdly high these days" or "you just can't find a job in this job market". Questions that only ask about personal planning and do not touch on economic conditions count as `no`.
+- Pure stock market moves (a particular stock rising or falling, index levels) count as `no`; if the text links the stock market to the economic outlook, recession, interest rates, etc., it counts as `yes`.
+- Text mainly about another country's economy counts as `no`; text about the effect of foreign policy on the US economy (e.g., tariffs on the US) counts as `yes`.
+- Keywords that appear with an unrelated meaning (e.g., "rent a car", personal names, sports) count as `no`.
+- Obituaries, advertisements, sponsored content, and event announcements count as `no`.
 
-### 3.3 `emotional_intensity`：情绪化措辞的强度
-| 值 | 规则 |
-|---|---|
-| `0` | 没有情绪化措辞 |
-| `1` | 轻度，例："worrying""tough""good news" |
-| `2` | 强烈，例："skyrocketing""collapse""nightmare""insane"、全大写、多个感叹号 |
-
-**区分事实与情绪（必须分开判断）**：
-- "Unemployment rose to 4.3% in July." → `fact_direction = bad`，`emotional_intensity = 0`，`tone_overall = negative` 或 `neutral`（看措辞，单纯陈述数据通常是 `neutral`）。
-- "Prices are absolutely insane, I can't afford anything anymore!!!" → `fact_direction = bad`，`emotional_intensity = 2`，`tone_overall = negative`。
-- "Inflation cooled again, but economists warn the fight isn't over." → `fact_direction = good`，`tone_overall = mixed`，`emotional_intensity = 0` 或 `1`。
+**When `relevant = no`, leave all other columns in the row blank.** When `unsure`, fill in the other columns as usual.
 
 ---
 
-## 4. 维度 2：选择与显著性（Topics，可多选）
+## 3. Dimension 1: Tone
 
-在下列 13 列中，文字**明确涉及**的主题填 `1`，否则留空。至少选一个；都不符合就在 `T13_other` 填 `1`。
-
-| 列 | 主题 |
+### 3.1 `tone_overall`: overall tone of the text itself
+| Value | Rule |
 |---|---|
-| T01_layoffs_unemployment_up | 裁员、失业上升 |
-| T02_hiring_jobs_growth | 招聘、就业增长 |
-| T03_prices_rising | 物价上涨、生活成本高 |
-| T04_inflation_easing | 通胀回落、涨价放缓 |
-| T05_economic_growth | 经济增长、GDP |
-| T06_recession_risk | 衰退、经济放缓风险 |
-| T07_interest_rates_borrowing | 利率、借贷成本、美联储利率决策 |
-| T08_housing_costs | 房价、房租、住房可负担性 |
-| T09_gas_prices | 汽油价格 |
-| T10_food_prices | 食品、杂货价格 |
-| T11_tariffs_trade | 关税、贸易政策 |
-| T12_stock_market | 股市 |
-| T13_other | 其他经济主题 |
+| `negative` | Overall, the wording and presentation make economic conditions seem bad or worrying, or are critical |
+| `positive` | Overall, makes conditions seem good; optimistic, approving |
+| `neutral` | Plain, matter-of-fact statement with no clear leaning |
+| `mixed` | Both positive and negative sides are present, with comparable weight |
 
-只是顺带出现一个词不算"涉及"，要是文字确实在讨论这个主题。
+### 3.2 `fact_direction`: whether the **reported facts themselves** are good or bad news for US households
+| Value | Rule |
+|---|---|
+| `bad` | E.g., the unemployment rate rising, prices rising, mortgage rates rising, layoffs |
+| `good` | E.g., inflation easing, wages rising faster than prices, more hiring |
+| `neutral` | The facts are not clearly good or bad for households, e.g., the Fed holds rates unchanged, with no evaluation |
+| `mixed` | Both good and bad facts are reported |
+| `no_fact` | Only opinions, emotions, or questions; no economic facts are stated |
+
+### 3.3 `emotional_intensity`: strength of emotional wording
+| Value | Rule |
+|---|---|
+| `0` | No emotional wording |
+| `1` | Mild, e.g., "worrying", "tough", "good news" |
+| `2` | Strong, e.g., "skyrocketing", "collapse", "nightmare", "insane", all caps, multiple exclamation marks |
+
+**Separate facts from emotion (they must be judged separately)**:
+- "Unemployment rose to 4.3% in July." → `fact_direction = bad`, `emotional_intensity = 0`, `tone_overall = negative` or `neutral` (depending on the wording; a plain statement of data is usually `neutral`).
+- "Prices are absolutely insane, I can't afford anything anymore!!!" → `fact_direction = bad`, `emotional_intensity = 2`, `tone_overall = negative`.
+- "Inflation cooled again, but economists warn the fight isn't over." → `fact_direction = good`, `tone_overall = mixed`, `emotional_intensity = 0` or `1`.
 
 ---
 
-## 5. 维度 3：框架（Framing，三个独立的轴）
+## 4. Dimension 2: Selection and salience (Topics, multiple selection allowed)
 
-### 5.1 `price_frame`：讲价格时用哪种表述
-| 值 | 规则 |
+Among the 13 columns below, enter `1` for each topic the text **explicitly addresses**, and leave the others blank. Select at least one; if none fits, enter `1` in `T13_other`.
+
+| Column | Topic |
 |---|---|
-| `level` | 价格水平："比以前贵多少""groceries cost twice what they did" |
-| `rate` | 通胀率或涨价速度："inflation slowed to 3%""prices rising faster" |
-| `both` | 两种都有 |
-| `none` | 没有讲价格 |
+| T01_layoffs_unemployment_up | Layoffs, rising unemployment |
+| T02_hiring_jobs_growth | Hiring, job growth |
+| T03_prices_rising | Rising prices, high cost of living |
+| T04_inflation_easing | Inflation easing, price increases slowing |
+| T05_economic_growth | Economic growth, GDP |
+| T06_recession_risk | Recession, risk of an economic slowdown |
+| T07_interest_rates_borrowing | Interest rates, borrowing costs, Fed rate decisions |
+| T08_housing_costs | Home prices, rent, housing affordability |
+| T09_gas_prices | Gasoline prices |
+| T10_food_prices | Food and grocery prices |
+| T11_tariffs_trade | Tariffs, trade policy |
+| T12_stock_market | Stock market |
+| T13_other | Other economic topics |
 
-注意："inflation is down" 是 `rate`；"prices are still way higher than 2020" 是 `level`。通胀率下降不等于价格下降。
-
-### 5.2 `perspective`：视角
-| 值 | 规则 |
-|---|---|
-| `national` | 全国总量、宏观数据、市场或政策层面 |
-| `household` | 家庭或个人的亲身经历、具体人的处境 |
-| `both` | 两者都有 |
-| `none` | 都不是 |
-
-### 5.3 `time_frame`：时间
-| 值 | 规则 |
-|---|---|
-| `current` | 当前或刚发生的状况 |
-| `forecast` | 预测、预期、对未来的担忧或判断 |
-| `both` | 两者都有 |
-| `none` | 都不是（例如纯历史回顾） |
+A word that only appears in passing does not count as "addressing" a topic; the text must actually be discussing that topic.
 
 ---
 
-## 6. 维度 4：事实校准（Factual calibration）
+## 5. Dimension 3: Framing (three independent axes)
 
-人工只做两件事；与当时官方数据的逐项核对由分析者用发布时的数据版本（ALFRED）完成。
-
-### 6.1 `numeric_claim` 与 `claim_text`
-- `numeric_claim = yes`：文字中有关于美国经济指标的数字陈述（失业率、通胀率、GDP 增速、利率、房价、油价、新增就业等）。
-- 是 `yes` 时，在 `claim_text` 逐字摘抄每一条数字陈述，用 `;` 分隔。例：`unemployment rose to 4.3% in July; 114,000 jobs added`。
-- 个人收入、个人账单的数字（"I make $50k"）不算，填 `no`。
-
-### 6.2 `definition_error`：概念或定义错误
-| 值 | 规则 |
+### 5.1 `price_frame`: which kind of description is used when the text talks about prices
+| Value | Rule |
 |---|---|
-| `yes` | 有明显概念错误，例：把"通胀下降"说成"价格下降"；混淆同比和环比；把其他失业指标当成 U-3；把初值当作确定值且与文意矛盾 |
-| `no` | 提到经济统计概念，但没有发现错误 |
-| `not_applicable` | 没有提到任何经济统计概念 |
+| `level` | Price level: "how much more expensive than before", "groceries cost twice what they did" |
+| `rate` | Inflation rate or speed of price increases: "inflation slowed to 3%", "prices rising faster" |
+| `both` | Both are present |
+| `none` | Does not talk about prices |
 
-不确定时填 `no`，并在 `notes` 说明。
+Note: "inflation is down" is `rate`; "prices are still way higher than 2020" is `level`. A falling inflation rate does not mean falling prices.
+
+### 5.2 `perspective`: perspective
+| Value | Rule |
+|---|---|
+| `national` | National aggregates, macro data, the market or policy level |
+| `household` | First-hand experience of households or individuals, the situation of specific people |
+| `both` | Both are present |
+| `none` | Neither |
+
+### 5.3 `time_frame`: time
+| Value | Rule |
+|---|---|
+| `current` | Current or just-occurred conditions |
+| `forecast` | Forecasts, expectations, worries or judgments about the future |
+| `both` | Both are present |
+| `none` | Neither (e.g., a purely historical review) |
 
 ---
 
-## 7. 维度 5：政治归因（Political attribution）
+## 6. Dimension 4: Factual calibration
 
-是否把经济状况（好或坏）归因于某个行动者。最多记录两个：`actor_1` / `direction_1`，`actor_2` / `direction_2`。没有归因时 `actor_1 = none`，其余留空。
+Annotators do only two things here; the item-by-item check against the official data of the time is done by the analyst, using the data vintage available at release (ALFRED).
 
-| actor 值 | 含义 |
+### 6.1 `numeric_claim` and `claim_text`
+- `numeric_claim = yes`: the text contains a numeric statement about a US economic indicator (unemployment rate, inflation rate, GDP growth, interest rates, home prices, gas prices, jobs added, etc.).
+- When it is `yes`, copy every numeric statement verbatim into `claim_text`, separated by `;`. Example: `unemployment rose to 4.3% in July; 114,000 jobs added`.
+- Numbers about personal income or personal bills ("I make $50k") do not count; enter `no`.
+
+### 6.2 `definition_error`: conceptual or definitional error
+| Value | Rule |
 |---|---|
-| `president_admin` | 总统或行政当局（含点名的总统、白宫、内阁） |
-| `congress` | 国会 |
-| `fed` | 美联储 |
-| `democrats` | 民主党或民主党人 |
-| `republicans` | 共和党或共和党人 |
-| `business` | 企业、公司、行业 |
-| `foreign_trade` | 外国政府或贸易伙伴、外国政策 |
-| `other` | 其他（工会、州政府等，在 notes 写明） |
-| `none` | 没有归因 |
+| `yes` | There is a clear conceptual error, e.g., describing "inflation falling" as "prices falling"; confusing year-over-year and month-over-month changes; treating another unemployment measure as U-3; treating a preliminary figure as final in a way that contradicts the meaning of the text |
+| `no` | Economic statistical concepts are mentioned, but no error was found |
+| `not_applicable` | No economic statistical concept is mentioned |
 
-| direction 值 | 含义 |
-|---|---|
-| `credit` | 归功：把好的经济结果归于该行动者 |
-| `blame` | 归咎：把坏的经济结果归于该行动者 |
-| `neutral_mention` | 提到该行动者与经济状况有关，但没有归功或归咎 |
-
-**批评不等于偏差。**这里只记录文字说了什么；是否构成偏差，由分析阶段与基准比较后判断，标注时不要考虑来源立场。
-
-例："Trump's tariffs are driving up grocery prices" → `actor_1 = president_admin`，`direction_1 = blame`。
-例："The Fed held rates steady on Wednesday." → `actor_1 = fed`，`direction_1 = neutral_mention`。
+When unsure, enter `no` and explain in `notes`.
 
 ---
 
-## 8. 其他列
+## 7. Dimension 5: Political attribution
 
-- `notes`：疑问、`unsure` 的原因、`other` 的说明。不要写对来源的猜测。
-- 不要修改 `item_id`、`date`、`unit_type`、`context`、`text` 列，不要排序或删除行。
+Whether economic conditions (good or bad) are attributed to an actor. Record at most two: `actor_1` / `direction_1`, `actor_2` / `direction_2`. When there is no attribution, set `actor_1 = none` and leave the rest blank.
+
+| actor value | Meaning |
+|---|---|
+| `president_admin` | The president or the administration (including a named president, the White House, the cabinet) |
+| `congress` | Congress |
+| `fed` | The Federal Reserve |
+| `democrats` | The Democratic Party or Democrats |
+| `republicans` | The Republican Party or Republicans |
+| `business` | Businesses, companies, industries |
+| `foreign_trade` | Foreign governments or trading partners, foreign policies |
+| `other` | Other (unions, state governments, etc.; specify in notes) |
+| `none` | No attribution |
+
+| direction value | Meaning |
+|---|---|
+| `credit` | Credit: attributes a good economic outcome to the actor |
+| `blame` | Blame: attributes a bad economic outcome to the actor |
+| `neutral_mention` | Mentions the actor as connected to economic conditions, without giving credit or blame |
+
+**Criticism is not bias.** Record only what the text says; whether it amounts to bias is judged at the analysis stage by comparison with a benchmark. Do not take the source's leaning into account when labeling.
+
+Example: "Trump's tariffs are driving up grocery prices" → `actor_1 = president_admin`, `direction_1 = blame`.
+Example: "The Fed held rates steady on Wednesday." → `actor_1 = fed`, `direction_1 = neutral_mention`.
 
 ---
 
-## 9. 修改记录
+## 8. Other columns
 
-| 日期 | 版本 | 修改内容 | 依据（校准条目编号） |
+- `notes`: questions, reasons for `unsure`, explanations of `other`. Do not write guesses about the source.
+- Do not modify the `item_id`, `date`, `unit_type`, `context`, or `text` columns; do not sort or delete rows.
+
+---
+
+## 9. Change log
+
+| Date | Version | Change | Basis (calibration item IDs) |
 |---|---|---|---|
-| 2026-10-16 | v0.9 | 初稿 | — |
-| 2026-10-16 | v0.9 | 校准后未修改 | C001–C030 |
+| 2026-10-16 | v0.9 | First draft | — |
+| 2026-10-16 | v0.9 | No changes after calibration | C001–C030 |

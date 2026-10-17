@@ -1,51 +1,51 @@
 # econ_monthly_realtime.csv
 
-- 生成脚本：`src/process/econ_realtime.py`（同一脚本生成敏感性版本 `econ_monthly_realtime_prelim_cutoff.csv`）
-- 生成时间：2026-10-16
-- 行数：202（2010-01 至 2026-10，一行一个调查月份），63 列
-- 原始数据：`data/raw/M01–M16`（ALFRED 全部版本）、`data/raw/S01`（密歇根月度 CSV）、`data/raw/S05`（官网首页初值、历史发布日历 PDF）
+- Generating script: `src/process/econ_realtime.py` (the same script generates the sensitivity version `econ_monthly_realtime_prelim_cutoff.csv`)
+- Generated: 2026-10-16
+- Rows: 202 (2010-01 to 2026-10, one row per survey month), 63 columns
+- Raw data: `data/raw/M01–M16` (all ALFRED vintages), `data/raw/S01` (Michigan monthly CSV), `data/raw/S05` (preliminary values from the official homepage, historical release calendar PDF)
 
-## 信息截止日规则
+## Information cutoff rule
 
-- 主文件（`cutoff_rule = D2`）：第 t 月的截止日 τ = 第 t 月 1 日的前一天。只使用 ALFRED `realtime_start ≤ τ ≤ realtime_end` 的数值，即截止日当时公开的版本。
-- 敏感性文件（`cutoff_rule = mich_prelim`）：τ = 第 t 月密歇根初值发布日的前一天，发布日取自官方历史发布日历。
-- 每个指标在该版本内取**最新的非缺失观测期**。官方缺失值（ALFRED 中的 `.`，例如 2025-10 的失业率）会被跳过，所以截止日 2025-10-31 时最新可得的失业率是 8 月数据，因为 9 月数据到 2025-11-20 才发布。
-- 同比、环比、累计涨幅的分子和分母都取自**同一版本**。
+- Main file (`cutoff_rule = D2`): the cutoff for month t is τ = the day before the 1st of month t. Only ALFRED values with `realtime_start ≤ τ ≤ realtime_end` are used, i.e. the vintage that was public on the cutoff date.
+- Sensitivity file (`cutoff_rule = mich_prelim`): τ = the day before the Michigan preliminary release date for month t, with release dates taken from the official historical release calendar.
+- For each indicator, the **latest non-missing observation period** within that vintage is taken. Official missing values (`.` in ALFRED, e.g. the unemployment rate for 2025-10) are skipped, so at the 2025-10-31 cutoff the latest available unemployment rate is the August figure, because the September figure was not released until 2025-11-20.
+- The numerator and denominator of year-over-year, period-over-period, and cumulative changes are all taken from the **same vintage**.
 
-## 列定义
+## Column definitions
 
-| 列 | 含义 |
+| Column | Meaning |
 |---|---|
-| `month` | 调查月份 YYYY-MM |
-| `origin_date` | 截止日 τ |
-| `cutoff_rule` | `D2` 或 `mich_prelim` |
-| `ics`、`icc`、`ice` | 密歇根三项指数：2026-09 及以前为月度 CSV 的终值；2026-10 为官网首页的初值 |
-| `ics_status` | `final` 或 `prelim` |
-| `mich_prelim_release_date`、`mich_final_release_date` | 官方初值和终值发布日 |
-| `mode_web_share` | 网络访谈比例：2024-04 为 0.25，05 为 0.5，06 为 0.75，07 起为 1，此前为 0 |
-| `<x>_rt` | 截止日的实时值 |
-| `<x>_ref` | 该值对应的观测期（周度或日度序列为观测日期） |
-| `<x>_release_date` | 该值所在版本的 `realtime_start`，即该数值的发布日 |
-| `unrate` / `u6rate` | U-3（UNRATE）、U-6（U6RATE），% |
-| `pce_yoy_rt`、`core_pce_yoy_rt` | 总体 PCE（PCEPI）、核心 PCE（PCEPILFE）同比，% |
-| `pce_cum_since_2021_01_rt`、`food_cpi_cum_since_2021_01_rt` | 相对 2021-01 的累计涨幅，%；观测期早于 2021-02 时为空 |
-| `rdpi_pc_yoy_rt`、`rdpi_yoy_rt`、`real_pce_yoy_rt` | 人均实际可支配收入（A229RX0）、实际可支配收入（DSPIC96）、实际消费（PCEC96）同比，% |
-| `food_cpi_yoy_rt`、`food_home_cpi_yoy_rt` | 食品 CPI（CPIUFDSL）、家庭食品 CPI（CUSR0000SAF11）同比，% |
-| `case_shiller_yoy_rt` | Case-Shiller 全国房价（CSUSHPISA）同比，% |
-| `mortgage30_rt` | 30 年期房贷利率（MORTGAGE30US，周度），% |
-| `gas_price_rt` | 普通汽油零售价（GASREGW，周度），美元/加仑 |
-| `tdsp_rt` | 家庭偿债负担（TDSP，季度），% |
-| `epu_rt` | 政策不确定性指数（USEPUINDXM） |
-| `gdp_qoq_saar_rt` | 实际 GDP（GDPC1）环比折年率 = 100×((G_q/G_{q-1})^4 − 1) |
-| `gdp_yoy_rt` | 实际 GDP 同比 = 100×(G_q/G_{q-4} − 1) |
-| `gdp_ref_quarter` | 观测季度 |
-| `gdp_release_number` | 截至截止日，该季度已出现的发布次数：1 为首次估计（advance），2 为第二次，3 为第三次，≥4 为后续修订 |
-| `sp500_close`、`nasdaq_close` 及 `_ref` | 截止日前最后一个交易日的收盘价，取自当前数据；市场数据不修订 |
+| `month` | Survey month YYYY-MM |
+| `origin_date` | Cutoff τ |
+| `cutoff_rule` | `D2` or `mich_prelim` |
+| `ics`, `icc`, `ice` | The three Michigan indices: for 2026-09 and earlier, final values from the monthly CSV; for 2026-10, the preliminary value from the official homepage |
+| `ics_status` | `final` or `prelim` |
+| `mich_prelim_release_date`, `mich_final_release_date` | Official preliminary and final release dates |
+| `mode_web_share` | Share of web interviews: 0.25 in 2024-04, 0.5 in 05, 0.75 in 06, 1 from 07 onward, 0 before that |
+| `<x>_rt` | Real-time value at the cutoff |
+| `<x>_ref` | The observation period the value refers to (the observation date for weekly or daily series) |
+| `<x>_release_date` | `realtime_start` of the vintage containing the value, i.e. the release date of that value |
+| `unrate` / `u6rate` | U-3 (UNRATE), U-6 (U6RATE), % |
+| `pce_yoy_rt`, `core_pce_yoy_rt` | Headline PCE (PCEPI), core PCE (PCEPILFE), year over year, % |
+| `pce_cum_since_2021_01_rt`, `food_cpi_cum_since_2021_01_rt` | Cumulative increase relative to 2021-01, %; empty when the observation period is earlier than 2021-02 |
+| `rdpi_pc_yoy_rt`, `rdpi_yoy_rt`, `real_pce_yoy_rt` | Real disposable income per capita (A229RX0), real disposable income (DSPIC96), real consumption (PCEC96), year over year, % |
+| `food_cpi_yoy_rt`, `food_home_cpi_yoy_rt` | Food CPI (CPIUFDSL), food at home CPI (CUSR0000SAF11), year over year, % |
+| `case_shiller_yoy_rt` | Case-Shiller national home price index (CSUSHPISA), year over year, % |
+| `mortgage30_rt` | 30-year mortgage rate (MORTGAGE30US, weekly), % |
+| `gas_price_rt` | Regular gasoline retail price (GASREGW, weekly), dollars/gallon |
+| `tdsp_rt` | Household debt service burden (TDSP, quarterly), % |
+| `epu_rt` | Policy uncertainty index (USEPUINDXM) |
+| `gdp_qoq_saar_rt` | Real GDP (GDPC1) quarter-over-quarter annualized rate = 100×((G_q/G_{q-1})^4 − 1) |
+| `gdp_yoy_rt` | Real GDP year over year = 100×(G_q/G_{q-4} − 1) |
+| `gdp_ref_quarter` | Observation quarter |
+| `gdp_release_number` | Number of releases for that quarter as of the cutoff: 1 is the first estimate (advance), 2 the second, 3 the third, ≥4 later revisions |
+| `sp500_close`, `nasdaq_close` and `_ref` | Closing price on the last trading day before the cutoff, taken from current data; market data are not revised |
 
-## 已知问题
+## Known issues
 
-- 各序列在其 ALFRED 最早版本之前为空，不用后来的版本回填，否则会造成前视偏差：U-6 从 2011-04 起有值，家庭食品 CPI 从 2011-05 起，人均实际可支配收入从 2010-06 起，房贷利率从 2010-07 起，EPU 从 2013-07 起，Case-Shiller 从 2014-12 起，S&P 500 从 2016-11 起（FRED 只提供 2016-10-17 以后的数据）。
-- GDP 是"截止日前最新已发布季度"的阶梯函数，不是插值，不违反 R1.7。环比和同比都由 GDPC1 的同一版本计算；A191RL1Q225SBEA 的版本从 2014-09 才开始，因此未使用。
-- HOAM 住房可负担性只有当前快照，没有历史版本，不能做实时变量，因此不在本文件中；原件在 `data/raw/M13`。
-- 2026-10 的 ICS/ICC/ICE 是初值（46.3/44.7/47.3），终值将于 2026-10-23 发布。
-- 党派构成（自认共和党比例）没有可用的月度序列；各党派的信心指数见 `survey_monthly.csv`。
+- Each series is empty before its earliest ALFRED vintage and is not backfilled with later vintages, since that would create look-ahead bias: U-6 has values from 2011-04, food at home CPI from 2011-05, real disposable income per capita from 2010-06, the mortgage rate from 2010-07, EPU from 2013-07, Case-Shiller from 2014-12, S&P 500 from 2016-11 (FRED only provides data after 2016-10-17).
+- GDP is a step function of "the latest quarter released before the cutoff", not an interpolation, and does not violate R1.7. Both the quarter-over-quarter and year-over-year rates are computed from the same vintage of GDPC1; vintages of A191RL1Q225SBEA only start in 2014-09, so it is not used.
+- HOAM housing affordability has only a current snapshot and no historical vintages, so it cannot be a real-time variable and is not in this file; the raw file is in `data/raw/M13`.
+- The 2026-10 ICS/ICC/ICE are preliminary (46.3/44.7/47.3); the final values will be released on 2026-10-23.
+- Partisan composition (share self-identifying as Republican) has no available monthly series; consumer sentiment indices by party are in `survey_monthly.csv`.

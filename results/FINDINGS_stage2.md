@@ -1,146 +1,146 @@
-# 阶段 2 结果：测量验证与偏差基准（RQ1；R3.3、R3.5、R3.7、事实校准）
+# Stage 2 results: measurement validation and bias benchmarks (RQ1; R3.3, R3.5, R3.7, factual calibration)
 
-冻结时间 2026-10-16。设计见 `research/RESEARCH_DESIGN_v1.md`，实现细节与偏离见 `DECISIONS.md` 2026-10-16T19:23Z 条目，所有设定登记在 `results/spec_registry.csv`（S066 起）。脚本在 `src/analysis/`，一键重跑用 `sh src/analysis/run_stage2.sh`。
+Frozen 2026-10-16. The design is in `research/RESEARCH_DESIGN_v1.md`, implementation details and deviations are in the 2026-10-16T19:23Z entry of `DECISIONS.md`, and all specifications are registered in `results/spec_registry.csv` (from S066). Scripts are in `src/analysis/`; rerun everything with `sh src/analysis/run_stage2.sh`.
 
-先写发现，再写对假设的判定。区间一律为 95% 自助法区间。"全国新闻"指 NYT + Guardian，是主媒体指标的来源。
+Findings come first, then the adjudication of the hypotheses. All intervals are 95% bootstrap intervals. "National news" means NYT + Guardian, the source of the main media measures.
 
-## 一、发现
+## 1. Findings
 
-**F1. 在条目层面，LLM 编码明显优于全部低成本方法；词典法的语气判断只在全国新闻上勉强可用。**
-260 条人工测试集，语气与价格框架用 A 组（金标准与 LLM 都判为相关，174 条），相关性用金标准 yes/no 的 236 条（`stage2_r35/item_metrics.csv`）。
+**F1. At the item level, LLM coding is clearly better than every low-cost method; the dictionary method's tone judgments are barely usable, and only on national news.**
+On the 260-item human test set, tone and price framing use group A (items that both the gold standard and the LLM judge relevant, 174 items), and relevance uses the 236 items with gold-standard yes/no (`stage2_r35/item_metrics.csv`).
 
-| 维度 | LLM | Loughran–McDonald | VADER | 关键词规则 | TF-IDF（LLM 标签训练） | TF-IDF（100 条人工开发集训练） |
+| Dimension | LLM | Loughran–McDonald | VADER | Keyword rules | TF-IDF (trained on LLM labels) | TF-IDF (trained on the 100-item human development set) |
 | --- | --- | --- | --- | --- | --- | --- |
-| 相关性 κ | 0.86 [0.79, 0.93] | — | — | 0（全判相关） | 0.75 [0.64, 0.83] | 0.41 |
-| 语气 κ | 0.73 [0.63, 0.81] | 0.35 [0.23, 0.46] | 0.27 [0.18, 0.35] | — | 0.39 [0.28, 0.50] | 0.14 |
-| 价格框架 κ | 0.83 [0.75, 0.90] | — | — | 0.48 | 0.64 | 0.39 |
-| 13 个主题平均 κ | 0.79 | — | — | 0.58 | 0.69 | 0.23 |
+| Relevance κ | 0.86 [0.79, 0.93] | — | — | 0 (all judged relevant) | 0.75 [0.64, 0.83] | 0.41 |
+| Tone κ | 0.73 [0.63, 0.81] | 0.35 [0.23, 0.46] | 0.27 [0.18, 0.35] | — | 0.39 [0.28, 0.50] | 0.14 |
+| Price framing κ | 0.83 [0.75, 0.90] | — | — | 0.48 | 0.64 | 0.39 |
+| Mean κ over 13 topics | 0.79 | — | — | 0.58 | 0.69 | 0.23 |
 
-- LLM 与每种方法的宏平均 F1 配对差，自助法区间都不含 0。例如语气上 LLM − LM 为 0.30 [0.18, 0.40]，相关性上 LLM − TF-IDF 为 0.06 [0.01, 0.11]。
-- LM 语气的 κ 按来源分组：全国新闻 0.51，地方新闻 0.19，社交平台 0.10。VADER 在三组都低于 0.33。
-- 关键词规则在通胀叙事最核心的两个主题上几乎失效：物价上涨 κ 0.10，通胀回落 −0.01。TF-IDF 分别为 0.72 和 0.41，LLM 为 0.79 和 0.79（`item_metrics.csv`，A 组）。
-- 只用 100 条人工标签训练的分类器在所有维度都最差，说明小规模人工标注不足以训练替代编码器。
-- 词典阈值只在开发集上确定：LM 截断为 0.0，开发集宏 F1 0.44；VADER 复合分截断 0.15，混合判定 0.10，宏 F1 0.43（`dictionary_thresholds.json`）。
-- B 组为金标准相关的 186 条，LLM 判为不相关的条目计为错。LLM 语气 κ 降为 0.66 [0.56, 0.74]，价格框架降为 0.74 [0.65, 0.82]，仍高于所有其他方法：LM 0.36，VADER 0.26，TF-IDF 0.40 和 0.66（`item_metrics.csv`）。
+- For the paired difference in macro-average F1 between the LLM and each method, no bootstrap interval contains 0. For example, LLM − LM on tone is 0.30 [0.18, 0.40], and LLM − TF-IDF on relevance is 0.06 [0.01, 0.11].
+- LM tone κ by source group: national news 0.51, local news 0.19, social platforms 0.10. VADER is below 0.33 in all three groups.
+- Keyword rules almost fail on the two topics most central to the inflation narrative: rising prices κ 0.10, easing inflation −0.01. TF-IDF gets 0.72 and 0.41, and the LLM 0.79 and 0.79 (`item_metrics.csv`, group A).
+- The classifier trained only on the 100 human labels is the worst on every dimension, showing that small-scale human annotation is not enough to train a substitute coder.
+- Dictionary thresholds were set only on the development set: LM cutoff 0.0, development-set macro F1 0.44; VADER compound-score cutoff 0.15, mixed-judgment cutoff 0.10, macro F1 0.43 (`dictionary_thresholds.json`).
+- Group B is the 186 items the gold standard judges relevant, with items the LLM judges not relevant counted as errors. LLM tone κ drops to 0.66 [0.56, 0.74] and price framing to 0.74 [0.65, 0.82], still higher than every other method: LM 0.36, VADER 0.26, TF-IDF 0.40 and 0.66 (`item_metrics.csv`).
 
-**F2. 在指数层面，同样的样本量下词典法与 LLM 和旧金山联储指数的相关程度相同；把样本扩大到全框架后，相关明显提高。**
-全框架为 42,472 条 NYT 与 Guardian 单元，TF-IDF 判为相关的有 26,758 条，每月中位数 120 条。训练集内的条目用 5 折交叉拟合预测（`stage2_dictindex/info.json`）。
+**F2. At the index level, with the same sample size the dictionary method correlates with the San Francisco Fed index as strongly as the LLM does; expanding the sample to the full frame raises the correlation clearly.**
+The full frame is 42,472 NYT and Guardian units, of which 26,758 are judged relevant by TF-IDF, a median of 120 per month. Items in the training set are predicted with 5-fold cross-fitting (`stage2_dictindex/info.json`).
 
-| 与旧金山联储指数的相关 | 月度水平 | 3 个月平均 | 一阶差分 |
+| Correlation with the San Francisco Fed index | Monthly level | 3-month average | First difference |
 | --- | --- | --- | --- |
-| LLM 指数（每月约 26 条） | 0.37 | 0.44 | 0.18 |
-| LM 词典，只用 LLM 抽样的同一批单元 | 0.37 | 0.57 | 0.12 |
-| LM 词典，全框架 | 0.54 | 0.67 | 0.23 |
-| VADER，全框架 | 0.50 | 0.60 | 0.23 |
+| LLM index (about 26 items per month) | 0.37 | 0.44 | 0.18 |
+| LM dictionary, only the same units sampled for the LLM | 0.37 | 0.57 | 0.12 |
+| LM dictionary, full frame | 0.54 | 0.67 | 0.23 |
+| VADER, full frame | 0.50 | 0.60 | 0.23 |
 
-- 全框架词典指数与 LLM 指数的相关为 0.42（3 个月平均 0.46）。
-- 两种方法在同一批单元上与外部指数的相关相同，说明 LLM 指数相关偏低的主要原因是每月条目少，不是编码方法。
-- 一阶差分的相关在所有组合中都很低（0.12–0.25），共同成分主要是缓慢变化的部分。
-- 全框架词典指数（`features/media_dict_monthly.csv`）按设计作为阶段 3 的替代媒体测量。
+- The correlation between the full-frame dictionary index and the LLM index is 0.42 (0.46 for 3-month averages).
+- On the same units, the two methods correlate equally with the external index, showing that the main reason for the LLM index's low correlation is the small number of items per month, not the coding method.
+- First-difference correlations are low in all combinations (0.12–0.25); the shared component is mainly the slow-moving part.
+- The full-frame dictionary index (`features/media_dict_monthly.csv`) serves, by design, as an alternative media measure in stage 3.
 
-**F3. 全国 LLM 语气指数的月度信度约 0.62，3 个月平均约 0.78；与旧金山联储指数的偏低相关，主要能由抽样噪声解释，另两个候选原因没有得到支持。**
-每月 40 条编码单元做格内自助（2,000 次），含有限总体校正（`stage2_reliability/reliability.csv`）：
+**F3. The monthly reliability of the national LLM tone index is about 0.62, and about 0.78 for 3-month averages; the low correlation with the San Francisco Fed index can be explained mainly by sampling noise, and the other two candidate reasons are not supported.**
+A within-cell bootstrap (2,000 replications) on the 40 coding units per month, with a finite-population correction (`stage2_reliability/reliability.csv`):
 
-- 每月抽样标准差 0.12，指数本身的标准差 0.20。
-- 信度为 0.62（不做有限总体校正时 0.50）；3 个月平均为 0.78（0.72）。`net_fact` 与之相近，为 0.63。
-- 按经典测量误差，M2 中语气系数会向 0 衰减约 0.62 倍。这是阶段 3 预先登记 3 个月平均和全框架词典两个替代测量的理由。
-- 校正衰减后，与旧金山联储指数的相关为 0.47（3 个月平均 0.50）。这假定外部指数没有测量误差，所以是上限式的校正。
+- The monthly sampling standard deviation is 0.12, against a standard deviation of 0.20 for the index itself.
+- Reliability is 0.62 (0.50 without the finite-population correction); for 3-month averages it is 0.78 (0.72). `net_fact` is similar, at 0.63.
+- Under classical measurement error, the tone coefficient in M2 is attenuated toward 0 by a factor of about 0.62. This is the reason stage 3 pre-registers two alternative measures, the 3-month average and the full-frame dictionary.
+- After correcting for attenuation, the correlation with the San Francisco Fed index is 0.47 (0.50 for 3-month averages). This assumes the external index has no measurement error, so it is an upper-bound-type correction.
 
-三项预先登记的对照（`stage2_reliability/sffed_checks.csv`）：
+Three pre-registered comparisons (`stage2_reliability/sffed_checks.csv`):
 
-1. 抽样噪声：3 个月平均把相关从 0.37 提高到 0.44，全框架词典达到 0.54。**支持。**
-2. 标题加摘要与全文：只用 Guardian（每月约 17 条），LM 词典用编码单元文本时相关为 0.34，用全文时为 0.25。全文没有提高相关。**不支持。** Guardian 是英国媒体、条目少，这个检验的力度有限。
-3. 主题范围：只用宏观主题（T01–T06）条目时，LLM 指数相关 0.34，全框架词典 0.43，都没有高于全部条目。**不支持。**
+1. Sampling noise: the 3-month average raises the correlation from 0.37 to 0.44, and the full-frame dictionary reaches 0.54. **Supported.**
+2. Headline plus abstract versus full text: using Guardian only (about 17 items per month), the LM dictionary correlates at 0.34 on coding-unit text and 0.25 on full text. Full text does not raise the correlation. **Not supported.** The Guardian is a British outlet with few items, so this test has limited power.
+3. Topic scope: using only items on macro topics (T01–T06), the LLM index correlates at 0.34 and the full-frame dictionary at 0.43, neither higher than with all items. **Not supported.**
 
-扣除抽样噪声后仍有差距，合理的解释是构造不同：旧金山联储指数用词典给 24 家报纸的全部经济类文章打分，本项目用关键词筛选 NYT 与 Guardian。这只是推断，没有单独检验。
+A gap remains after removing sampling noise; a reasonable explanation is the difference in construction: the San Francisco Fed index uses a dictionary to score all economics articles from 24 newspapers, while this project uses keyword screening of NYT and Guardian. This is only an inference and was not tested separately.
 
-**F4. 写明了指标的数字陈述中，全国新闻的错误率约 3%（68 条中 2 条），社交平台 9 条中没有错误。社交平台的极端通胀数字都没有写明指标，按规则不可核对；但它们与任何官方口径都不相符。**
-用规则从 `claim_text` 中抽取指标、数值和观测期，与发表日当天有效的 ALFRED 版本比对（`stage2_factcal/claims.csv`、`summary.csv`）。
+**F4. Among numeric claims that name the indicator, the national news error rate is about 3% (2 of 68), and social platforms have no errors among 9. Extreme inflation figures on social platforms never name the indicator and are uncheckable under the rules; but they match no official measure.**
+Rules extract the indicator, value, and observation period from `claim_text`, and these are compared with the ALFRED vintage in effect on the publication date (`stage2_factcal/claims.csv`, `summary.csv`).
 
-- 3,569 个陈述片段中，103 条落在四项指标内。其余大多引用的是股指、商品价格、工资、州或地方数据，或者是预测，按预先规则排除（`fragment_status.csv`）。
-- **人工抽查**：你核对了 30 条解析结果（`review_sample_30.csv`），26 条正确，4 条有误。按你的意见修改了三条规则，并对全部 103 条重新运行：
-  - 只写"inflation"、没有写明 CPI 或 PCE 的数字，不再按数值接近程度指定序列，改判为不可核对（K01583、K00987）。
-  - "compared to March"一类比较期月份不再当作参照月（K07821，参照月改为 2023-04，判定不变）。
-  - "unemployment rate fell 4%"这类没有 to 的说法，改判为口径不明、不可核对（K06427）。
-  - 这条规则统一适用后，你判为正确的三条全国新闻（"US inflation falls to 2.1%""cools to 3.2%""rose to 3.7% in September"）也没有写明指标，同样改为不可核对。否则 K00987 和 K00058 是同一种情况，却会得到不同处理。
-  - 修订后共有 23 条判定发生变化：15 条由正确改为不可核对，8 条由错误改为不可核对（`claims.csv` 新增 `unverifiable_reason` 列）。
-- **全国新闻**：写明指标、可核对的 68 条中错误 2 条（2.9%）；CPI 12 个月变化用 ±0.2 的敏感性口径，结果相同。
-  - 一条是 2026-07-14 Guardian 写 6 月 CPI 环比 −0.8%，季调值为 −0.42%。
-  - 一条是 2020-08-18 写失业率 11%，当时最新值为 10.2%（7 月）。
-  - 原先判为错误的两条"2022 年 6 月通胀 9.1%"没有写明指标，现在不可核对。官方 CPI 未季调值正是 9.1%，季调值为 8.9–9.0%。
-  - 按时期：2010–2019 年 0/29，2020–2022 年 1/14，2023–2024 年 0/14，2025–2026 年 1/11。样本太小，不能检验趋势。
-- **社交平台**：可核对的 9 条全部正确。另有 13 条通胀数字没有写明指标，1 条失业率说法口径不明，2 条 GDP 增速缺少口径。
-- **未写明指标的通胀数字**（`unnamed_inflation.csv`，仅作描述，不计入错误率）：拿 CPI、PCE 的 12 个月和 1 个月变化逐一比对，只要有一种口径相符就算相符（CPI 12 个月变化用 ±0.2，理由同上）。
-  - 全国新闻 9 条全部至少与一种口径相符。
-  - 社交平台 13 条中 6 条与所有口径都不符。其中 4 条是 15%–50% 的夸张说法（"50 percent inflation""18% inflation""inflation is like 15% easy""more than 20%"），2 条是接近但不符（2.9% 对 2.7%、"2025 年 1 月 2.5%"）。
-  - 若把这一宽松口径计入，全国新闻为 77 条中错 2 条（2.6%），社交平台为 22 条中错 6 条（27%）。
-- 结论：全国新闻引用官方数字基本准确。社交平台的问题主要不是引错某个序列，而是给出与任何官方口径都相去甚远、又不注明出处的数字。样本很小（社交 25 条），只作描述。
+- Of 3,569 claim fragments, 103 fall within the four indicators. Most of the rest cite stock indexes, commodity prices, wages, or state or local data, or are forecasts, and are excluded under the pre-set rules (`fragment_status.csv`).
+- **Manual spot check**: you checked 30 parsing results (`review_sample_30.csv`): 26 correct, 4 wrong. Following your comments, three rules were revised and all 103 were rerun:
+  - A figure that says only "inflation" without naming CPI or PCE is no longer assigned a series by closeness of value, and is reclassified as uncheckable (K01583, K00987).
+  - Comparison-period months such as "compared to March" are no longer treated as the reference month (K07821; the reference month becomes 2023-04, verdict unchanged).
+  - Statements without "to", such as "unemployment rate fell 4%", are reclassified as having an unclear measure and as uncheckable (K06427).
+  - Once this rule is applied uniformly, the three national news items you had judged correct ("US inflation falls to 2.1%", "cools to 3.2%", "rose to 3.7% in September") also do not name the indicator and are likewise changed to uncheckable. Otherwise K00987 and K00058, which are the same kind of case, would be treated differently.
+  - After the revision, 23 verdicts changed in total: 15 from correct to uncheckable, and 8 from incorrect to uncheckable (`claims.csv` gains an `unverifiable_reason` column).
+- **National news**: among the 68 checkable claims that name the indicator, 2 are incorrect (2.9%); using the ±0.2 sensitivity tolerance for 12-month CPI changes gives the same result.
+  - One is the Guardian on 2026-07-14 writing that June CPI fell −0.8% month over month, when the seasonally adjusted value was −0.42%.
+  - One, on 2020-08-18, writes an unemployment rate of 11%, when the latest value at the time was 10.2% (July).
+  - The two "inflation of 9.1% in June 2022" items previously judged incorrect do not name the indicator and are now uncheckable. The official not-seasonally-adjusted CPI value is exactly 9.1%, and the seasonally adjusted value is 8.9–9.0%.
+  - By period: 2010–2019 0/29, 2020–2022 1/14, 2023–2024 0/14, 2025–2026 1/11. The samples are too small to test for a trend.
+- **Social platforms**: all 9 checkable claims are correct. In addition, 13 inflation figures do not name the indicator, 1 unemployment statement has an unclear measure, and 2 GDP growth figures lack a measure.
+- **Inflation figures that do not name the indicator** (`unnamed_inflation.csv`, descriptive only, not counted in the error rate): each is compared against the 12-month and 1-month changes in CPI and PCE, and counts as matching if any one measure matches (±0.2 for 12-month CPI changes, for the same reason as above).
+  - All 9 national news items match at least one measure.
+  - Of the 13 social platform items, 6 match no measure. Of these, 4 are exaggerated claims of 15%–50% ("50 percent inflation", "18% inflation", "inflation is like 15% easy", "more than 20%"), and 2 are close but do not match (2.9% vs. 2.7%, "2.5% in January 2025").
+  - If this looser measure is counted, national news has 2 errors in 77 (2.6%), and social platforms 6 errors in 22 (27%).
+- Conclusion: national news cites official figures mostly accurately. The problem on social platforms is mainly not citing the wrong series, but giving figures far from any official measure with no source stated. The sample is very small (25 social items), so this is descriptive only.
 
-**F5. 名字和来源标签替换没有检出 AI 编码偏差。**
-120 条提到总统或政党的条目，每条 5 个版本（`stage2_r37/`）。480 条新编码全部返回，没有非法取值，3,551 条证据摘录全部逐字可查（`qa.json`）。
+**F5. Name and source-label swaps detected no AI coding bias.**
+120 items mentioning a president or a party, 5 versions each (`stage2_r37/`). All 480 new codings were returned, with no invalid values, and all 3,551 evidence excerpts can be found verbatim (`qa.json`).
 
-- 超额翻转率 = 替换版与原文第一次标签不同的比例 − 原文第二次与第一次不同的比例。原文两次运行间的翻转率：语气 18%，归咎政府 26%，事实好坏 30%（`flip_rates.csv`）。
+- Excess flip rate = share of swapped versions whose label differs from the first original label − share of second original runs that differ from the first. Flip rates between the two original runs: tone 18%, blaming the administration 26%, factual good/bad 30% (`flip_rates.csv`).
 
-| 维度 | 人名与党派互换 | 加注 Fox News | 加注 MSNBC |
+| Dimension | Swapped names and parties | Labeled Fox News | Labeled MSNBC |
 | --- | --- | --- | --- |
-| 语气 | +4.2 [−2.5, +11.7] | −1.7 [−7.5, +4.2] | +0.8 [−5.8, +7.5] |
-| 归咎政府 | +0.8 [−5.9, +8.3] | −8.3 [−16.7, 0.0] | −0.8 [−8.3, +6.7] |
-| 情绪强度 | +6.7 [−0.8, +14.2] | +1.7 | +5.8 [−1.7, +14.2] |
+| Tone | +4.2 [−2.5, +11.7] | −1.7 [−7.5, +4.2] | +0.8 [−5.8, +7.5] |
+| Blaming the administration | +0.8 [−5.9, +8.3] | −8.3 [−16.7, 0.0] | −0.8 [−8.3, +6.7] |
+| Emotional intensity | +6.7 [−0.8, +14.2] | +1.7 | +5.8 [−1.7, +14.2] |
 
-（单位：百分点）13 个维度、3 个版本共 39 个超额翻转率，没有一个显著大于 0。
+(Units: percentage points.) Of the 39 excess flip rates across 13 dimensions and 3 versions, none is significantly greater than 0.
 
-- 方向性检验（`directional.csv`）：
-  - Trump 换成 Biden 后语气变化 −0.08，Biden 换成 Trump 后为 0.00，两者之差为 −0.08 [−0.32, +0.16]。
-  - 归咎政府的同类差为 +0.15 [−0.03, +0.35]。点估计的方向是：文本主角换成 Trump 后，编码器归咎政府的比例略降而不是上升。
-  - Fox 版与 MSNBC 版的语气差为 −0.02 [−0.10, +0.07]。
-- 每个替换方向只有 25–40 条，能排除的只是较大的偏差。准确的表述是"未检出"。
+- Directional test (`directional.csv`):
+  - The change in tone is −0.08 when Trump is replaced with Biden and 0.00 when Biden is replaced with Trump; the difference between the two is −0.08 [−0.32, +0.16].
+  - The corresponding difference for blaming the administration is +0.15 [−0.03, +0.35]. The direction of the point estimate is that when the main figure in the text becomes Trump, the share of items the coder codes as blaming the administration falls slightly rather than rising.
+  - The tone difference between the Fox and MSNBC versions is −0.02 [−0.10, +0.07].
+- Each swap direction has only 25–40 items, so only fairly large biases can be ruled out. The accurate statement is "not detected".
 
-**F6. 偏差基准：负面不对称和"通胀回落后仍偏重价格水平"都没有得到稳健支持；归咎政府的比例随政府更替大幅变化；NYT 与 Guardian 比其他新闻来源更负面。**
-全国新闻月度指标，2010-01 至 2026-09，201 个月；"当月新闻" = 截止日 t+1 的实时值 − 截止日 t 的实时值（`stage2_bias/`）。
+**F6. Bias benchmarks: neither negativity asymmetry nor "still emphasizing the price level after inflation eased" receives robust support; the share blaming the administration changes greatly with changes of administration; NYT and Guardian are more negative than other news sources.**
+National news monthly measures, 2010-01 to 2026-09, 201 months; "news of the month" = the real-time value at cutoff t+1 − the real-time value at cutoff t (`stage2_bias/`).
 
-1. **语气不对称**（`tone_asymmetry.csv`）：主设定中，失业上升的系数为 −0.026（p = 0.002），失业下降为 −0.054（符号与预期相反，p = 0.48）；通胀两部分都不显著。GDP 好消息和坏消息的系数都为负，这是 2020 年 GDP 大起大落造成的。三个"坏 + 好 = 0"的联合检验 p < 0.001，但驱动力就是这组符号相反的 GDP 系数。各变体结论不一致：
-   - 加入滞后语气：p = 0.20。
-   - 剔除 2020-03 至 12 月：p = 0.015，但来自失业下降的系数 +0.35，属于正面不对称。
-   - 改用 3 个月变化：p = 0.08。
-   月度语气主要跟随经济水平和时期，而不是逐月发布的新闻。
-2. **选择与显著性**（`topic_selection.csv`）：
-   - 通胀每上升 1 个百分点，物价上涨主题占比增加 0.13（p = 0.08）；每下降 1 个百分点，通胀回落主题增加 0.12（p = 0.008）。差为 0.02 [−0.17, +0.26]。
-   - 失业每上升 1 个百分点，裁员主题增加 0.029（p < 0.001）；失业下降时招聘主题只增加 0.007（p = 0.76）。差 0.02 [−0.16, +0.17] 不显著。
-   - 3 个月变化的结果相同。
-3. **框架**（`framing.csv`、`framing_periods.csv`）：实时 PCE 通胀在 2022-07 见顶。
-   - 有价格框架的条目中，"价格水平"表述的占比在 2010–2019 年为 0.76，见顶前为 0.68，见顶后为 0.60。控制通胀水平后，见顶后的系数为 −0.09（p = 0.035）；控制 36 个月累计涨幅后，不显著。
-   - 通胀回落后，价格话题本身仍然更多：带价格框架的条目占比从 0.25 升到 0.47，见顶后系数 +0.09（p = 0.06）。
-   - 家庭视角占比没有显著变化。
-   - 所以全国新闻的问题不是"仍在强调价格水平"，而是物价报道的比重保持在高位。
-4. **事实校准**：见 F4。
-5. **政治归因**（`attribution.csv`、`attribution_means.csv`）：
-   - 归咎政府的条目占比：奥巴马时期 0.03，特朗普第一任 0.19，拜登 0.06，特朗普第二任 0.40。
-   - 控制失业、通胀、GDP 后，相对奥巴马时期：特朗普第一任 +0.14（p < 0.001），拜登 +0.02（p = 0.68），特朗普第二任 +0.35（p < 0.001）。四届政府相等的 Wald 检验 p < 0.001。
-   - 归功政府的占比都在 0.07 以下。
-   - 这不能直接称为偏差：关税等是总统的直接决策，指向政府的批评可能是准确的。结合 F5，这一差异不是编码器看到 Trump 名字后造成的。
-6. **跨来源对比**（`cross_source.csv`，各组与全国新闻在相同月份比较）：
-   - **地方新闻**（2025-03 至 2026-09）：净语气 −0.27，全国 −0.63，差 +0.37 [+0.30, +0.44]。归咎政府 0.14，全国 0.40。
-   - **Media Cloud 全国组**（13 个月）：也比 NYT 与 Guardian 少负面（+0.17 [+0.06, +0.28]），少归咎政府（−0.22）。
-   - **YouTube 评论**（2023-01 起）：更负面（−0.19 [−0.24, −0.13]），家庭视角多 0.14，价格水平表述多 0.12，物价上涨主题多 0.18。
-   - **Reddit**（季度）：语气接近全国新闻；家庭视角、价格框架更多，归咎政府更少。Reddit 条目的设计权重差异很大，自助法分布有偏，这一组的差值只作参考。
-   - 这些差异只说明不同来源提供的内容不同，不称为偏差。但它意味着：2025–2026 年用 NYT 与 Guardian 构造的主指标，负面程度很可能高于美国新闻整体。
+1. **Tone asymmetry** (`tone_asymmetry.csv`): in the main specification, the coefficient on rising unemployment is −0.026 (p = 0.002), and on falling unemployment −0.054 (sign opposite to expectations, p = 0.48); neither inflation part is significant. The coefficients on good and bad GDP news are both negative, which is caused by the large swings in GDP in 2020. The joint test of the three "bad + good = 0" restrictions has p < 0.001, but it is driven by exactly this pair of opposite-signed GDP coefficients. The conclusions differ across variants:
+   - Adding lagged tone: p = 0.20.
+   - Excluding 2020-03 to 12: p = 0.015, but driven by the coefficient on falling unemployment, +0.35, which is a positivity asymmetry.
+   - Using 3-month changes: p = 0.08.
+   Monthly tone mainly follows the level of the economy and the period, not the month-by-month news from releases.
+2. **Selection and salience** (`topic_selection.csv`):
+   - For each 1 percentage point rise in inflation, the share of the rising-prices topic increases by 0.13 (p = 0.08); for each 1 percentage point fall, the easing-inflation topic increases by 0.12 (p = 0.008). The difference is 0.02 [−0.17, +0.26].
+   - For each 1 percentage point rise in unemployment, the layoffs topic increases by 0.029 (p < 0.001); when unemployment falls, the hiring topic increases by only 0.007 (p = 0.76). The difference, 0.02 [−0.16, +0.17], is not significant.
+   - Results with 3-month changes are the same.
+3. **Framing** (`framing.csv`, `framing_periods.csv`): real-time PCE inflation peaked in 2022-07.
+   - Among items with a price frame, the share of "price level" wording is 0.76 in 2010–2019, 0.68 before the peak, and 0.60 after the peak. Controlling for the level of inflation, the post-peak coefficient is −0.09 (p = 0.035); controlling for 36-month cumulative inflation, it is not significant.
+   - After inflation eased, the price topic itself was still more frequent: the share of items with a price frame rose from 0.25 to 0.47, with a post-peak coefficient of +0.09 (p = 0.06).
+   - The share of household perspective shows no significant change.
+   - So the issue with national news is not "still emphasizing the price level" but that the weight of price coverage stays high.
+4. **Factual calibration**: see F4.
+5. **Political attribution** (`attribution.csv`, `attribution_means.csv`):
+   - Share of items blaming the administration: Obama period 0.03, Trump first term 0.19, Biden 0.06, Trump second term 0.40.
+   - Controlling for unemployment, inflation, and GDP, relative to the Obama period: Trump first term +0.14 (p < 0.001), Biden +0.02 (p = 0.68), Trump second term +0.35 (p < 0.001). The Wald test that the four administrations are equal has p < 0.001.
+   - The share crediting the administration is below 0.07 in all periods.
+   - This cannot be directly called bias: tariffs and similar measures are direct presidential decisions, and criticism aimed at the administration may be accurate. Together with F5, this difference is not caused by the coder seeing Trump's name.
+6. **Cross-source comparison** (`cross_source.csv`, each group compared with national news in the same months):
+   - **Local news** (2025-03 to 2026-09): net tone −0.27 versus national −0.63, a difference of +0.37 [+0.30, +0.44]. Blaming the administration 0.14, versus national 0.40.
+   - **Media Cloud national group** (13 months): also less negative than NYT and Guardian (+0.17 [+0.06, +0.28]), and less blame of the administration (−0.22).
+   - **YouTube comments** (from 2023-01): more negative (−0.19 [−0.24, −0.13]), with 0.14 more household perspective, 0.12 more price-level wording, and 0.18 more of the rising-prices topic.
+   - **Reddit** (quarterly): tone close to national news; more household perspective and price framing, and less blame of the administration. Design weights for Reddit items vary greatly and the bootstrap distribution is skewed, so the differences for this group are for reference only.
+   - These differences show only that different sources supply different content and are not called bias. But they imply that in 2025–2026 the main measure built from NYT and Guardian is very likely more negative than U.S. news as a whole.
 
-## 二、对假设与前提的判定
+## 2. Adjudication of hypotheses and premises
 
-| 项目 | 判定 | 依据 |
+| Item | Verdict | Basis |
 | --- | --- | --- |
-| RQ1 前提：AI 测量可作为自变量 | 支持，但月度噪声大 | F1：LLM 在全部维度优于基准；F3：月度信度 0.62，阶段 3 必须报告 3 个月平均和全框架词典版本 |
-| H2a 媒体端负面不对称 | 不支持（无稳健证据） | F6-1：结论随设定翻转，主设定显著来自符号相反的 GDP 系数 |
-| 选择不对称（R3.3） | 不支持 | F6-2：上涨与回落主题的斜率差区间含 0 |
-| 通胀回落后的价格水平框架（R3.3） | 不支持；物价报道比重偏高 | F6-3 |
-| 政治归因随政府变化（R3.3） | 存在差异，不能认定为偏差 | F6-5；F5 排除了编码器对人名的反应 |
-| 跨来源差异 | 主指标比其他新闻来源更负面 | F6-6 |
-| 反证清单第 8 条（测量不稳） | 名字与来源替换部分未触发；"三种语气测量结论相反"待阶段 3 判定 | F5；F2 |
-| 0.37 相关的三个候选原因 | 抽样噪声支持；全文与主题范围不支持 | F3 |
+| RQ1 premise: AI measurement can serve as an explanatory variable | Supported, but monthly noise is large | F1: the LLM beats the benchmarks on every dimension; F3: monthly reliability 0.62, so stage 3 must report the 3-month average and full-frame dictionary versions |
+| H2a Media-side negativity asymmetry | Not supported (no robust evidence) | F6-1: the conclusion flips with the specification, and significance in the main specification comes from opposite-signed GDP coefficients |
+| Selection asymmetry (R3.3) | Not supported | F6-2: the interval for the slope difference between the rising and easing topics contains 0 |
+| Price-level framing after inflation eased (R3.3) | Not supported; the weight of price coverage stays high | F6-3 |
+| Political attribution changes with the administration (R3.3) | A difference exists but cannot be identified as bias | F6-5; F5 rules out a coder reaction to names |
+| Cross-source differences | The main measure is more negative than other news sources | F6-6 |
+| Falsification list item 8 (unstable measurement) | The name and source swap part is not triggered; "the three tone measures give opposite conclusions" awaits adjudication in stage 3 | F5; F2 |
+| Three candidate reasons for the 0.37 correlation | Sampling noise supported; full text and topic scope not supported | F3 |
 
-## 三、限制
+## 3. Limitations
 
-- 事实校准的样本小：写明指标、可核对的全国新闻 68 条，社交平台 9 条。CPI 用季调序列核对，与媒体引用的未季调数字有系统差异，已用 ±0.2 敏感性口径报告。解析规则经 30 条人工抽查修订（26/30 正确，4 条错误已修正），修订后没有再做第二轮抽查。
-- 名字替换测试每个方向只有 25–40 条，检验力有限；Obama 换成 Trump 会造成时代错置。替换残余问题见 `labels/r37/r37_swap_review.md`。
-- 偏差基准是月度层面的总量关联，每月约 26 条相关条目；样本外推断交给阶段 3。
-- 地方新闻和 Media Cloud 全国组只覆盖 2025–2026 年的部分月份，跨来源结论只适用于这些月份。
+- The factual calibration sample is small: 68 checkable national news claims that name the indicator, and 9 from social platforms. CPI is checked against the seasonally adjusted series, which differs systematically from the not-seasonally-adjusted figures media cite; this is reported with the ±0.2 sensitivity tolerance. The parsing rules were revised after a manual spot check of 30 items (26/30 correct, the 4 errors fixed), and no second spot check was done after the revision.
+- The name-swap test has only 25–40 items per direction, so power is limited; replacing Obama with Trump creates anachronisms. Remaining swap issues are in `labels/r37/r37_swap_review.md`.
+- The bias benchmarks are aggregate associations at the monthly level, with about 26 relevant items per month; out-of-sample inference is left to stage 3.
+- Local news and the Media Cloud national group cover only some months of 2025–2026, so the cross-source conclusions apply only to those months.

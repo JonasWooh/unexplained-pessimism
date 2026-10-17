@@ -1,24 +1,24 @@
-# 收集过程记录
+# Collection process record
 
-快照生成于 2026-10-15T01:59:04.143385+00:00。数据检索截止日 2026-10-14。
+Snapshot generated at 2026-10-15T01:59:04.143385+00:00. Data retrieval cutoff 2026-10-14.
 
-先完整阅读方案与任务指导，再测试方案所列站点。随后收调查、宏观及版本资料；同日启动 YouTube，并继续新闻和参考来源。原件统一独占创建，实际来源与 UTC 时间记录在 sources.csv。
+The plan and the task guide were first read in full, and then the sites listed in the plan were tested. Next, survey, macro, and vintage materials were collected; YouTube was started the same day, and news and reference sources continued. All raw files were created exclusively, and the actual sources and UTC times are recorded in sources.csv.
 
-本轮以本地 conda base 运行。记录过的参数错误、404、403、429和超时均保留。访问拒绝未用代理、更换身份或非公开接口绕过。Reddit 未直接访问。许可与个人信息边界仍按用户答复处理。
+This round ran in the local conda base. Recorded parameter errors, 404s, 403s, 429s, and timeouts are all kept. Access denials were not circumvented with proxies, changed identities, or non-public interfaces. Reddit was not accessed directly. Permission and personal information boundaries are still handled according to the user's answers.
 
-调查/宏观/参考数据快照已核对，4578份原件在 2026-10-15T01:57:30Z 完成哈希检查，0失败、0未登记原件。16条ALFRED序列共37086条观测版本行，分页完整。S01从1978年起没有缺月，S06共194个月且CASEID无重复。
+The survey/macro/reference data snapshot has been checked: 4578 raw files completed hash checks at 2026-10-15T01:57:30Z, with 0 failures and 0 unregistered raw files. The 16 ALFRED series have 37086 observation-vintage rows in total, with complete pagination. S01 has no missing months from 1978 onward, and S06 has 194 months in total with no duplicate CASEID.
 
-YouTube目录已遍历到来源返回的边界：8频道在20000条截断，2频道回溯到2023年边界。官方搜索成功96页后收到429/rateLimitExceeded，后续YouTube请求停止。评论元数据35959条，正文未收；不把这些元数据称为NLP评论语料。
+The YouTube directory has been traversed to the boundary returned by the source: 8 channels were truncated at 20000 entries, and 2 channels go back to the 2023 boundary. After 96 successful pages, the official search received 429/rateLimitExceeded, and subsequent YouTube requests stopped. There are 35959 comment metadata records; comment text was not collected; this metadata is not called an NLP comment corpus.
 
-Media Cloud全国和地方的主题并集分别为1015455、3015899条（接口统计，可能跨集合重复）。按每页1000条和每分钟2次的限速，仅等待时间就约35小时，显著超出方案估计。按原监测范围继续本次单次后台下载，进度写入mediacloud_collection_state.json；没有缩短日期或当成全量样本。进程结束/出错会重做本地快照。
+The topic unions for Media Cloud national and local are 1015455 and 3015899 items respectively (API statistics, possibly duplicated across collections). At 1000 items per page and a rate limit of 2 requests per minute, the waiting time alone is about 35 hours, well above the plan's estimate. This single background download continues over the original monitoring range, with progress written to mediacloud_collection_state.json; the date range was not shortened, and it is not treated as a full-population sample. When the process ends/errors, the local snapshot will be regenerated.
 
-20新闻链接核查：14成功、4拒绝、1不存在、1限速；标题与日期差异见news_url_spotcheck.csv。未标注经济主题准确率，未建模或分析。初/终值仅核对真实来源；发现2025-01官方修订并保留原件；2026-10 ICS46.3已确认为初值。
+Check of 20 news links: 14 succeeded, 4 refused, 1 not found, 1 rate-limited; title and date differences are in news_url_spotcheck.csv. Precision of the economic topic was not annotated, and no modeling or analysis was done. Preliminary/final values were only checked against real sources; the official 2025-01 revision was found and the raw file kept; 2026-10 ICS 46.3 has been confirmed as a preliminary value.
 
-后续下载文件晚于上述快照，因此报告条目数带生成时间；完整清单在collection_report.md及dataset_status.csv。受限源与待决事项详见DECISIONS.md。
+Files downloaded later are newer than the snapshot above, so the report item counts carry the generation time; the complete list is in collection_report.md and dataset_status.csv. Restricted sources and pending items are detailed in DECISIONS.md.
 
-## 实际请求结果（含已记录失败，不含缓存命中）
+## Actual request results (including recorded failures, excluding cache hits)
 
-| 数据集 | 状态码或异常类型：次数 |
+| Dataset | Status code or exception type: count |
 |---|---|
 | M01 | 200: 7, 400: 1 |
 | M02 | 200: 4, 400: 1 |

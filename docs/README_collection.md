@@ -1,29 +1,29 @@
-# 本轮数据收集
+# This round of data collection
 
-原始请求：只收集真实数据及核查完整性；不分析、不标注。检索截止日期为 **2026-10-14**；文件夹日期使用本批次开始的 UTC 日期 20261015，实际逐文件下载时刻以来源登记为准。
+Original request: collect only real data and verify completeness; no analysis, no annotation. The retrieval cutoff date is **2026-10-14**; folder dates use 20261015, the UTC date when this batch started, and the actual per-file download times are as recorded in the source registry.
 
-结果入口：
+Where to find the results:
 
-- `provenance/collection_report.md`：带时间戳的状态汇报，明确区分完成、进行中、等待许可与缺失。
-- `provenance/dataset_status.csv`：每一个方案数据集的状态、覆盖、条目数和问题。
-- `provenance/sources.csv`：来源 URL/公开参数、UTC 下载时间、覆盖和条目数。认证参数不入表。
-- `provenance/inventory.csv`：逐文件检查；版本行、月、案例、标题、评论元数据不是同一种计数单位。
-- `DECISIONS.md`：方案中需核实项及实际调整、许可限制。
-- `provenance/excel_reconciliation.md`：教授 Excel 的 PCE 口径证据。
-- `provenance/release_calendar.csv`：发布日、ALFRED 版本日、未来计划分别标记，不能混用。
+- `provenance/collection_report.md`: a timestamped status report that clearly separates completed, in progress, awaiting permission, and missing.
+- `provenance/dataset_status.csv`: status, coverage, item counts, and issues for every dataset in the plan.
+- `provenance/sources.csv`: source URLs/public parameters, UTC download times, coverage, and item counts. Authentication parameters are not included in the table.
+- `provenance/inventory.csv`: per-file checks; vintage rows, months, cases, titles, and comment metadata are not the same counting unit.
+- `DECISIONS.md`: items in the plan that needed verification, the actual adjustments made, and permission restrictions.
+- `provenance/excel_reconciliation.md`: evidence on the PCE definition used in the professor's Excel file.
+- `provenance/release_calendar.csv`: release dates, ALFRED vintage dates, and future schedules are marked separately and must not be mixed.
 
-`data/raw/` 和 `corpus/raw/` 保存下载响应原件，独占创建而不覆盖。原方案、指导清单和教授 Excel 均未修改。部分原站响应实际是 CSV/PDF，但请求保存名以 `.html` 结尾；文件内容保持原样，inventory 和请求日志记录实际用途/Content-Type。没有把任何 API key 复制到这里、脚本或日志。
+`data/raw/` and `corpus/raw/` keep the original downloaded responses, created exclusively and never overwritten. The original plan, the guidance checklist, and the professor's Excel file are all unmodified. Some responses from the original sites are actually CSV/PDF, but the saved request names end in `.html`; the file contents are kept as is, and the inventory and request logs record the actual use/Content-Type. No API key has been copied here, into scripts, or into logs.
 
-运行环境为本地 conda base：`/Users/jonasw/anaconda3/bin/python`。依赖 requests、pandas、openpyxl、xlrd、beautifulsoup4、PyMuPDF；本轮补装了 xlrd 以读取原始 `.xls`。各脚本从原 `API_KEY.txt` 按本地标签运行时读取密钥，完整值不输出。不要共享该文件或原始受版权语料。
+The runtime environment is the local conda base: `/Users/jonasw/anaconda3/bin/python`. Dependencies are requests, pandas, openpyxl, xlrd, beautifulsoup4, and PyMuPDF; xlrd was additionally installed in this round to read the original `.xls` files. Each script reads its key from the original `API_KEY.txt` by local label at run time, and the full value is never printed. Do not share that file or the raw copyrighted corpus.
 
-已下载同名原件会跳过。当前批次的 Media Cloud 继续操作为 `src/collect/N03.py`；它先读取保存的分页 token，再以单个 worker 按 31 秒以上的请求间隔交替两集合，直到分页结束或某集合出现错误。不能同时启动第二个 Media Cloud worker；否则账户总速率会超限。计数总量不等于本地文章数，最早出版日期也不等于可靠连续历史起点。
+Raw files with the same name that have already been downloaded are skipped. The Media Cloud continuation for the current batch is `src/collect/N03.py`; it first reads the saved pagination token, then uses a single worker with a request interval of 31 seconds or more, alternating between the two collections until pagination ends or an error occurs for one collection. A second Media Cloud worker must not be started at the same time; otherwise the account's total rate limit will be exceeded. Total counts do not equal the number of local articles, and the earliest publication date does not equal a reliable start of continuous history.
 
-YouTube `youtube_inventory.py` 只完成目录能返回的范围；`youtube_search.py` 补查目录缺失季度，每天最多 100 次官方搜索，已存在的响应可继续读取。用户已允许评论正文，`youtube_comment_text.py` 请求 API 的 plainText/textDisplay，服务器端排除所有作者身份字段，另存 `comment_text_*.json`，不改原元数据文件。`youtube_comment_text_state.json` 保存逐视频分页状态；按用户要求已取消自行设置的单轮请求数、预留配额和单视频2000条截断，直到顶层分页结束或 API 实际错误，未收回复正文。`run_youtube_remaining.py` 单次后台继续正文及缺失视频详情，停止后重建状态报告；不能同时启动第二个 YouTube worker。`youtube_inventory_state.json` 的 done 不是覆盖完整标记，应看 `youtube_coverage.csv`。所有统计都是采集时累计值，不是发布时数值。
+YouTube `youtube_inventory.py` only covers what the directory can return; `youtube_search.py` fills in quarters missing from the directory, with at most 100 official searches per day, and existing responses can still be read. The user has allowed comment text, so `youtube_comment_text.py` requests plainText/textDisplay from the API, excludes all author identity fields on the server side, saves separately to `comment_text_*.json`, and does not change the original metadata files. `youtube_comment_text_state.json` stores per-video pagination state; at the user's request, the self-imposed per-round request count, reserved quota, and 2000-comment per-video truncation have been removed, so collection continues until top-level pagination ends or the API returns an actual error; reply text was not collected. `run_youtube_remaining.py` runs once in the background to continue comment text and missing video details, and rebuilds the status report after it stops; a second YouTube worker must not be started at the same time. In `youtube_inventory_state.json`, done is not a marker of complete coverage; see `youtube_coverage.csv`. All statistics are cumulative values at collection time, not values at publication time.
 
-`src/collect/finalize_snapshot.py` 重跑本地完整性与状态表，不分析数据、不改 raw。运行中新增原件可能晚于报告快照，后续应再次生成快照。`running_collection.json` 和 progress 日志记录本地长请求的状态；这是本次采集的单次后台进程，不是定时自动化。电脑休眠、断网或 API 限制可能中断，错误会保留，不自动切换网络或身份。
+`src/collect/finalize_snapshot.py` reruns the local completeness and status tables; it does not analyze data or change raw files. Raw files added during a run may be newer than the report snapshot, so the snapshot should be regenerated later. `running_collection.json` and the progress logs record the status of long local requests; this is a single background process for this collection, not a scheduled automation. Computer sleep, network loss, or API limits may interrupt it; errors are kept, and it does not automatically switch networks or identities.
 
-NYT/Guardian 已使用用户提供的官方密钥实测成功，并启动 `run_news_remaining.py` 单次后台采集；`news_archives.py` 负责每月原响应、分页和配额。NYT 2009-12 起全部文章元数据；Guardian 2010-01 起已核实的 US economy 标签及可得正文。查看 `news_running_collection.json` 和 `N01_archive_state.json` / `N02_archive_state.json`；不可同时启动重复 worker。
+NYT/Guardian were tested successfully with the official keys provided by the user, and `run_news_remaining.py` was started as a single background collection; `news_archives.py` handles the monthly raw responses, pagination, and quota. NYT: all article metadata from 2009-12 onward; Guardian: the verified US economy tag and available full text from 2010-01 onward. Check `news_running_collection.json` and `N01_archive_state.json` / `N02_archive_state.json`; duplicate workers must not be started at the same time.
 
-Reddit 已获用户明确授权并启动 `reddit_posts.py`，通过 Arctic Shift 社区存档采集四个子版块的帖子，排除所有作者身份字段。单次 API 返回上限100条不代表总量截断；满页递归拆分时间区间，保留原响应，只将非重叠叶区间计入帖子数。`reddit_collection_state.json` 和 `reddit_progress.log` 记录断点、数量和实际错误；不是 Reddit 官方 API，也不保证存档本身完整。先收2025年以来，再补2010—2024；未采可选评论。
+Reddit was explicitly authorized by the user, and `reddit_posts.py` was started to collect posts from four subreddits through the Arctic Shift community archive, excluding all author identity fields. The 100-item cap on a single API response does not mean the total is truncated; full pages recursively split the time interval, the raw responses are kept, and only non-overlapping leaf intervals are counted toward the number of posts. `reddit_collection_state.json` and `reddit_progress.log` record checkpoints, counts, and actual errors; this is not the official Reddit API, and the archive itself is not guaranteed to be complete. 2025 onward was collected first, then 2010—2024 was backfilled; optional comments were not collected.
 
-后续仍缺：各源未完成分页、截断历史的未完搜索页、未公开的调查报告和未来宏观发布、部分重大事件。正文与旧评论元数据可能重叠，不能将两批行数相加当作独立评论数。评论发布时间保留实际值，可晚于视频检索截止日。YouTube 非授权数据需在 30 天内刷新/删除；不要把此目录作为永久不刷新的档案。未创建自动提醒或删除任务。
+Still missing: unfinished pagination for each source, unfinished search pages for truncated history, unpublished survey reports and future macro releases, and some major events. Comment text and the older comment metadata may overlap, so the row counts of the two batches cannot be added together as the number of independent comments. Comment publication times are kept as their actual values and can be later than the video retrieval cutoff. Unauthorized YouTube data must be refreshed/deleted within 30 days; do not treat this directory as a permanent archive that is never refreshed. No automatic reminder or deletion task has been created.

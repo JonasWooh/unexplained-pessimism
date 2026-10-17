@@ -96,3 +96,9 @@ provenance/requests.jsonl
 
 # Local submission bundle (copies of tracked files)
 submission/
+
+# Chinese originals and Chinese-only working notes, kept locally for the author
+zh/
+# the author's Chinese launcher (any other .command file)
+*.command
+!open_dashboard.command

@@ -22,17 +22,18 @@ def main():
  shutil.copy2(ANN/'agreement/adjudication_disagreements.xlsx',LAB/'adjudication_log.xlsx')
  for f in ['agreement_summary.csv','confusion_matrices.csv','gold_overview.json']:shutil.copy2(ANN/'agreement'/f,LAB/f)
  for f in ['sampling_design.json','sampling_frame_sizes.csv']:shutil.copy2(ANN/f,LAB/f)
- shutil.copy2(ANN/'codebook_v1.md',CB/'codebook.md')
+ # codebook/codebook.md is the English labeling guide; annotation/codebook_v1.md is the frozen original given to annotators.
+ shutil.copy2(ANN/'codebook_v1_en.md',CB/'codebook.md')
  # examples.md: up to three gold calibration/main item ids per label value, with a short excerpt.
  gold=pd.read_csv(LAB/'adjudicated.csv',dtype=str).fillna('');txt=key.set_index('item_id').text
- lines=['# 标签示例（来自金标准，供手册对照）','','每个取值最多列 3 条金标准条目；摘录为单位文本前 30 词。完整文本见 labels/sample_for_annotation.csv。','']
+ lines=['# Label examples (from the gold standard, for use with the codebook)','','Up to 3 gold-standard items per value; each excerpt is the first 30 words of the unit text. Full text in labels/sample_for_annotation.csv.','']
  dims=['relevant','tone_overall','fact_direction','emotional_intensity','price_frame','perspective','time_frame','numeric_claim','definition_error','actor_1','direction_1']
  for d in dims:
   lines.append(f'## {d}');lines.append('')
   for v in sorted(x for x in gold[d].unique() if x):
    ids=gold[gold[d]==v].item_id.head(3)
-   lines.append(f'**{v}**（金标准 {int((gold[d]==v).sum())} 条）')
-   for i in ids:lines.append(f'- {i}：'+' '.join(str(txt[i]).split()[:30]).replace('|','/')+' …')
+   lines.append(f'**{v}** ({int((gold[d]==v).sum())} gold-standard items)')
+   for i in ids:lines.append(f'- {i}: '+' '.join(str(txt[i]).split()[:30]).replace('|','/')+' …')
    lines.append('')
  (CB/'examples.md').write_text('\n'.join(lines))
  # YouTube video-level metadata (consumption/engagement proxy, R2.4).

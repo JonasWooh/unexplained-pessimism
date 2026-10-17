@@ -1,84 +1,84 @@
-# 阶段 3 结果：预测比较（RQ5、H2b）
+# Stage 3 results: forecast comparison (RQ5, H2b)
 
-冻结时间 2026-10-16。设计见 `research/RESEARCH_DESIGN_v1.md` 模型 2、模型 3 与稳健性部分；实现细节见 `DECISIONS.md` 2026-10-16T19:35Z 条目。设定登记在 `results/spec_registry.csv`（S083 起），一键重跑用 `sh src/analysis/run_stage3.sh`。
+Frozen 2026-10-16. The design is in the Model 2, Model 3, and robustness sections of `research/RESEARCH_DESIGN_v1.md`; implementation details are in the 2026-10-16T19:35Z entry of `DECISIONS.md`. Specifications are registered in `results/spec_registry.csv` (from S083); rerun everything with `sh src/analysis/run_stage3.sh`.
 
-**设定**
-- 预测时点为 t 月 1 日：用该日的实时经济值、t−1 月媒体指标，AR 版本另加 ICS_{t−1}。
-- 四个模型共用 2010-06 起的扩展窗口（人均实际可支配收入从这个月开始才有）。第一个训练窗口到 2016-12，评估期 2017-01 至 2026-10，共 118 个月。
-- 在看到结果之前已写定：反证清单第 2 条以 AR 版本为主，因为它控制了信心本身的持续性，检验更严格；不带 AR 的版本并列报告。
-- RMSE 比 = 大模型 ÷ 小模型，小于 1 表示加入变量后预测更准。Clark–West 为单侧检验。
+**Specification**
+- The forecast origin is the 1st of month t: use the real-time economic values on that date and the media measures for month t−1, with ICS_{t−1} added in the AR version.
+- All four models share an expanding window starting 2010-06 (real per-capita disposable income is available only from that month). The first training window runs to 2016-12, and the evaluation period is 2017-01 to 2026-10, 118 months in total.
+- Fixed in writing before seeing the results: item 2 of the falsification list uses the AR version as the main version, because it controls for the persistence of sentiment itself and is the stricter test; the version without AR is reported alongside.
+- RMSE ratio = larger model ÷ smaller model; below 1 means forecasts are more accurate after adding the variables. Clark–West is a one-sided test.
 
-## 一、发现
+## 1. Findings
 
-**F1. 在只含三项基本面的模型上加入媒体语气，预测有小幅但显著的改进。**
-1 步预测，AR 版本（`stage3_forecast/comparisons.csv`）：
+**F1. Adding media tone to the model with only the three fundamentals gives a small but significant improvement in forecasts.**
+1-step forecasts, AR version (`stage3_forecast/comparisons.csv`):
 
-| 时段 | M1 RMSE | M2 RMSE | 比值 [95% 区间] | Clark–West p |
+| Period | M1 RMSE | M2 RMSE | Ratio [95% interval] | Clark–West p |
 | --- | --- | --- | --- | --- |
-| 2017-01 至 2026-10 | 4.93 | 4.89 | 0.991 [0.949, 1.022] | 0.041 |
-| 同上，剔除 2020-03 至 12 月 | 4.23 | 4.13 | 0.976 [0.931, 1.010] | 0.005 |
+| 2017-01 to 2026-10 | 4.93 | 4.89 | 0.991 [0.949, 1.022] | 0.041 |
+| Same, excluding 2020-03 to 12 | 4.23 | 4.13 | 0.976 [0.931, 1.010] | 0.005 |
 | 2017–2019 | 3.04 | 2.85 | 0.937 | 0.017 |
 | 2020–2022 | 6.54 | 6.69 | 1.023 | 0.48 |
 | 2023–2024 | 4.30 | 4.31 | 1.004 | 0.36 |
 | 2025–2026 | 5.00 | 4.60 | 0.920 | 0.005 |
 
-不带 AR 时，M1 本身很差（RMSE 14.1），加入语气后比值为 0.946（p = 0.006）。3 个月直接预测在 AR 版本中没有改进（p = 0.88）。
+Without AR, M1 itself is poor (RMSE 14.1), and the ratio after adding tone is 0.946 (p = 0.006). 3-month direct forecasts show no improvement in the AR version (p = 0.88).
 
-**F2. 控制家庭压力和政治变量之后，媒体语气在主设定下没有样本外增量。**
-M1c 对 M3 的 AR 版本：
+**F2. After controlling for household pressures and political variables, media tone has no out-of-sample increment in the main specification.**
+M1c vs. M3, AR version:
 
-- RMSE 比 1.001 [0.964, 1.046]，Clark–West p = 0.23；剔除疫情月份后 p = 0.42。
-- 分时期只有 2017–2019 年显著（p = 0.007），2025–2026 年 p = 0.34。
-- 20 个稳健性变体中没有一个在 5% 水平显著，p 介于 0.065 和 0.85 之间。最接近显著的是全框架词典指数（p = 0.065）和密歇根初值截止日（p = 0.095）。见 `stage3_robustness/variants.csv` 和 `fig_spec_curve_cw.png`。
-- 不带 AR 时，20 个变体中 18 个显著（主设定 p = 0.004，比值 0.926）。但不带 AR 的模型漏掉了信心本身的持续性，RMSE 是 AR 版本的两倍以上；语气在这里很可能替代了缺口的持续部分，而不是提供了独立信息。
+- RMSE ratio 1.001 [0.964, 1.046], Clark–West p = 0.23; p = 0.42 after excluding the pandemic months.
+- By period, only 2017–2019 is significant (p = 0.007); for 2025–2026, p = 0.34.
+- None of the 20 robustness variants is significant at the 5% level, with p between 0.065 and 0.85. The closest to significance are the full-frame dictionary index (p = 0.065) and the Michigan preliminary-release cutoff (p = 0.095). See `stage3_robustness/variants.csv` and `fig_spec_curve_cw.png`.
+- Without AR, 18 of the 20 variants are significant (main specification p = 0.004, ratio 0.926). But the models without AR miss the persistence of sentiment itself, and their RMSE is more than twice that of the AR versions; here tone very likely stands in for the persistent part of the gap rather than providing independent information.
 
-**F3. 在样本内，语气系数稳定为正且显著，但折算成点数很小。**
-M3 的 AR 版本，2010-06 至 2026-10：γ = 5.03（HAC 12 阶标准误 1.40，p < 0.001）。HAC 6 阶和 18 阶下结论相同，2010–2019 窗口为 5.93（`media_coefficients.csv`）。
+**F3. In sample, the tone coefficient is stably positive and significant, but small when converted into points.**
+M3, AR version, 2010-06 to 2026-10: γ = 5.03 (HAC 12-lag standard error 1.40, p < 0.001). The conclusion is the same with HAC 6 and 18 lags, and the 2010–2019 window gives 5.93 (`media_coefficients.csv`).
 
-- 全国语气的月度标准差约 0.20，所以语气变动一个标准差，当月 ICS 约变 1.0 点，长期累积约 1.8 点（γ ÷ (1 − ρ)，ρ = 0.45）。
-- 量级换算（`magnitude.csv`，用 2010–2019 年拟合的 M3）：2025 年全国语气比 2019 年均值低 0.15，对应约 1.6 点；阶段 1 中 2025 年的平均缺口是 −35.8，所以这部分约占 4.5%。2026 年约占 3.6%。2021–2022 年和 2023–2024 年的语气并不比 2019 年更负面，对应份额小于 0。
-- 这些是关联的上限，不是因果效应。
+- The monthly standard deviation of national tone is about 0.20, so a one-standard-deviation change in tone moves same-month ICS by about 1.0 point, and about 1.8 points cumulatively in the long run (γ ÷ (1 − ρ), ρ = 0.45).
+- Magnitude conversion (`magnitude.csv`, using M3 fitted on 2010–2019): national tone in 2025 is 0.15 below its 2019 mean, corresponding to about 1.6 points; the mean 2025 gap in stage 1 is −35.8, so this part accounts for about 4.5%. In 2026 it accounts for about 3.6%. Tone in 2021–2022 and 2023–2024 is not more negative than in 2019, and the corresponding shares are below 0.
+- These are upper bounds on the association, not causal effects.
 
-**F4. 语气系数在 2024-07 调查方式转换后变大。**
-`gamma_breaks.csv` 的结果：
+**F4. The tone coefficient becomes larger after the 2024-07 survey mode switch.**
+Results from `gamma_breaks.csv`:
 
-- AR 版本在 2024-07 之后 γ 增加 11.7（p = 0.010）；不带 AR 时增加 41.3（p < 0.001）。
-- 2020-03 和 2025-01 只有截距变化，γ 本身没有显著变化。
-- 60 个月滚动系数见 `fig_rolling_gamma.png`。
-- 这与阶段 1 中网络访谈后 ICC 下移的发现相呼应。网络样本的信心可能对新闻环境更敏感，但只有 28 个月数据，属于探索性观察。
+- In the AR version, γ increases by 11.7 after 2024-07 (p = 0.010); without AR it increases by 41.3 (p < 0.001).
+- At 2020-03 and 2025-01 only the intercept changes; γ itself shows no significant change.
+- 60-month rolling coefficients are in `fig_rolling_gamma.png`.
+- This echoes the stage 1 finding that ICC shifted down after web interviews. Sentiment in the web sample may be more sensitive to the news environment, but there are only 28 months of data, so this is an exploratory observation.
 
-**F5. 加入家庭与政治控制本身使样本外预测变差。**
-AR 版本中 M1c 对 M1 的 RMSE 比为 1.16 [1.01, 1.37]，2020–2022 年最差（1.26）。原因与阶段 1 相同：累计通胀和房贷利率在训练期变动很小，外推不稳。另外，在第一个训练窗口里执政党虚拟变量恒为 0（2010–2016 年全是同一届政府），系数只能在 2017 年之后逐渐估出来。
+**F5. Adding household and political controls by itself makes out-of-sample forecasts worse.**
+In the AR version, the RMSE ratio of M1c to M1 is 1.16 [1.01, 1.37], worst in 2020–2022 (1.26). The reason is the same as in stage 1: cumulative inflation and the mortgage rate varied little in the training period, so extrapolation is unstable. In addition, the governing-party dummy is constantly 0 in the first training window (2010–2016 is all the same administration), so its coefficient can only be estimated gradually after 2017.
 
-方差膨胀因子在第一个窗口最高为 4.5（累计通胀），全期最高为 5.5，不构成严重共线性（`vif.csv`）。
+The highest variance inflation factor is 4.5 in the first window (cumulative inflation) and 5.5 over the full period, which does not amount to serious collinearity (`vif.csv`).
 
-**F6. 次要媒体变量都没有通过错误发现率校正（AR 版本）。**
-六个变量逐一加到 M1 上，滞后 1–3 期在每个窗口用 BIC 选择，另加六者的第一主成分（`secondary.csv`）。
+**F6. None of the secondary media variables survives the false discovery rate correction (AR version).**
+The six variables are added to M1 one at a time, with lags of 1–3 chosen by BIC in each window, plus the first principal component of the six (`secondary.csv`).
 
-- AR 版本中，BH 校正后 p 值都不小于 0.43。
-- 不带 AR 时只有 `net_fact` 通过（校正后 p = 0.082，q = 0.10）。
+- In the AR version, all BH-corrected p-values are at least 0.43.
+- Without AR, only `net_fact` passes (corrected p = 0.082, q = 0.10).
 
-**F7. 替代媒体测量的结果：超额语气保留了与原始语气相同的信息；旧金山联储指数和 EPU 没有增量。**
+**F7. Results for the alternative media measures: excess tone keeps the same information as raw tone; the San Francisco Fed index and EPU add nothing.**
 
-- **超额语气**：按设计字面做法，把语气对模型中已有的 U、π、g 回归取残差，由 Frisch–Waugh–Lovell 定理可知预测结果与原始语气完全相同，检验没有信息量。因此改为对 U、π、g、家庭变量和 t−1 月数据发布回归取残差（记为偏离）。结果：M1 对 M2 的 AR 版本 p = 0.024，M1c 对 M3 的 p = 0.12。去掉基本面成分后，语气对 M1 的增量仍在，所以它不只是基本面的另一种读数；但控制家庭变量后同样不显著。
-- **3 个月平均语气**：AR 版本无增量（p = 0.73），γ 不显著。月度语气的信息主要在短期变化上，平滑后被 AR 项吸收。
-- **旧金山联储指数**：AR 版本 γ = 0.68（p = 0.86）。
-- **EPU**：AR 版本 γ 接近 0（p = 0.54）。
-- **全框架词典指数**：γ = 9.2（p = 0.017），M1c 对 M3 的 p = 0.065，是 AR 版本中最接近显著的变体。
+- **Excess tone**: following the design literally, regressing tone on U, π, and g, which are already in the model, and taking the residual gives forecasts identical to raw tone by the Frisch–Waugh–Lovell theorem, so the test is uninformative. The residual was therefore taken instead from a regression on U, π, g, the household variables, and the data releases of month t−1 (recorded as a deviation). Results: M1 vs. M2, AR version, p = 0.024; M1c vs. M3, p = 0.12. With the fundamentals component removed, tone's increment over M1 remains, so it is not merely another reading of the fundamentals; but after controlling for household variables it is likewise not significant.
+- **3-month average tone**: no increment in the AR version (p = 0.73), and γ is not significant. The information in monthly tone lies mainly in short-run changes, which are absorbed by the AR term after smoothing.
+- **San Francisco Fed index**: AR version γ = 0.68 (p = 0.86).
+- **EPU**: AR version γ close to 0 (p = 0.54).
+- **Full-frame dictionary index**: γ = 9.2 (p = 0.017), and M1c vs. M3 p = 0.065, the variant closest to significance in the AR version.
 
-## 二、对假设与反证清单的判定
+## 2. Adjudication of hypotheses and the falsification list
 
-| 项目 | 判定 | 依据 |
+| Item | Verdict | Basis |
 | --- | --- | --- |
-| H2b 第一部分：语气在 M1 上有增量 | 支持，效应小 | F1：AR 版本 p = 0.041，RMSE 降 0.9%；20 个变体中 9 个显著 |
-| H2b 主检验：控制真实压力与政治后语气仍有增量 | 不支持（主设定） | F2：AR 版本 20 个变体都不显著；只有不带 AR 的设定支持 |
-| RQ5 媒体分析能否改进信心预测 | 只在基本面模型上有小幅改进，加入家庭与政治控制后消失 | F1、F2 |
-| 反证清单第 2 条（无样本外增量） | **触发**（AR 主版本 p = 0.23）；不带 AR 版本未触发 | F2 |
-| 次要媒体假设 | AR 版本全部不显著 | F6 |
-| 与语气相关的缺口份额 | 2025–2026 年不超过约 5% | F3 |
+| H2b first part: tone adds to M1 | Supported, small effect | F1: AR version p = 0.041, RMSE down 0.9%; 9 of the 20 variants significant |
+| H2b main test: tone still adds after controlling for real pressures and politics | Not supported (main specification) | F2: none of the 20 variants significant in the AR version; only the specifications without AR support it |
+| RQ5 Whether media analysis improves sentiment forecasts | Only a small improvement over the fundamentals model, which disappears after adding household and political controls | F1, F2 |
+| Falsification list item 2 (no out-of-sample increment) | **Triggered** (AR main version p = 0.23); not triggered in the version without AR | F2 |
+| Secondary media hypotheses | All not significant in the AR version | F6 |
+| Share of the gap associated with tone | No more than about 5% in 2025–2026 | F3 |
 
-## 三、限制
+## 3. Limitations
 
-- 评估期只有 118 个月，2025–2026 年只有 22 个月，分时期检验的力度有限。
-- AR 版本是否应作为主版本，设计中没有写明。这里在看到结果之前选定了 AR 版本，并在 DECISIONS.md 中记录，两种版本都完整报告。
-- 媒体指标月度信度约 0.62（阶段 2），γ 会被低估。3 个月平均和全框架词典两个替代测量的结论与主测量一致或更弱，没有因为测量噪声而改变方向。
+- The evaluation period has only 118 months, and 2025–2026 only 22 months, so the by-period tests have limited power.
+- The design did not state whether the AR version should be the main version. Here the AR version was chosen before seeing the results and recorded in DECISIONS.md, and both versions are reported in full.
+- The monthly reliability of the media measures is about 0.62 (stage 2), so γ is underestimated. The conclusions from the two alternative measures, the 3-month average and the full-frame dictionary, agree with the main measure or are weaker; measurement noise did not change the direction.

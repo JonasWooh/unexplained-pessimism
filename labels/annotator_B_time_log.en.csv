@@ -1,0 +1,2 @@
+session,start (local time),end (local time),sheet,first item_id,last item_id,notes
+1,,,calibration + main,C001,A360,"Back-filled estimate of time spent: 35 minutes (range of 30-40 minutes specified by the user, not measured); original start and end times were not recorded."

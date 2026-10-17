@@ -1,15 +1,15 @@
-# 教授 Excel 只读核对
+# Read-only check of the professor's Excel file
 
-原文件未修改。以下运算仅用于确认数据口径与完整性，不是分析数据集。单位为百分点。
+The original file was not modified. The calculations below are only for confirming the data definitions and completeness; this is not an analysis dataset. Units are percentage points.
 
-| 口径 | 可对齐月份 | 平均绝对误差 | 最大绝对误差 | 误差不超过 0.01 的月份 |
+| Definition | Alignable months | Mean absolute error | Maximum absolute error | Months with error no greater than 0.01 |
 |---|---:|---:|---:|---:|
 | headline | 584 | 0.53754305 | 2.25331113 | 4 |
 | core | 584 | 0.00000348 | 0.00001351 | 584 |
 
-对照公式：100 × (同一最新版本的当月指数 / 12 个月前指数 − 1)。匹配结果支持核心 PCE 口径，精确程度见上表；不能仅凭列名判断为总体 PCE。历史修订可能影响精确逐值匹配。
+Comparison formula: 100 × (index for the month in the same latest vintage / index 12 months earlier − 1). The match supports the core PCE definition, with the precision shown in the table above; it cannot be judged to be headline PCE from the column name alone. Historical revisions may affect exact value-by-value matching.
 
-- 信心月度 CSV 可匹配 585 个月；一致 585 个月。CSV 最新月份 2026-09。另核对保存的官网首页明确标为 Preliminary Results for October 2026：ICS=46.3，与教授表 2026-10=46.3 一致。它是初值，不能混作终值。官方日历发布日 2026-10-09，10月终值计划10月23日发布。证据 data/raw/S05/20261015/homepage.html，来源 https://www.sca.isr.umich.edu/ 。
-- UNRATE 2025-10 共有 1 条版本记录，其中非缺失数值 0 条；缺失标记不等于可用观测。
-- GDP 环比折年率最新非缺失观测 2026-04；Excel 的 2026Q3=3.7 不作为实测值收录，无法据此确认来源。
-- 官网 ICS 2022-06=50.0; 2026-05=44.8。
+- The consumer sentiment monthly CSV can be matched for 585 months; 585 months agree. The latest month in the CSV is 2026-09. The saved official homepage was also checked; it is explicitly labeled Preliminary Results for October 2026: ICS=46.3, which agrees with the professor's table value 2026-10=46.3. It is a preliminary value and must not be mixed with final values. The official calendar release date is 2026-10-09, and the October final value is scheduled for release on October 23. Evidence: data/raw/S05/20261015/homepage.html, source https://www.sca.isr.umich.edu/ .
+- UNRATE 2025-10 has 1 vintage record in total, of which 0 have non-missing values; a missing-value marker is not a usable observation.
+- The latest non-missing observation of the GDP quarter-over-quarter annualized rate is 2026-04; the Excel value 2026Q3=3.7 is not recorded as a measured value, and its source cannot be confirmed from it.
+- Official website ICS 2022-06=50.0; 2026-05=44.8.

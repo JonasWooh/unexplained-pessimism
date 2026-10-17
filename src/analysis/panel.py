@@ -1,6 +1,6 @@
 """Research panel: real-time monthly regressors for M1/M1c/M2/M3 and the long M1 windows.
 
-Design: research/RESEARCH_DESIGN_v1.md (D-A, D-D, "数据与变量"). Output: data/processed/research_panel.csv
+Design: research/RESEARCH_DESIGN_v1.md (D-A, D-D, "Data and variables"). Output: data/processed/research_panel.csv
 (1978-01..2026-10, one row per survey month, cutoff tau_t = last day of month t-1, rule D2).
 
 Columns added on top of data/processed/econ_monthly_realtime.csv (2010-01 onward, copied unchanged):

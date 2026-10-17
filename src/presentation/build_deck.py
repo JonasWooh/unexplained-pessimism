@@ -1,4 +1,4 @@
-"""Build the 9-slide presentation and its bilingual script. Run from the project root:
+"""Build the 9-slide presentation and its speaker script. Run from the project root:
     python3 src/presentation/build_deck.py
 Reads frozen results through slide_numbers.py and the chart layers from make_slide_figures.py
 (run first). Writes presentation/Unexplained_Pessimism_slides.pptx and presentation/SCRIPT.md.
@@ -479,13 +479,12 @@ def main():
         slide, tl = fn(prs, N)
         n_click = sp['en'].count('[CLICK]')
         assert n_click == tl.n_clicks, f'slide {i + 1}: script has {n_click} clicks, animation {tl.n_clicks}'
-        assert sp['zh'].count('[点击]') == n_click, f'slide {i + 1}: Chinese click marks differ'
         fx.apply(slide, transition=tr, dur_ms=900 if tr == 'morph' else 700, timeline=tl)
         nw = words(sp['en'])
         secs = nw / 130 * 60 + n_click * 0.8
         rows.append((i + 1, nw, n_click, secs))
         slide.notes_slide.notes_text_frame.text = (
-            f'≈ {round(secs)} s  ·  {nw} words  ·  {n_click} clicks\n\n{sp["en"]}\n\n—— 中文对照 ——\n{sp["zh"]}')
+            f'≈ {round(secs)} s  ·  {nw} words  ·  {n_click} clicks\n\n{sp["en"]}')
     out = OUT / 'Unexplained_Pessimism_slides.pptx'
     prs.save(out)
 
@@ -493,11 +492,10 @@ def main():
     tot_c = sum(r[2] for r in rows)
     t = lambda wpm: tot_w / wpm * 60 + tot_c * 0.8 + 8 * 1.0
     ms = lambda sec: f'{int(sec // 60)}:{round(sec % 60):02d}'
-    md = ['# Presentation script / 展示讲稿', '',
-          f'Slides: `Unexplained_Pessimism_slides.pptx` (9 slides). The English text is what you read; the '
-          f'Chinese text is a reference translation. [CLICK] = advance one animation step.',
-          '', f'英文为实际朗读稿，中文为对照翻译。[CLICK] / [点击] 表示按一次翻页键触发下一个动画；每页讲完后再按一次进入下一页。', '',
-          f'**Length / 时长**: {tot_w} words, {tot_c} clicks. Estimated total (including about 0.8 s per click '
+    md = ['# Presentation script', '',
+          f'Slides: `Unexplained_Pessimism_slides.pptx` (9 slides). [CLICK] = press the advance key once to trigger '
+          f'the next animation step; after a slide is finished, press once more to go to the next slide.', '',
+          f'**Length**: {tot_w} words, {tot_c} clicks. Estimated total (including about 0.8 s per click '
           f'and 1 s per slide change): {ms(t(140))} at 140 words per minute, {ms(t(130))} at 130, '
           f'{ms(t(120))} at 120. Limit 4:30.', '']
     md += ['| Slide | Words | Clicks | ≈ seconds at 130 wpm |', '| --- | --- | --- | --- |']
@@ -506,7 +504,7 @@ def main():
     titles = ['Title', 'The puzzle', 'Three explanations', 'H3 · Measurement', 'H2 · Measuring the media',
               'H2 · What coverage shows', 'H2 · The forecast test', 'Verdict', 'Implication']
     for (i, nw, nc, secs), sp, ttl in zip(rows, sc, titles):
-        md += [f'## {i}. {ttl}  (≈ {secs:.0f} s)', '', sp['en'], '', f'> {sp["zh"]}', '']
+        md += [f'## {i}. {ttl}  (≈ {secs:.0f} s)', '', sp['en'], '']
     (OUT / 'SCRIPT.md').write_text('\n'.join(md))
     print(out)
     for r in rows:

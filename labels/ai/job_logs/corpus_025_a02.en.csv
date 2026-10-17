@@ -1,0 +1,2 @@
+run_dir,split,files,model_name_as_displayed,settings,prompt_file,prompt_sha256,started_local,finished_local,notes
+labels/ai/codex__v2_isolated_r1_corpus,corpus,corpus_batch_025.jsonl,not visible,not visible,03_corpus_all/prompts/label_prompt_v2.md,9f95f20aa319fff0ecf6c4a29d2ab81bfcc9503d72a581ea64cc6a661b6e16bd,2026-10-16T05:45:28-04:00,2026-10-16T05:58:01-04:00,agent=corpus_025_retry (a02); status=completed; rows=200; full text read for all items; full validation passed; SHA256=1f44487ce4089ab07e05fb10395d1ca303f419f79c129caf8e562354dba59f79
