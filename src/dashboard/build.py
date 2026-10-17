@@ -459,7 +459,7 @@ def meta(months, conf, econ, med, mode):
         'media_last': nat['last'], 'media_note': next((n for n in reversed(nat['note']) if n), None),
         'prompt': PROMPT_FILE.split('/')[-1], 'prompt_sha256': sha,
         'model': decl['model'], 'effort': decl['reasoning_effort'],
-        'repo': '[GitHub repository URL]',
+        'repo': 'https://github.com/JonasWooh/unexplained-pessimism',
     }
 
 

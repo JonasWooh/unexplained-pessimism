@@ -318,4 +318,4 @@
 - 提示的内容：
   - 页面中的结果都是观测数据中的关联，不代表新闻报道导致了信心变化。
   - Reddit 和 YouTube 只以计数和平均值的形式出现，不展示原文；新闻标题会链接到原发布方。
-- 仓库链接目前还是占位符 `[GitHub repository URL]`，等你提供地址后再替换。
+- 仓库链接：https://github.com/JonasWooh/unexplained-pessimism

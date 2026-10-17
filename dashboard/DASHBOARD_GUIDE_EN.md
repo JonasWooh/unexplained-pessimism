@@ -343,4 +343,4 @@ The orange box at the top is the key point for this tab.
 - The footer has a project description, the list of data sources and two reading notes:
   - The results are associations in observational data. The page does not claim that news coverage causes changes in sentiment.
   - Reddit and YouTube appear only as counts and averages, and their text is never shown. Headlines link to the publishers.
-- The repository link is still the placeholder `[GitHub repository URL]`. It will be replaced once you send the address.
+- Repository: https://github.com/JonasWooh/unexplained-pessimism
