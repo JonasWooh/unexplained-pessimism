@@ -1,0 +1,49 @@
+{
+  "generated_at_utc": "2026-10-15T23:09:48.499453+00:00",
+  "total_dates": 1383,
+  "dates_with_candidate": 1116,
+  "dates_with_complete_video": 1075,
+  "dates_with_window_comment": 1059,
+  "channel_dates_with_candidate": 3501,
+  "channel_dates_with_complete_video": 2638,
+  "channel_dates_with_two_complete": 1003,
+  "main_set_videos": 7289,
+  "search_only_supplement_videos": 1724,
+  "months_total": 46,
+  "months_with_complete_video": 46,
+  "channel_months_with_candidate": 401,
+  "channel_months_with_complete_video": 356,
+  "min_window_comments_per_month": 404,
+  "complete_videos": 4488,
+  "window_comments_in_main_set": 337964,
+  "status": "running",
+  "phase": "roundmonth",
+  "rounds": {
+    "round1": {
+      "status": "complete",
+      "queue_left": 0,
+      "done": 38,
+      "units_without_eligible": 308
+    },
+    "roundpanel": {
+      "status": "complete",
+      "queue_left": 0,
+      "done": 7,
+      "units_without_eligible": 8
+    },
+    "roundmonth": {
+      "status": "complete",
+      "queue_left": 0,
+      "done": 63,
+      "units_without_eligible": 45
+    }
+  },
+  "quota_stops": [],
+  "requests_total": 3264,
+  "limitations": [
+    "UUSH (shorts) playlists not traversed; shorts enter the main set only through uploads pages, i.e. only for dates the 20,000-item uploads listing reached per channel.",
+    "Date = UTC calendar date of contentDetails.videoPublishedAt.",
+    "Window comments = unique top-level comments published within 30 days of video publication and no later than 2026-10-14T23:59:59Z.",
+    "commentCount from videos.list includes replies and is a snapshot; it only decides eligibility (present and >0) and processing order."
+  ]
+}

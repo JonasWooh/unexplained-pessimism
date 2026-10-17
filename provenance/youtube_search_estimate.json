@@ -1,0 +1,8 @@
+{
+  "as_of_utc": "2026-10-15T20:47:15.040446+00:00",
+  "remaining_channel_months": 218,
+  "minimum_requests": 218,
+  "minimum_pacific_days": 3,
+  "note": "Lower bound assumes one page per unfinished month; actual days depend on result counts, pagination, quota shared with other search calls, and errors.",
+  "search_calls_today": 102
+}

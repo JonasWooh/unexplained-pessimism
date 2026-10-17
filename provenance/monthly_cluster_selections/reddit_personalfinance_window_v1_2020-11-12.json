@@ -1,0 +1,50 @@
+{
+  "source": "personalfinance",
+  "date": "2020-11-12",
+  "sample_unit": "circular_time_window",
+  "selected_intervals": [
+    [
+      1605154586,
+      1605166311
+    ]
+  ],
+  "window_start_second": 15386,
+  "window_length_seconds": 11725,
+  "inclusion_probability": 0.013570601851851851,
+  "month_plan_file": "provenance/personalfinance_window_month_plans/2020-11.json",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_window_personalfinance_1605154586_1605166311.json"
+  ],
+  "unique_ids": [
+    "jso2uw",
+    "jso5tr",
+    "jso7n9",
+    "jso8xo",
+    "jso9u4",
+    "jso9xh",
+    "jsoh9y",
+    "jsoi0o",
+    "jsomyv",
+    "jsoqak",
+    "jsor8a",
+    "jsot0l",
+    "jsouvx",
+    "jsoz3l",
+    "jsp3ft",
+    "jsp3n9",
+    "jspemr",
+    "jspgnq",
+    "jsphnr",
+    "jspiqd",
+    "jspq1g",
+    "jspqnv",
+    "jspsmv",
+    "jsqadv",
+    "jsqc5l",
+    "jsqde0"
+  ],
+  "rows": 26,
+  "removed": 5,
+  "deleted": 9,
+  "missing_retrieved_on": 26
+}

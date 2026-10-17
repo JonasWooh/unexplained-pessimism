@@ -1,0 +1,9 @@
+check,series,note,months,r_sffed,r_sffed_first_difference
+"LLM index, all relevant (baseline)",net_tone,40 coded units a month,202,0.367332930418289,0.17532365422624896
+"(1) LLM index, 3-month mean",net_tone,rolling 3,200,0.44122540653942205,0.3261318237555625
+"(3) LLM index, macro-topic units only",net_tone_macro,LLM topics T01-T06,202,0.33761347310361967,0.212012906946848
+"dictionary LM, LLM-sample units only",dict_net_tone_lm_llmsample,"same units as LLM index, dictionary tone",202,0.36900163434815125,0.12350624809562322
+"dictionary LM, full frame",dict_net_tone_lm,"all predicted-relevant units, about 120 a month",202,0.543287465411748,0.22572654273678253
+"(3) dictionary LM, full frame, macro-topic units only",dict_net_tone_lm_macro,keyword-rule topics T01-T06,202,0.4281763105198694,0.11395807953386179
+"(2) Guardian only, LM dictionary on coded unit text",guardian_lm_unit,about 17 Guardian units a month,202,0.3387764650869618,0.2010576536348749
+"(2) Guardian only, LM dictionary on full article body",guardian_lm_fulltext,about 17 Guardian units a month,202,0.2540403276481909,0.1776585385614032

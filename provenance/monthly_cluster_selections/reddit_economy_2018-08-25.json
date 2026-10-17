@@ -1,0 +1,34 @@
+{
+  "source": "economy",
+  "date": "2018-08-25",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/cluster_posts_economy_1535155200_1535241600.json"
+  ],
+  "unique_ids": [
+    "9a37k9",
+    "9a3azf",
+    "9a3eb7",
+    "9a3l1y",
+    "9a46n0",
+    "9a4dwk",
+    "9a4wnj",
+    "9a4wnk",
+    "9a5jd9",
+    "9a6prm",
+    "9a71za",
+    "9a71zg",
+    "9a7nk7",
+    "9a86au",
+    "9a8cbb",
+    "9a8ke0",
+    "9a8ke4",
+    "9a8kea",
+    "9a9vqo",
+    "9aaqnb",
+    "9ab3wm",
+    "9ab9ag",
+    "9abat8"
+  ],
+  "rows": 23
+}

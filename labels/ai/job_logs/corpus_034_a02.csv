@@ -1,0 +1,2 @@
+run_dir,split,files,model_name_as_displayed,settings,prompt_file,prompt_sha256,started_local,finished_local,notes
+labels/ai/codex__v2_isolated_r1_corpus,corpus,corpus_batch_034.jsonl,not visible,not visible,03_corpus_all/prompts/label_prompt_v2.md,9f95f20aa319fff0ecf6c4a29d2ab81bfcc9503d72a581ea64cc6a661b6e16bd,2026-10-16T06:18:28-04:00,2026-10-16T06:18:59-04:00,task corpus_034_a02; incomplete due to execution resource limit; 10 of 200 records labeled (K06601-K06610); remaining IDs K06611-K06800; output is a valid ordered prefix; status incomplete

@@ -1,0 +1,32 @@
+{
+  "source": "personalfinance",
+  "date": "2011-06-30",
+  "sample_unit": "circular_time_window",
+  "selected_intervals": [
+    [
+      1309392000,
+      1309478400
+    ]
+  ],
+  "window_start_second": 80200,
+  "window_length_seconds": 86400,
+  "inclusion_probability": 0.1,
+  "month_plan_file": "provenance/personalfinance_window_month_plans/2011-06.json",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_window_personalfinance_1309392000_1309478400.json"
+  ],
+  "unique_ids": [
+    "id4dy",
+    "id8o3",
+    "id909",
+    "id9p0",
+    "ide7i",
+    "ideh4",
+    "idnn3",
+    "idp42"
+  ],
+  "rows": 8,
+  "removed": 0,
+  "deleted": 0,
+  "missing_retrieved_on": 8
+}

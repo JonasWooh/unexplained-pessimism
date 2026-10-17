@@ -1,0 +1,60 @@
+{
+  "source": "personalfinance",
+  "date": "2020-10-10",
+  "sample_unit": "circular_time_window",
+  "selected_intervals": [
+    [
+      1602295789,
+      1602306768
+    ]
+  ],
+  "window_start_second": 7789,
+  "window_length_seconds": 10979,
+  "inclusion_probability": 0.012297267025089606,
+  "month_plan_file": "provenance/personalfinance_window_month_plans/2020-10.json",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_window_personalfinance_1602295789_1602306768.json"
+  ],
+  "unique_ids": [
+    "j8cam3",
+    "j8cb5n",
+    "j8ck33",
+    "j8ckcq",
+    "j8cl0f",
+    "j8cn7a",
+    "j8cr9s",
+    "j8cw57",
+    "j8cxcr",
+    "j8cz1r",
+    "j8d1b8",
+    "j8d1lr",
+    "j8d20k",
+    "j8d27x",
+    "j8d3c6",
+    "j8d6yd",
+    "j8dcsg",
+    "j8ddcs",
+    "j8desn",
+    "j8devh",
+    "j8dimb",
+    "j8dlxi",
+    "j8dm67",
+    "j8drwt",
+    "j8dt38",
+    "j8dt75",
+    "j8dtkk",
+    "j8dzdj",
+    "j8e79k",
+    "j8e8h2",
+    "j8ebs7",
+    "j8eeua",
+    "j8ejw5",
+    "j8ele3",
+    "j8eqjs",
+    "j8erdh"
+  ],
+  "rows": 36,
+  "removed": 10,
+  "deleted": 10,
+  "missing_retrieved_on": 36
+}

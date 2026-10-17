@@ -1,0 +1,168 @@
+{
+  "as_of_utc": "2026-10-16T04:11:41.079743+00:00",
+  "seed": 20261015,
+  "sources": {
+    "MediaCloud/34412234": {
+      "planned_sample_dates": 26,
+      "completed_sample_dates": 26,
+      "planned_sample_days": 26,
+      "completed_sample_days": 26,
+      "sample_days_reused": 0,
+      "sample_days_newly_completed": 26,
+      "planned_sample_windows": 0,
+      "completed_sample_windows": 0,
+      "sample_windows_reused": 0,
+      "sample_windows_newly_completed": 0,
+      "sample_unique_records": 39464,
+      "retained_other_full_days": 18,
+      "retained_other_full_day_records": 21936,
+      "retained_full_days_including_selected_dates": 18,
+      "retained_full_day_records_including_selected_dates": 21936,
+      "sample_unit": "UTC_full_day",
+      "sample_months_complete": 13,
+      "sample_months_planned": 13
+    },
+    "MediaCloud/38379429": {
+      "planned_sample_dates": 38,
+      "completed_sample_dates": 38,
+      "planned_sample_days": 38,
+      "completed_sample_days": 38,
+      "sample_days_reused": 0,
+      "sample_days_newly_completed": 38,
+      "planned_sample_windows": 0,
+      "completed_sample_windows": 0,
+      "sample_windows_reused": 0,
+      "sample_windows_newly_completed": 0,
+      "sample_unique_records": 185150,
+      "retained_other_full_days": 17,
+      "retained_other_full_day_records": 107912,
+      "retained_full_days_including_selected_dates": 17,
+      "retained_full_day_records_including_selected_dates": 107912,
+      "sample_unit": "UTC_full_day",
+      "sample_months_complete": 19,
+      "sample_months_planned": 19
+    },
+    "Reddit/Economics": {
+      "planned_sample_dates": 360,
+      "completed_sample_dates": 360,
+      "planned_sample_days": 360,
+      "completed_sample_days": 360,
+      "sample_days_reused": 32,
+      "sample_days_newly_completed": 328,
+      "planned_sample_windows": 0,
+      "completed_sample_windows": 0,
+      "sample_windows_reused": 0,
+      "sample_windows_newly_completed": 0,
+      "sample_unique_records": 17857,
+      "retained_other_full_days": 2548,
+      "retained_other_full_day_records": 128143,
+      "retained_full_days_including_selected_dates": 2580,
+      "retained_full_day_records_including_selected_dates": 129445,
+      "sample_unit": "UTC_full_day",
+      "sample_months_complete": 120,
+      "sample_months_planned": 120
+    },
+    "Reddit/economy": {
+      "planned_sample_dates": 360,
+      "completed_sample_dates": 360,
+      "planned_sample_days": 360,
+      "completed_sample_days": 360,
+      "sample_days_reused": 78,
+      "sample_days_newly_completed": 282,
+      "planned_sample_windows": 0,
+      "completed_sample_windows": 0,
+      "sample_windows_reused": 0,
+      "sample_windows_newly_completed": 0,
+      "sample_unique_records": 19831,
+      "retained_other_full_days": 3179,
+      "retained_other_full_day_records": 125923,
+      "retained_full_days_including_selected_dates": 3257,
+      "retained_full_day_records_including_selected_dates": 129105,
+      "sample_unit": "UTC_full_day",
+      "sample_months_complete": 120,
+      "sample_months_planned": 120
+    },
+    "Reddit/personalfinance": {
+      "planned_sample_dates": 606,
+      "completed_sample_dates": 606,
+      "planned_sample_days": 0,
+      "completed_sample_days": 0,
+      "sample_days_reused": 0,
+      "sample_days_newly_completed": 0,
+      "planned_sample_windows": 606,
+      "completed_sample_windows": 606,
+      "sample_windows_reused": 40,
+      "sample_windows_newly_completed": 566,
+      "sample_unique_records": 26974,
+      "retained_other_full_days": 284,
+      "retained_other_full_day_records": 86862,
+      "retained_full_days_including_selected_dates": 324,
+      "retained_full_day_records_including_selected_dates": 97907,
+      "sample_unit": "circular_time_window",
+      "sample_months_complete": 202,
+      "sample_months_planned": 202
+    }
+  },
+  "mediacloud_eta": {
+    "remaining_pages_estimate": 0,
+    "remaining_hours_at_35_50_seconds_per_page": [
+      0.0,
+      0.0
+    ],
+    "basis": "Existing selected-day query counts / 1000, less downloaded pages; rate plus observed network latency, excludes prolonged outage. Count snapshots can drift."
+  },
+  "reddit_eta": {
+    "pending_sample_dates": 0,
+    "unprepared_personalfinance_windows": 0,
+    "missing_monthly_counts": 0,
+    "minimum_remaining_requests": 0,
+    "minimum_hours_at_5_10_seconds_per_request": [
+      0.0,
+      0.0
+    ],
+    "density_estimated_calls_for_known_months": 0,
+    "dates_without_monthly_density": 0,
+    "provisional_hours_if_unknown_dates_require_1_to_7_calls": null,
+    "basis": "Request floor for currently prepared intervals and missing counts. Unprepared personalfinance windows need actual monthly counts before their intervals can be fixed; they are not counted as full days. Time projections remain provisional; retries can lengthen them.",
+    "note": "Previous full-day time projection superseded. Current request floor excludes unprepared personalfinance windows; it is not an ETA for the entire remaining project. See monthly_cluster_eta_snapshot.json for explicit window request scenarios."
+  },
+  "workers": {
+    "mediacloud": {
+      "status": "complete_monthly_day_clusters",
+      "updated_at_utc": "2026-10-16T01:16:30.070811+00:00",
+      "pid": 72945
+    },
+    "reddit": {
+      "status": "complete_monthly_sampling",
+      "updated_at_utc": "2026-10-16T04:11:40.906567+00:00",
+      "pid": 12709
+    }
+  },
+  "reddit_monthly_count_timeout_policy": {
+    "full_month_timeout_action": "exact_weekly_partition",
+    "full_month_attempts": 5,
+    "max_partition_days": 7,
+    "partition_attempts": 5,
+    "on_partition_exhausted": "stop_and_ask_user",
+    "authorization": "User selected uniform partition rule for this and future same-type count timeouts",
+    "authorized_at_utc": "2026-10-16T02:52:01.332910+00:00",
+    "timeout_errors_eligible_for_partition": [
+      "ReadTimeout",
+      "ConnectTimeout",
+      "Timeout",
+      422,
+      504
+    ]
+  },
+  "personalfinance_priority": {
+    "sample_unit": "circular_time_window",
+    "planned_dates": 9,
+    "completed_dates": 9,
+    "records": 437
+  },
+  "personalfinance_design": {
+    "target_expected_records_per_month": 150,
+    "design_file": "provenance/personalfinance_window_design.json",
+    "note": "Equal marginal inclusion within each month; expected target, not a hard record cap; complete windows, not full dates."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "seed": 20261015,
+  "rule": "economic_title_regex_v1 TERMS must match the displayed unit text",
+  "periods": [
+    [
+      "P1_2010_2019",
+      "2010-01-01",
+      "2019-12-31"
+    ],
+    [
+      "P2_2020_2022",
+      "2020-01-01",
+      "2022-12-31"
+    ],
+    [
+      "P3_2023_2024",
+      "2023-01-01",
+      "2024-12-31"
+    ],
+    [
+      "P4_2025_2026",
+      "2025-01-01",
+      "2026-10-14"
+    ]
+  ],
+  "allocation": {
+    "national|NYT|P1_2010_2019": 35,
+    "national|Guardian|P1_2010_2019": 10,
+    "national|NYT|P2_2020_2022": 35,
+    "national|Guardian|P2_2020_2022": 10,
+    "national|NYT|P3_2023_2024": 35,
+    "national|Guardian|P3_2023_2024": 10,
+    "national|NYT|P4_2025_2026": 20,
+    "national|Guardian|P4_2025_2026": 10,
+    "national|MediaCloud_National|P4_2025_2026": 15,
+    "local|MediaCloud_Local|P4_2025_2026": 60,
+    "social|Reddit|P1_2010_2019": 30,
+    "social|Reddit|P2_2020_2022": 30,
+    "social|Reddit|P3_2023_2024": 15,
+    "social|YouTube|P3_2023_2024": 15,
+    "social|Reddit|P4_2025_2026": 15,
+    "social|YouTube|P4_2025_2026": 15
+  },
+  "calibration": {
+    "national|NYT": 8,
+    "national|Guardian": 2,
+    "national|MediaCloud_National": 2,
+    "local|MediaCloud_Local": 6,
+    "social|Reddit": 7,
+    "social|YouTube": 5
+  },
+  "dev_n": 100,
+  "main_n": 360,
+  "calibration_n": 30,
+  "frame_totals": {
+    "local|MediaCloud_Local|P4_2025_2026": 25055,
+    "national|Guardian|P1_2010_2019": 1869,
+    "national|Guardian|P2_2020_2022": 376,
+    "national|Guardian|P3_2023_2024": 250,
+    "national|Guardian|P4_2025_2026": 519,
+    "national|MediaCloud_National|P4_2025_2026": 3854,
+    "national|NYT|P1_2010_2019": 25387,
+    "national|NYT|P2_2020_2022": 6255,
+    "national|NYT|P3_2023_2024": 3359,
+    "national|NYT|P4_2025_2026": 3467,
+    "social|Reddit|P1_2010_2019": 4357,
+    "social|Reddit|P2_2020_2022": 2950,
+    "social|Reddit|P3_2023_2024": 2094,
+    "social|Reddit|P4_2025_2026": 231,
+    "social|YouTube|P3_2023_2024": 23596,
+    "social|YouTube|P4_2025_2026": 31063
+  },
+  "digest": "61e87fe58ab3ef54bb7c1d2154d83bf7228429db0c88166fe4758ded3ea7fc9c"
+}

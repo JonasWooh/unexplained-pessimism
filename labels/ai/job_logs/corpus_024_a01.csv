@@ -1,0 +1,2 @@
+run_dir,split,files,model_name_as_displayed,settings,prompt_file,prompt_sha256,started_local,finished_local,notes
+labels/ai/codex__v2_isolated_r1_corpus,corpus,corpus_batch_024.jsonl,不可见,不可见,03_corpus_all/prompts/label_prompt_v2.md,9f95f20aa319fff0ecf6c4a29d2ab81bfcc9503d72a581ea64cc6a661b6e16bd,2026-10-16T05:34:38-04:00,2026-10-16T05:44:54-04:00,agent=/root/corpus_024; status=completed; actual=200; new attempt a01; structural_id_enum_null_and_exact_quote_validation=passed

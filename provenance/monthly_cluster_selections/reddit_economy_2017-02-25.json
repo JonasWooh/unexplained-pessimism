@@ -1,0 +1,28 @@
+{
+  "source": "economy",
+  "date": "2017-02-25",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/posts_economy_1487980800_1488067200.json"
+  ],
+  "unique_ids": [
+    "5w15ef",
+    "5w1d72",
+    "5w1zoz",
+    "5w22fc",
+    "5w25ow",
+    "5w2lq1",
+    "5w2n3o",
+    "5w3318",
+    "5w38ra",
+    "5w39md",
+    "5w3ww3",
+    "5w41is",
+    "5w44mg",
+    "5w54a5",
+    "5w5v14",
+    "5w6bso",
+    "5w73dd"
+  ],
+  "rows": 17
+}

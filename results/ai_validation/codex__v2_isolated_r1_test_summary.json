@@ -1,0 +1,27 @@
+{
+  "run": "codex__v2_isolated_r1",
+  "split": "test",
+  "items_expected": 260,
+  "items_returned": 260,
+  "missing": [],
+  "problems": [],
+  "n_problems": 0,
+  "evidence": {
+    "quotes": 1315,
+    "verbatim": 1315
+  },
+  "self_consistency": {
+    "relevant": 0.9230769230769231,
+    "tone_overall": 0.8461538461538461,
+    "fact_direction": 0.8461538461538461,
+    "emotional_intensity": 0.6923076923076923,
+    "price_frame": 0.8846153846153846,
+    "perspective": 0.8076923076923077,
+    "time_frame": 0.7307692307692307,
+    "numeric_claim": 0.9230769230769231,
+    "definition_error": 0.8461538461538461,
+    "actor_1": 0.7692307692307693,
+    "direction_1": 0.8846153846153846
+  },
+  "self_consistency_items": 26
+}

@@ -1,0 +1,42 @@
+{
+  "source": "Economics",
+  "date": "2019-10-19",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/cluster_posts_Economics_1571443200_1571529600.json"
+  ],
+  "unique_ids": [
+    "djwatv",
+    "djx2ba",
+    "djxkcx",
+    "djxv1y",
+    "djy2j5",
+    "djymhp",
+    "djzubp",
+    "dk1frr",
+    "dk29fq",
+    "dk2s2s",
+    "dk3j7z",
+    "dk3kgp",
+    "dk508l",
+    "dk5421",
+    "dk5er3",
+    "dk5p7u",
+    "dk6o3x",
+    "dk70cf",
+    "dk72sw",
+    "dk7bcw",
+    "dk7s4n",
+    "dk8m2i",
+    "dk95eu",
+    "dk9ler",
+    "dk9sd2",
+    "dk9sk2",
+    "dkaoua",
+    "dkau0l",
+    "dkavjn",
+    "dkbfon",
+    "dkbsvl"
+  ],
+  "rows": 31
+}

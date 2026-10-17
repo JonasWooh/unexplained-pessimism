@@ -1,0 +1,110 @@
+{
+  "as_of_utc": "2026-10-16T01:25:12.835022+00:00",
+  "status": "proposal_only_not_applied",
+  "same_month_same_date_comparisons": [
+    {
+      "month": "2025-01",
+      "personalfinance": 1125,
+      "economy": 184,
+      "Economics": 89
+    },
+    {
+      "month": "2025-02",
+      "personalfinance": 980,
+      "economy": 193,
+      "Economics": 92
+    },
+    {
+      "month": "2025-03",
+      "personalfinance": 945,
+      "economy": 225,
+      "Economics": 134
+    },
+    {
+      "month": "2025-04",
+      "personalfinance": 922,
+      "economy": 252,
+      "Economics": 143
+    },
+    {
+      "month": "2025-05",
+      "personalfinance": 853,
+      "economy": 202,
+      "Economics": 164
+    },
+    {
+      "month": "2025-06",
+      "personalfinance": 965,
+      "economy": 224,
+      "Economics": 119
+    },
+    {
+      "month": "2025-07",
+      "personalfinance": 951,
+      "economy": 178,
+      "Economics": 99
+    },
+    {
+      "month": "2025-08",
+      "personalfinance": 819,
+      "economy": 219,
+      "Economics": 116
+    },
+    {
+      "month": "2025-09",
+      "personalfinance": 749,
+      "economy": 221,
+      "Economics": 119
+    },
+    {
+      "month": "2025-10",
+      "personalfinance": 781,
+      "economy": 256,
+      "Economics": 84
+    },
+    {
+      "month": "2026-08",
+      "personalfinance": 620,
+      "economy": 191,
+      "Economics": 72
+    },
+    {
+      "month": "2026-09",
+      "personalfinance": 579,
+      "economy": 213,
+      "Economics": 60
+    },
+    {
+      "month": "2026-10",
+      "personalfinance": 462,
+      "economy": 190,
+      "Economics": 45
+    }
+  ],
+  "mean_three_date_posts": {
+    "economy": 211.3846153846154,
+    "Economics": 102.76923076923077,
+    "personalfinance": 827
+  },
+  "target_expected_posts_per_month": 150,
+  "examples": [
+    {
+      "month": "2026-08",
+      "source_count": 6167,
+      "eligible_calendar_days": 31,
+      "proposed_hours_per_selected_date": 6.0321063726285065
+    },
+    {
+      "month": "2026-09",
+      "source_count": 5362,
+      "eligible_calendar_days": 30,
+      "proposed_hours_per_selected_date": 6.713912719134651
+    },
+    {
+      "month": "2026-10",
+      "source_count": 2243,
+      "eligible_calendar_days": 14,
+      "proposed_hours_per_selected_date": 7.489968791796701
+    }
+  ]
+}

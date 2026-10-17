@@ -1,0 +1,50 @@
+[
+  {
+    "date": "2024-09-13",
+    "url": "https://ustr.gov/about-us/policy-offices/press-office/press-releases/2024/september/ustr-finalizes-action-china-tariffs-following-statutory-four-year-review",
+    "status": "evidence_verified",
+    "file": "data/raw/R02/20261015/tariffs_20240913.html"
+  },
+  {
+    "date": "2019-08-13",
+    "url": "https://www.ustr.gov/about-us/policy-offices/press-office/press-releases/2019/august/ustr-announces-next-steps-proposed",
+    "status": "evidence_verified",
+    "file": "data/raw/R02/20261015/tariffs_20190813.html"
+  },
+  {
+    "date": "2020-01-15",
+    "url": "https://ustr.gov/about-us/policy-offices/press-office/press-releases/2020/january/economic-and-trade-agreement-between-government-united-states-and-government-peoples-republic-china",
+    "status": "evidence_verified",
+    "file": "data/raw/R02/20261015/phase_one_20200115.html"
+  },
+  {
+    "date": "2020-02-14",
+    "url": "https://www.ustr.gov/about-us/policy-offices/press-office/press-releases/2020/february/usda-and-ustr-announce-progress-implementation-us-china-phase-one-agreement",
+    "status": "evidence_verified",
+    "file": "data/raw/R02/20261015/phase_one_effective_20200214.html"
+  },
+  {
+    "date": "2023-03-12",
+    "url": "https://www.fdic.gov/news/press-releases/2023/pr23018.html",
+    "status": "evidence_verified",
+    "file": "data/raw/R02/20261015/signature_20230312.html"
+  },
+  {
+    "date": "2023-05-01",
+    "url": "https://www.fdic.gov/resources/resolutions/bank-failures/failed-bank-list/first-republic.html",
+    "status": "evidence_verified",
+    "file": "data/raw/R02/20261015/first_republic_20230501.html"
+  },
+  {
+    "date": "2018-01-20",
+    "url": "https://www.opm.gov/policy-data-oversight/snow-dismissal-procedures/status-archives/18/1/20/Due-to-a-lapse-in-appropriations-Federal-government-operations-vary-by-agency_761/",
+    "status": "evidence_verified",
+    "file": "data/raw/R02/20261015/shutdown_20180120.html"
+  },
+  {
+    "date": "2018-02-09",
+    "url": "https://www.opm.gov/chcoc/transmittals/2018/pay-employees-affected-lapse-appropriations-and-continued-pay-freeze-certain-senior_508.pdf",
+    "status": "evidence_verified",
+    "file": "data/raw/R02/20261015/shutdown_20180209.pdf"
+  }
+]

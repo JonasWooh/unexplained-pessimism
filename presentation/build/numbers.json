@@ -1,0 +1,166 @@
+{
+ "gap_2025": {
+  "value": -35.82138788991321,
+  "source": "results/stage1_m1/m1_periods.csv"
+ },
+ "gap_2026": {
+  "value": -39.76626167014555,
+  "source": "results/stage1_m1/m1_periods.csv"
+ },
+ "actual_2026": {
+  "value": 51.17,
+  "source": "results/stage1_m1/m1_periods.csv"
+ },
+ "pred_2026": {
+  "value": 90.93626167014556,
+  "source": "results/stage1_m1/m1_periods.csv"
+ },
+ "explained_lo": {
+  "value": 0.06715135703351,
+  "source": "results/stage1_m1/m1_periods.csv"
+ },
+ "explained_hi": {
+  "value": 0.1126243304787514,
+  "source": "results/stage1_m1/m1_periods.csv"
+ },
+ "pre2020_min": {
+  "value": 51.7,
+  "source": "data/raw/S01/20261015/tbmics.csv"
+ },
+ "pre2020_min_when": {
+  "value": "May 1980",
+  "source": "data/raw/S01/20261015/tbmics.csv"
+ },
+ "michigan_first_year": {
+  "value": 1952.0,
+  "source": "data/raw/S01/20261015/tbmics.csv"
+ },
+ "mode_icc_step": {
+  "value": -8.01756055421206,
+  "source": "results/stage1_h3/h3a_mode.csv"
+ },
+ "web_gap_start": {
+  "value": -23.01234036352308,
+  "source": "results/stage5_mechanisms/mode_gap_changes.csv"
+ },
+ "web_gap_end": {
+  "value": -39.32900622840846,
+  "source": "results/stage5_mechanisms/mode_gap_changes.csv"
+ },
+ "party_bound": {
+  "value": 2.718843666193393,
+  "source": "results/stage1_h3/h3b_composition_bound.csv"
+ },
+ "gap_2026_janapr": {
+  "value": -38.79848925698762,
+  "source": "results/stage5_mechanisms/pre_election_years.csv"
+ },
+ "gap_2026_mayoct": {
+  "value": -40.411443278917496,
+  "source": "results/stage5_mechanisms/pre_election_years.csv"
+ },
+ "group_gap_min": {
+  "value": -42.3350203820866,
+  "source": "results/stage5_mechanisms/group_gaps_monthly.csv"
+ },
+ "group_gap_max": {
+  "value": -32.032318049690325,
+  "source": "results/stage5_mechanisms/group_gaps_monthly.csv"
+ },
+ "n_groups": {
+  "value": 13.0,
+  "source": "results/stage5_mechanisms/group_gaps_monthly.csv"
+ },
+ "corpus_items": {
+  "value": 167418.0,
+  "source": "corpus/corpus_documentation.md"
+ },
+ "coded_items": {
+  "value": 11431.0,
+  "source": "labels/ai_corpus_labels.csv"
+ },
+ "gold_items": {
+  "value": 360.0,
+  "source": "labels/gold_overview.json"
+ },
+ "kappa_llm": {
+  "value": 0.7312510725931012,
+  "source": "results/stage2_r35/item_metrics.csv"
+ },
+ "kappa_lm": {
+  "value": 0.3504967887138388,
+  "source": "results/stage2_r35/item_metrics.csv"
+ },
+ "kappa_vader": {
+  "value": 0.2673861491554953,
+  "source": "results/stage2_r35/item_metrics.csv"
+ },
+ "kappa_tfidf": {
+  "value": 0.3941972920696326,
+  "source": "results/stage2_r35/item_metrics.csv"
+ },
+ "kappa_human": {
+  "value": 0.7888275706723731,
+  "source": "labels/agreement_summary.csv"
+ },
+ "swap_tests": {
+  "value": 39.0,
+  "source": "results/stage2_r37/flip_rates.csv"
+ },
+ "swap_sig": {
+  "value": 0.0,
+  "source": "results/stage2_r37/flip_rates.csv"
+ },
+ "fact_wrong": {
+  "value": 2.0,
+  "source": "results/stage2_factcal/summary.csv"
+ },
+ "fact_checkable": {
+  "value": 68.0,
+  "source": "results/stage2_factcal/summary.csv"
+ },
+ "blame_obama": {
+  "value": 0.0295101823484043,
+  "source": "results/stage2_bias/attribution_means.csv"
+ },
+ "blame_trump1": {
+  "value": 0.1883312343107134,
+  "source": "results/stage2_bias/attribution_means.csv"
+ },
+ "blame_biden": {
+  "value": 0.0599888813508744,
+  "source": "results/stage2_bias/attribution_means.csv"
+ },
+ "blame_trump2": {
+  "value": 0.3990075063404368,
+  "source": "results/stage2_bias/attribution_means.csv"
+ },
+ "m2_n_specs": {
+  "value": 20.0,
+  "source": "results/stage3_robustness/variants.csv"
+ },
+ "m2_n_sig": {
+  "value": 9.0,
+  "source": "results/stage3_robustness/variants.csv"
+ },
+ "m2_p_main": {
+  "value": 0.0407881221991031,
+  "source": "results/stage3_robustness/variants.csv"
+ },
+ "m3_n_specs": {
+  "value": 20.0,
+  "source": "results/stage3_robustness/variants.csv"
+ },
+ "m3_n_sig": {
+  "value": 0.0,
+  "source": "results/stage3_robustness/variants.csv"
+ },
+ "m3_p_main": {
+  "value": 0.2295421922954481,
+  "source": "results/stage3_robustness/variants.csv"
+ },
+ "tone_share_max": {
+  "value": 0.0447630109819671,
+  "source": "results/stage3_robustness/magnitude.csv"
+ }
+}

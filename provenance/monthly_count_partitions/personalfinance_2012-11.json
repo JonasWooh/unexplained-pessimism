@@ -1,0 +1,41 @@
+{
+  "source": "personalfinance",
+  "month": "2012-11",
+  "start_utc": 1351728000,
+  "end_utc": 1354320000,
+  "method": "sum of exhaustive aggregate counts over disjoint UTC intervals covering the full month",
+  "parts": [
+    {
+      "start_utc": 1351728000,
+      "end_utc": 1352332800,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1351728000_1352332800.json",
+      "count": 207
+    },
+    {
+      "start_utc": 1352332800,
+      "end_utc": 1352937600,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1352332800_1352937600.json",
+      "count": 244
+    },
+    {
+      "start_utc": 1352937600,
+      "end_utc": 1353542400,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1352937600_1353542400.json",
+      "count": 253
+    },
+    {
+      "start_utc": 1353542400,
+      "end_utc": 1354147200,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1353542400_1354147200.json",
+      "count": 238
+    },
+    {
+      "start_utc": 1354147200,
+      "end_utc": 1354320000,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1354147200_1354320000.json",
+      "count": 104
+    }
+  ],
+  "count": 1046,
+  "note": "Source count snapshots retrieved sequentially, not an atomic source snapshot; no sampled-day extrapolation."
+}

@@ -1,0 +1,15 @@
+{
+  "source": "personalfinance",
+  "month": "2019-12",
+  "population_count": 13216,
+  "eligible_utc_dates": 31,
+  "target_expected_records": 150,
+  "window_length_seconds": 10133,
+  "inclusion_probability": 0.011349686379928316,
+  "expected_sample_records": 149.9974551971326,
+  "count_provenance": {
+    "file": "corpus/raw/SM02/20261016/cluster_month_count_personalfinance_2019-12.json",
+    "count": 13216
+  },
+  "design_file": "provenance/personalfinance_window_design.json"
+}

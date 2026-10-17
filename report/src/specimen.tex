@@ -1,0 +1,51 @@
+\documentclass[11pt]{article}
+\input{preamble}
+\renewcommand{\shorttitle}{Unexplained Pessimism Ahead of the 2026 Midterms}
+\begin{document}
+
+\maketitleblock
+{Unexplained Pessimism:\\Economic Fundamentals, Media Narratives, and\\U.S.\ Consumer Sentiment Ahead of the 2026 Midterms}
+{Jonas Wu (jw9452)}
+{AI Applications in Finance, Final Project\\Data cutoff: October 16, 2026 \quad·\quad Replication package: \textit{link to be added}}
+{U.S. consumer sentiment has stayed far below the level implied by headline economic indicators. Using the real-time vintages of unemployment, PCE inflation and real GDP growth that were available at each survey date, we fit an economic-only model to the University of Michigan Index of Consumer Sentiment over 2010–2019 and define the sentiment gap as its out-of-sample residual. The gap averages −35.8 index points in 2025 and −39.8 in January–October 2026, and the three indicators account for only 7–11\% of the decline since 2019. To ask whether news and social media help explain the gap, we code a documented corpus with a large language model validated against 360 items labeled independently by two human annotators (tone $\kappa = 0.73$, against 0.79 between the annotators and 0.35 for a finance dictionary). Swapping political names does not detectably change the coding. Lagged national news tone improves forecasts over the economic-only model (Clark–West $p = 0.041$) but not once household-pressure and political controls are added ($p = 0.23$; none of 20 variants significant), and tone-related variation accounts for at most about 5\% of the 2025–2026 gap. The gap is similar across income, age, region and education groups, widens within the web-only survey period, and is present before the campaign season. Media bias is therefore not the main explanation of the gap; we propose a randomized framing experiment for causal identification.}
+\keywords{consumer sentiment; real-time data; media bias; large language models; forecasting; 2026 midterm elections}{D12, D84, E71, C53}
+
+\section{Introduction}
+
+Since mid-2021, U.S. consumers have reported far gloomier views of the economy than unemployment, inflation and output growth would suggest. Such a gap invites three different readings. Consumers may be responding to pressures that headline indicators miss, such as the level of prices or the cost of housing. Their perceptions may instead reflect selective information, framing or cognitive bias, possibly transmitted through news and social media. Or the apparent discrepancy may be an artifact of measurement, timing or an incomplete model. This paper treats all three as hypotheses (H1–H3) and asks which the available evidence can support or rule out ahead of the November 3, 2026 midterm elections.
+
+We make three contributions, each registered before the results were computed:
+\begin{itemize}
+  \item \textbf{A real-time baseline.} Every indicator enters at the vintage published before the survey month, so the gap measures pessimism relative to information consumers could actually have had (\cref{sec:baseline}).
+  \item \textbf{Validated AI measurement.} An LLM codes tone, salience, framing, factual calibration and political attribution against a human gold standard, with a dictionary and a conventional classifier as benchmarks.
+  \item \textbf{Separate tests of association and causation.} Chronological forecast comparisons, timing tests and pre-registered falsification criteria are reported together with a design for stronger identification.
+\end{itemize}
+
+\section{Data and the real-time economic baseline}\label{sec:baseline}
+
+\subsection{Real-time indicators}
+For each survey month $t$ we take the U-3 unemployment rate, year-over-year headline PCE inflation and real GDP growth from the ALFRED vintage available on the first day of $t$ \citep{croushore2001}. GDP growth is the latest published quarter-over-quarter annualized rate and is held constant between releases rather than interpolated. The economic-only model (M1) is
+\begin{equation}
+  \mathit{ICS}_t = \alpha + \beta_u U^{\mathrm{rt}}_t + \beta_\pi \pi^{\mathrm{rt}}_t + \beta_g g^{\mathrm{rt}}_t + \textstyle\sum_{m} \delta_m D_{mt} + \varepsilon_t ,
+  \label{eq:m1}
+\end{equation}
+estimated on 2010–2019 with HAC standard errors; the sentiment gap is $\mathit{ICS}_t - \widehat{\mathit{ICS}}_t$ for every month after 2019. A negative gap is unexplained pessimism under M1, not evidence of perceptual bias.
+
+\subsection{The size of the gap}
+M1 fits the estimation window closely ($R^2 = 0.90$; unemployment $-4.84$, s.e.\ 0.29). \Cref{fig:gap} shows that a large and growing gap opens from the second half of 2021, and \cref{tab:gap} summarizes it by period. The 2025 and 2026 gaps are roughly eight times the half-width of the M1 prediction band, and the current-conditions component (ICC) is consistently further below its prediction than the expectations component (ICE).
+
+\input{tables/tab_gap}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig_gap.pdf}
+  \caption{\textbf{Michigan sentiment against the economic-only prediction.} Panel (a) shows the Index of Consumer Sentiment and the M1 prediction from \cref{eq:m1}; the dashed line is the 2010–2019 in-sample fit and the band is the 95\% moving-block bootstrap prediction interval. Panel (b) shows the gap; horizontal segments and labels give the period means in \cref{tab:gap}. Pandemic months (shaded) are not interpreted because the indicators leave the estimation range. The dotted line marks the first month of web-only interviewing (July 2024).}
+  \label{fig:gap}
+\end{figure}
+
+\para{What the gap is not.} The specimen ends here. In the full report this subsection continues with the alternative explanations (household pressure, survey mode, partisan composition) and the forecast comparison uses the test of \citet{clark2007}; local projections follow \citet{jorda2005}, and the dictionary benchmarks follow \citet{loughran2011} and \citet{shapiro2022}.
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}

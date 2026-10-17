@@ -1,0 +1,12 @@
+{
+  "items": {
+    "calibration": 30,
+    "main": 360
+  },
+  "items_with_any_disagreement": {
+    "calibration": 19,
+    "main": 209
+  },
+  "adjudication_rows": 593,
+  "invalid_entries": 0
+}

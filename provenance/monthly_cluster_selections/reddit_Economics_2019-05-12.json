@@ -1,0 +1,40 @@
+{
+  "source": "Economics",
+  "date": "2019-05-12",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/cluster_posts_Economics_1557619200_1557705600.json"
+  ],
+  "unique_ids": [
+    "bniwmj",
+    "bnjyut",
+    "bnkt2i",
+    "bnl2ou",
+    "bnl2xs",
+    "bnl3c6",
+    "bnmxo0",
+    "bnngz3",
+    "bnnrve",
+    "bnnvjj",
+    "bnnx7o",
+    "bnoh7c",
+    "bnp8fc",
+    "bnpfes",
+    "bnqaod",
+    "bnqild",
+    "bnqvet",
+    "bnroko",
+    "bnry3k",
+    "bns9c3",
+    "bnsisv",
+    "bnt25o",
+    "bntokx",
+    "bntowz",
+    "bnui9j",
+    "bnujnv",
+    "bnuqfr",
+    "bnv8ml",
+    "bnv9wf"
+  ],
+  "rows": 29
+}

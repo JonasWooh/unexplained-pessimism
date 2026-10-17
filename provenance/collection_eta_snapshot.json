@@ -1,0 +1,25 @@
+{
+  "as_of_new_york": "2026-10-15T18:41:20.154444-04:00",
+  "mediacloud": {
+    "completed_collection_dates": 95,
+    "total_collection_dates": 1304,
+    "remaining_collection_dates": 1209,
+    "recent_successful_draws_per_hour": 106,
+    "estimated_remaining_hours": 11.40566037735849,
+    "planning_range_hours": [
+      12,
+      14
+    ],
+    "theoretical_min_hours": 10.410833333333333
+  },
+  "reddit": {
+    "status": "waiting_retry",
+    "current_scope": "core_economy_Economics_2017_2024_daily_halfday",
+    "remaining_core_dates": 4830,
+    "deferred_intervals": 2090,
+    "planning_range_hours": [
+      8,
+      10
+    ]
+  }
+}

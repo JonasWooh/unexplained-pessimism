@@ -1,0 +1,2 @@
+split,started_local,finished_local,model,reasoning,prompt_sha256,input_path,output_path,item_count,status,notes
+test,2026-10-16 03:41:46 EDT,2026-10-16 03:47:38 EDT,不可见,不可见,9f95f20aa319fff0ecf6c4a29d2ab81bfcc9503d72a581ea64cc6a661b6e16bd,/Users/jonasw/Documents/NLP/LLM_Labeling_v2_Run/02_repeat/labels/ai_inputs/test_repeat.jsonl,/Users/jonasw/Documents/NLP/LLM_Labeling_v2_Run/02_repeat/labels/ai/codex__v2_isolated_r2/test_repeat.jsonl,26,complete,独立重复r2；证据逐字修复，全量核验通过

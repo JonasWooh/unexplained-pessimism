@@ -1,0 +1,38 @@
+{
+  "source": "personalfinance",
+  "date": "2011-10-22",
+  "sample_unit": "circular_time_window",
+  "selected_intervals": [
+    [
+      1319241600,
+      1319328000
+    ]
+  ],
+  "window_start_second": 55069,
+  "window_length_seconds": 86400,
+  "inclusion_probability": 0.09677419354838711,
+  "month_plan_file": "provenance/personalfinance_window_month_plans/2011-10.json",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_window_personalfinance_1319241600_1319328000.json"
+  ],
+  "unique_ids": [
+    "lkis4",
+    "lkjku",
+    "lkl87",
+    "lkovd",
+    "lkrxc",
+    "lkt32",
+    "lktlj",
+    "lktx5",
+    "lkx6e",
+    "lkxk9",
+    "ll113",
+    "ll4pl",
+    "ll5jm",
+    "ll7z0"
+  ],
+  "rows": 14,
+  "removed": 0,
+  "deleted": 0,
+  "missing_retrieved_on": 14
+}

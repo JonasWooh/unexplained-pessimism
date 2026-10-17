@@ -1,0 +1,29 @@
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{\textbf{Out-of-sample forecast comparison}}
+\label{tab:forecast}
+\small
+\begin{tabular}{@{}l r c c c c c c@{}}
+\toprule
+ & & \multicolumn{2}{c}{M2 vs.\ M1} & \multicolumn{2}{c}{M3 vs.\ M1c} & \multicolumn{2}{c}{M1c vs.\ M1} \\
+ & & \multicolumn{2}{c}{tone added} & \multicolumn{2}{c}{tone added (primary)} & \multicolumn{2}{c}{controls added} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(l){7-8}
+Evaluation period & Months & RMSE ratio & $p$ & RMSE ratio & $p$ & RMSE ratio & $p$ \\
+\midrule
+2017-01 to 2026-10 & 118 & 0.991 & 0.041 & 1.001 & 0.23 & 1.161 & 0.80 \\
+\quad excluding 2020-03 to 2020-12 & 108 & 0.976 & 0.005 & 1.022 & 0.42 & 1.119 & 0.75 \\
+2017--2019 & 36 & 0.937 & 0.017 & 0.942 & 0.007 & 1.015 & 0.37 \\
+2020--2022 & 36 & 1.023 & 0.48 & 1.018 & 0.52 & 1.258 & 0.75 \\
+2023--2024 & 24 & 1.004 & 0.35 & 0.954 & 0.076 & 1.007 & 0.29 \\
+2025--2026 & 22 & 0.920 & 0.005 & 0.999 & 0.34 & 1.076 & 0.96 \\
+\addlinespace
+\textit{2017-01 to 2026-10, no AR term} & 118 & 0.946 & 0.006 & 0.926 & 0.004 & 0.831 & < 0.001 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} One-step-ahead recursive forecasts of the ICS from an expanding window starting 2010-06; the first window ends 2016-12. All rows except the last include ICS$_{t-1}$. M1: real-time unemployment, PCE inflation and GDP growth; M1c: M1 plus the four household variables, a governing-party dummy and a pre-election dummy; M2 and M3 add national LLM net tone for month $t-1$. RMSE ratio = larger model / smaller model, so values below 1 favour the larger model. $p$: one-sided Clark--West test with HAC variance.
+\item \textit{Source:} \texttt{results/stage3\_forecast/comparisons.csv}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

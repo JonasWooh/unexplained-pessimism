@@ -1,0 +1,140 @@
+field,raw_value,pre2025_rows,from2025_rows,comparison_key,mapping_basis
+document_type,,0,15,,case normalization only; distinct meanings not merged
+document_type,Article,0,79570,article,case normalization only; distinct meanings not merged
+document_type,Interactive,0,3728,interactive,case normalization only; distinct meanings not merged
+document_type,LegacyCollection,0,2,legacycollection,case normalization only; distinct meanings not merged
+document_type,article,975909,0,article,case normalization only; distinct meanings not merged
+document_type,audio,4188,0,audio,case normalization only; distinct meanings not merged
+document_type,audiocontainer,1161,0,audiocontainer,case normalization only; distinct meanings not merged
+document_type,multimedia,95564,0,multimedia,case normalization only; distinct meanings not merged
+section_name,,1209,31,,case normalization only; distinct meanings not merged
+section_name,Admin,298,6,Admin,case normalization only; distinct meanings not merged
+section_name,Archives,18,0,Archives,case normalization only; distinct meanings not merged
+section_name,Arts,90103,5700,Arts,case normalization only; distinct meanings not merged
+section_name,At Home,491,0,At Home,case normalization only; distinct meanings not merged
+section_name,Automobiles,7560,1,Automobiles,case normalization only; distinct meanings not merged
+section_name,Blogs,6773,0,Blogs,case normalization only; distinct meanings not merged
+section_name,Book Review,2,0,Book Review,case normalization only; distinct meanings not merged
+section_name,Books,29294,2282,Books,case normalization only; distinct meanings not merged
+section_name,Booming,609,0,Booming,case normalization only; distinct meanings not merged
+section_name,Briefing,9878,1701,Briefing,case normalization only; distinct meanings not merged
+section_name,Burst,62,0,Burst,case normalization only; distinct meanings not merged
+section_name,Business,0,5818,Business,Business Day / Business explicit user-audit correspondence
+section_name,Business Day,103798,0,Business,Business Day / Business explicit user-audit correspondence
+section_name,Climate,3660,1316,Climate,case normalization only; distinct meanings not merged
+section_name,Corrections,7514,1195,Corrections,case normalization only; distinct meanings not merged
+section_name,Crosswords & Games,11425,0,Crosswords & Games,case normalization only; distinct meanings not merged
+section_name,Education,12361,8,Education,case normalization only; distinct meanings not merged
+section_name,En español,0,31,En español,case normalization only; distinct meanings not merged
+section_name,Fashion,0,140,Fashion,case normalization only; distinct meanings not merged
+section_name,Fashion & Style,32891,0,Fashion & Style,case normalization only; distinct meanings not merged
+section_name,Feeds,1,0,Feeds,case normalization only; distinct meanings not merged
+section_name,Food,17038,1873,Food,case normalization only; distinct meanings not merged
+section_name,Gameplay,0,2958,Gameplay,case normalization only; distinct meanings not merged
+section_name,Giving,117,1,Giving,case normalization only; distinct meanings not merged
+section_name,Global Home,3,0,Global Home,case normalization only; distinct meanings not merged
+section_name,Great Homes & Destinations,1455,0,Great Homes & Destinations,case normalization only; distinct meanings not merged
+section_name,Guide,35,0,Guide,case normalization only; distinct meanings not merged
+section_name,Guides,23,0,Guides,case normalization only; distinct meanings not merged
+section_name,Headway,71,60,Headway,case normalization only; distinct meanings not merged
+section_name,Health,17068,760,Health,case normalization only; distinct meanings not merged
+section_name,Home & Garden,3659,7,Home & Garden,case normalization only; distinct meanings not merged
+section_name,Homepage,29,0,Homepage,case normalization only; distinct meanings not merged
+section_name,International Home,55,17,International Home,case normalization only; distinct meanings not merged
+section_name,Job Market,805,0,Job Market,case normalization only; distinct meanings not merged
+section_name,Learning,0,4,Learning,case normalization only; distinct meanings not merged
+section_name,Lens,265,1,Lens,case normalization only; distinct meanings not merged
+section_name,Magazine,14756,1037,Magazine,case normalization only; distinct meanings not merged
+section_name,Movies,23811,2074,Movies,case normalization only; distinct meanings not merged
+section_name,Multimedia/Photos,8609,0,Multimedia/Photos,case normalization only; distinct meanings not merged
+section_name,NYT Now,1653,0,NYT Now,case normalization only; distinct meanings not merged
+section_name,Neediest Cases,186,0,Neediest Cases,case normalization only; distinct meanings not merged
+section_name,New York,71162,4952,New York,case normalization only; distinct meanings not merged
+section_name,Obituaries,3252,167,Obituaries,case normalization only; distinct meanings not merged
+section_name,Open,3,0,Open,case normalization only; distinct meanings not merged
+section_name,Opinion,101449,5653,Opinion,case normalization only; distinct meanings not merged
+section_name,Opinion | Culture,0,1,Opinion | Culture,case normalization only; distinct meanings not merged
+section_name,Parenting,913,3,Parenting,case normalization only; distinct meanings not merged
+section_name,Podcasts,4831,1501,Podcasts,case normalization only; distinct meanings not merged
+section_name,Polls,0,283,Polls,case normalization only; distinct meanings not merged
+section_name,Public Editor,171,0,Public Editor,case normalization only; distinct meanings not merged
+section_name,Reader Center,931,9,Reader Center,case normalization only; distinct meanings not merged
+section_name,Real Estate,16046,1432,Real Estate,case normalization only; distinct meanings not merged
+section_name,Science,16622,1187,Science,case normalization only; distinct meanings not merged
+section_name,Slideshows,2,0,Slideshows,case normalization only; distinct meanings not merged
+section_name,Smarter Living,1015,0,Smarter Living,case normalization only; distinct meanings not merged
+section_name,Special Series,125,39,Special Series,case normalization only; distinct meanings not merged
+section_name,Sports,81252,255,Sports,case normalization only; distinct meanings not merged
+section_name,Style,18408,2882,Style,case normalization only; distinct meanings not merged
+section_name,Sunday Review,668,0,Sunday Review,case normalization only; distinct meanings not merged
+section_name,T Brand,282,0,T Brand,case normalization only; distinct meanings not merged
+section_name,T Magazine,21038,820,T Magazine,case normalization only; distinct meanings not merged
+section_name,Technology,24680,1178,Technology,case normalization only; distinct meanings not merged
+section_name,The Learning Network,8291,1325,The Learning Network,case normalization only; distinct meanings not merged
+section_name,The New York Times Presents,27,0,The New York Times Presents,case normalization only; distinct meanings not merged
+section_name,The Upshot,5621,347,The Upshot,case normalization only; distinct meanings not merged
+section_name,The Weekly,33,0,The Weekly,case normalization only; distinct meanings not merged
+section_name,Theater,13208,908,Theater,case normalization only; distinct meanings not merged
+section_name,Times Insider,2650,305,Times Insider,case normalization only; distinct meanings not merged
+section_name,Times Topics,423,0,Times Topics,case normalization only; distinct meanings not merged
+section_name,Today’s Paper,2465,0,Today’s Paper,case normalization only; distinct meanings not merged
+section_name,Topics,3,0,Topics,case normalization only; distinct meanings not merged
+section_name,Travel,13933,808,Travel,case normalization only; distinct meanings not merged
+section_name,U.S.,137295,18348,U.S.,case normalization only; distinct meanings not merged
+section_name,Universal,159,1,Universal,case normalization only; distinct meanings not merged
+section_name,UrbanEye,261,0,UrbanEye,case normalization only; distinct meanings not merged
+section_name,Video,51,2,Video,case normalization only; distinct meanings not merged
+section_name,Washington,32,0,Washington,case normalization only; distinct meanings not merged
+section_name,Watching,578,0,Watching,case normalization only; distinct meanings not merged
+section_name,Weather,248,746,Weather,case normalization only; distinct meanings not merged
+section_name,Week in Review,1814,0,Week in Review,case normalization only; distinct meanings not merged
+section_name,Well,5652,1221,Well,case normalization only; distinct meanings not merged
+section_name,World,107368,11810,World,case normalization only; distinct meanings not merged
+section_name,Your Money,6219,111,Your Money,case normalization only; distinct meanings not merged
+section_name,en Español,44,0,en Español,case normalization only; distinct meanings not merged
+section_name,membercenter,4,0,membercenter,case normalization only; distinct meanings not merged
+section_name,none,2,0,none,case normalization only; distinct meanings not merged
+section_name,nytfrontpage,3,0,nytfrontpage,case normalization only; distinct meanings not merged
+section_name,xword,3,0,xword,case normalization only; distinct meanings not merged
+type_of_material,,79149,924,,case normalization only; distinct meanings not merged
+type_of_material,Addendum,3,0,addendum,case normalization only; distinct meanings not merged
+type_of_material,An Analysis,63,0,an analysis,case normalization only; distinct meanings not merged
+type_of_material,An Appraisal,161,2,an appraisal,case normalization only; distinct meanings not merged
+type_of_material,Audio Podcast,9,0,audio podcast,case normalization only; distinct meanings not merged
+type_of_material,Biography,428,0,biography,case normalization only; distinct meanings not merged
+type_of_material,Brief,8508,0,brief,case normalization only; distinct meanings not merged
+type_of_material,Caption,50,0,caption,case normalization only; distinct meanings not merged
+type_of_material,Chronology,0,3,chronology,case normalization only; distinct meanings not merged
+type_of_material,Correction,4561,304,correction,case normalization only; distinct meanings not merged
+type_of_material,Economic Analysis,23,1,economic analysis,case normalization only; distinct meanings not merged
+type_of_material,Editorial,12231,163,editorial,case normalization only; distinct meanings not merged
+type_of_material,Editors' Note,16,0,editors' note,case normalization only; distinct meanings not merged
+type_of_material,First Chapter,420,0,first chapter,case normalization only; distinct meanings not merged
+type_of_material,Interactive Feature,24618,2821,interactive feature,case normalization only; distinct meanings not merged
+type_of_material,Interactive Graphic,36,0,interactive graphic,case normalization only; distinct meanings not merged
+type_of_material,Interview,861,0,interview,case normalization only; distinct meanings not merged
+type_of_material,Letter,22431,1123,letter,case normalization only; distinct meanings not merged
+type_of_material,List,4886,0,list,case normalization only; distinct meanings not merged
+type_of_material,Live Blog Post,0,2841,live blog post,case normalization only; distinct meanings not merged
+type_of_material,Military Analysis,15,0,military analysis,case normalization only; distinct meanings not merged
+type_of_material,NYT Cooking,12,313,nyt cooking,case normalization only; distinct meanings not merged
+type_of_material,News,705368,63203,news,case normalization only; distinct meanings not merged
+type_of_material,News Analysis,3093,301,news analysis,case normalization only; distinct meanings not merged
+type_of_material,Newsletter,81,0,newsletter,case normalization only; distinct meanings not merged
+type_of_material,Obituary (Obit),17186,2003,obituary (obit),case normalization only; distinct meanings not merged
+type_of_material,Op-Ed,44878,4646,op-ed,case normalization only; distinct meanings not merged
+type_of_material,Postscript,3,0,postscript,case normalization only; distinct meanings not merged
+type_of_material,Premium,3,0,premium,case normalization only; distinct meanings not merged
+type_of_material,Question,4723,2,question,case normalization only; distinct meanings not merged
+type_of_material,Quote,3940,505,quote,case normalization only; distinct meanings not merged
+type_of_material,Review,54374,2785,review,case normalization only; distinct meanings not merged
+type_of_material,Schedule,7884,0,schedule,case normalization only; distinct meanings not merged
+type_of_material,Series,150,2,series,case normalization only; distinct meanings not merged
+type_of_material,Slideshow,31255,0,slideshow,case normalization only; distinct meanings not merged
+type_of_material,Special Report,160,0,special report,case normalization only; distinct meanings not merged
+type_of_material,Summary,48,0,summary,case normalization only; distinct meanings not merged
+type_of_material,Text,441,0,text,case normalization only; distinct meanings not merged
+type_of_material,Video,30202,0,video,case normalization only; distinct meanings not merged
+type_of_material,Web Log,158,0,web log,case normalization only; distinct meanings not merged
+type_of_material,briefing,13563,1373,briefing,case normalization only; distinct meanings not merged
+type_of_material,recipe,831,0,recipe,case normalization only; distinct meanings not merged

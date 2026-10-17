@@ -1,0 +1,8 @@
+{
+ "lm_cut": 0.0,
+ "lm_dev_macro_f1": 0.4365747957847477,
+ "vader_compound_cut": 0.15,
+ "vader_mixed_min_share": 0.1,
+ "vader_dev_macro_f1": 0.4273852657004831,
+ "dev_items": 66
+}

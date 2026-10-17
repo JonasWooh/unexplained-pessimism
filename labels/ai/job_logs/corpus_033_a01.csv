@@ -1,0 +1,2 @@
+run_dir,split,files,model_name_as_displayed,settings,prompt_file,prompt_sha256,started_local,finished_local,notes
+labels/ai/codex__v2_isolated_r1_corpus,corpus,corpus_batch_033.jsonl,not_visible,not_visible,03_corpus_all/prompts/label_prompt_v2.md,9f95f20aa319fff0ecf6c4a29d2ab81bfcc9503d72a581ea64cc6a661b6e16bd,2026-10-16T06:11:46-04:00,,agent=corpus_033 (a01); status=failed; rows=0; no output produced; no annotation completed; retry as a02

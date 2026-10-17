@@ -1,0 +1,23 @@
+{
+  "source": "personalfinance",
+  "month": "2012-11",
+  "population_count": 1046,
+  "eligible_utc_dates": 30,
+  "target_expected_records": 150,
+  "window_length_seconds": 86400,
+  "inclusion_probability": 0.1,
+  "expected_sample_records": 104.6,
+  "count_provenance": {
+    "count": 1046,
+    "method": "sum of exhaustive aggregate counts over disjoint UTC intervals covering the full month",
+    "files": [
+      "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1351728000_1352332800.json",
+      "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1352332800_1352937600.json",
+      "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1352937600_1353542400.json",
+      "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1353542400_1354147200.json",
+      "corpus/raw/SM02/20261016/cluster_count_part_personalfinance_2012-11_1354147200_1354320000.json"
+    ],
+    "manifest": "provenance/monthly_count_partitions/personalfinance_2012-11.json"
+  },
+  "design_file": "provenance/personalfinance_window_design.json"
+}

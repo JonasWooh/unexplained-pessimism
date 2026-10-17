@@ -1,0 +1,2 @@
+run_dir,split,files,model_name_as_displayed,settings,prompt_file,prompt_sha256,started_local,finished_local,notes
+labels/ai/codex__v2_isolated_r1_corpus,corpus,corpus_batch_031.jsonl,not visible,reasoning setting not visible,03_corpus_all/prompts/label_prompt_v2.md,9f95f20aa319fff0ecf6c4a29d2ab81bfcc9503d72a581ea64cc6a661b6e16bd,2026-10-16T06:08:56.496316-04:00,2026-10-16T06:13:15.016612-04:00,"agent task corpus_031; completed; 200/200 items; no recovery; output passed ID/order, schema/enums/null-pairing, claim_text and evidence exactness checks; model/settings not visible"

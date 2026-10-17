@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{\textbf{Agreement with the human gold standard: LLM coding against low-cost baselines}}
+\label{tab:ai}
+\footnotesize
+\begin{tabular}{@{}l r c c c c c c c@{}}
+\toprule
+ & & Human & & \multicolumn{2}{c}{Dictionary} & & \multicolumn{2}{c}{TF-IDF + logit} \\
+\cmidrule(lr){5-6}\cmidrule(l){8-9}
+Dimension & $n$ & A vs.\ B & LLM [95\% CI] & LM & VADER & Keyword & \makecell{LLM\\labels} & \makecell{100 human\\labels} \\
+\midrule
+Relevance (yes/no) & 236 & 0.81 & 0.86 [0.78, 0.92] & -- & -- & 0.00 & 0.74 & 0.41 \\
+Tone & 174 & 0.79 & 0.73 [0.63, 0.81] & 0.35 & 0.27 & -- & 0.39 & 0.13 \\
+Price framing & 174 & 0.93 & 0.83 [0.75, 0.90] & -- & -- & 0.48 & 0.64 & 0.39 \\
+Topics (mean of 13) & 174 & -- & 0.79 & -- & -- & 0.58 & 0.69 & 0.23 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Cohen's $\kappa$ against the adjudicated gold standard on the 260-item test set, scored once after the prompt was frozen on the 100-item development set. Relevance is scored on items whose gold label is yes or no; the other dimensions on the 174 items that both the gold standard and the LLM judge relevant. Human A vs.\ B is the agreement between the two independent annotators on all 360 items. LM = Loughran--McDonald; dictionary thresholds were set on the development set. The keyword rule marks every item relevant, so its relevance $\kappa$ is zero. Confidence intervals are percentile bootstrap. Dimensions without a low-cost baseline, LLM $\kappa$ (human A vs.\ B in parentheses): factual direction 0.57 (0.72); numeric claim 0.79 (0.86); perspective 0.63 (0.78); time frame 0.59 (0.82); political actor 0.67 (0.83); attribution direction 0.56 (0.78); emotional intensity 0.56 (0.59); definition error 0.47 (0.77).
+\item \textit{Source:} \texttt{results/stage2\_r35/item\_metrics.csv}; \texttt{results/ai\_validation/README.md}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

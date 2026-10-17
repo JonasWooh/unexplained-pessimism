@@ -1,0 +1,25 @@
+{
+  "source": "Economics",
+  "date": "2024-11-30",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_Economics_1732924800_1733011200.json"
+  ],
+  "unique_ids": [
+    "1h38o3t",
+    "1h39nbl",
+    "1h3cljw",
+    "1h3dtrb",
+    "1h3gu3b",
+    "1h3h9jl",
+    "1h3iq2y",
+    "1h3jbh7",
+    "1h3kl34",
+    "1h3l193",
+    "1h3l2s8",
+    "1h3lg3b",
+    "1h3lia8",
+    "1h3mck2"
+  ],
+  "rows": 14
+}

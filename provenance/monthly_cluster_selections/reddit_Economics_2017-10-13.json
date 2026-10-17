@@ -1,0 +1,28 @@
+{
+  "source": "Economics",
+  "date": "2017-10-13",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/posts_Economics_1507852800_1507939200.json"
+  ],
+  "unique_ids": [
+    "7632cj",
+    "763934",
+    "763aa5",
+    "763m1i",
+    "7645r1",
+    "7645r2",
+    "7646ma",
+    "764s65",
+    "764uxt",
+    "764v9d",
+    "7652n6",
+    "765gqi",
+    "765gv5",
+    "765q03",
+    "765rt7",
+    "766ha6",
+    "766sfc"
+  ],
+  "rows": 17
+}

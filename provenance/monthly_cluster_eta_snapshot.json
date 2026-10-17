@@ -1,0 +1,17 @@
+{
+  "as_of_utc": "2026-10-16T01:33:27.006221+00:00",
+  "status": "waiting_retry",
+  "design": "core full days; personalfinance expected 150/month circular windows",
+  "completed_pf_windows": 12,
+  "completed_pf_window_records": 599,
+  "remaining_core_dates": 262,
+  "remaining_pf_date_windows": 594,
+  "remaining_pf_windows_not_previously_full_day": 564,
+  "missing_monthly_counts_in_state": 298,
+  "old_full_day_time_projection_superseded": true,
+  "pf_post_request_scenario_1_to_3_per_not_previously_full_date": [
+    564,
+    1692
+  ],
+  "basis": "Window expected count is about 50 per date; circular wrap and saturation can add requests, prior partial coverage can reduce them. Source count requests and core dates are separate. No fixed completion-time promise; retries may dominate."
+}

@@ -1,0 +1,2 @@
+session,start (local time),end (local time),sheet,first item_id,last item_id,notes
+1,,,calibration + main,C001,A360,补录估计用时：35分钟（用户指定30–40分钟范围，非实测）；原始起止时间未记录。

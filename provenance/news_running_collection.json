@@ -1,0 +1,15 @@
+{
+  "pid": 69033,
+  "status": "workers_finished_check_dataset_states",
+  "not_a_scheduled_task": true,
+  "started_at_utc": "2026-10-15T03:41:22.215856+00:00",
+  "workers": {
+    "N01": 69042,
+    "N02": 69043
+  },
+  "exit_codes": {
+    "N01": 0,
+    "N02": 0
+  },
+  "finished_at_utc": "2026-10-15T04:27:21.894235+00:00"
+}

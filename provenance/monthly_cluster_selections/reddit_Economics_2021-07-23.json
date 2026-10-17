@@ -1,0 +1,36 @@
+{
+  "source": "Economics",
+  "date": "2021-07-23",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/cluster_posts_Economics_1626998400_1627084800.json"
+  ],
+  "unique_ids": [
+    "optcgy",
+    "optnxz",
+    "opv02u",
+    "opxvz6",
+    "opz4pp",
+    "opzbty",
+    "oq22pw",
+    "oq2uta",
+    "oq2zk7",
+    "oq33bf",
+    "oq4ex7",
+    "oq5le6",
+    "oq7clm",
+    "oq8500",
+    "oq8ez2",
+    "oq8w6b",
+    "oqb6kq",
+    "oqb6nt",
+    "oqb6qs",
+    "oqb6tn",
+    "oqb6vv",
+    "oqc7wr",
+    "oqcebr",
+    "oqda3a",
+    "oqdl5o"
+  ],
+  "rows": 25
+}

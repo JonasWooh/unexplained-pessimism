@@ -1,0 +1,40 @@
+{
+  "source": "economy",
+  "date": "2020-11-22",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/cluster_posts_economy_1606003200_1606089600.json"
+  ],
+  "unique_ids": [
+    "jynco2",
+    "jyqbj4",
+    "jyroy4",
+    "jyrs3g",
+    "jysc66",
+    "jysnf3",
+    "jysxmy",
+    "jyt0ux",
+    "jyumws",
+    "jyw2vd",
+    "jywy84",
+    "jywyqj",
+    "jyy8ds",
+    "jyyaab",
+    "jyyai2",
+    "jyyf4h",
+    "jyypzd",
+    "jyzdih",
+    "jyzf7l",
+    "jyzll1",
+    "jyzlwq",
+    "jz03lp",
+    "jz05x0",
+    "jz188y",
+    "jz18py",
+    "jz19qq",
+    "jz1bl5",
+    "jz4hjz",
+    "jz5i5q"
+  ],
+  "rows": 29
+}

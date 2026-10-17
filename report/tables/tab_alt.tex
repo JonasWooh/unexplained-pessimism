@@ -1,0 +1,39 @@
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{\textbf{Alternative explanations of the gap: household pressure, estimation window and measurement}}
+\label{tab:alt}
+\footnotesize
+\begin{tabular}{@{}l c c c l@{}}
+\toprule
+ & \multicolumn{3}{c}{Mean ICS gap} & \\
+\cmidrule(lr){2-4}
+Specification & 2021-07 to 2022-12 & 2025 & 2026-01 to 2026-10 & Test \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{A. Household pressure (H1), pre-registered}}\\
+M1, 2010-06 to 2019-12 & −23.1 & −35.9 & −39.9 &  \\
+\quad + 36-month cumulative PCE inflation & −22.4 & −34.9 & −39.1 & $p = 0.79$ \\
+\quad + 30-year mortgage rate & −23.2 & −35.2 & −39.3 & $p = 0.78$ \\
+\quad + real disposable income per capita & −21.5 & −36.0 & −39.7 & $p = 0.28$ \\
+\quad + gasoline price & −22.6 & −35.4 & −38.8 & $p = 0.32$ \\
+\quad + all four household variables & −21.6 & −35.5 & −38.5 & $p = 0.24$ to $0.89$ \\
+\addlinespace
+\multicolumn{5}{@{}l}{\textit{B. Estimation window (H3c)}}\\
+2000-09 to 2019-12, fully real time & −10.1 & −31.7 & −33.0 &  \\
+\quad + 36-month cumulative PCE inflation\textsuperscript{a} & −11.3 & −26.2 & −30.7 & $p = 0.008$ \\
+1978-01 to 2019-12, quasi real time & −25.1 & −35.9 & −40.3 &  \\
+Expanding window, re-estimated monthly & & −25.2 & & \\
+\addlinespace
+\multicolumn{5}{@{}l}{\textit{C. Measurement (H3a, H3b): estimated effect on the gap}}\\
+Web-interview step from 2024-07, ICS & \multicolumn{3}{c}{−5.7 [−11.9, 0.5]} & $p = 0.072$ \\
+Web-interview step from 2024-07, ICC & \multicolumn{3}{c}{−8.0 [−11.9, −4.1]} & $p < 0.001$ \\
+Web-interview step from 2024-07, ICE & \multicolumn{3}{c}{−4.1 [−12.3, 4.0]} & $p = 0.32$ \\
+Republican share lower by 2 to 6 points, ICS & \multicolumn{3}{c}{−0.8 to −2.7} & $\leq$ 7\% of gap \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Panels A and B report the mean out-of-sample ICS gap. In Panel A the household variables are added to M1 and the model is estimated on 2010-06 to 2019-12, the first month with real-time income data, so the baseline differs slightly from \cref{tab:gap}. Test: HAC $p$-value of the added variable(s). Panel C, first three rows: coefficient on a step dummy for web-only interviewing in a regression of the 2023--2025 monthly gap, with 95\% confidence interval. Last row: change in the 2025--2026 ICS if the Republican share of respondents were 2, 4 or 6 points lower, using estimated group shares (Democrats 0.26, independents 0.54, Republicans 0.20). \textsuperscript{a}Exploratory, not pre-registered.
+\item \textit{Source:} \texttt{results/stage1\_h1/h1\_models\_with\_exploratory.csv}, \texttt{stage1\_windows/m1\_windows.csv}, \texttt{stage1\_m1/m1\_recursive\_expanding.csv}, \texttt{stage1\_h3/h3a\_mode.csv}, \texttt{stage1\_h3/h3b\_composition\_bound.csv}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

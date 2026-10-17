@@ -1,0 +1,21 @@
+window,regressor,vif
+first training window 2010-06..2016-12,unrate_rt,4.312544274955971
+first training window 2010-06..2016-12,pce_yoy_rt,2.72295990889997
+first training window 2010-06..2016-12,gdp_qoq_saar_rt,1.4177277181657553
+first training window 2010-06..2016-12,pce_cum36_rt,4.515587270285185
+first training window 2010-06..2016-12,mortgage30_rt_dd,2.1663723637659356
+first training window 2010-06..2016-12,rdpi_pc_yoy_rt,1.9699745220263345
+first training window 2010-06..2016-12,gas_price_rt_dd,3.2574273593787244
+first training window 2010-06..2016-12,rep_admin,
+first training window 2010-06..2016-12,pre_election6,1.1961821222125981
+first training window 2010-06..2016-12,tone_l1,1.0693504100498534
+full 2010-06..2026-10,unrate_rt,1.936327718586188
+full 2010-06..2026-10,pce_yoy_rt,3.17099240556135
+full 2010-06..2026-10,gdp_qoq_saar_rt,1.1669948715537364
+full 2010-06..2026-10,pce_cum36_rt,5.50135185421739
+full 2010-06..2026-10,mortgage30_rt_dd,4.01540486451493
+full 2010-06..2026-10,rdpi_pc_yoy_rt,1.6025935735346521
+full 2010-06..2026-10,gas_price_rt_dd,2.4198795512779774
+full 2010-06..2026-10,rep_admin,1.6980145231446717
+full 2010-06..2026-10,pre_election6,1.1690469788596403
+full 2010-06..2026-10,tone_l1,1.3115378672411808

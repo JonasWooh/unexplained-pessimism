@@ -1,0 +1,60 @@
+{
+  "source": "personalfinance",
+  "date": "2026-01-18",
+  "sample_unit": "circular_time_window",
+  "selected_intervals": [
+    [
+      1768704056,
+      1768718359
+    ]
+  ],
+  "window_start_second": 9656,
+  "window_length_seconds": 14303,
+  "inclusion_probability": 0.016020385304659497,
+  "month_plan_file": "provenance/personalfinance_window_month_plans/2026-01.json",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_window_personalfinance_1768704056_1768718359.json"
+  ],
+  "unique_ids": [
+    "1qfwsgz",
+    "1qfwwvs",
+    "1qfwwwc",
+    "1qfwzbw",
+    "1qfxq3f",
+    "1qfxtb4",
+    "1qfxwso",
+    "1qfy1gn",
+    "1qfy2ml",
+    "1qfy6ik",
+    "1qfy8n6",
+    "1qfyalj",
+    "1qfyczf",
+    "1qfydr2",
+    "1qfyezg",
+    "1qfyjto",
+    "1qfyp7f",
+    "1qfypbk",
+    "1qfypsb",
+    "1qfypsr",
+    "1qfywv7",
+    "1qfyz7t",
+    "1qfz2qn",
+    "1qfz4bl",
+    "1qfz83t",
+    "1qfz8jt",
+    "1qfzben",
+    "1qfzish",
+    "1qfzmf0",
+    "1qfzthg",
+    "1qg01sj",
+    "1qg02bp",
+    "1qg03tj",
+    "1qg0g36",
+    "1qg0h9g",
+    "1qg17nc"
+  ],
+  "rows": 36,
+  "removed": 7,
+  "deleted": 0,
+  "missing_retrieved_on": 0
+}

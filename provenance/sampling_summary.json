@@ -1,0 +1,41 @@
+{
+  "as_of_utc": "2026-10-15T22:41:11.205352+00:00",
+  "sources": {
+    "MediaCloud/34412234": {
+      "selected_unique": 35374,
+      "planned_dates": 652,
+      "completed_sample_dates": 48
+    },
+    "MediaCloud/38379429": {
+      "selected_unique": 45108,
+      "planned_dates": 652,
+      "completed_sample_dates": 46
+    },
+    "Reddit/Economics": {
+      "selected_unique": 69476,
+      "planned_dates": 6131,
+      "completed_sample_dates": 2769
+    },
+    "Reddit/economy": {
+      "selected_unique": 69426,
+      "planned_dates": 6131,
+      "completed_sample_dates": 3447
+    },
+    "Reddit/inflation": {
+      "selected_unique": 8616,
+      "planned_dates": 6131,
+      "completed_sample_dates": 6131
+    },
+    "Reddit/personalfinance": {
+      "selected_unique": 62577,
+      "planned_dates": 1192,
+      "completed_sample_dates": 315
+    }
+  },
+  "reddit_current_core_scope": {
+    "planned_dates": 5844,
+    "completed_sample_dates": 1010,
+    "selected_unique": 23276,
+    "deferred_intervals": 2090
+  }
+}

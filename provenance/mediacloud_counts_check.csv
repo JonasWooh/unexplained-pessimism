@@ -1,0 +1,17 @@
+file,rows,first_returned,last_returned,first_nonzero,duplicate_dates,api_total,note
+38379429_employment_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,3967518,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+38379429_housing_rates_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,3101176,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+34412234_all_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,71186503,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+34412234_general_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,4317076,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+34412234_housing_rates_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,1845455,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+38379429_monitoring_union_counts.json,652,2025-01-01,2026-10-14,2025-01-01,0,3015899,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+38379429_all_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,167030729,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+34412234_monitoring_union_counts.json,652,2025-01-01,2026-10-14,2025-01-01,0,1015455,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+38379429_growth_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,2123989,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+38379429_archive_extent_counts.json,11593,1901-12-13,2026-10-14,1901-12-13,0,168960095,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+34412234_archive_extent_counts.json,11666,1927-01-01,2026-10-14,1927-01-01,0,73207604,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+38379429_prices_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,6290477,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+38379429_general_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,6923072,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+34412234_prices_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,3810423,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+34412234_employment_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,2191434,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage
+34412234_growth_counts.json,6131,2010-01-01,2026-10-14,2010-01-01,0,1578345,Old publication dates can be indexing errors; earliest returned date is not proof of complete historical coverage

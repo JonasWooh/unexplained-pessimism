@@ -1,0 +1,11 @@
+{
+ "C": 4.0,
+ "train_items": 11349,
+ "frame_items_crossfit": 8021,
+ "frame_items": 42472,
+ "pred_relevant": 26758,
+ "months": 202,
+ "median_relevant_per_month": 120.0,
+ "guardian_units": 4278,
+ "median_guardian_per_month": 17.0
+}

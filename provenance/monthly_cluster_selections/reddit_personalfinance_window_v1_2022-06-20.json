@@ -1,0 +1,41 @@
+{
+  "source": "personalfinance",
+  "date": "2022-06-20",
+  "sample_unit": "circular_time_window",
+  "selected_intervals": [
+    [
+      1655718713,
+      1655731252
+    ]
+  ],
+  "window_start_second": 35513,
+  "window_length_seconds": 12539,
+  "inclusion_probability": 0.014512731481481482,
+  "month_plan_file": "provenance/personalfinance_window_month_plans/2022-06.json",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_window_personalfinance_1655718713_1655731252.json"
+  ],
+  "unique_ids": [
+    "vghtin",
+    "vgip77",
+    "vgippg",
+    "vgiqd3",
+    "vgirc8",
+    "vgit79",
+    "vgjc6b",
+    "vgk22f",
+    "vgk89f",
+    "vgkajw",
+    "vgkgoh",
+    "vgkl0x",
+    "vgknvv",
+    "vgkxys",
+    "vgl353",
+    "vgl5bu",
+    "vglb3l"
+  ],
+  "rows": 17,
+  "removed": 5,
+  "deleted": 2,
+  "missing_retrieved_on": 0
+}

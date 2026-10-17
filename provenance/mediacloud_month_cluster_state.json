@@ -1,0 +1,1114 @@
+{
+  "jobs": [
+    {
+      "source": "34412234",
+      "month": "2025-09",
+      "date": "2025-09-07",
+      "page": 1,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-09-07_00000.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 933,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2025-09-07.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2025-09",
+      "date": "2025-09-30",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-09-30_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-09-30_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-09-30_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2452,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2025-09-30.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2025-10",
+      "date": "2025-10-07",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-10-07_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-10-07_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-10-07_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2261,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2025-10-07.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2025-10",
+      "date": "2025-10-15",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-10-15_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-10-15_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-10-15_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2323,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2025-10-15.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2025-11",
+      "date": "2025-11-01",
+      "page": 1,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-11-01_00000.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 848,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2025-11-01.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2025-11",
+      "date": "2025-11-16",
+      "page": 1,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-11-16_00000.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 783,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2025-11-16.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2025-12",
+      "date": "2025-12-02",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-12-02_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-12-02_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1941,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2025-12-02.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2025-12",
+      "date": "2025-12-27",
+      "page": 1,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2025-12-27_00000.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 490,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2025-12-27.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-01",
+      "date": "2026-01-01",
+      "page": 1,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-01-01_00000.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 800,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-01-01.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-01",
+      "date": "2026-01-20",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-01-20_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-01-20_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-01-20_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2133,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-01-20.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-02",
+      "date": "2026-02-07",
+      "page": 1,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-02-07_00000.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 674,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-02-07.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-02",
+      "date": "2026-02-17",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-02-17_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-02-17_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1305,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-02-17.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-03",
+      "date": "2026-03-14",
+      "page": 1,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-03-14_00000.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 799,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-03-14.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-03",
+      "date": "2026-03-27",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-03-27_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-03-27_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1923,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-03-27.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-04",
+      "date": "2026-04-13",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-04-13_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-04-13_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1774,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-04-13.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-04",
+      "date": "2026-04-29",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-04-29_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-04-29_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-04-29_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2236,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-04-29.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-05",
+      "date": "2026-05-19",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-05-19_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-05-19_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-05-19_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2004,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-05-19.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-05",
+      "date": "2026-05-21",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-05-21_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-05-21_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-05-21_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2187,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-05-21.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-06",
+      "date": "2026-06-23",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-06-23_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-06-23_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-06-23_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2111,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-06-23.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-06",
+      "date": "2026-06-26",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-06-26_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-06-26_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1467,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-06-26.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-07",
+      "date": "2026-07-21",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-07-21_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-07-21_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1631,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-07-21.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-07",
+      "date": "2026-07-29",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-07-29_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-07-29_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1356,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-07-29.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-08",
+      "date": "2026-08-13",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-08-13_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-08-13_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1368,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-08-13.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-08",
+      "date": "2026-08-27",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-08-27_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-08-27_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1464,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-08-27.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-09",
+      "date": "2026-09-08",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-09-08_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-09-08_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1514,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-09-08.json"
+    },
+    {
+      "source": "34412234",
+      "month": "2026-09",
+      "date": "2026-09-26",
+      "page": 1,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_34412234_2026-09-26_00000.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 687,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_34412234_2026-09-26.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-03",
+      "date": "2025-03-07",
+      "page": 6,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-03-07_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-03-07_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-03-07_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-03-07_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-03-07_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-03-07_00005.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 5419,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-03-07.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-03",
+      "date": "2025-03-30",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/daily_38379429_2025-03-30_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-03-30_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1653,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-03-30.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-04",
+      "date": "2025-04-07",
+      "page": 7,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/daily_38379429_2025-04-07_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-07_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-07_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-07_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-07_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-07_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-07_00006.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 6069,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-04-07.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-04",
+      "date": "2025-04-15",
+      "page": 6,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/daily_38379429_2025-04-15_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-15_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-15_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-15_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-15_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-04-15_00005.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 5278,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-04-15.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-05",
+      "date": "2025-05-01",
+      "page": 7,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/daily_38379429_2025-05-01_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-01_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-01_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-01_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-01_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-01_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-01_00006.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 6370,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-05-01.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-05",
+      "date": "2025-05-16",
+      "page": 5,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/daily_38379429_2025-05-16_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-16_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-16_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-16_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-05-16_00004.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 4357,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-05-16.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-06",
+      "date": "2025-06-02",
+      "page": 4,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/daily_38379429_2025-06-02_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-06-02_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-06-02_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-06-02_00003.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 3741,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-06-02.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-06",
+      "date": "2025-06-27",
+      "page": 5,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-06-27_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-06-27_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-06-27_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-06-27_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-06-27_00004.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 4415,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-06-27.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-07",
+      "date": "2025-07-01",
+      "page": 5,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-07-01_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-07-01_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-07-01_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-07-01_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-07-01_00004.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 4653,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-07-01.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-07",
+      "date": "2025-07-20",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-07-20_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-07-20_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1413,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-07-20.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-08",
+      "date": "2025-08-07",
+      "page": 6,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-08-07_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-08-07_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-08-07_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-08-07_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-08-07_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-08-07_00005.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 5554,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-08-07.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-08",
+      "date": "2025-08-17",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-08-17_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-08-17_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1707,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-08-17.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-09",
+      "date": "2025-09-14",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-09-14_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-09-14_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1383,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-09-14.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-09",
+      "date": "2025-09-27",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-09-27_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-09-27_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1470,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-09-27.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-10",
+      "date": "2025-10-13",
+      "page": 4,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-13_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-13_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-13_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-13_00003.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 3942,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-10-13.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-10",
+      "date": "2025-10-29",
+      "page": 6,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-29_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-29_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-29_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-29_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-29_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-10-29_00005.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 5405,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-10-29.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-11",
+      "date": "2025-11-19",
+      "page": 5,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-19_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-19_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-19_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-19_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-19_00004.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 4597,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-11-19.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-11",
+      "date": "2025-11-21",
+      "page": 5,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-21_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-21_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-21_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-21_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-11-21_00004.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 4093,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-11-21.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-12",
+      "date": "2025-12-23",
+      "page": 4,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-12-23_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-12-23_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-12-23_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-12-23_00003.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 3740,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-12-23.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2025-12",
+      "date": "2025-12-26",
+      "page": 2,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-12-26_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2025-12-26_00001.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 1866,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2025-12-26.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-01",
+      "date": "2026-01-21",
+      "page": 5,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-21_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-21_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-21_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-21_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-21_00004.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 4936,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-01-21.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-01",
+      "date": "2026-01-29",
+      "page": 6,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-29_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-29_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-29_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-29_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-29_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-01-29_00005.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 5065,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-01-29.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-02",
+      "date": "2026-02-13",
+      "page": 6,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-13_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-13_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-13_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-13_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-13_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-13_00005.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 5170,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-02-13.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-02",
+      "date": "2026-02-27",
+      "page": 7,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-27_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-27_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-27_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-27_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-27_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-27_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-02-27_00006.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 6443,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-02-27.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-03",
+      "date": "2026-03-08",
+      "page": 4,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-08_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-08_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-08_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-08_00003.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 3056,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-03-08.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-03",
+      "date": "2026-03-26",
+      "page": 10,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00006.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00007.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00008.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-03-26_00009.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 9345,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-03-26.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-04",
+      "date": "2026-04-16",
+      "page": 10,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00006.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00007.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00008.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-16_00009.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 9624,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-04-16.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-04",
+      "date": "2026-04-22",
+      "page": 9,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-22_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-22_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-22_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-22_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-22_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-22_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-22_00006.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-22_00007.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-04-22_00008.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 8756,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-04-22.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-05",
+      "date": "2026-05-28",
+      "page": 9,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-28_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-28_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-28_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-28_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-28_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-28_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-28_00006.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-28_00007.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-28_00008.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 8727,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-05-28.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-05",
+      "date": "2026-05-30",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-30_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-30_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-05-30_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2934,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-05-30.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-06",
+      "date": "2026-06-02",
+      "page": 9,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-02_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-02_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-02_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-02_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-02_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-02_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-02_00006.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-02_00007.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-02_00008.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 8129,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-06-02.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-06",
+      "date": "2026-06-08",
+      "page": 8,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-08_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-08_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-08_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-08_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-08_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-08_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-08_00006.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-06-08_00007.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 7228,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-06-08.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-07",
+      "date": "2026-07-06",
+      "page": 6,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-07-06_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-07-06_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-07-06_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-07-06_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-07-06_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-07-06_00005.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 5052,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-07-06.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-07",
+      "date": "2026-07-18",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-07-18_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-07-18_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-07-18_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2995,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-07-18.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-08",
+      "date": "2026-08-02",
+      "page": 3,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-08-02_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-08-02_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-08-02_00002.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 2480,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-08-02.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-08",
+      "date": "2026-08-22",
+      "page": 4,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-08-22_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-08-22_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-08-22_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-08-22_00003.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 3094,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-08-22.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-09",
+      "date": "2026-09-03",
+      "page": 8,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-03_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-03_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-03_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-03_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-03_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-03_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-03_00006.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-03_00007.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 7472,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-09-03.json"
+    },
+    {
+      "source": "38379429",
+      "month": "2026-09",
+      "date": "2026-09-09",
+      "page": 8,
+      "token": null,
+      "raw_files": [
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-09_00000.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-09_00001.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-09_00002.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-09_00003.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-09_00004.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-09_00005.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-09_00006.json",
+        "corpus/raw/N03/20261015/month_cluster_38379429_2026-09-09_00007.json"
+      ],
+      "old_full": false,
+      "complete": true,
+      "rows": 7519,
+      "selection_file": "provenance/monthly_cluster_selections/mediacloud_38379429_2026-09-09.json"
+    }
+  ],
+  "seed": 20261015,
+  "design": "calendar-day cluster sampling; complete selected days; not article/post-level simple random sampling",
+  "retained_complete_months": {
+    "34412234": [
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08"
+    ],
+    "38379429": [
+      "2025-01",
+      "2025-02"
+    ]
+  },
+  "status": "complete_monthly_day_clusters",
+  "updated_at_utc": "2026-10-16T01:16:30.070811+00:00",
+  "pid": 72945
+}

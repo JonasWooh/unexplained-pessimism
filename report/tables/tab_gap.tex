@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{\textbf{Sentiment gap relative to the economic-only model (M1), by period}}
+\label{tab:gap}
+\small
+\begin{tabular}{@{}l r r r c r r r@{}}
+\toprule
+ & & \multicolumn{4}{c}{Index of Consumer Sentiment (ICS)} & \multicolumn{2}{c}{Mean gap}\\
+\cmidrule(lr){3-6}\cmidrule(l){7-8}
+Period & Months & \makecell[r]{Actual\\change} & \makecell[r]{Mean\\gap} & \makecell{95\% band\\under M1} & \makecell[r]{Explained\\share $S$} & ICC & ICE\\
+\midrule
+2021-07 to 2022-12 & 18 & −32.6 & −22.9 & [−7.7, 7.9] & 0.30 & −35.0 & −15.2 \\
+2023-01 to 2024-12 & 24 & −27.0 & −25.2 & [−4.4, 4.7] & 0.07 & −39.8 & −15.8 \\
+2025-01 to 2025-12 & 12 & −38.4 & −35.8 & [−4.2, 3.9] & 0.07 & −47.7 & −28.2 \\
+2026-01 to 2026-10 & 10 & −44.8 & −39.8 & [−5.3, 5.1] & 0.11 & −55.2 & −29.9 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Changes are relative to the 2019 average. Gap = actual − M1 out-of-sample prediction; M1 regresses each index on real-time U-3 unemployment, PCE inflation (year over year) and real GDP growth (quarter over quarter, annualized), fitted on 2010–2019 with month dummies. The band is the 95\% range of the period-mean prediction error under M1 (moving-block bootstrap, block length 12, 2,000 draws); every period mean lies outside it ($p < 0.001$). $S = 1 - \text{mean gap}/\text{actual change}$, the share of the decline since 2019 that M1 accounts for. ICC = Current Economic Conditions; ICE = Consumer Expectations. Pandemic months (2020-01 to 2021-06) are omitted. 2026-10 is the preliminary reading.
+\item \textit{Source:} \texttt{results/stage1\_m1/m1\_periods.csv}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

@@ -1,0 +1,21 @@
+source,url,checked_at_utc,http_status,outcome,content_type
+Michigan,https://www.sca.isr.umich.edu/tables.html,2026-10-15T01:19:30.874222+00:00,200,accessible,text/html; charset=utf-8
+Michigan data,https://data.sca.isr.umich.edu/tables.php,2026-10-15T01:19:30.874632+00:00,200,accessible,text/html; charset=UTF-8
+FRED API,https://api.stlouisfed.org/fred/series?series_id=UNRATE&file_type=json,2026-10-15T01:19:30.874846+00:00,400,HTTP error; distinguish authentication from access restriction,application/json; charset=UTF-8
+FRED,https://fred.stlouisfed.org/,2026-10-15T01:19:30.874979+00:00,200,accessible,text/html; charset=UTF-8
+ALFRED,https://alfred.stlouisfed.org/,2026-10-15T01:19:30.875137+00:00,200,accessible,text/html; charset=UTF-8
+BLS API,https://api.bls.gov/publicAPI/v2/timeseries/data/LNS14000000,2026-10-15T01:19:30.875282+00:00,200,accessible,application/json
+BLS,https://www.bls.gov/schedule/,2026-10-15T01:19:31.010093+00:00,403,HTTP error; distinguish authentication from access restriction,text/html
+BEA apps,https://apps.bea.gov/,2026-10-15T01:19:31.032314+00:00,200,accessible,text/html
+BEA,https://www.bea.gov/news/schedule,2026-10-15T01:19:31.075281+00:00,200,accessible,text/html; charset=UTF-8
+NYT API,https://api.nytimes.com/svc/archive/v1/2009/12.json,2026-10-15T01:19:31.092457+00:00,401,HTTP error; distinguish authentication from access restriction,application/json
+Guardian API,https://content.guardianapis.com/search?page-size=1,2026-10-15T01:19:31.176105+00:00,401,HTTP error; distinguish authentication from access restriction,application/json; charset=utf-8
+Media Cloud,https://search.mediacloud.org/,2026-10-15T01:19:31.225564+00:00,200,accessible,text/html; charset=utf-8
+GDELT,https://api.gdeltproject.org/api/v2/doc/doc?query=economy&mode=timelinevolraw&format=json&timespan=1d,2026-10-15T01:19:31.269449+00:00,429,HTTP error; distinguish authentication from access restriction,
+FRBSF,https://www.frbsf.org/research-and-insights/data-and-indicators/daily-news-sentiment-index/,2026-10-15T01:19:31.279276+00:00,200,accessible,text/html; charset=UTF-8
+YouTube API,https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=CNN,2026-10-15T01:19:31.336938+00:00,403,HTTP error; distinguish authentication from access restriction,application/json; charset=UTF-8
+Philadelphia Fed,https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists,2026-10-15T01:19:31.356621+00:00,200,accessible,text/html; charset=utf-8
+EPU,https://www.policyuncertainty.com/us_monthly.html,2026-10-15T01:19:31.405900+00:00,200,accessible,text/html; charset=UTF-8
+Atlanta Fed,https://www.atlantafed.org/,2026-10-15T01:19:31.457979+00:00,200,accessible,text/html; charset=utf-8
+Pew,https://www.pewresearch.org/internet/2025/11/20/americans-social-media-use-2025/,2026-10-15T01:19:31.619494+00:00,200,accessible,text/html; charset=UTF-8
+Federal Reserve,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm,2026-10-15T01:19:31.728248+00:00,200,accessible,text/html

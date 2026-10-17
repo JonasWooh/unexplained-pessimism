@@ -1,0 +1,23 @@
+{
+  "updated_at_utc": "2026-10-15T18:52:36.678879+00:00",
+  "collections": [
+    {
+      "collection_id": 38379429,
+      "name": "United States - State & Local",
+      "next_page": 218,
+      "token": "MjAyNS0wMy0wNFQxNToxODo1My40OTc5NjgwMDBaATI5MzIzMzM~",
+      "rows": 218000,
+      "complete": false,
+      "error": false
+    },
+    {
+      "collection_id": 34412234,
+      "name": "United States - National",
+      "next_page": 457,
+      "token": "MjAyNS0wOS0yNlQxMjoyNDozMy40ODY4NjYwMDBaATM3Mjk2OTE~",
+      "rows": 457000,
+      "complete": false,
+      "error": false
+    }
+  ]
+}

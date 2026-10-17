@@ -1,0 +1,14 @@
+source,missing,reason,status,evidence
+NYT,2026-01-08..31; 2026-10-05..14,Latest saved re-requests still return only Jan1-7 (694) and Oct1-4 (516); source snapshot truncation,unresolved_source_gap,provenance/monthly_audit_summary.json
+Guardian,bodyText empty for 100 items,99 gallery/picture/video/interactive items; 1 article without body; no invented text,99_format_limit_1_article_gap,provenance/guardian_missing_body_status.csv
+GDELT,planned records unavailable,Saved repeated HTTP429; user instructed no further retries,unavailable_no_retry,provenance/dataset_status.csv
+Media bias ratings,numeric ratings database,AllSides403; Ad Fontes numeric data not acquired; chart/form is not a numeric database,unavailable,provenance/dataset_status.csv
+Survey microdata S06,2026-03 onward in collected release,Latest obtained public data ends 2026-02; no extrapolation,public_release_lag,provenance/dataset_status.csv
+Detailed survey S02-S04,detailed tables after2026-08,Latest collected detailed release ends2026-08; main ICS/expectations have later separate releases,public_release_lag,provenance/dataset_status.csv
+Survey S05,2026-09 final PDF,CSV final value exists; report PDF not obtained,document_gap_not_numeric_value_gap,provenance/dataset_status.csv
+M04 GDP growth,vintages before2014-09-26,ALFRED available vintage archive begins2014-09-26,archive_limit,provenance/macro_completeness.csv
+M13 HOAM,historical release vintages,Current full-series snapshot obtained; source vintage archive not obtained,snapshot_only,provenance/dataset_status.csv
+M16 S&P500,observations before2016-10-17; historical vintages,"FRED source window/archive limitations; NASDAQ is a separate supplement, not replacement S&P data",source_limit,provenance/dataset_status.csv
+M01/M06/M09,2025-10 official missing values in source series,"Source missing values retained, no interpolation; details in prior source verification",official_missing,provenance/macro_completeness.csv
+R02 events,No claimed exhaustive event universe,158 verified events currently retained; expanded beyond FOMC; no denominator for exhaustive completeness,partial_reference_list,provenance/events.csv
+YouTube,Not assessed in this task,User assigned elsewhere; no interface calls or management,outside_current_task,user instruction

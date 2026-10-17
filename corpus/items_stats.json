@@ -1,0 +1,17 @@
+{
+  "rows": 167418,
+  "by_source": {
+    "YouTube": 54659,
+    "Reddit": 41096,
+    "NYT": 38468,
+    "MediaCloud_Local": 25055,
+    "Guardian": 4286,
+    "MediaCloud_National": 3854
+  },
+  "near_duplicate_merges": 666,
+  "duplicates": 2484,
+  "reposts": 21188,
+  "ads": 8,
+  "obituaries": 170,
+  "generated_at_utc": "2026-10-16T06:27:35.621581+00:00"
+}

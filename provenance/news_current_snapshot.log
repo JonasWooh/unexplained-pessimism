@@ -1,0 +1,44 @@
+/Users/jonasw/anaconda3/lib/python3.11/site-packages/openpyxl/worksheet/header_footer.py:48: UserWarning: Cannot parse header or footer so it will be ignored
+  warn("""Cannot parse header or footer so it will be ignored""")
+/Users/jonasw/anaconda3/lib/python3.11/site-packages/openpyxl/worksheet/header_footer.py:48: UserWarning: Cannot parse header or footer so it will be ignored
+  warn("""Cannot parse header or footer so it will be ignored""")
+/Users/jonasw/anaconda3/lib/python3.11/site-packages/openpyxl/worksheet/header_footer.py:48: UserWarning: Cannot parse header or footer so it will be ignored
+  warn("""Cannot parse header or footer so it will be ignored""")
+/Users/jonasw/anaconda3/lib/python3.11/site-packages/openpyxl/worksheet/header_footer.py:48: UserWarning: Cannot parse header or footer so it will be ignored
+  warn("""Cannot parse header or footer so it will be ignored""")
+Unparsed: 0
+{
+  "checked_at_utc": "2026-10-15T03:43:04.125581+00:00",
+  "macro_all_pages_complete": true,
+  "macro_duplicate_keys": 0,
+  "macro_future_vintages": 0,
+  "macro_reference_after_version": 0,
+  "survey_final_compared": 32,
+  "survey_final_mismatches": [
+    {
+      "month": "2025-01",
+      "report_final": 71.1,
+      "current_csv": 71.7,
+      "equal": false,
+      "source_url": "https://data.sca.isr.umich.edu/fetchdoc.php?docid=77939"
+    }
+  ],
+  "stories": {
+    "38379429": {
+      "rows": 110000,
+      "unique": 110000,
+      "duplicates": 0
+    },
+    "34412234": {
+      "rows": 104000,
+      "unique": 104000,
+      "duplicates": 0
+    }
+  },
+  "story_date_anomalies": []
+}
+Release calendar 15082 events 150 elections 9
+Channels 10 comment videos 186 comment pages 489
+News archive counts: {'N01': (8, 77046), 'N02': (49, 2397)}
+Manifest metadata enriched: 8095 unregistered raw files: 0
+Status rows: 36 registered files: 8073

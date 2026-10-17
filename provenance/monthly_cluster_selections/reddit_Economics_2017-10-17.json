@@ -1,0 +1,34 @@
+{
+  "source": "Economics",
+  "date": "2017-10-17",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/posts_Economics_1508198400_1508284800.json"
+  ],
+  "unique_ids": [
+    "76v2qa",
+    "76vedj",
+    "76vsu3",
+    "76xa9r",
+    "76xjr6",
+    "76xoqe",
+    "76y0v9",
+    "76y1vg",
+    "76y55o",
+    "76yam3",
+    "76yex9",
+    "76yfrh",
+    "76yk8l",
+    "76yxqa",
+    "76z161",
+    "76z4kg",
+    "76zkig",
+    "76zkt6",
+    "76zyyg",
+    "7709le",
+    "770u6g",
+    "771j7l",
+    "771ufy"
+  ],
+  "rows": 23
+}

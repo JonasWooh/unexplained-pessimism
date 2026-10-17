@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--__FRAGMENT_START__-->
+<title>Perception Gap Monitor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Michigan consumer sentiment against a fundamentals model, with AI-coded news measures, ahead of the November 3, 2026 midterms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<style>
+/*__CSS__*/
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="topbar" id="top">
+  <div class="topbar-in">
+    <a class="brand" href="#overview" aria-label="Perception Gap Monitor, overview">
+      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5 C8 6.5 9 7 12 9.5 S17 17.5 21 17.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 6.5 H21" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 2.2" opacity=".55"/></svg>
+      <span>Perception Gap Monitor</span>
+    </a>
+    <nav class="nav" role="tablist" aria-label="Sections">
+      <a href="#overview" role="tab" id="tab-overview">Overview</a>
+      <a href="#findings" role="tab" id="tab-findings">Findings</a>
+      <a href="#sentiment" role="tab" id="tab-sentiment">Sentiment</a>
+      <a href="#news" role="tab" id="tab-news">News</a>
+      <a href="#measurement" role="tab" id="tab-measurement">Measurement</a>
+      <a href="#tests" role="tab" id="tab-tests">Tests</a>
+      <a href="#update" role="tab" id="tab-update">Update plan</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7a5 5 0 0 1 0 10z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="panel" id="overview" role="tabpanel" aria-labelledby="tab-overview">
+    <div class="intro wrap">
+      <div class="intro-text">
+        <p class="eyebrow">Consumer sentiment before the 2026 midterms</p>
+        <h1 id="introTitle"></h1>
+        <p class="lede" id="introLede"></p>
+      </div>
+      <aside class="status" aria-label="Latest readings" id="statusBoard"></aside>
+    </div>
+    <div class="wrap">
+      <div class="bento" id="overviewGrid"></div>
+      <div class="takeaways" id="takeaways"></div>
+      <div class="buildinfo" id="buildInfo" aria-label="Data vintage and coding setup"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="findings" role="tabpanel" aria-labelledby="tab-findings" hidden>
+    <div class="wrap">
+      <div class="sec-head" id="headFindings"></div>
+      <div class="story-grid">
+        <div class="step-panel">
+          <div class="step-card" id="stepCard" aria-live="polite"></div>
+          <div class="step-nav">
+            <button type="button" class="step-btn" id="stepPrev" aria-label="Previous step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="step-dots" id="stepDots" role="tablist" aria-label="Steps"></div>
+            <button type="button" class="step-btn" id="stepNext" aria-label="Next step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <div class="stage-card">
+          <div class="stage-head"><span class="stage-title" id="stageTitle"></span><span class="stage-key" id="stageKey"></span></div>
+          <div class="stage-chart" id="stageChart"></div>
+          <p class="src" id="stageSrc"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="explorer" id="explorer" hidden>
+    <div class="wrap"><div class="sec-head" id="headExplorer"></div></div>
+    <div class="dock" id="dock">
+      <div class="wrap dock-in">
+        <div class="dock-row" id="dockControls"></div>
+        <div class="overview" id="overviewStrip" aria-label="Choose the period shown in every chart"></div>
+      </div>
+    </div>
+    <div class="wrap"><div class="kpis" id="kpis"></div></div>
+    <section class="panel" id="sentiment" role="tabpanel" aria-labelledby="tab-sentiment" hidden>
+      <div class="wrap"><div class="bento" id="bentoS"></div></div>
+    </section>
+    <section class="panel" id="news" role="tabpanel" aria-labelledby="tab-news" hidden>
+      <div class="wrap"><div class="bento" id="bentoN"></div></div>
+    </section>
+  </div>
+
+  <section class="panel" id="measurement" role="tabpanel" aria-labelledby="tab-measurement" hidden>
+    <div class="wrap">
+      <div class="sec-head" id="headMeasurement"></div>
+      <div class="bento" id="qualityGrid"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="tests" role="tabpanel" aria-labelledby="tab-tests" hidden>
+    <div class="wrap">
+      <div class="sec-head" id="headTests"></div>
+      <div class="bento" id="testsGrid"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="update" role="tabpanel" aria-labelledby="tab-update" hidden>
+    <div class="wrap">
+      <div class="sec-head" id="headUpdate"></div>
+      <div class="bento" id="updateGrid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in" id="foot"></div>
+</footer>
+
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog">
+  <div class="drawer-in">
+    <div class="drawer-head">
+      <div>
+        <p class="eyebrow" id="drawerEyebrow">Month</p>
+        <h3 id="drawerTitle"></h3>
+      </div>
+      <div class="drawer-nav">
+        <button type="button" id="drPrev" aria-label="Previous month"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" id="drNext" aria-label="Next month"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" id="drClose" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+    <p class="drawer-hint">Use the ← and → keys to step through months. Esc closes.</p>
+    <div class="drawer-body" id="drawerBody"></div>
+  </div>
+</aside>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+<!--__D3__-->
+<script>
+/*__DATA__*/
+</script>
+<script>
+/*__APP__*/
+</script>
+<!--__FRAGMENT_END__-->
+</body>
+</html>

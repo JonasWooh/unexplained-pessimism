@@ -1,0 +1,38 @@
+{
+  "source": "Economics",
+  "date": "2020-02-22",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/cluster_posts_Economics_1582329600_1582416000.json"
+  ],
+  "unique_ids": [
+    "f7k8px",
+    "f7kerx",
+    "f7lliq",
+    "f7mvcs",
+    "f7noix",
+    "f7np15",
+    "f7q3j2",
+    "f7qf8a",
+    "f7rr0c",
+    "f7s0ra",
+    "f7sgy2",
+    "f7ssug",
+    "f7txwy",
+    "f7u877",
+    "f7ucbb",
+    "f7utyr",
+    "f7uzqm",
+    "f7wd2c",
+    "f7wyls",
+    "f7xmrc",
+    "f7xp4u",
+    "f7xz7a",
+    "f7y7lx",
+    "f7zlqd",
+    "f80fgd",
+    "f80o9e",
+    "f813am"
+  ],
+  "rows": 27
+}

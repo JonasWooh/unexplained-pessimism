@@ -1,0 +1,42 @@
+{
+  "source": "Economics",
+  "date": "2022-02-22",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_Economics_1645488000_1645574400.json"
+  ],
+  "unique_ids": [
+    "syckr1",
+    "syg6wx",
+    "sygajk",
+    "sygirh",
+    "sygroj",
+    "syjca7",
+    "syk3ai",
+    "sykkkl",
+    "sykn80",
+    "syku5w",
+    "sylpgq",
+    "sym3lo",
+    "syms32",
+    "symv52",
+    "synl6j",
+    "syny0j",
+    "syq67n",
+    "syqvgd",
+    "syrevb",
+    "syrnr3",
+    "syrz62",
+    "sysyp1",
+    "sytj6l",
+    "syuzu7",
+    "syvnh4",
+    "syw1tc",
+    "syx2uk",
+    "syxcq8",
+    "syxr3b",
+    "sz17zs",
+    "sz2e6x"
+  ],
+  "rows": 31
+}

@@ -1,0 +1,41 @@
+{
+  "source": "economy",
+  "month": "2021-09",
+  "start_utc": 1630454400,
+  "end_utc": 1633046400,
+  "method": "sum of exhaustive aggregate counts over disjoint UTC intervals covering the full month",
+  "parts": [
+    {
+      "start_utc": 1630454400,
+      "end_utc": 1631059200,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_economy_2021-09_1630454400_1631059200.json",
+      "count": 346
+    },
+    {
+      "start_utc": 1631059200,
+      "end_utc": 1631664000,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_economy_2021-09_1631059200_1631664000.json",
+      "count": 370
+    },
+    {
+      "start_utc": 1631664000,
+      "end_utc": 1632268800,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_economy_2021-09_1631664000_1632268800.json",
+      "count": 383
+    },
+    {
+      "start_utc": 1632268800,
+      "end_utc": 1632873600,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_economy_2021-09_1632268800_1632873600.json",
+      "count": 380
+    },
+    {
+      "start_utc": 1632873600,
+      "end_utc": 1633046400,
+      "file": "corpus/raw/SM02/20261016/cluster_count_part_economy_2021-09_1632873600_1633046400.json",
+      "count": 159
+    }
+  ],
+  "count": 1638,
+  "note": "Source count snapshots retrieved sequentially, not an atomic source snapshot; no sampled-day extrapolation."
+}

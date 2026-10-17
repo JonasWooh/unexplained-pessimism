@@ -1,0 +1,9 @@
+{
+  "as_of_utc": "2026-10-15T20:47:15.135501+00:00",
+  "channel_months": 460,
+  "complete_inventory_or_query_months": 242,
+  "search_calls_current_pacific_day": 102,
+  "search_status": "waiting_for_next_pacific_reset_no_search_request",
+  "search_error": null,
+  "classified_status": "running"
+}

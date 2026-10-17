@@ -1,0 +1,30 @@
+{
+  "checked_at_utc": "2026-10-15T08:17:13.579330+00:00",
+  "macro_all_pages_complete": true,
+  "macro_duplicate_keys": 0,
+  "macro_future_vintages": 0,
+  "macro_reference_after_version": 0,
+  "survey_final_compared": 32,
+  "survey_final_mismatches": [
+    {
+      "month": "2025-01",
+      "report_final": 71.1,
+      "current_csv": 71.7,
+      "equal": false,
+      "source_url": "https://data.sca.isr.umich.edu/fetchdoc.php?docid=77939"
+    }
+  ],
+  "stories": {
+    "34412234": {
+      "rows": 455000,
+      "unique": 455000,
+      "duplicates": 0
+    },
+    "38379429": {
+      "rows": 215000,
+      "unique": 215000,
+      "duplicates": 0
+    }
+  },
+  "story_date_anomalies": []
+}

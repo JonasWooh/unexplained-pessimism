@@ -1,0 +1,8 @@
+{
+ "corpus_labels": 11431,
+ "excluded_gold_overlap": 59,
+ "train_relevance": 11349,
+ "train_content": 7640,
+ "dev_relevance": 92,
+ "dev_content": 66
+}

@@ -1,0 +1,33 @@
+{
+  "source": "Economics",
+  "date": "2016-01-03",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_Economics_1451779200_1451865600.json"
+  ],
+  "unique_ids": [
+    "3z8an5",
+    "3z8b7r",
+    "3z8bha",
+    "3z8e19",
+    "3z8jy6",
+    "3z8rbn",
+    "3z8rbp",
+    "3z9c44",
+    "3z9cnx",
+    "3z9g5y",
+    "3zahel",
+    "3zalat",
+    "3zawye",
+    "3zazzu",
+    "3zb02q",
+    "3zb1a5",
+    "3zb3ss",
+    "3zb9vm",
+    "3zbf5l",
+    "3zbmeh",
+    "3zbxm2",
+    "3zbz1y"
+  ],
+  "rows": 22
+}

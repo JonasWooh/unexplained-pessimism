@@ -1,0 +1,31 @@
+coding_id,date,fragment,indicator,measure,official_series,claim_value,inequality,reference_period,official_value_at_pub,category,parse_correct_yes_no,note
+K08763,2012-02-03,gross domestic product rising at an around 3.0% at the start of the year,gdp_growth,quarterly change,,3.0,,2012-01-01,,unverifiable,yes,数值和2012年第一季度对应合理；原文是根据ISM调查推算的GDP增速，不是已公布的季度实测值，且未明确年化口径，应维持无法核实。
+K03492,2019-04-26,GDP growth well ahead of the 2.2% in the last quarter of 2018,gdp_growth,quarterly change,q/q annualized,2.2,,2018-10-01,2.1664986743739068,correct,yes,
+K10766,2019-10-06,Real GDP growth in Q3 2019 is 1.8%,gdp_growth,quarterly change,,1.8,,2019-07-01,,unverifiable,yes,1.8%、GDP和2019年第三季度对应一致；原文署名Atlanta Fed且未明确年化口径，不能据此当作已公布的官方GDP实测值。
+K06146,2015-05-29,U.S. Economy Contracted 0.7% in First Quarter,gdp_growth,quarterly change,q/q annualized,-0.7,,2015-01-01,-0.74905120650679,correct,yes,
+K03470,2026-10-14,US inflation rose to 3.7% in September,inflation,12-month change,CPI,3.7,,2026-09-01,3.7172508442689933,correct,yes,
+K02848,2024-03-12,Consumer prices rose 0.4% in February and 3.2% from a year ago,inflation,1-month change,CPI,0.4,,2024-02-01,0.4420620953549559,correct,yes,
+K01583,2024-03-10,50 percent inflation,inflation,12-month change,CPI,50.0,,2024-01-01,3.1059809026621865,wrong,no,原文仅称“50 percent inflation”，未说明CPI或PCE、同比口径或对应月份；50的数值摘录正确，但不能指定为CPI同比、2024-01。
+K02471,2022-04-29,The Personal Consumption Expenditures price index climbed 6.6 percent from a year earlier,inflation,12-month change,PCE,6.6,,2022-03-01,6.591025211860679,correct,yes,
+K09071,2026-07-14,"Month-over-month, CPI fell 0.8% in June",inflation,1-month change,CPI,-0.8,,2026-06-01,-0.42248165303806484,wrong,yes,
+K00058,2024-10-31,US inflation falls to 2.1%,inflation,12-month change,PCE,2.1,,2024-09-01,2.0949525072701425,correct,yes,
+K05894,2024-02-09,US consumer price index rose 0.2% in December,inflation,1-month change,CPI,0.2,,2023-12-01,0.2330987195803047,correct,yes,
+K03941,2023-11-14,US inflation cools to 3.2%,inflation,12-month change,CPI,3.2,,2023-10-01,3.232355773909612,correct,yes,
+K02848,2024-03-12,Consumer prices rose 0.4% in February and 3.2% from a year ago,inflation,12-month change,CPI,3.2,,2024-02-01,3.1657429794798686,correct,yes,
+K00987,2026-10-03,August 2026 (current inflation) 3.4% and rising,inflation,12-month change,PCE,3.4,,2026-08-01,3.419031824505425,correct,no,3.4%及2026年8月对应正确，但原文只称“current inflation”，未指明PCE或CPI及同比口径；不能仅据数值匹配或发表日期指定PCE同比。
+K09715,2017-06-02,"Payrolls grew by 138,000",payroll_change,"1-month change, thousands",PAYEMS,138.0,,2017-05-01,138.0,correct,yes,
+K04823,2018-11-02,"The US added 250,000 jobs in October",payroll_change,"1-month change, thousands",PAYEMS,250.0,,2018-10-01,250.0,correct,yes,
+K07519,2024-05-03,"Employers added 175,000 jobs in April",payroll_change,"1-month change, thousands",PAYEMS,175.0,,2024-04-01,175.0,correct,yes,
+K02926,2015-08-07,"The economy created 215,000 jobs",payroll_change,"1-month change, thousands",PAYEMS,215.0,,2015-07-01,215.0,correct,yes,
+K07751,2024-11-01,"U.S. payrolls grew by only 12,000 in October",payroll_change,"1-month change, thousands",PAYEMS,12.0,,2024-10-01,12.0,correct,yes,
+K07727,2022-04-01,"US adds 431,000 jobs",payroll_change,"1-month change, thousands",PAYEMS,431.0,,2022-03-01,431.0,correct,yes,
+K02196,2019-09-06,"US adds 130,000 jobs August",payroll_change,"1-month change, thousands",PAYEMS,130.0,,2019-08-01,130.0,correct,yes,
+K06555,2012-11-02,"employers added 171,000 jobs in October",payroll_change,"1-month change, thousands",PAYEMS,171.0,,2012-10-01,171.0,correct,yes,
+K07821,2023-05-05,"The unemployment rate fell slightly to 3.4%, a 0.1% decrease compared to March",unemployment_rate,level,UNRATE,3.4,,2023-03-01,3.5,correct,no,3.4%是2023年4月失业率，March是比较期；reference_period应为2023-04-01，而不是2023-03-01。
+K02553,2026-09-04,unemployment rate held steady at 4.1%,unemployment_rate,level,UNRATE,4.1,,2026-08-01,4.1,correct,yes,
+K04598,2025-06-06,unemployment rate remained steady at 4.2%,unemployment_rate,level,UNRATE,4.2,,2025-05-01,4.2,correct,yes,
+K01897,2022-08-05,jobless rate fell to 3.5 percent,unemployment_rate,level,UNRATE,3.5,,2022-07-01,3.5,correct,yes,
+K06427,2025-02-07,unemployment rate fell 4%,unemployment_rate,level,UNRATE,4.0,,2025-01-01,4.0,correct,no,原文写“unemployment rate fell 4%”，没有to或by，无法唯一判定是降至4%还是下降4%；不可无条件解析为level=4.0%，应标注口径歧义。
+K05994,2012-12-07,The unemployment rate dropped from 7.9% to 7.7%,unemployment_rate,level,UNRATE,7.7,,2012-11-01,7.7,correct,yes,
+K01293,2018-04-06,the unemployment rate had remained at 4.1% for a sixth straight month,unemployment_rate,level,UNRATE,4.1,,2018-03-01,4.1,correct,yes,
+K04229,2011-08-05,unemployment rate edged down from 9.2 to 9.1%,unemployment_rate,level,UNRATE,9.1,,2011-07-01,9.1,correct,yes,

@@ -1,0 +1,2 @@
+run_dir,split,files,model_name_as_displayed,settings,prompt_file,prompt_sha256,started_local,finished_local,notes
+labels/ai/codex__v2_isolated_r1_corpus,corpus,corpus_batch_027.jsonl,not_visible,not_visible,03_corpus_all/prompts/label_prompt_v2.md,9f95f20aa319fff0ecf6c4a29d2ab81bfcc9503d72a581ea64cc6a661b6e16bd,2026-10-16T05:45:50-04:00,2026-10-16T05:59:07-04:00,agent task corpus_027; completed; 200 records; repaired five topics evidence quotes as continuous verbatim spans; full validation passed with 0 errors; model and settings not visible

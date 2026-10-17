@@ -1,0 +1,16 @@
+{
+  "adjudicated_cells": 593,
+  "final=B": 114,
+  "final=A": 477,
+  "final=neither": 2,
+  "main_items": 360,
+  "main_relevant": {
+    "no": 108,
+    "unsure": 32,
+    "yes": 220
+  },
+  "files": [
+    "gold_standard_v1.csv",
+    "gold_calibration_v1.csv"
+  ]
+}

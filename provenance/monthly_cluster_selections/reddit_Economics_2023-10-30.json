@@ -1,0 +1,40 @@
+{
+  "source": "Economics",
+  "date": "2023-10-30",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_Economics_1698624000_1698710400.json"
+  ],
+  "unique_ids": [
+    "17jgmt6",
+    "17jh3pk",
+    "17jituo",
+    "17jjbel",
+    "17jklhk",
+    "17jknn3",
+    "17jm6yh",
+    "17joasz",
+    "17jt5jc",
+    "17jtegh",
+    "17jtzny",
+    "17jv1vg",
+    "17jx3wu",
+    "17jxfm9",
+    "17jy122",
+    "17jybel",
+    "17jyjyj",
+    "17jyow3",
+    "17jytr2",
+    "17jzn5g",
+    "17jzxk1",
+    "17jzzud",
+    "17k1u5t",
+    "17k22rl",
+    "17k3ui5",
+    "17k5ath",
+    "17k5et4",
+    "17k63da",
+    "17k6m7s"
+  ],
+  "rows": 29
+}

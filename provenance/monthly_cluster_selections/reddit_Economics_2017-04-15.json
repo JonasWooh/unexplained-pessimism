@@ -1,0 +1,41 @@
+{
+  "source": "Economics",
+  "date": "2017-04-15",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/posts_Economics_1492214400_1492300800.json"
+  ],
+  "unique_ids": [
+    "65ghsc",
+    "65h8j3",
+    "65h9ty",
+    "65iezh",
+    "65ifl4",
+    "65irof",
+    "65j3y1",
+    "65j47n",
+    "65j8ae",
+    "65jg2e",
+    "65jugu",
+    "65jwl4",
+    "65jy5n",
+    "65jz94",
+    "65k7hy",
+    "65k8j3",
+    "65kato",
+    "65kdtc",
+    "65khdb",
+    "65knvm",
+    "65kony",
+    "65kqdi",
+    "65kzd5",
+    "65l1kj",
+    "65l4br",
+    "65lasc",
+    "65llic",
+    "65llrv",
+    "65lo51",
+    "65lqns"
+  ],
+  "rows": 30
+}

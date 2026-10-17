@@ -1,0 +1,85 @@
+a,b,transform,months,pearson
+llm_net_tone (sample),sffed,level,202,0.36733293041828924
+llm_net_tone (sample),sffed,3-month mean,200,0.4412254065394222
+llm_net_tone (sample),sffed,first difference,201,0.17532365422624907
+dict_net_tone_lm (full frame),llm_net_tone (sample),level,202,0.4196444641233562
+dict_net_tone_lm (full frame),llm_net_tone (sample),3-month mean,200,0.45719570984541685
+dict_net_tone_lm (full frame),llm_net_tone (sample),first difference,201,0.3461214754049869
+dict_net_tone_lm (full frame),dict_net_tone_vader (full frame),level,202,0.5261394384163967
+dict_net_tone_lm (full frame),dict_net_tone_vader (full frame),3-month mean,200,0.5665799208713023
+dict_net_tone_lm (full frame),dict_net_tone_vader (full frame),first difference,201,0.44697287675769115
+dict_net_tone_lm (full frame),guardian_lm_unit,level,202,0.49584411091489095
+dict_net_tone_lm (full frame),guardian_lm_unit,3-month mean,200,0.5413017708654189
+dict_net_tone_lm (full frame),guardian_lm_unit,first difference,201,0.40947964267706805
+dict_net_tone_lm (full frame),guardian_lm_fulltext,level,202,0.3525733592755624
+dict_net_tone_lm (full frame),guardian_lm_fulltext,3-month mean,200,0.4324794034475058
+dict_net_tone_lm (full frame),guardian_lm_fulltext,first difference,201,0.2721954182099067
+dict_net_tone_lm (full frame),sffed,level,202,0.543287465411748
+dict_net_tone_lm (full frame),sffed,3-month mean,200,0.6733524562652542
+dict_net_tone_lm (full frame),sffed,first difference,201,0.22572654273678244
+dict_net_tone_vader (full frame),llm_net_tone (sample),level,202,0.4742690290327551
+dict_net_tone_vader (full frame),llm_net_tone (sample),3-month mean,200,0.5833378125412776
+dict_net_tone_vader (full frame),llm_net_tone (sample),first difference,201,0.26778436124938315
+dict_net_tone_vader (full frame),guardian_lm_unit,level,202,0.4089052747962993
+dict_net_tone_vader (full frame),guardian_lm_unit,3-month mean,200,0.5001782057492028
+dict_net_tone_vader (full frame),guardian_lm_unit,first difference,201,0.28576611246066336
+dict_net_tone_vader (full frame),guardian_lm_fulltext,level,202,0.30761437245785134
+dict_net_tone_vader (full frame),guardian_lm_fulltext,3-month mean,200,0.3677752854871586
+dict_net_tone_vader (full frame),guardian_lm_fulltext,first difference,201,0.2545080556656879
+dict_net_tone_vader (full frame),sffed,level,202,0.5015361558623233
+dict_net_tone_vader (full frame),sffed,3-month mean,200,0.6014893407004168
+dict_net_tone_vader (full frame),sffed,first difference,201,0.23282565959844176
+dict_lm_score (full frame),llm_net_tone (sample),level,202,0.47726946581715785
+dict_lm_score (full frame),llm_net_tone (sample),3-month mean,200,0.5452202362518548
+dict_lm_score (full frame),llm_net_tone (sample),first difference,201,0.3593062129712495
+dict_lm_score (full frame),dict_net_tone_lm (full frame),level,202,0.9462622282765097
+dict_lm_score (full frame),dict_net_tone_lm (full frame),3-month mean,200,0.9595491452707806
+dict_lm_score (full frame),dict_net_tone_lm (full frame),first difference,201,0.9237409549822092
+dict_lm_score (full frame),dict_net_tone_vader (full frame),level,202,0.6135151755831373
+dict_lm_score (full frame),dict_net_tone_vader (full frame),3-month mean,200,0.6801776110651823
+dict_lm_score (full frame),dict_net_tone_vader (full frame),first difference,201,0.4935952113750762
+dict_lm_score (full frame),dict_net_tone_lm (LLM sample units),level,202,0.561366689314253
+dict_lm_score (full frame),dict_net_tone_lm (LLM sample units),3-month mean,200,0.7151573516742492
+dict_lm_score (full frame),dict_net_tone_lm (LLM sample units),first difference,201,0.4656307221681874
+dict_lm_score (full frame),guardian_lm_unit,level,202,0.4935670038722406
+dict_lm_score (full frame),guardian_lm_unit,3-month mean,200,0.5555142261369864
+dict_lm_score (full frame),guardian_lm_unit,first difference,201,0.3963269594369255
+dict_lm_score (full frame),guardian_lm_fulltext,level,202,0.34916446203853657
+dict_lm_score (full frame),guardian_lm_fulltext,3-month mean,200,0.44367731520222775
+dict_lm_score (full frame),guardian_lm_fulltext,first difference,201,0.2596498560767031
+dict_lm_score (full frame),sffed,level,202,0.5777255729157628
+dict_lm_score (full frame),sffed,3-month mean,200,0.7039908067827145
+dict_lm_score (full frame),sffed,first difference,201,0.2520584997875043
+dict_net_tone_lm (LLM sample units),llm_net_tone (sample),level,202,0.3801117074751796
+dict_net_tone_lm (LLM sample units),llm_net_tone (sample),3-month mean,200,0.45283317827445296
+dict_net_tone_lm (LLM sample units),llm_net_tone (sample),first difference,201,0.3176674626060635
+dict_net_tone_lm (LLM sample units),dict_net_tone_lm (full frame),level,202,0.5777509938089391
+dict_net_tone_lm (LLM sample units),dict_net_tone_lm (full frame),3-month mean,200,0.713320394489404
+dict_net_tone_lm (LLM sample units),dict_net_tone_lm (full frame),first difference,201,0.49307215675953703
+dict_net_tone_lm (LLM sample units),dict_net_tone_vader (full frame),level,202,0.3198803512004358
+dict_net_tone_lm (LLM sample units),dict_net_tone_vader (full frame),3-month mean,200,0.4948486727695195
+dict_net_tone_lm (LLM sample units),dict_net_tone_vader (full frame),first difference,201,0.15165617287573419
+dict_net_tone_lm (LLM sample units),guardian_lm_unit,level,202,0.2801279518698932
+dict_net_tone_lm (LLM sample units),guardian_lm_unit,3-month mean,200,0.45112516480745285
+dict_net_tone_lm (LLM sample units),guardian_lm_unit,first difference,201,0.14517745436899196
+dict_net_tone_lm (LLM sample units),guardian_lm_fulltext,level,202,0.16653170060780342
+dict_net_tone_lm (LLM sample units),guardian_lm_fulltext,3-month mean,200,0.2866526898843968
+dict_net_tone_lm (LLM sample units),guardian_lm_fulltext,first difference,201,0.06818749225567602
+dict_net_tone_lm (LLM sample units),sffed,level,202,0.36900163434815125
+dict_net_tone_lm (LLM sample units),sffed,3-month mean,200,0.5738043973183224
+dict_net_tone_lm (LLM sample units),sffed,first difference,201,0.12350624809562327
+guardian_lm_unit,llm_net_tone (sample),level,202,0.3102711709811647
+guardian_lm_unit,llm_net_tone (sample),3-month mean,200,0.41870592643230947
+guardian_lm_unit,llm_net_tone (sample),first difference,201,0.18601068454712122
+guardian_lm_unit,sffed,level,202,0.33877646508696185
+guardian_lm_unit,sffed,3-month mean,200,0.4438680360700239
+guardian_lm_unit,sffed,first difference,201,0.20105765363487493
+guardian_lm_fulltext,llm_net_tone (sample),level,202,0.3144213583344402
+guardian_lm_fulltext,llm_net_tone (sample),3-month mean,200,0.3422977052779744
+guardian_lm_fulltext,llm_net_tone (sample),first difference,201,0.28055979787455004
+guardian_lm_fulltext,guardian_lm_unit,level,202,0.3120997399205163
+guardian_lm_fulltext,guardian_lm_unit,3-month mean,200,0.4070062353844001
+guardian_lm_fulltext,guardian_lm_unit,first difference,201,0.2304165880232495
+guardian_lm_fulltext,sffed,level,202,0.25404032764819096
+guardian_lm_fulltext,sffed,3-month mean,200,0.3472910607763595
+guardian_lm_fulltext,sffed,first difference,201,0.17765853856140326

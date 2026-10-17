@@ -1,0 +1,39 @@
+{
+  "source": "Economics",
+  "date": "2015-09-27",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261016/cluster_posts_Economics_1443312000_1443398400.json"
+  ],
+  "unique_ids": [
+    "3mizd8",
+    "3mj4at",
+    "3mjdrq",
+    "3mjjp8",
+    "3mjkg3",
+    "3mjx41",
+    "3mk8bt",
+    "3mka6b",
+    "3mkfo8",
+    "3mkfzp",
+    "3mkhpj",
+    "3mkj7h",
+    "3mkqi7",
+    "3mkrlo",
+    "3mkrrq",
+    "3ml0bw",
+    "3ml2mv",
+    "3mlf1a",
+    "3mlgb7",
+    "3mljml",
+    "3mlmi5",
+    "3mloah",
+    "3mlxol",
+    "3mme98",
+    "3mmkc2",
+    "3mmsvi",
+    "3mmw79",
+    "3mmx5i"
+  ],
+  "rows": 28
+}

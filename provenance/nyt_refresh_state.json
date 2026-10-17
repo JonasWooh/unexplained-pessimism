@@ -1,0 +1,25 @@
+{
+  "status": "refresh_complete_not_proof_of_temporal_completeness",
+  "pid": 25752,
+  "months": [
+    {
+      "month": "2026-01",
+      "file": "corpus/raw/N01/20261015/2026-01_refresh_20261015T203556.json",
+      "response_rows": 694,
+      "unique_ids": 694,
+      "expected": 694,
+      "earliest": "2026-01-01T00:04:58Z",
+      "latest": "2026-01-07T15:26:09Z"
+    },
+    {
+      "month": "2026-10",
+      "file": "corpus/raw/N01/20261015/2026-10_refresh_20261015T203556.json",
+      "response_rows": 516,
+      "unique_ids": 516,
+      "expected": 516,
+      "earliest": "2026-10-01T00:00:49Z",
+      "latest": "2026-10-04T17:53:18.167Z"
+    }
+  ],
+  "updated_at_utc": "2026-10-15T20:36:10.586411+00:00"
+}

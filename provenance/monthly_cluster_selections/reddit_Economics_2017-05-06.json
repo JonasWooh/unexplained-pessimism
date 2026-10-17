@@ -1,0 +1,36 @@
+{
+  "source": "Economics",
+  "date": "2017-05-06",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/posts_Economics_1494028800_1494115200.json"
+  ],
+  "unique_ids": [
+    "69ie6x",
+    "69ih60",
+    "69j671",
+    "69jqnf",
+    "69jxxa",
+    "69k0rm",
+    "69k6ht",
+    "69kmay",
+    "69kpu0",
+    "69kubc",
+    "69kyti",
+    "69lae2",
+    "69lgum",
+    "69lhfi",
+    "69lu5w",
+    "69lx8k",
+    "69mjfc",
+    "69mmsg",
+    "69n8l3",
+    "69ndu3",
+    "69ng1n",
+    "69nmc9",
+    "69ntcm",
+    "69nx78",
+    "69o8vg"
+  ],
+  "rows": 25
+}

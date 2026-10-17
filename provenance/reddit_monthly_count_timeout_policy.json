@@ -1,0 +1,16 @@
+{
+  "full_month_timeout_action": "exact_weekly_partition",
+  "full_month_attempts": 5,
+  "max_partition_days": 7,
+  "partition_attempts": 5,
+  "on_partition_exhausted": "stop_and_ask_user",
+  "authorization": "User selected uniform partition rule for this and future same-type count timeouts",
+  "authorized_at_utc": "2026-10-16T02:52:01.332910+00:00",
+  "timeout_errors_eligible_for_partition": [
+    "ReadTimeout",
+    "ConnectTimeout",
+    "Timeout",
+    422,
+    504
+  ]
+}

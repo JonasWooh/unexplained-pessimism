@@ -1,0 +1,27 @@
+{
+  "series": "NASDAQCOM",
+  "windows": [
+    {
+      "start": "1776-07-04",
+      "end": "2020-05-11",
+      "rows": 3741,
+      "expected_rows": 3741,
+      "complete": true
+    },
+    {
+      "start": "2020-05-12",
+      "end": "2026-09-16",
+      "rows": 5677,
+      "expected_rows": 5677,
+      "complete": true
+    },
+    {
+      "start": "2026-09-17",
+      "end": "2026-10-14",
+      "rows": 4900,
+      "expected_rows": 4900,
+      "complete": true
+    }
+  ],
+  "notes": "All API vintage dates covered by contiguous query windows. Window boundaries clip validity intervals; not distinct revisions. Separate index from SP500."
+}

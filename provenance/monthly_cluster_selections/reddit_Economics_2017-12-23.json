@@ -1,0 +1,25 @@
+{
+  "source": "Economics",
+  "date": "2017-12-23",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/sample_posts_Economics_1513987200_1514030400.json",
+    "corpus/raw/SM02/20261015/cluster_posts_Economics_1514030400_1514073600.json"
+  ],
+  "unique_ids": [
+    "7lmj0x",
+    "7lmkr0",
+    "7lnf1y",
+    "7lo3uz",
+    "7lo8s8",
+    "7lov0s",
+    "7lp0rs",
+    "7lpqni",
+    "7lpxdw",
+    "7lpzl9",
+    "7lq9kn",
+    "7lqud1",
+    "7lr50t"
+  ],
+  "rows": 13
+}

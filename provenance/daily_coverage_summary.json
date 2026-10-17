@@ -1,0 +1,87 @@
+{
+  "as_of_utc": "2026-10-15T20:02:48.832196+00:00",
+  "cutoff": "2026-10-14",
+  "series": {
+    "Reddit/economy": {
+      "days": 6131,
+      "days_with_records": 2910,
+      "status_days": {
+        "complete_nonzero": 2909,
+        "partial": 1,
+        "not_queried": 3221
+      }
+    },
+    "Reddit/Economics": {
+      "days": 6131,
+      "days_with_records": 2233,
+      "status_days": {
+        "complete_nonzero": 2233,
+        "not_queried": 3898
+      }
+    },
+    "Reddit/personalfinance": {
+      "days": 6131,
+      "days_with_records": 581,
+      "status_days": {
+        "not_queried": 5550,
+        "complete_nonzero": 315,
+        "partial": 266
+      }
+    },
+    "Reddit/inflation": {
+      "days": 6131,
+      "days_with_records": 2265,
+      "status_days": {
+        "complete_zero": 3866,
+        "complete_nonzero": 2265
+      }
+    },
+    "Media Cloud/38379429": {
+      "days": 652,
+      "days_with_records": 161,
+      "status_days": {
+        "partial": 161,
+        "not_queried": 491
+      }
+    },
+    "Media Cloud/34412234": {
+      "days": 652,
+      "days_with_records": 273,
+      "status_days": {
+        "partial": 273,
+        "not_queried": 379
+      }
+    },
+    "YouTube/comment_publication": {
+      "days": 1383,
+      "days_with_records": 1383,
+      "status_days": {
+        "observed_incomplete": 1383
+      }
+    },
+    "YouTube/video_publication": {
+      "days": 1383,
+      "days_with_records": 1245,
+      "status_days": {
+        "observed_incomplete": 1245,
+        "not_confirmed": 138
+      }
+    },
+    "NYT/publication": {
+      "days": 6131,
+      "days_with_records": 6096,
+      "status_days": {
+        "observed_month_batch": 6096,
+        "zero_or_source_gap": 35
+      }
+    },
+    "Guardian/publication": {
+      "days": 6131,
+      "days_with_records": 2958,
+      "status_days": {
+        "observed_month_batch": 2958,
+        "zero_or_source_gap": 3173
+      }
+    }
+  }
+}

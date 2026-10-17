@@ -1,0 +1,7 @@
+{
+  "declared_by": "project lead (user), 2026-10-16T17:09Z",
+  "model": "GPT 6 luna (Codex)",
+  "reasoning_effort": "high (default)",
+  "applies_to": ["codex__v1_isolated_r1 (dev)", "codex__v2_isolated_r1 (dev, test)", "codex__v2_isolated_r2 (test_repeat)", "codex__v2_isolated_r1_corpus (58 batches)"],
+  "note": "run_log.csv records the model name and settings as not visible in the run environment; this file records the user's declaration and does not modify the original logs. Temperature is not settable in Codex."
+}

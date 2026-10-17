@@ -1,0 +1,30 @@
+N03 38379429_monitoring_union_counts.json OK 59262 bytes
+N03 38379429_stories_00008.json OK 450872 bytes
+N03 34412234_stories_00003.json OK 440437 bytes
+N03 38379429_stories_00009.json OK 449922 bytes
+N03 34412234_stories_00004.json OK 439142 bytes
+N03 38379429_stories_00010.json OK 441657 bytes
+N03 34412234_stories_00005.json OK 442878 bytes
+N03 38379429_stories_00011.json OK 442108 bytes
+N03 34412234_stories_00006.json OK 439147 bytes
+N03 38379429_stories_00012.json OK 448004 bytes
+N03 34412234_stories_00007.json OK 438251 bytes
+N03 38379429_stories_00013.json OK 432509 bytes
+N03 34412234_stories_00008.json OK 443887 bytes
+N03 38379429_stories_00014.json OK 437458 bytes
+N03 34412234_stories_00009.json OK 438638 bytes
+N03 38379429_stories_00015.json OK 442342 bytes
+N03 34412234_stories_00010.json OK 437446 bytes
+N03 38379429_stories_00016.json OK 455096 bytes
+N03 34412234_stories_00011.json OK 439260 bytes
+N03 38379429_stories_00017.json OK 443402 bytes
+Traceback (most recent call last):
+  File "/Users/jonasw/Documents/NLP/Final Project/src/collect/N03.py", line 50, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/Users/jonasw/Documents/NLP/Final Project/src/collect/N03.py", line 43, in main
+    p=fetch('N03','https://search.mediacloud.org/api/search/story-list',f"{s['collection_id']}_stories_{s['next_page']:05}.json",params,headers=hdr,delay=31,license_note=LICENSE)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jonasw/Documents/NLP/Final Project/src/collect/common.py", line 38, in fetch
+    time.sleep(max(0,delay-(time.monotonic()-LAST.get(host,0))))
+KeyboardInterrupt

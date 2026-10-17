@@ -1,0 +1,21 @@
+{
+  "source": "Economics",
+  "date": "2018-03-31",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/cluster_posts_Economics_1522454400_1522540800.json"
+  ],
+  "unique_ids": [
+    "88g1l3",
+    "88h1sz",
+    "88hpx2",
+    "88jcsm",
+    "88k69k",
+    "88klsx",
+    "88lfjf",
+    "88lmf7",
+    "88ln48",
+    "88m7du"
+  ],
+  "rows": 10
+}

@@ -1,0 +1,29 @@
+{
+  "source": "Economics",
+  "date": "2018-04-08",
+  "design": "complete selected UTC day; fixed-seed day cluster",
+  "raw_files": [
+    "corpus/raw/SM02/20261015/cluster_posts_Economics_1523145600_1523232000.json"
+  ],
+  "unique_ids": [
+    "8ap3wd",
+    "8apbhr",
+    "8apdws",
+    "8apx4c",
+    "8apx9q",
+    "8aq4hk",
+    "8aq93k",
+    "8aqf1y",
+    "8ar97m",
+    "8arjg3",
+    "8arovu",
+    "8arsoy",
+    "8arxen",
+    "8asmew",
+    "8assvi",
+    "8au5bm",
+    "8au5k1",
+    "8au5su"
+  ],
+  "rows": 18
+}

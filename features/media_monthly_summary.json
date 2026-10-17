@@ -1,0 +1,44 @@
+{
+  "rows": 422,
+  "groups": {
+    "local": {
+      "count": 19,
+      "min": "2025-03",
+      "max": "2026-09"
+    },
+    "mc_national": {
+      "count": 13,
+      "min": "2025-09",
+      "max": "2026-09"
+    },
+    "national": {
+      "count": 202,
+      "min": "2010-01",
+      "max": "2026-10"
+    },
+    "reddit": {
+      "count": 142,
+      "min": "2015-01",
+      "max": "2026-10"
+    },
+    "youtube": {
+      "count": 46,
+      "min": "2023-01",
+      "max": "2026-10"
+    }
+  },
+  "low_n_months": {
+    "reddit": 140
+  },
+  "labels": {
+    "yes": 7681,
+    "no": 3727,
+    "unsure": 23
+  },
+  "sffed_correlation": {
+    "pearson_net_tone_vs_sffed": 0.3673329304182893,
+    "pearson_net_fact_vs_sffed": 0.38949520864896375,
+    "months": 202,
+    "pearson_net_tone_vs_sffed_3m_avg": 0.4412254065394223
+  }
+}

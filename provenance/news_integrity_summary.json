@@ -1,0 +1,43 @@
+{
+  "N01": {
+    "months_expected": 203,
+    "months_complete": 203,
+    "rows": 1160137,
+    "duplicate_ids_within_month": 4,
+    "actual_field_presence": {
+      "abstract": 1160137,
+      "web_url": 1160137,
+      "snippet": 1160137,
+      "lead_paragraph": 1076822,
+      "source": 1160137,
+      "multimedia": 1160137,
+      "headline": 1160137,
+      "keywords": 1160137,
+      "pub_date": 1160137,
+      "document_type": 1160137,
+      "news_desk": 1160137,
+      "section_name": 1160137,
+      "byline": 1160137,
+      "type_of_material": 1160137,
+      "_id": 1160137,
+      "word_count": 1160137,
+      "uri": 1160137,
+      "subsection_name": 512156,
+      "print_section": 689329,
+      "print_page": 689322
+    }
+  },
+  "N02": {
+    "months_expected": 202,
+    "months_complete": 202,
+    "rows": 5368,
+    "duplicate_ids_within_month": 0,
+    "actual_field_presence": {
+      "headline": 5368,
+      "trailText": 5368,
+      "byline": 5242,
+      "wordcount": 5368,
+      "bodyText": 5368
+    }
+  }
+}

@@ -1,0 +1,2 @@
+run_dir,split,files,model_name_as_displayed,settings,prompt_file,prompt_sha256,started_local,finished_local,notes
+codex__v2_isolated_r1_corpus,corpus,corpus_batch_040.jsonl,not_visible,not_visible,03_corpus_all/prompts/label_prompt_v2.md,9f95f20aa319fff0ecf6c4a29d2ab81bfcc9503d72a581ea64cc6a661b6e16bd,2026-10-16T06:38:15-04:00,2026-10-16T06:44:01-04:00,agent_task_corpus_040; status=failed_validation; labeled=200/200; ID sequence valid; exact-evidence validation failed; not completed

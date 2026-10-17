@@ -1,0 +1,13 @@
+{
+  "run": "codex__v2_isolated_r1",
+  "split": "dev",
+  "items_expected": 100,
+  "items_returned": 100,
+  "missing": [],
+  "problems": [],
+  "n_problems": 0,
+  "evidence": {
+    "quotes": 442,
+    "verbatim": 442
+  }
+}
