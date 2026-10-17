@@ -93,3 +93,6 @@ provenance/previews/
 # Large request/source logs (local audit only)
 provenance/sources.csv
 provenance/requests.jsonl
+
+# Local submission bundle (copies of tracked files)
+submission/
